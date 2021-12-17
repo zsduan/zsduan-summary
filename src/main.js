@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-16 15:26:59
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-17 11:55:37
+ * @LastEditTime: 2021-12-17 13:54:39
  * @FilePath: \template\src\main.js
  */
 import Vue from 'vue'
@@ -15,6 +15,7 @@ import reqList from "./request/request";
 import { encrypt, decrypt } from '@/common/encryp.js';
 import jurisdiction from "@/config/jurisdiction.json";
 import * as echarts from 'echarts';
+
 
 // cookie
 import cookie from "./common/cookie.js";
