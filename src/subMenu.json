@@ -1,0 +1,19 @@
+[{
+    "id": "1",
+    "title": "首页",
+    "list": [],
+    "pathName": "Index",
+    "is_show": true,
+    "icon": "icon-shouye2",
+    "url": "index"
+},
+{
+    "id": "2",
+    "title": "角色分配",
+    "list": [],
+    "pathName": "PowerSet",
+    "is_show": true,
+    "icon": "icon-cheliangguanli",
+    "url": "powerSet"
+}
+]
