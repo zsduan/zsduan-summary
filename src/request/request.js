@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-16 17:15:06
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-16 17:40:16
+ * @LastEditTime: 2021-12-17 17:19:19
  * @FilePath: \template\src\request\request.js
  */
 
@@ -28,15 +28,15 @@ const apiList = require("./api").api;
 let reqList = {};
 
 
+let LoadingFun = null;
 // 加载中
 const loading = () => {
-    const Loading = ElementUI.Loading.service({
+    LoadingFun = ElementUI.Loading.service({
         lock: true,
         text: '正在获取数据，请稍等~~',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
     });
-    return Loading;
 }
 
 
@@ -91,8 +91,9 @@ for (const item in apiList) {
 
 // 请求
 const request = (data) => {
-    let load = loading();
-    data.Loading ? load : null;
+    if(data.Loading){
+        loading();
+    }
     return new Promise((resolve, reject) => {
         axios({
             header: { 'content-type': data.header ? data.header : 'application/json; charset=utf-8' },
@@ -100,8 +101,8 @@ const request = (data) => {
             method: data.method,
             data: data.data,
         }).then(res => {
-            data.Loading ? load.close() : "";
-            if (res.statusCode != 200 && res.statusCode != 304) {
+            data.Loading ? LoadingFun.close() : "";
+            if (res.status != 200 && res.status != 304) {
                 ElementUI.Message({
 					showClose: true,
 					message: "网络或请求错误",
@@ -114,7 +115,7 @@ const request = (data) => {
                 });
                 return;
             }
-            if (res.data.StatusCode != undefined && res.data.StatusCode != 1) { //专属判断
+            if (res.data.code < 0) { //专属判断
                 ElementUI.Message({
 					showClose: true,
 					message: res.data.result.msg,
@@ -131,7 +132,7 @@ const request = (data) => {
             resolve(res.data);
 
         }).catch(err => {
-            data.Loading ? load.close() : "";
+            data.Loading ? LoadingFun.close() : "";
             ElementUI.Message({
 				showClose: true,
 				message: "服务器有点小问题刷新试一试",

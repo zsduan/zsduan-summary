@@ -6,7 +6,7 @@
 			</el-col>
 			<el-col :span="13">
 				<div class="grid-content">
-					<div class="title">xx后台管理系统</div>
+					<div class="title">{{this.$env.indexName}}</div>
 					<div class="from">
 						<el-form label-width="0" :model="parms" :rules="rules" ref="parms">
 							<el-form-item prop="userName">
@@ -81,6 +81,7 @@
 			}
 		},
 		mounted() {
+			
 			let query = this.$route.query;
 			if (query.toPath && query.toPath == "Login") {
 				this.is_show = true;
@@ -171,7 +172,7 @@
 				this.$store.commit("setMenuList", subMenu);
 				setTimeout(() => {
 					this.$router.push({
-						name: 'Index'
+						name: 'Home'
 					});
 				}, 1000)
 				
