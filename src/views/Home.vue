@@ -3,15 +3,21 @@
 		<div class="wrops">
 			<el-container>
 				<!-- 侧边栏 -->
-                <el-aside :style="{maxWidth:this.$env.sliderWidth}">
-                    <Slider :menuList="menuList" @goPath="goPath" :active_slider="active_slider"></Slider>
-                </el-aside>
+				<div class="slider">
+					<el-aside :style="{maxWidth:$env.sliderWidth}">
+						<Slider :menuList="menuList" @goPath="goPath" :active_slider="active_slider"></Slider>
+					</el-aside>
+				</div>
+                
+				<div class="slider-empty" :style="{width:$env.sliderWidth}"></div>
                 <el-container class="main-wrop">
                     <el-container>
 						<!-- 这是头部 -->
-						<el-header class="headers">
+						<el-header class="headers" style="width:calc(100% - $env.sliderWidth)">
 							<HomeHeader :title="header_title"></HomeHeader>
 						</el-header>
+						<div class="header-empty"></div>
+
 						<el-main>
 							<div class="main box-show" :style="{minHeight:(this.$store.state.innerHeight - 180) + 'px'}">
 								<router-view></router-view>
@@ -87,6 +93,13 @@
 <style lang="less" scoped>
 	@import "../assets/css/reset.less";
 
+	.slider{
+			position: fixed;
+	}
+
+	.slider-empty{
+		height: 100%;
+	}
 	.home {
 		min-width: 1200px;
 	}
@@ -150,7 +163,15 @@
 
 	.headers {
 		background-color: #fff;
+		position: fixed;
+		width: calc(100% - 200px);
+		z-index: 9;
 		.box-show();
+	}
+
+	.header-empty{
+		width: 100%;
+		height: 60px;
 	}
 
 	.main {

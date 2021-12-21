@@ -1,3 +1,10 @@
+/*
+ * @Author: zs.duan
+ * @Date: 2021-12-16 15:27:00
+ * @LastEditors: zs.duan
+ * @LastEditTime: 2021-12-20 09:13:18
+ * @FilePath: \template\src\router\index.js
+ */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import cookie from '../common/cookie.js';
@@ -55,14 +62,14 @@ router.beforeEach((to, from, next) => {
 	if(arr.length == 1){
 		url = urls[1];
 	}
-	if(to.name){
-		next();
-		return ;
-	}
 	if(!Tk && to.name !== 'Login'){
 		next({
 			name : "Login"
 		})
+		return ;
+	}
+	if(to.name){
+		next();
 		return ;
 	}
 	routerList.forEach(v =>{
