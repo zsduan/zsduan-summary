@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2021-12-16 15:26:59
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-17 13:54:39
- * @FilePath: \template\src\main.js
+ * @LastEditTime: 2021-12-22 10:34:18
+ * @FilePath: \templatef:\模板\template\src\main.js
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -15,6 +15,7 @@ import reqList from "./request/request";
 import { encrypt, decrypt } from '@/common/encryp.js';
 import jurisdiction from "@/config/jurisdiction.json";
 import * as echarts from 'echarts';
+import {formatTime} from "./util/util"
 
 
 // cookie
@@ -31,16 +32,22 @@ import './assets/icon/iconfont.css';
 import MyPopup from '@/components/my-popup/my-popup';
 Vue.component('MyPopup', MyPopup);
 
-// 表单组件
+//  表格
 import TableList from '@/components/tableList/tableList';
 Vue.component('TableList', TableList);
 
-// 表单组件
+//  头部
 import Header from '@/components/header/header';
 Vue.component('Header', Header);
 
+// from表单
+import From from "@/components/from/from.vue";
+Vue.component('From', From);
+
 
 Vue.config.productionTip = false;
+
+Vue.prototype.$formatTime = formatTime; //格式化时间
 
 Vue.use(ElementUI,{ size: 'small', zIndex: 3000 });//全局配置饿了吗
 

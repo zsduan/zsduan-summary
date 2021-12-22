@@ -6,7 +6,15 @@
 				</el-table-column>
 				<el-table-column :label="itm.lable" v-for="(itm,idx) in tableHeader" :key="idx" :width="itm.width" >
 					<template slot-scope="scope">
-						<span :style="{color:scope.row[`${itm.color}`]}" class="scope-span">{{ scope.row[`${itm.key}`] }}</span>
+						<div v-if="itm.is_switch">
+							<el-switch
+								v-model="scope.row[`${itm.key}`]"
+								active-color="#0065ff"
+								@change="changSwicth($event,scope.$index,tableList,itm.key)"
+								>
+							</el-switch>
+						</div>
+						<span :style="{color:scope.row[`${itm.color}`]}" class="scope-span" v-else>{{ scope.row[`${itm.key}`] }}</span>
 					</template>
 				</el-table-column>
 				<el-table-column fixed="right" label="操作"
@@ -18,8 +26,11 @@
 								@click="onEdit(scope.$index,tableList)">编辑</span>
 							<span v-if="item == 'details' && $jurisdiction.is_details"
 								@click="onDetails(scope.$index,tableList)">详情</span>
-							<span v-if="item == 'del' && $jurisdiction.is_del"
-								@click="onDeL(scope.$index,tableList)">删除</span>
+							<el-popconfirm title="确定删除吗？" @confirm="onDeL(scope.$index,tableList)">
+                                <template #reference>
+                                    <span v-if="item == 'del' && $jurisdiction.is_del">删除</span>
+                                </template>
+                            </el-popconfirm>
 							<!-- 自定义名称 -->
 						</el-button>
 						<el-button type="text" size="small" @click="onOther(scope.$index,tableList)">
@@ -52,9 +63,11 @@
 	 *@methods onEdit 编辑 返回编辑数据
 	 *@methods onDetails 详情  返回详情数据
 	 *@methods onDeL 删除 返回删除数据
-	 *@methods 
+	 *@methods changSwicth 改变开关
 	 * 
 	 */
+	import jurisdiction from "@/config/jurisdiction.json";
+
 	export default {
 		name: "table-list",
 		props: {
@@ -95,8 +108,8 @@
 			}
 		},
 		created() {
-			let jurisdiction = {};
-			jurisdiction = JSON.parse(this.decrypt(this.$cookie.readCookie("functonPower")));
+			// let jurisdiction = {};
+			// jurisdiction = JSON.parse(this.decrypt(this.$cookie.readCookie("functonPower")));
 			this.$jurisdiction = jurisdiction;
 		},
 		methods: {
@@ -136,7 +149,13 @@
 			// 其他点击
 			onOther(index, list) {
 				this.$emit("onOther", list[index]);
+			},
+
+			// 改变开关
+			changSwicth(e,index,list,key){
+				this.$emit("changSwicth",{e:e,item:list[index],key:key})
 			}
+
 		}
 	}
 </script>
@@ -149,6 +168,7 @@
 		position: relative;
 
 		.list-wrop {
+			padding: 0 10px;
 			height: calc(100% - 95px);
 			overflow-y: scroll;
 
