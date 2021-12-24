@@ -62,6 +62,7 @@
 	import {
 		pickerOptions,
 	} from "./config.js";
+	import jurisdiction from "@/config/jurisdiction.json";
 	export default {
 		props: {
 			headerList : {
@@ -86,8 +87,8 @@
 			}
 		},
 		created() {
-			let jurisdiction = {};
-			jurisdiction = JSON.parse(this.decrypt(this.$cookie.readCookie("functonPower")));
+			// let jurisdiction = {};
+			// jurisdiction = JSON.parse(this.decrypt(this.$cookie.readCookie("functonPower")));
 			this.$jurisdiction = jurisdiction;
 			this.reset();
 		},
@@ -116,10 +117,10 @@
 			},
 			changeInput(e, type) {
 				this.sendData[`${type}`] = e;
+				this.$forceUpdate();
 			},
 			changeSelect(e, type) {
 				this.sendData[`${type}`] = e;
-				
 			},
 			changeTime(e, type) {
 				let startTime = this.setTime(new Date(e[0]));

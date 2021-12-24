@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-20 16:33:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-22 16:24:17
+ * @LastEditTime: 2021-12-24 10:57:14
  * @FilePath: \adminBlogf:\模板\template\src\components\from\from.vue
 -->
 <template>
@@ -12,7 +12,7 @@
             v-for="(item, index) in FromList"
             :key="index"
         >
-            <div class="ipt-box">
+            <div class="ipt-box" v-if="!item.hidden">
                 <label :style="{ width: width }">
                     <span class="important" v-if="item.important">*</span>
                     <span class="important" v-else></span>
@@ -49,7 +49,10 @@
                 </div>
 
                 <div class="switch" v-if="item.type == 'switch'">
-                    <el-switch v-model="item.content" @change="changeSwitch"></el-switch>
+                    <el-switch
+                        v-model="item.content"
+                        @change="changeSwitch"
+                    ></el-switch>
                 </div>
 
                 <div class="time-all" v-if="item.type == 'times'">
@@ -87,6 +90,26 @@
                         v-model="item.content"
                         @change="changeNum(index)"
                     ></el-input-number>
+                </div>
+
+                <div class="img" v-if="item.type == 'img'">
+                    <div class="icon-wrop" v-if="item.content">
+                        <img :src="item.content" />
+                    </div>
+                    <div class="up-img" @click="upImgClick(index)">
+                        <el-upload
+                            class="avatar-uploader"
+                            action="#"
+                            :show-file-list="false"
+                            list-type="picture-card"
+                            :before-upload="beforeAvatarUpload"
+                            :auto-upload="false"
+                            :on-change="changAvatar"
+
+                        >
+                            <i class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </div>
                 </div>
             </div>
             <div
@@ -135,7 +158,8 @@ export default {
     data() {
         return {
             pickerOptions: pickerOptions,
-            content : ''
+            content: "",
+            imgItemIndex : {}
         };
     },
     methods: {
@@ -190,16 +214,14 @@ export default {
             this.$forceUpdate();
         },
 
-        changeSwitch(){
+        changeSwitch() {
             this.$forceUpdate();
         },
 
-        
         onSubmit() {
-            console.log(this.FromList);
             let falge = false;
             this.FromList.forEach((v) => {
-                if (v.important && !v.content) {
+                if (v.important && !v.content && !v.hidden) {
                     falge = true;
                 }
             });
@@ -213,28 +235,55 @@ export default {
                 return;
             }
             let sendList = {};
-            this.FromList.forEach(v =>{
+            this.FromList.forEach(async v => {
                 sendList[`${v.key}`] = v.content;
-                if(!v.content && v.type == 'num'){
+                if (!v.content && v.type == "num") {
                     sendList[`${v.key}`] = 0;
                 }
-                if(v.type == 'select'){
-                    v.list.forEach(item =>{
-                        if(item.active){
+                if (v.type == "select") {
+                    v.list.forEach((item) => {
+                        if (item.active) {
                             sendList[`${v.key}`] = item.lable;
                         }
-                    })
+                    });
                 }
-            })
+                if(v.type == "img" && v.raw){
+                    sendList[`${v.key}`] = v.raw;
+                }
+            });
             for (const key in sendList) {
-                if(sendList[`${key}`] == undefined){
+                if (sendList[`${key}`] == undefined) {
                     sendList[`${key}`] = "";
                 }
             }
-            this.$emit("onSubmit",sendList)
+            this.$emit("onSubmit", sendList);
         },
         onClose() {
             this.$emit("onClose");
+        },
+        // 图片选择
+        beforeAvatarUpload(file) {
+            // const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 5;
+            // if (!isJPG) {
+            //     this.$message.error('上传头像图片只能是 JPG 格式!');
+            // }
+            if (!isLt2M) {
+                this.$message.error("上传头像图片大小不能超过 5MB!");
+            }
+            return isLt2M;
+        },
+
+        // 选择图片
+        changAvatar(file, fileList) {
+            this.FromList[this.imgItemIndex].content = file.url;
+            this.FromList[this.imgItemIndex].raw = file.raw;
+            this.$forceUpdate();
+        },
+
+        // 点击上传图片时候
+        upImgClick(index){
+            this.imgItemIndex = index;
         },
     },
 };
@@ -242,7 +291,7 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/css/reset.less";
-li{
+li {
     padding: 0 20px !important;
 }
 
@@ -251,6 +300,7 @@ li{
     .ipt-box {
         display: flex;
         align-items: center;
+        min-height: 55px;
         .important {
             color: red;
             display: inline-block;
@@ -259,17 +309,12 @@ li{
         .ipt {
             width: 85%;
         }
-        
     }
     .tips {
         font-size: 12px;
         color: red;
         padding-top: 2px;
     }
-    .ipt-box-worp {
-        height: 55px;
-    }
-
     .sbumit {
         text-align: center;
         .btn {
@@ -287,6 +332,36 @@ li{
     .submits {
         background-color: @fontColor;
         color: #fff;
+    }
+    .img{
+        display: flex;
+        .icon-wrop{
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .up-img{
+            width: 80px;
+            height: 80px;
+            /deep/.avatar-uploader{
+                height: 100%;
+            }
+            /deep/.el-upload{
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+            /deep/.el-icon-plus{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+            }
+        }
     }
 }
 </style>

@@ -14,6 +14,13 @@
 								>
 							</el-switch>
 						</div>
+						<div v-else-if="itm.is_img">
+							<el-image 
+								style="width: 40px; height: 60px"
+								:src="scope.row[`${itm.key}`]" 
+								:preview-src-list="[scope.row[`${itm.key}`]]">
+							</el-image>
+						</div>
 						<span :style="{color:scope.row[`${itm.color}`]}" class="scope-span" v-else>{{ scope.row[`${itm.key}`] }}</span>
 					</template>
 				</el-table-column>
