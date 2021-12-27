@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-20 16:33:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-24 10:57:14
+ * @LastEditTime: 2021-12-27 14:36:16
  * @FilePath: \adminBlogf:\模板\template\src\components\from\from.vue
 -->
 <template>
@@ -111,6 +111,19 @@
                         </el-upload>
                     </div>
                 </div>
+
+                <div class="textarea" v-if="item.type == 'textarea'" >
+                    <el-input
+                        type="textarea"
+                        :placeholder="'请输入' + item.lable"
+                        v-model="item.content"
+                        @blur="BlurIpt(index, item)"
+                        @input="InputIpt(index, item)"
+                        show-word-limit
+                        :maxlength="item.maxlength ? item.maxlength : '999'"
+                    >
+                    </el-input>
+                </div>
             </div>
             <div
                 class="tips"
@@ -132,6 +145,26 @@
 </template>
 
 <script>
+/*
+ *@props FromList = [
+     {
+		important : true, //是否必填
+        lable: "", //输入框名称
+        key: "", //输入框key
+		type : "", //类型  input(default)输入框 select选择框 switch开关 time时间 times时间段 img图片 num数字 textarea 多行文本输入框
+		list : [] , //select 列表
+        maxlength : 999 , //多行文本输入长度
+	}
+ ] //表单列表
+ *@props width default 100px lable宽度
+ *@props success_txt 底部按钮提示文字
+ *
+ * 
+ *@methods onSubmit 提交事件
+ *@methods onClose 关闭事件
+ * 
+ * 
+*/ 
 import { pickerOptions } from "./config.js";
 export default {
     name: "From",
@@ -307,6 +340,9 @@ li {
             width: 10px;
         }
         .ipt {
+            width: 85%;
+        }
+        .textarea{
             width: 85%;
         }
     }

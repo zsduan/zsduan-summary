@@ -1,10 +1,10 @@
 <template>
 	<div class="table-wrop">
 		<div class="list-wrop">
-			<el-table :data="tableList" class="table" height="100%" @selection-change="handleSelectionChange">
+			<el-table :data="tableList" class="table" :height="(this.$store.state.innerHeight - 240) + 'px'" @selection-change="handleSelectionChange">
 				<el-table-column type="selection" width="55" v-if="show_Checkbox">
 				</el-table-column>
-				<el-table-column :label="itm.lable" v-for="(itm,idx) in tableHeader" :key="idx" :width="itm.width" >
+				<el-table-column :label="itm.lable" v-for="(itm,idx) in tableHeader" :key="idx" :width="itm.width">
 					<template slot-scope="scope">
 						<div v-if="itm.is_switch">
 							<el-switch
@@ -47,9 +47,9 @@
 				</el-table-column>
 			</el-table>
 		</div>
-		<div class="table-footer" v-if="pageSize >10">
+		<div class="table-footer" v-if="pageSize > maxSize">
 			<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-				:page-sizes="[10, 20, 40]" layout="total, sizes, prev, pager, next, jumper" :total="pageSize">
+				:page-sizes="[maxSize, maxSize * 2, maxSize * 4]" layout="total, sizes, prev, pager, next, jumper" :total="pageSize">
 			</el-pagination>
 		</div>
 	</div>
@@ -62,6 +62,7 @@
 	 *@props tableHeader 表头数据及表单key  lable 表头名称  key 显示关键字
 	 *@props pageSize 总页码
 	 *@props show_Checkbox 是否显示多选 默认 false 不显示  true 显示
+	 *@props maxSize 最多条数
 	 * 
 	 *@methods boxChange 是否选中  返回选中的列表数据 
 	 *@methods SizeChange 改变条数  返回选中条数
@@ -106,6 +107,12 @@
 				type: Boolean,
 				default: () => {
 					return false
+				}
+			},
+			maxSize : {
+				type :Number,
+				default:()=>{
+					return 10
 				}
 			}
 		},
@@ -211,6 +218,7 @@
 			position: absolute;
 			bottom: 10px;
 			right: 10px;
+			z-index: 9;
 		}
 
 		.operation {

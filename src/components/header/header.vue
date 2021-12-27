@@ -35,6 +35,9 @@
 			<div class="search btn-wrop" v-if="operationHeader.is_search && headerList.length">
 				<el-button type="primary" class="btn" icon="el-icon-search" @click="onSearch">查询</el-button>
 			</div>
+			<div class="export btn-wrop" v-if="operationHeader.is_export && headerList.length">
+				<el-button type="primary" class="btn" icon="el-icon-upload2" @click="onExport">导出</el-button>
+			</div>
 			<div class="reset btn-wrop" v-if="operationHeader.is_reset && headerList.length">
 				<el-button type="info" class="btn" icon="el-icon-refresh-right" @click="reset">重置</el-button>
 			</div>
@@ -44,7 +47,6 @@
 
 <script>
 	/* 
-	 *采用的vuex传参
 	 *@props :headerList 表单渲染数据 
 	 * 数据格式 {type : "表单类型 必填 input select time" , 
 	 * 			lable : "提示内容 必填 string" , 
@@ -114,6 +116,10 @@
 				})
 				this.sendData = {};
 				this.onSearch();
+			},
+			// 导出
+			onExport(){
+				this.$emit("onExport");
 			},
 			changeInput(e, type) {
 				this.sendData[`${type}`] = e;
