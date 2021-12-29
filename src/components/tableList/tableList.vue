@@ -21,7 +21,16 @@
 								:preview-src-list="[scope.row[`${itm.key}`]]">
 							</el-image>
 						</div>
-						<span :style="{color:scope.row[`${itm.color}`]}" class="scope-span" v-else>{{ scope.row[`${itm.key}`] }}</span>
+						<div v-else-if="itm.is_tag && scope.row[`${itm.key}`]">
+							<el-tag
+								:color="scope.row.color"
+								effect="dark"
+								size="medium"
+								>
+								{{ scope.row[`${itm.key}`] }}
+							</el-tag>
+						</div>
+						<span :style="{color:itm.is_color ? scope.row.color : ''}" class="scope-span" v-else>{{ scope.row[`${itm.key}`] }}</span>
 					</template>
 				</el-table-column>
 				<el-table-column fixed="right" label="操作"
@@ -59,7 +68,7 @@
 	/* 
 	 *@props tableList 列表数据
 	 *@props operation 操作数据 add 新增 edit 编辑 details 详情 del 删除
-	 *@props tableHeader 表头数据及表单key  lable 表头名称  key 显示关键字
+	 *@props tableHeader 表头数据及表单key  lable 表头名称  key 显示关键字 is_tag:是否为tag is_img:是否为图片 is_switch是否为开关
 	 *@props pageSize 总页码
 	 *@props show_Checkbox 是否显示多选 默认 false 不显示  true 显示
 	 *@props maxSize 最多条数
@@ -245,6 +254,13 @@
 		
 		.scope-span{
 			color: @fontColor;
+		}
+
+		/deep/.el-tag--dark{
+			border-color: transparent;
+			display: inline-block !important;
+			padding:  0 10px;
+			margin: 0 auto;
 		}
 
 

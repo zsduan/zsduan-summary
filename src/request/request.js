@@ -2,13 +2,14 @@
  * @Author: zs.duan
  * @Date: 2021-12-16 17:15:06
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-17 17:19:19
- * @FilePath: \template\src\request\request.js
+ * @LastEditTime: 2021-12-27 14:16:00
+ * @FilePath: \adminBlog\src\request\request.js
  */
 
 var cookie = require("../common/cookie");
 import axios from 'axios';
 import ElementUI from 'element-ui';
+import router from '../router'
 cookie = cookie.default;
 
 /* 
@@ -17,6 +18,7 @@ cookie = cookie.default;
  *@parame url 请求路径 必填
  *@parame data 请求携带参数 
  *@parame is_url 是否拼接url  true 不拼接 传啥用啥  false 拼接默认的地址加url地址
+ *@parame is_dwon 是否为下载文件
  *@parame formDatas 上传文件 本参数传在data中
  *@parame header 头部
  *
@@ -33,7 +35,7 @@ let LoadingFun = null;
 const loading = () => {
     LoadingFun = ElementUI.Loading.service({
         lock: true,
-        text: '正在获取数据，请稍等~~',
+        text: '正在处理，请稍等~~',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
     });
@@ -43,8 +45,12 @@ const loading = () => {
 const $get = (obj) => {
     let urls = `${obj.url}`; //拼接 url
     urls = obj.is_url ? obj.url : urls; //是否需要重写url 接外部的请求
-
     return function (data) {
+        let token = cookie.readCookie("TK");
+        if(token){
+            if(!data) data = {};
+            data.token = token;
+        } 
         let count = 0;
         let getData = ""; //发送数据
         for (let key in data) {
@@ -59,6 +65,7 @@ const $get = (obj) => {
             header: obj.header || "",
             url: urls + "" + getData,
             Loading: obj.is_loading,
+            is_dwon : obj.is_dwon ? true : false,
             method: "GET",
             data: {}
         }
@@ -70,12 +77,18 @@ const $requests = (obj) => {
     let urls = `${obj.url}`; //拼接 url
     urls = obj.is_url ? obj.url : urls; //是否需要重写url 接外部的请求
     return function (data) {
+        let token = cookie.readCookie("TK");
+        if(token){
+            if(!data) data = {};
+            data.token = token;
+        } 
         let requestData = {
             header: obj.header,
             url: urls,
             Loading: obj.is_loading,
             method: obj.method,
-            data: data
+            data: data,
+            is_dwon : obj.is_dwon ? true : false,
         }
         return request(requestData);
     }
@@ -100,6 +113,7 @@ const request = (data) => {
             url: data.url,
             method: data.method,
             data: data.data,
+            responseType: data.is_dwon ? "arraybuffer" : ""
         }).then(res => {
             data.Loading ? LoadingFun.close() : "";
             if (res.status != 200 && res.status != 304) {
@@ -118,20 +132,28 @@ const request = (data) => {
             if (res.data.code < 0) { //专属判断
                 ElementUI.Message({
 					showClose: true,
-					message: res.data.result.msg,
+					message: res.data.msg,
 					type: 'error',
 					duration: 1000
 				});
                 reject({
                     code: -1,
-                    msg: res.data.Message,
+                    msg: res.data.msg,
                     data: res.data
                 });
+                if(res.data.code == -104){
+                    setTimeout(() => {
+                        router.push({
+                            name: "Login",
+                        });
+                    }, 1500);
+                }
                 return;
             }
             resolve(res.data);
 
         }).catch(err => {
+            console.log(err);
             data.Loading ? LoadingFun.close() : "";
             ElementUI.Message({
 				showClose: true,
