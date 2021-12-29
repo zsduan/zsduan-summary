@@ -14,7 +14,7 @@
 								>
 							</el-switch>
 						</div>
-						<div v-else-if="itm.is_img">
+						<div v-else-if="itm.is_img && scope.row[`${itm.key}`]">
 							<el-image 
 								style="width: 40px; height: 60px"
 								:src="scope.row[`${itm.key}`]" 
@@ -84,6 +84,7 @@
 	 * 
 	 */
 	import jurisdiction from "@/config/jurisdiction.json";
+	
 
 	export default {
 		name: "table-list",

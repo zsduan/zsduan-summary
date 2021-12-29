@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-20 16:33:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-27 14:36:16
+ * @LastEditTime: 2021-12-29 17:51:06
  * @FilePath: \adminBlogf:\模板\template\src\components\from\from.vue
 -->
 <template>
@@ -124,6 +124,12 @@
                     >
                     </el-input>
                 </div>
+
+                <div class="edit" v-if="item.type == 'edit'">
+                    <div class="edit">
+                        <Editors @save="saveEdit($event,index)" :editHeight="460" :content="item.content"></Editors>
+                    </div>
+                </div>
             </div>
             <div
                 class="tips"
@@ -166,8 +172,12 @@
  * 
 */ 
 import { pickerOptions } from "./config.js";
+import Editors from "../editor/editor.vue"; 
 export default {
     name: "From",
+    components:{
+		Editors
+	},
     props: {
         FromList: {
             type: Array,
@@ -192,7 +202,7 @@ export default {
         return {
             pickerOptions: pickerOptions,
             content: "",
-            imgItemIndex : {}
+            imgItemIndex : {}, //选择的img时index
         };
     },
     methods: {
@@ -238,7 +248,6 @@ export default {
 
         // 改变时间
         changTime(index) {
-            console.log(this.FromList[index].content);
             // this.FromList[index].content = this.$formatTime(this.FromList[index].content)
             this.$forceUpdate();
         },
@@ -318,6 +327,13 @@ export default {
         upImgClick(index){
             this.imgItemIndex = index;
         },
+
+        // 保存富文本
+        saveEdit(e,index){
+            e = e.replace(/'/g, "&#39;");
+            this.FromList[index].content = e;
+            this.$forceUpdate();
+        }
     },
 };
 </script>
@@ -329,11 +345,14 @@ li {
 }
 
 .from-box {
-    width: 600px;
+    min-width: 600px;
     .ipt-box {
         display: flex;
         align-items: center;
         min-height: 55px;
+        label{
+            display: flex;
+        }
         .important {
             color: red;
             display: inline-block;
@@ -345,7 +364,11 @@ li {
         .textarea{
             width: 85%;
         }
+        .edit{
+            width: 90%;
+        }
     }
+    
     .tips {
         font-size: 12px;
         color: red;

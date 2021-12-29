@@ -19,7 +19,7 @@
 
 			<slot name="right"></slot>
 		</div>
-		<MyPopup :isShow="show_pup" @onClose="onClose" @onSubmit="onSubmit" title="修改密码">
+		<MyPopup :isShow.sync="show_pup" @onSubmit="onSubmit" title="修改密码">
 			<div class="from">
 				<el-form label-width="100px" :model="parms">
 					<el-form-item prop="OriginalPassword" label="输入原密码">
@@ -83,7 +83,7 @@
 			}
 		},
 		created() {
-			this.info_lits = JSON.parse(this.decrypt(this.$cookie.readCookie('un')))
+			this.info_lits = this.decrypt(this.$cookie.readCookie('un'));
 			this.user_name = this.info_lits.sysUserName
 		},
 		methods: {
@@ -101,7 +101,8 @@
 			exit() {
 				this.$cookie.delCookie("TK");
 				this.$cookie.delCookie("un");
-				this.$cookie.delCookie("menu");
+				// this.$cookie.delCookie("menu");
+				localStorage.removeItem("menu");
 				this.$cookie.delCookie("functonPower");
 				this.$cookie.delCookie("HandsomeL·Y");
 				const loading = this.$loading({
@@ -117,10 +118,6 @@
 						name: "Login"
 					})
 				}, 2000)
-			},
-
-			onClose() {
-				this.show_pup = false;
 			},
 
 			onSubmit() {

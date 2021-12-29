@@ -4,14 +4,14 @@
 			<label v-if="item.type && item.lable">{{item.lable}}</label>
 			<!-- 输入框 -->
 			<div v-if="item.type == 'input' && item.lable">
-				<el-input v-model="item.value" :placeholder="'请输入' + item.lable" @input="changeInput($event,item.key)">
+				<el-input v-model="item.value" :placeholder="'请输入' + item.lable" @input="changeInput($event,item.key)" clearable>
 				</el-input>
 			</div>
 
 			<!-- 选择框 -->
 			<div v-if="item.type == 'select' && item.lable" class="select-name">
 				<el-select v-model="item.value" :placeholder="'请选择' + item.lable"
-					@change="changeSelect($event,item.key)">
+					@change="changeSelect($event,item.key,index)">
 					<div class="options">
 						<el-option v-for="itm in item.list" :key="itm.value" :label="itm.label" :value="itm.value">
 						</el-option>
@@ -114,8 +114,10 @@
 				this.headerList.forEach(v => {
 					v.value = "";
 				})
+				this.$forceUpdate();
 				this.sendData = {};
-				this.onSearch();
+				// this.onSearch();
+
 			},
 			// 导出
 			onExport(){
@@ -125,8 +127,16 @@
 				this.sendData[`${type}`] = e;
 				this.$forceUpdate();
 			},
-			changeSelect(e, type) {
-				this.sendData[`${type}`] = e;
+			changeSelect(e, type,index) {
+				this.headerList[index].list.forEach(v =>{
+					if(v.value == e){
+						this.sendData[`${type}`] = {
+							lable : v.lable,
+							value : v.value
+						};
+					}
+				})
+				this.$forceUpdate();
 			},
 			changeTime(e, type) {
 				let startTime = this.setTime(new Date(e[0]));

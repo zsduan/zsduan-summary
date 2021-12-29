@@ -1,3 +1,10 @@
+<!--
+ * @Author: zs.duan
+ * @Date: 2021-12-17 15:23:43
+ * @LastEditors: zs.duan
+ * @LastEditTime: 2021-12-29 17:50:51
+ * @FilePath: \adminBlogf:\模板\template\src\components\editor\editor.vue
+-->
 <template>
     <div>
         <div class="" v-if="is_show_edit">
@@ -26,10 +33,8 @@
     import 'tinymce/plugins/hr'; //水平分割线
     import 'tinymce/plugins/preview'; //预览
 
-
-    import api from "@/common/api.js";
     export default {
-        name: "articles",
+        name: "Editors",
         props: {
             editHeight: {
                 type: Number,
@@ -78,16 +83,9 @@
                     images_upload_handler: function(blobInfo, success, failure) {
                         let formdata = new FormData();
                         formdata.append("file", blobInfo.blob());
-                        let json = {
-                            formDatas: formdata
-                        }
-                        // 上传图片接口，跟后端同事协调上传图片
-                        api.post({
-                            url: "profileImg",
-                            data: json,
-                        }).then(res => {
+                        _this.$api.profileImg(formData).then(res =>{
                             success(imgurl + res.url);
-                        })
+                        });
                     },
                     save_onsavecallback: function() {
                         _this.save();
