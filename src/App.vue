@@ -1,32 +1,39 @@
 <!--
  * @Author: zs.duan
- * @Date: 2021-12-16 15:26:59
+ * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-17 11:10:33
- * @FilePath: \template\src\App.vue
+ * @LastEditTime: 2022-09-20 16:58:17
+ * @FilePath: \vue2+js+eui+template\src\App.vue
 -->
 <template>
-	<div id="app">
-		<router-view />
-	</div>
+    <div id="app">
+        <router-view />
+    </div>
 </template>
 
-<style>
-	@import "assets/css/reset.less";
-	html,
-	body {
-		width: 100%;
-		height: 100%;
-		box-sizing: border-box;
-		padding: 0px;
-		margin: 0px;
-	}
-
-	#app {
-		font-family: "Avenir", Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		width: 100%;
-		height: 100%;
-	}
+<style lang="less">
+@import url("./assets/css/reset.css");
+:root {
+    --ThemeColor: #0065ff;
+    --fontColor: #333;
+}
+::selection {
+    background: var(--ThemeColor);
+    color: #fff;
+}
+.page {
+    width: 1200px;
+    margin: 0 auto;
+    h2 {
+        font-size: 20px;
+        padding-top: 30px;
+    }
+    .tips-box {
+        font-size: 16px;
+        color: var(--fontColor);
+        line-height: 20px;
+        padding: 10px 0;
+    }
+    
+}
 </style>

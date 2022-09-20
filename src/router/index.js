@@ -1,92 +1,28 @@
 /*
  * @Author: zs.duan
- * @Date: 2021-12-16 15:27:00
+ * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-20 09:13:18
- * @FilePath: \template\src\router\index.js
+ * @LastEditTime: 2022-09-20 13:56:40
+ * @FilePath: \vue2+js+eui+template\src\router\index.js
  */
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import cookie from '../common/cookie.js';
-import store from '../store';
-import setRouter from "./setRouter.js";
-import {decrypt} from "../common/encryp.js";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
 
-Vue.use(VueRouter);
-//获取原型对象上的push函数
-const originalPush = VueRouter.prototype.push;
-//修改原型对象中的push方法
-VueRouter.prototype.push = function push(location) {
-	return originalPush.call(this, location).catch(err => err)
-}
+Vue.use(VueRouter)
+
 const routes = [
-	{
-		path: "/login",
-		name: "Login",
-		component: () => import("../views/login.vue"),
-		meta: {
-			title: "智慧停车登录"
-		}
-	},
-	{
-		path: "/404",
-		name: "404",
-		component: () => import("../views/error-page/404.vue"),
-		meta: {
-			title: "页面不见啦~"
-		}
-	},
-	// {
-	// 	path: "*",
-	// 	redirect: {
-	// 		name: "404"
-	// 	}
-	// }
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
 ]
 
 const router = new VueRouter({
-	// mode: 'history',
-	base: process.env.BASE_URL,
-	mode: 'hash',
-	routes
-})
-
-router.beforeEach((to, from, next) => {
-	document.title = to.meta.title || "智慧停车管理系统";
-	let url = window.location.pathname,jurisdiction = false;
-	let routerList = router.getRoutes();
-	let Tk = cookie.readCookie("TK");
-	let urls = window.location.href;
-	urls = urls.split("#");
-	let arr = urls[1].split("toPath");
-	if(arr.length == 1){
-		url = urls[1];
-	}
-	if(!Tk && to.name !== 'Login'){
-		next({
-			name : "Login"
-		})
-		return ;
-	}
-	if(to.name){
-		next();
-		return ;
-	}
-	routerList.forEach(v =>{
-		if(v.path == url) jurisdiction = true;
-	})
-	if(!Tk && to.name !== 'Login'){
-		next({name:"Login"});
-		return;
-	}
-	if(to.name !== 'Login' && !jurisdiction){
-		next({
-			name: "Login",
-			query : {toPath : url}
-		});
-	}else{
-		next();
-	}
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
 
 export default router

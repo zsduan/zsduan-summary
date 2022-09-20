@@ -1,4 +1,17 @@
-* {
+div,
+p,
+span,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+header,
+main,
+footer,
+section {
   padding: 0;
   margin: 0;
   font-size: 14px;
@@ -74,6 +87,25 @@ img {
   box-shadow: 0 0 12px 0 rgba(46, 72, 233, 0.2);
   background-color: #fff;
 }
-.el-button--text {
-  color: #0065ff;
+ /deep/ .el-button--default {
+  min-width: 88px;
+  font-size: 14px;
+}
+ /deep/ .el-button--primary {
+  background-color: var(--ThemeColor);
+  border-color: var(--ThemeColor);
+  min-width: 88px;
+  font-size: 14px;
+}
+ /deep/ .el-button--primary:hover {
+  background: var(--ThemeColor07);
+  border-color: var(--ThemeColor07);
+}
+ /deep/ .el-switch.is-checked .el-switch__core {
+  border-color: var(--ThemeColor);
+  background-color: var(--ThemeColor);
+}
+.el-form-item--medium.el-form-item,
+.el-form-item--default.el-form-item {
+  margin-bottom: 22px;
 }

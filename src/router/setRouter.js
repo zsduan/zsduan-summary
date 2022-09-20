@@ -1,61 +1,62 @@
 /*
  * @Author: zs.duan
- * @Date: 2021-12-16 15:27:00
+ * @Date: 2022-09-20 15:03:54
  * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-17 17:27:27
- * @FilePath: \template\src\router\setRouter.js
+ * @LastEditTime: 2022-09-20 16:04:41
+ * @FilePath: \vue2+js+eui+template\src\router\setRouter.js
  */
+import MENU from "../subMenu.json" ;
+import Router from "./index";
 
-/* 
- *@data 2021-09-26\
- *@author zs.duan
- *动态路由的处理
- *
- */
-function setRouters(menuList) {
-	let newMenuList = [],
-		router = [];
-	menuList.forEach(v => {
-		newMenuList.push(v);
-		v.list.forEach(o => {
-			newMenuList.push(o);
-		})
-	})
-	newMenuList.forEach(v => {
-		if (v.is_show && v.url) {
-			let json = {
-				path: `/${v.url}`,
-				name: v.pathName,
-				component: loadView(`${v.url}/${v.url}.vue`),
-				meta: {
-					title: v.title
-				}
-			};
-			router.push(json);
-		}
-	})
-	let newRouter = {
-		path: '/',
-		name: 'Home',
-		redirect: router[0].path,
-		component:loadView("Home.vue"),
-		children: [],
-	};
-	newRouter.children = router;
-	return newRouter;
+class setRouter {
+    constructor(menu){
+        this.newMenu = [];
+        this.menu = menu;
+    }
+
+    set(){
+        let menu = this.getRouters(this.menu);
+        menu.forEach(v => {
+            Router.addRoute(v); 
+        })
+        
+    }
+
+    // 递归处理 路由
+    getRouters(menu , list){
+        list = list ? list : [];
+        menu.forEach(v => {
+            if(v.isShow){
+                let router = {
+                    path: `/${v.pathName}`,
+                    name: v.pathName,
+                    component: this.loadView(`${v.page}.vue`),
+                    meta: {
+                        title: v.title,
+                    }
+                }
+                if(!v.PID){
+                    router.children = [];
+                    list.push(router);
+                }
+                list.forEach(item => {
+                    if(v.PID === item.ID){
+                        item.children.push(item);
+                    }
+                })
+                if(v.children && v.children.length){
+                    this.getRouters(v.children , list);
+                }
+            }
+        })
+        return list;
+    }
+
+    // 路由懒加载
+    loadView(view) {
+        return () => import(`@/views/${view}`);
+    }
 }
 
-function loadView(view) {
-	// 路由懒加载
-	return () => import(`@/views/${view}`);
-}
-
-
-function setRouter(menuList,router) {
-	let routers = setRouters(menuList);
-	router.addRoute(routers);
-	return true;
-}
-
-
-export default setRouter;
+let newMenu = new setRouter(MENU);
+newMenu.set();

@@ -1,204 +1,96 @@
+<!--
+ * @Author: zs.duan
+ * @Date: 2022-09-20 13:49:02
+ * @LastEditors: zs.duan
+ * @LastEditTime: 2022-09-20 16:53:56
+ * @FilePath: \vue2+js+eui+template\src\views\Home.vue
+-->
 <template>
-	<div class="home" :style="{height:(this.$store.state.innerHeight) + 'px'}">
-		<div class="wrops">
-			<el-container>
-				<!-- 侧边栏 -->
-				<div class="slider">
-					<el-aside :style="{maxWidth:$env.sliderWidth}">
-						<Slider :menuList="menuList" @goPath="goPath" :active_slider="active_slider"></Slider>
-					</el-aside>
-				</div>
-                
-				<div class="slider-empty" :style="{width:$env.sliderWidth}"></div>
-                <el-container class="main-wrop">
-                    <el-container>
-						<!-- 这是头部 -->
-						<el-header class="headers" style="width:calc(100% - $env.sliderWidth)">
-							<HomeHeader :title="header_title"></HomeHeader>
-						</el-header>
-						<div class="header-empty"></div>
-
-						<el-main>
-							<div class="main box-show" :style="{minHeight:(this.$store.state.innerHeight - 180) + 'px'}">
-								<router-view></router-view>
-							</div>
-						</el-main>
-						<!-- 这是底部 -->
-						<el-footer>
-							<div class="footer">
-								<p>&copy;2021-{{year}},{{this.$env.sliderName}}</p>
-							</div>
-						</el-footer>
-					</el-container>
-				</el-container>
-			</el-container>
-		</div>
-	</div>
+    <div class="home">
+        <h1 class="home-title">zs.duan的自我总结</h1>
+        <div class="components-box piblic-box">
+            <h2 class="title">组件篇</h2>
+            <ul>
+                <li v-for="(item,index) in componentsList" :key="index" @click="goNav(item.path)">{{item.title}}</li>
+            </ul>
+        </div>
+        <div class="components-box piblic-box">
+            <h2 class="title">js篇</h2>
+            <ul>
+                <li v-for="(item,index) in jsList" :key="index" @click="goNav(item.path)">{{item.title}}</li>
+            </ul>
+        </div>
+    </div>
 </template>
+
 <script>
-	import Slider from "../components/slider/slider.vue"; //侧边栏
-	import HomeHeader from "../components/home-header/home-header.vue"; //侧边栏
-	import subMenu from "@/subMenu.json";
-	export default {
-		name: "home",
-		components: {
-			Slider,
-			HomeHeader,
-		},
-		data() {
-			return {
-				navlist: [],
-				year: "",
-				user_name: "未登录", //用户名
-				active_slider: "1", //当前选择
-				menuList: [],
-				header_title: this.$env.sliderName,
-			};
-		},
-		mounted() {
-			this.menuList = JSON.parse(this.decrypt(this.$cookie.readCookie("menu")));
-			this.getYears();  //获取当前年费
-			this.$store.commit("setMenuList", subMenu);
-			this.changeSlider();
-		},
-		methods: {
-			getYears() {
-				let date = new Date;
-				this.year = date.getFullYear();
-			},
-
-			// 页面跳转
-			goPath(e) {
-				this.header_title = e == '首页' ? this.$env.indexName : e ? e : this.$env.indexName;
-			},
-
-			// 自动切换侧边栏
-			changeSlider() {
-				this.menuList.forEach(v => {
-					if (v.pathName == this.$route.name) {
-						this.active_slider = v.id;
-						this.goPath(v.title);
-					}
-					v.list.forEach(o => {
-						if (o.pathName == this.$route.name) {
-							this.active_slider = o.id;
-							this.goPath(o.title);
-						}
-					})
-				})
-			},
-		}
-	};
+import {componentsList , jsList} from "../assets/data/homeData"
+export default {
+    name: "Home",
+    components: {},
+    data(){
+        return {
+            componentsList : componentsList.filter(item => {return item.is_show == true}),
+            jsList : jsList.filter(item => {return item.is_show == true})
+        }
+    },
+    methods:{
+        goNav(path){
+            if(!path){
+                return ;
+            }
+            this.$router.push({path : path})
+        }
+    }
+};
 </script>
 <style lang="less" scoped>
-	@import "../assets/css/reset.less";
-
-	.slider{
-			position: fixed;
-	}
-
-	.slider-empty{
-		height: 100%;
-	}
-	.home {
-		min-width: 1200px;
-	}
-
-	.wrops {
-		background-color: #fff;
-		min-width: 1200px;
-	}
-
-	.header {
-		width: 100%;
-		height: 70px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
-		.title {
-			font-size: 30px;
-			font-weight: bold;
-			padding-left: 20px;
-		}
-		
-	}
-
-
-	.aside {
-		min-height: 700px;
-		background-color: #393D49;
-		overflow-y: auto;
-		width: 100%;
-		padding-bottom: 20px;
-		-ms-overflow-style: none;
-		/* IE 10+ */
-		scrollbar-width: none;
-
-		/* Firefox */
-		&::-webkit-scrollbar {
-			/* Chrome Safari */
-			display: none;
-		}
-
-		/deep/.el-submenu {
-			width: 200px;
-		}
-
-		/deep/.el-menu-item {
-			width: 200px;
-		}
-
-		.title {
-			text-align: center;
-			font-size: 30px;
-			padding: 20px 0;
-			color: #fff;
-		}
-	}
-
-	.main-wrop {
-		background-color: #F8F8F8;
-	}
-
-	.headers {
-		background-color: #fff;
-		position: fixed;
-		width: calc(100% - 200px);
-		z-index: 9;
-		.box-show();
-	}
-
-	.header-empty{
-		width: 100%;
-		height: 60px;
-	}
-
-	.main {
-		margin: 20px;
-		position: relative;
-		overflow-y: auto;
-		min-width: 960px;
-		-ms-overflow-style: none;
-		/* IE 10+ */
-		scrollbar-width: none;
-
-		/* Firefox */
-		&::-webkit-scrollbar {
-			/* Chrome Safari */
-			display: none;
-		}
-	}
-
-	.show-main {
-		background-color: #fff;
-		.box-show();
-	}
-
-
-	.footer {
-		text-align: center;
-		line-height: 40px;
-		.not-select();
-	}
+.not-select{
+    -moz-user-select: none;
+    /*火狐*/
+    -webkit-user-select: none;
+      
+    /*webkit浏览器*/
+    -ms-user-select: none;
+    -ms-overflow-style: none;
+    /*IE10*/
+    -khtml-user-select: none;
+    /*早期浏览器*/
+    user-select: none;
+}
+.home-title {
+    font-size: 36px;
+    text-align: center;
+}
+.piblic-box {
+    max-width: 1200px;
+    margin: 0 auto;
+    .title{
+        font-size: 20px;
+        padding-top: 30px;
+    }
+    ul{
+        display: grid;
+         /* 宽度平均分成4份 */
+        grid-template-columns: repeat(4,1fr);
+        column-gap:20px ; //左右间距
+        row-gap: 40px; //上下间距
+        margin-top: 40px;
+        .not-select();
+        li{
+            height: 100px;
+            line-height: 100px;
+            box-shadow: 0 4px 8px 6px rgba(7, 17, 21, 0.06);
+            text-align: center;
+            font-size: 26px;
+            border: 10px;
+            cursor: pointer;
+            transition: all .3s;
+            color: var(--fontColor);
+            &:hover{
+                box-shadow: 0 4px 8px 10px rgba(7, 17, 21, 0.1);
+            }
+        }
+    }
+}
 </style>
