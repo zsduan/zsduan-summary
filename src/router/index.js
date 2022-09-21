@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 09:44:02
+ * @LastEditTime: 2022-09-21 14:33:20
  * @FilePath: \vue2+js+eui+template\src\router\index.js
  */
 import Vue from 'vue'
@@ -20,9 +20,15 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  // mode: 'history',
   mode: 'hash',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach(async(to, from, next) => {
+  document.title = to.meta?.title ? to.meta.title : "zs.duan的个人总结";
+  next();
 })
 
 export default router

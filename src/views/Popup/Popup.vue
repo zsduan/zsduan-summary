@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 15:03:10
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-20 17:33:02
+ * @LastEditTime: 2022-09-21 11:42:15
  * @FilePath: \vue2+js+eui+template\src\views\Popup\Popup.vue
 -->
 <template >
@@ -26,7 +26,9 @@
                 <div class="tips-box">自己在源代码去看</div>
             </div>
             <h2>组件源代码下载</h2>
-            <div class="item"></div>
+            <div class="item">
+                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-popup/index.vue">弹窗组件下载地址</a>
+            </div>
         </div>
         <dzs-popup :isShow.sync="defaultIsShow">
             <div>我是一个默认的弹窗</div>
@@ -40,7 +42,7 @@
     </div>
 </template>
 <script>
-import dzsPopup from "../../components/dzs-popup/index.vue";
+import dzsPopup from "@/components/dzs-popup/index.vue";
 export default {
     components: {
         dzsPopup,
@@ -76,6 +78,13 @@ export default {
 .page {
     .item {
         padding: 10px 0;
+        a{
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
     }
 }
 </style>

@@ -7,5 +7,14 @@
         "page" : "Popup/Popup",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20220920145900",
+        "PID" : null ,
+        "title" : "表格组件",
+        "pathName" : "table",
+        "page" : "table/table",
+        "isShow" : true,
+        "children" : []
     }
 ]

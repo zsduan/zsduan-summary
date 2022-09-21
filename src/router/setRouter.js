@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 15:03:54
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-20 16:04:41
+ * @LastEditTime: 2022-09-21 11:49:10
  * @FilePath: \vue2+js+eui+template\src\router\setRouter.js
  */
 import MENU from "../subMenu.json" ;

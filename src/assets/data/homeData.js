@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-20 16:04:56
+ * @LastEditTime: 2022-09-21 11:21:58
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -14,29 +14,29 @@ export const componentsList = [
     },
     {
         title : "表格组件",
-        path : "",
+        path : "/table",
         is_show : true
     },
-    {
-        title : "表单组件",
-        path : "",
-        is_show : true
-    },
-    {
-        title : "富文本组件",
-        path : "",
-        is_show : true
-    },
-    {
-        title : "公共按钮组件",
-        path : "",
-        is_show : true
-    },
-    {
-        title : "车牌号键盘组件",
-        path : "",
-        is_show : true
-    }
+    // {
+    //     title : "表单组件",
+    //     path : "",
+    //     is_show : true
+    // },  
+    // {
+    //     title : "富文本组件",
+    //     path : "",
+    //     is_show : true
+    // },
+    // {
+    //     title : "公共按钮组件",
+    //     path : "",
+    //     is_show : true
+    // },
+    // {
+    //     title : "车牌号键盘组件",
+    //     path : "",
+    //     is_show : true
+    // }
 ]
 
 

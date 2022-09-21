@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 16:57:00
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-20 17:25:04
+ * @LastEditTime: 2022-09-21 10:08:56
  * @FilePath: \vue2+js+eui+template\src\components\dzs-code\index.vue
 -->
 <template>
@@ -69,6 +69,7 @@ export default {
     border: 10px;
     padding: 10px;
     margin: 10px 0;
+    border-radius: 5px;
     .title {
         font-size: 16px;
         font-weight: 500;
