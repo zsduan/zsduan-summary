@@ -9,11 +9,20 @@
         "children" : []
     },
     {
-        "ID" : "20220920145900",
+        "ID" : "20220921145900",
         "PID" : null ,
         "title" : "表格组件",
         "pathName" : "table",
         "page" : "table/table",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20220921145547",
+        "PID" : null ,
+        "title" : "富文本",
+        "pathName" : "edit",
+        "page" : "edit/edit",
         "isShow" : true,
         "children" : []
     }
