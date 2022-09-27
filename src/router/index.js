@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 14:43:45
+ * @LastEditTime: 2022-09-27 09:53:46
  * @FilePath: \vue2+js+eui+template\src\router\index.js
  */
 import Vue from 'vue'
@@ -20,8 +20,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  // mode: 'hash',
+  // mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
