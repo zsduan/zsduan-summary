@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-17 15:23:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-27 09:46:23
+ * @LastEditTime: 2022-09-27 10:12:16
  * @FilePath: \vue2+js+eui+template\src\components\dzs-editor\index.vue
 -->
 <template>
@@ -99,9 +99,9 @@ export default {
     created() {
         let _this = this;
         (this.editConfig = {
-            language_url: "/tinymce/langs/zh_CN.js", // 语言包的路径
+            language_url: process.env.NODE_ENV === 'production' ?  "/zsduan-summary/tinymce/langs/zh_CN.js" :  "/tinymce/langs/zh_CN.js", // 语言包的路径
             language: "zh_CN", //语言
-            skin_url: "/tinymce/skins/ui/oxide", // skin路径
+            skin_url: process.env.NODE_ENV === 'production' ? "/zsduan-summary/tinymce/skins/ui/oxide":"/tinymce/skins/ui/oxide", // skin路径
             browser_spellcheck: true, // 拼写检查
             branding: false, // 去水印
             height: this.height || 500, //编辑器高度

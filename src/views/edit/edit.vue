@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 14:52:41
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-27 09:49:17
+ * @LastEditTime: 2022-09-27 10:10:36
  * @FilePath: \vue2+js+eui+template\src\views\edit\edit.vue
 -->
 <template>
@@ -43,6 +43,9 @@ export default {
             code2 : code2,
             defaultValue : "<p>我是默认值</p>"
         }
+    },
+    mounted(){
+        console.log(process.env.NODE_ENV)
     }
 }
 </script>
