@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 14:56:12
+ * @LastEditTime: 2022-09-27 10:42:38
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -17,16 +17,16 @@ export const componentsList = [
         path : "/table",
         is_show : true
     },
-    // {
-    //     title : "表单组件",
-    //     path : "",
-    //     is_show : true
-    // },  
     {
         title : "富文本组件",
         path : "/edit",
         is_show : true
     },
+    {
+        title : "表单组件",
+        path : "/form",
+        is_show : true
+    },  
     // {
     //     title : "公共按钮组件",
     //     path : "",

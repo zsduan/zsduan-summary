@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 10:21:11
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 14:20:29
+ * @LastEditTime: 2022-09-28 13:54:04
  * @FilePath: \vue2+js+eui+template\src\components\dzs-table\index.vue
 -->
 <template>
@@ -228,8 +228,8 @@ export default {
             /* Chrome Safari */
             display: none;
         }
-        /deep/.el-table th,
-        .el-table tr {
+        :deep(.el-table th,
+        .el-table tr) {
             background-color: var(--ThemeColor01);
             color: #282c33;
             .cell {
@@ -237,7 +237,7 @@ export default {
             }
         }
 
-        /deep/.el-table__fixed-right-patch {
+        :deep(.el-table__fixed-right-patch ){
             background-color: #f3f8ff;
         }
     }
@@ -293,7 +293,7 @@ export default {
         color: var(--fontColor);
     }
 
-    /deep/.el-tag--dark {
+    :deep(.el-tag--dark) {
         border-color: transparent;
         display: inline-block !important;
         padding: 0 10px;
@@ -304,7 +304,7 @@ export default {
     span {
         color: var(--ThemeColor);
     }
-    /deep/span {
+    :deep(span) {
         color: var(--ThemeColor);
     }
 }

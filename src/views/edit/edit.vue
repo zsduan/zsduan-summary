@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 14:52:41
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-27 10:10:36
+ * @LastEditTime: 2022-09-28 13:51:12
  * @FilePath: \vue2+js+eui+template\src\views\edit\edit.vue
 -->
 <template>
@@ -16,7 +16,7 @@
             </div>
             <h2>默认值</h2>
             <div class="item">
-                <dzs-editor v-model="defaultValue"></dzs-editor>
+                <dzs-editor :value.sync="defaultValue"></dzs-editor>
                 <dzs-code title="源代码" :value="code2"></dzs-code>
             </div>
             <h2>更多功能</h2>

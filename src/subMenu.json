@@ -25,5 +25,14 @@
         "page" : "edit/edit",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20220927103837",
+        "PID" : null ,
+        "title" : "表单组件",
+        "pathName" : "form",
+        "page" : "form/form",
+        "isShow" : true,
+        "children" : []
     }
 ]
