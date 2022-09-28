@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-27 10:39:53
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 13:50:00
+ * @LastEditTime: 2022-09-28 14:07:41
  * @FilePath: \vue2+js+eui+template\src\views\form\form.vue
 -->
 <template>
@@ -14,6 +14,14 @@
                 <dzs-form :options="formOptions"></dzs-form>
                 <dzs-code title="源代码" :value="code1"></dzs-code>
                 <dzs-code title="全部配置" :value="code2"></dzs-code>
+            </div>
+            <h2>更多功能</h2>
+            <div class="item">
+                <div class="tips-box">自己在源代码去看</div>
+            </div>
+            <h2>组件源代码下载</h2>
+            <div class="item">
+                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-form/index.vue">表单组件下载地址</a>
             </div>
         </div>
     </div>
@@ -143,5 +151,16 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
+.page {
+    .item {
+        padding: 10px 0;
+        a{
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+    }
+}
 </style>

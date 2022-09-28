@@ -34,5 +34,14 @@
         "page" : "form/form",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20220928141333",
+        "PID" : null ,
+        "title" : "车牌号组件",
+        "pathName" : "licensePlateNumber",
+        "page" : "license-plate-number/license-plate-number",
+        "isShow" : true,
+        "children" : []
     }
 ]

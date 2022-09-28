@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-27 10:42:38
+ * @LastEditTime: 2022-09-28 14:14:16
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -32,11 +32,11 @@ export const componentsList = [
     //     path : "",
     //     is_show : true
     // },
-    // {
-    //     title : "车牌号键盘组件",
-    //     path : "",
-    //     is_show : true
-    // }
+    {
+        title : "车牌号键盘组件",
+        path : "/licensePlateNumber",
+        is_show : true
+    }
 ]
 
 

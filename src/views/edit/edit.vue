@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 14:52:41
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 13:51:12
+ * @LastEditTime: 2022-09-28 14:08:21
  * @FilePath: \vue2+js+eui+template\src\views\edit\edit.vue
 -->
 <template>
@@ -50,5 +50,16 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
+.page {
+    .item {
+        padding: 10px 0;
+        a{
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+    }
+}
 </style>

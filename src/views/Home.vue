@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 10:10:42
+ * @LastEditTime: 2022-09-28 14:27:18
  * @FilePath: \vue2+js+eui+template\src\views\Home.vue
 -->
 <template>
@@ -37,6 +37,10 @@ export default {
     methods:{
         goNav(path){
             if(!path){
+                this.$message({
+                    message: '功能暂未开放',
+                    type: 'info'
+                });
                 return ;
             }
             this.$router.push({path : path})
