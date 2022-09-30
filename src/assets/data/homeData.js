@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 14:14:16
+ * @LastEditTime: 2022-09-30 17:15:36
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -43,7 +43,7 @@ export const componentsList = [
 export const jsList = [
     {
         title : "处理时间 苹果/安卓",
-        path : "",
+        path : "/setTime",
         is_show : true
     },
     {
@@ -58,27 +58,27 @@ export const jsList = [
     },
     {
         title : "生成guid",
-        path : "",
+        path : "/guid",
         is_show : true
     },
     {
         title : "设置主题色",
-        path : "",
+        path : "/ThemeColor",
         is_show : true
     },
     {
         title : "获取浏览器型号",
-        path : "",
+        path : "/ua",
         is_show : true
     },
     {
         title : "计算时间差",
-        path : "",
+        path : "/timeDifference",
         is_show : true
     },
     {
         title : "日期转农历",
-        path : "",
+        path : "/calender",
         is_show : true
     },
     {

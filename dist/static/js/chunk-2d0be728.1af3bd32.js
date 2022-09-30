@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0be728"],{"2ffd":function(n,e,t){"use strict";t.r(e),t.d(e,"code1",(function(){return i}));const i='\n// 传入 \nstartDate //开始时间 必填 string 2022-09-30 12:00:00 endDate 结束时间 选填 不填默认 当前时间 \n// 计算方法 开始时间 - 结束时间 \n//返回\nreturn {\n    day : dayDiff, //天数\n    hours : hours, //小时\n    minutes : minutes, //分钟\n    seconds : seconds, //结束时间\n  }\n\n  //使用\n  import timeDifference from "@/utils/time-difference";\n  timeDifference(e.startTime , e.endTime)\n'}}]);
+//# sourceMappingURL=chunk-2d0be728.1af3bd32.js.map

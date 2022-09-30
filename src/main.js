@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-20 17:00:35
+ * @LastEditTime: 2022-09-30 11:21:21
  * @FilePath: \vue2+js+eui+template\src\main.js
  */
 import Vue from 'vue'
@@ -12,6 +12,7 @@ import store from './store'
 import "./router/setRouter"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import "./assets/css/reset.css"
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;

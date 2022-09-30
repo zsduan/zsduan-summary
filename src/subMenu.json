@@ -43,5 +43,59 @@
         "page" : "license-plate-number/license-plate-number",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20220930095422",
+        "PID" : null ,
+        "title" : "guid",
+        "pathName" : "guid",
+        "page" : "guid/guid",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20220930110149",
+        "PID" : null ,
+        "title" : "设置主题色",
+        "pathName" : "ThemeColor",
+        "page" : "ThemeColor/ThemeColor",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20220930141632",
+        "PID" : null ,
+        "title" : "获取浏览器信息",
+        "pathName" : "ua",
+        "page" : "ua/ua",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20220930143154",
+        "PID" : null ,
+        "title" : "时间差",
+        "pathName" : "timeDifference",
+        "page" : "time-difference/time-difference",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20220930150113",
+        "PID" : null ,
+        "title" : "获取农历",
+        "pathName" : "calender",
+        "page" : "calender/calender",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20220930171524",
+        "PID" : null ,
+        "title" : "设置时间",
+        "pathName" : "setTime",
+        "page" : "setTime/setTime",
+        "isShow" : true,
+        "children" : []
     }
 ]

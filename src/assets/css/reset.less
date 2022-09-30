@@ -88,27 +88,27 @@ img {
 }
 
 
-// 饿了吗组件
-/deep/.el-button--default{
-	min-width: 88px;
-    font-size: 14px;
-}
-/deep/.el-button--primary{
-	background-color: var(--ThemeColor);
-	border-color: var(--ThemeColor);
-	min-width: 88px;
-    font-size: 14px;
-	&:hover{
-		background: var(--ThemeColor07);
-		border-color: var(--ThemeColor07);
-	}
-}
 
-/deep/.el-switch.is-checked .el-switch__core{
-	border-color: var(--ThemeColor) ;
-	background-color: var(--ThemeColor) ;
-}
+
+
 
 .el-form-item--medium.el-form-item, .el-form-item--default.el-form-item{
 	margin-bottom: 22px;
+}
+
+.el-button--primary{
+	background-color: var(--ThemeColor) ;
+	border-color: var(--ThemeColor);
+	&:hover{
+		background: var(--ThemeColor07);
+		border-color: var(--ThemeColor07) ;
+	}
+	&:focus{
+		background-color: var(--ThemeColor) ;
+		border-color: var(--ThemeColor);
+	}
+}
+.el-switch.is-checked .el-switch__core{
+	border-color: var(--ThemeColor) ;
+	background-color: var(--ThemeColor);
 }

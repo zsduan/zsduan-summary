@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 14:27:18
+ * @LastEditTime: 2022-09-30 11:15:22
  * @FilePath: \vue2+js+eui+template\src\views\Home.vue
 -->
 <template>
@@ -24,36 +24,40 @@
 </template>
 
 <script>
-import {componentsList , jsList} from "../assets/data/homeData"
+import { componentsList, jsList } from "../assets/data/homeData";
 export default {
     name: "Home",
     components: {},
-    data(){
+    data() {
         return {
-            componentsList : componentsList.filter(item => {return item.is_show == true}),
-            jsList : jsList.filter(item => {return item.is_show == true})
-        }
+            componentsList: componentsList.filter((item) => {
+                return item.is_show == true;
+            }),
+            jsList: jsList.filter((item) => {
+                return item.is_show == true;
+            }),
+        };
     },
-    methods:{
-        goNav(path){
-            if(!path){
+    methods: {
+        goNav(path) {
+            if (!path) {
                 this.$message({
-                    message: '功能暂未开放',
-                    type: 'info'
+                    message: "功能暂未开放",
+                    type: "info",
                 });
-                return ;
+                return;
             }
-            this.$router.push({path : path})
-        }
-    }
+            this.$router.push({ path: path });
+        },
+    },
 };
 </script>
 <style lang="less" scoped>
-.not-select{
+.not-select {
     -moz-user-select: none;
     /*火狐*/
     -webkit-user-select: none;
-      
+
     /*webkit浏览器*/
     -ms-user-select: none;
     -ms-overflow-style: none;
@@ -69,19 +73,19 @@ export default {
 .piblic-box {
     max-width: 1200px;
     margin: 0 auto;
-    .title{
+    .title {
         font-size: 20px;
         padding-top: 30px;
     }
-    ul{
+    ul {
         display: grid;
-         /* 宽度平均分成4份 */
-        grid-template-columns: repeat(4,1fr);
-        column-gap:20px ; //左右间距
+        /* 宽度平均分成4份 */
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px; //左右间距
         row-gap: 40px; //上下间距
         margin-top: 40px;
         .not-select();
-        li{
+        li {
             height: 100px;
             line-height: 100px;
             box-shadow: 0 4px 8px 6px rgba(7, 17, 21, 0.06);
@@ -89,9 +93,9 @@ export default {
             font-size: 26px;
             border: 10px;
             cursor: pointer;
-            transition: all .3s;
+            transition: all 0.3s;
             color: var(--fontColor);
-            &:hover{
+            &:hover {
                 box-shadow: 0 4px 8px 10px rgba(7, 17, 21, 0.1);
             }
         }
