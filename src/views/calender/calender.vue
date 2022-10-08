@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 15:01:00
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 17:12:45
+ * @LastEditTime: 2022-10-08 09:30:53
  * @FilePath: \vue2+js+eui+template\src\views\calender\calender.vue
 -->
 <template>
@@ -15,7 +15,7 @@
                 <div class="guid">{{time}}</div>
                 <div class="guid">
                     <span>{{time.zodiacYear}}年 {{time.lunarYearCn}}  {{time.lunarMonthCn}}{{time.lunarDayCn}} {{time.weekday}}</span>
-                    <span> {{time.solarTerm}} {{time.gregorianFestival}} {{time.lunarFestival}}</span>
+                    <span> {{time.solarTerm}} {{time.gregorianFestival}} {{time.lunarFestival}} {{time.constellation}}</span>
                 </div>
                 <dzs-code title="使用方法" :value="code1"></dzs-code>
             </div>
