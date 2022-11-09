@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 14:20:09
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 15:14:57
+ * @LastEditTime: 2022-11-01 11:08:57
  * @FilePath: \vue2+js+eui+template\src\utils\time-difference.js
  */
 
@@ -11,9 +11,13 @@ export default (startDate , endDate) => { //di作为一个变量传进来
         throw new Error("startDate must be null");
     }
     //如果时间格式是正确的，那下面这一步转化时间格式就可以不用了
-    let dateBegin = startDate.replace(/T/g, " "); //将-转化为/，使用new Date
-    dateBegin = new Date(dateBegin.replace(/-/g, "/")); //将-转化为/，使用new Date 用于苹果手机
-    if(endDate){
+    let dateBegin = "";
+    if(typeof endDate == 'string'){
+      dateBegin = startDate.replace(/T/g, " "); //将-转化为/，使用new Date
+      dateBegin = new Date(dateBegin.replace(/-/g, "/")); //将-转化为/，使用new Date 用于苹果手机
+    }
+    
+    if(endDate && typeof endDate == 'string'){
         endDate = endDate.replace(/T/g," "); //处理后端数据
         endDate = new Date(endDate.replace(/-/g,'/'));
     }

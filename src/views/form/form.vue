@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-27 10:39:53
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 14:07:41
+ * @LastEditTime: 2022-11-08 13:55:09
  * @FilePath: \vue2+js+eui+template\src\views\form\form.vue
 -->
 <template>
@@ -11,7 +11,11 @@
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <dzs-form :options="formOptions"></dzs-form>
+                <dzs-form :options="formOptions">
+                    <template #mySlot>
+                        <el-button>我是自定义组件的button</el-button>
+                    </template>
+                </dzs-form>
                 <dzs-code title="源代码" :value="code1"></dzs-code>
                 <dzs-code title="全部配置" :value="code2"></dzs-code>
             </div>
@@ -41,6 +45,13 @@ export default {
                 },
                 formItem : [
                     {
+                        label: "自定义组件", 
+                        key: "mySlot", 
+                        type : "input",
+                        isSlot : true , 
+                        span : 24
+                    },
+                    {
                         label: "输入框", 
                         key: "input", 
                         type : "input",
@@ -48,7 +59,8 @@ export default {
                             { required: true, message: '请输入输入框名称', trigger: 'blur' },
                         ],
                         props:{
-                            placeholder : "请输入输入框"
+                            placeholder : "请输入输入框",
+                            tips : "这个是一个输入框"
                         },
                         span : 24
                     },

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-20 16:33:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 13:48:21
+ * @LastEditTime: 2022-11-08 13:56:35
  * @FilePath: \vue2+js+eui+template\src\components\dzs-form\index.vue
 -->
 <template>
@@ -20,7 +20,7 @@
                 <div v-for="(item,index) in formItem" :key="index">
                     <el-col :span="item.span ? item.span : 24" v-if="!item.isHidden">
                         <!-- 自定义组件 -->
-                        <el-form-item :label="item.label" :prop="item.key" v-if="item.isSlot">
+                        <el-form-item :label="item.label" v-if="item.isSlot">
                             <slot :name="item.key"></slot>
                         </el-form-item>
                         <div v-if="!item.isSlot">
@@ -31,6 +31,7 @@
                                     v-bind="{...item.props}"
                                     @input="changeVaule($event,item.key)"
                                 ></el-input>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 选择框 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'select'">
@@ -47,6 +48,7 @@
                                         :value="option.value"
                                     ></el-option>
                                 </el-select>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 日期选择器 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'date'">
@@ -55,6 +57,7 @@
                                     v-bind="{...item.props}"
                                     @input="changeVaule($event,item.key)"
                                 ></el-date-picker>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 开关 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'switch'">
@@ -63,6 +66,7 @@
                                     v-bind="{...item.props}"
                                     @input="changeVaule($event,item.key)"
                                 ></el-switch>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 多选框 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'checkbox'">
@@ -79,6 +83,7 @@
                                         :label="option.value"
                                     >{{option.label}}</el-checkbox>
                                 </el-checkbox-group>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 单选框 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'radio'">
@@ -95,6 +100,7 @@
                                         :label="option.value"
                                     >{{option.label}}</el-radio>
                                 </el-radio-group>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 图片 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'uploadImg'">
@@ -103,9 +109,11 @@
                                     v-bind="{...item.props}"
                                     @change="changeVaule($event,item.key)"
                                 ></dzs-upload-img>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 富文本 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'edit'">
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                                 <dzs-editors
                                     @save="changeVaule($event,item.key)"
                                     :show_save="false"
@@ -138,14 +146,15 @@
                 children : [] , //列表数据 非必填
                 defaultValue : "" , //默认值 非必填
                 isHidden : false , //是否隐藏 非必填
-                props:{ }, //内部参数 饿了吗ui相同 非必填 tips type == uploadImg  参数见组件
+                props:{ }, //内部参数 饿了吗ui相同 非必填 tips type == uploadImg  参数见组件 特殊参数  tips 文字介绍说明
                 rules：{ } ,// 规则 饿了吗ui相同 非必填
                 isNull : false , //是否不需要添加到提交表单中  非必填
+                isSlot : false , //非必填 是否为自定义组件
             }
         ] 
     }
  *
- *@props value / v-model 返回值 表单数据
+ * @props value / v-model 返回值 表单数据
  * 
  * @methods onSubmit  提交事件 返回当前表单数据
  * 
@@ -297,6 +306,11 @@ export default {
     min-width: 650px;
     .items {
         padding-right: 10px;
+    }
+    .from-item-tips{
+        font-size: 12px;
+        color: #ccc;
+        padding-top: 3px;
     }
 }
 .form-box {

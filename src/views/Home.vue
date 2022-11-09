@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 11:15:22
+ * @LastEditTime: 2022-11-08 14:15:28
  * @FilePath: \vue2+js+eui+template\src\views\Home.vue
 -->
 <template>
@@ -17,7 +17,7 @@
         <div class="components-box piblic-box">
             <h2 class="title">js篇</h2>
             <ul>
-                <li v-for="(item,index) in jsList" :key="index" @click="goNav(item.path)">{{item.title}}</li>
+                <li v-for="(item,index) in jsList" :key="index" @click="goNav(item.path)" :class="item.title.length > 8 ? 'small-size' :''">{{item.title}}</li>
             </ul>
         </div>
     </div>
@@ -99,6 +99,9 @@ export default {
                 box-shadow: 0 4px 8px 10px rgba(7, 17, 21, 0.1);
             }
         }
+    }
+    .small-size{
+        font-size: 20px;
     }
 }
 </style>

@@ -97,5 +97,14 @@
         "page" : "setTime/setTime",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20221108142330",
+        "PID" : null ,
+        "title" : "微信/支付宝/其他浏览器",
+        "pathName" : "is-wx-Alipay",
+        "page" : "is-wx-Alipay/is-wx-Alipay",
+        "isShow" : true,
+        "children" : []
     }
 ]

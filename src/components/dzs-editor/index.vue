@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-17 15:23:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-27 10:12:16
+ * @LastEditTime: 2022-11-01 09:40:48
  * @FilePath: \vue2+js+eui+template\src\components\dzs-editor\index.vue
 -->
 <template>
@@ -147,6 +147,7 @@ export default {
             images_upload_handler: function (blobInfo, success, failure) {
                 let formData = new FormData();
                 formData.append("file", blobInfo.blob());
+                // 需要自行修改上传api
                 _this.$api
                     .editorProfileImg(formData)
                     .then((res) => {

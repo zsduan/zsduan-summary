@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-28 13:43:24
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 13:49:29
+ * @LastEditTime: 2022-11-08 13:57:52
  * @FilePath: \vue2+js+eui+template\src\views\form\config.js
  */
 export const code1 = `
@@ -16,9 +16,10 @@ export const code1 = `
                 children : [] , //列表数据 非必填
                 defaultValue : "" , //默认值 非必填
                 isHidden : false , //是否隐藏 非必填
-                props:{ }, //内部参数 饿了吗ui相同 非必填 tips type == uploadImg  参数见组件
+                props:{ }, //内部参数 饿了吗ui相同 非必填 tips type == uploadImg  参数见组件 特殊参数  tips 文字介绍说明
                 rules：{ } ,// 规则 饿了吗ui相同 非必填
                 isNull : false , //是否不需要添加到提交表单中  非必填
+                isSlot : false , //非必填 是否为自定义组件
             }
         ] 
     }
@@ -28,12 +29,26 @@ export const code1 = `
 `
 
 export const code2 = `
+
+<dzs-form :options="formOptions">
+    <template #mySlot>
+        <el-button>我是自定义组件的button</el-button>
+    </template>
+</dzs-form>
+
 formOptions(){
     return {
         formProps : {
             "label-width" : "110px",
         },
         formItem : [
+            {
+                label: "自定义组件", 
+                key: "mySlot", 
+                type : "input",
+                isSlot : true , 
+                span : 24
+            },
             {
                 label: "输入框", 
                 key: "input", 

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 17:15:36
+ * @LastEditTime: 2022-11-08 14:24:20
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -109,6 +109,11 @@ export const jsList = [
     {
         title : "对称加密/解密",
         path : "",
+        is_show : true
+    },
+    {
+        title : "微信/支付宝/其他浏览器",
+        path : "/is-wx-Alipay",
         is_show : true
     },
 ]
