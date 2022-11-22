@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:19:50
+ * @LastEditTime: 2022-11-22 20:36:28
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -98,7 +98,7 @@ export const jsList = [
     },
     {
         title : "js模糊搜索",
-        path : "",
+        path : "/blurSearch",
         is_show : true
     },
     {
@@ -118,6 +118,11 @@ export const jsList = [
     },
     {
         title : "大文件切片与合并",
+        path : "",
+        is_show : true
+    },
+    {
+        title : "js复制",
         path : "",
         is_show : true
     },

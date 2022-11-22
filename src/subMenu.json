@@ -115,5 +115,14 @@
         "page" : "encryp/encryp",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20221122203652",
+        "PID" : null ,
+        "title" : "模糊搜索",
+        "pathName" : "blurSearch",
+        "page" : "blurSearch/blurSearch",
+        "isShow" : true,
+        "children" : []
     }
 ]

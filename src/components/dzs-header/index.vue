@@ -2,13 +2,16 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 16:14:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 11:33:29
- * @FilePath: \vue2+js+eui+template\src\components\dzs-header\index.vue
+ * @LastEditTime: 2022-11-22 21:23:30
+ * @FilePath: \vue2+elui+template\src\components\dzs-header\index.vue
 -->
 <template>
     <div>
         <div class="top-box">
-            <div class="go-home" @click="goHome">返回首页</div>
+            <div class="go-home" @click="goHome">
+                <i class="el-icon-house"></i>
+                <span>返回首页</span>
+            </div>
             <div class="title">{{title}}</div>
         </div>
     </div>

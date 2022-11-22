@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 17:33:31
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:17:58
+ * @LastEditTime: 2022-11-22 21:18:11
  * @FilePath: \vue2+elui+template\src\views\encryp\encryp.vue
 -->
 <template>
@@ -59,6 +59,8 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/encryp.js">下载/查看地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20">
+        </el-backtop>
     </div>
 </template>
 <script>

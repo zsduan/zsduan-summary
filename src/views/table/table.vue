@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 11:16:17
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:14:47
+ * @LastEditTime: 2022-11-22 21:21:08
  * @FilePath: \vue2+elui+template\src\views\table\table.vue
 -->
 <template>
@@ -38,6 +38,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-table/index.vue">表格组件下载地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

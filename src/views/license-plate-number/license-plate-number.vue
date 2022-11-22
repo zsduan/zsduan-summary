@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-28 14:12:31
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:14:33
+ * @LastEditTime: 2022-11-22 21:20:43
  * @FilePath: \vue2+elui+template\src\views\license-plate-number\license-plate-number.vue
 -->
 <template>
@@ -27,6 +27,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-keyboard/index.vue">键盘组件下载地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

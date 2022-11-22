@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 15:03:10
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:14:38
+ * @LastEditTime: 2022-11-22 21:20:59
  * @FilePath: \vue2+elui+template\src\views\Popup\Popup.vue
 -->
 <template >
@@ -39,6 +39,7 @@
                 <el-button>提交</el-button>
             </template>
         </dzs-popup>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 10:51:51
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:16:12
+ * @LastEditTime: 2022-11-22 21:21:12
  * @FilePath: \vue2+elui+template\src\views\ThemeColor\ThemeColor.vue
 -->
 <template>
@@ -26,6 +26,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/views/ThemeColor/ThemeColor.vue">下载地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

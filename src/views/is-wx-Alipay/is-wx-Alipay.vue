@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-08 14:22:34
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:14:25
+ * @LastEditTime: 2022-11-22 21:20:48
  * @FilePath: \vue2+elui+template\src\views\is-wx-Alipay\is-wx-Alipay.vue
 -->
 <template>
@@ -21,6 +21,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/guid.js">下载/查看地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

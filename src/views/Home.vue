@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:20:18
+ * @LastEditTime: 2022-11-22 21:23:48
  * @FilePath: \vue2+elui+template\src\views\Home.vue
 -->
 <template>
@@ -26,6 +26,7 @@
                 <li v-for="(item,index) in effectList" :key="index" @click="goNav(item.path)" :class="item.title.length > 8 ? 'small-size' :''">{{item.title}}</li>
             </ul>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 

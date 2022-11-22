@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 14:52:41
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:14:06
+ * @LastEditTime: 2022-11-22 21:20:22
  * @FilePath: \vue2+elui+template\src\views\edit\edit.vue
 -->
 <template>
@@ -28,6 +28,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-editor/index.vue">富文本组件下载地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

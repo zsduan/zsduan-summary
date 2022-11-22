@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 09:53:35
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:14:21
+ * @LastEditTime: 2022-11-22 21:20:33
  * @FilePath: \vue2+elui+template\src\views\guid\guid.vue
 -->
 <template>
@@ -21,6 +21,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/guid.js">下载/查看地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
