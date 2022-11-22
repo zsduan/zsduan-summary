@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-08 14:24:20
- * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
+ * @LastEditTime: 2022-11-22 19:19:50
+ * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
 export const componentsList = [
@@ -107,13 +107,31 @@ export const jsList = [
         is_show : true
     },
     {
-        title : "对称加密/解密",
+        title : "对称加密/解密/MD5加密",
+        path : "/encryp",
+        is_show : true
+    },
+    {
+        title : "微信/支付宝/其他浏览器的判断",
+        path : "/is-wx-Alipay",
+        is_show : true
+    },
+    {
+        title : "大文件切片与合并",
+        path : "",
+        is_show : true
+    },
+]
+
+export const effectList = [
+    {
+        title : "模块拖动",
         path : "",
         is_show : true
     },
     {
-        title : "微信/支付宝/其他浏览器",
-        path : "/is-wx-Alipay",
+        title : "边框动画效果",
+        path : "",
         is_show : true
     },
 ]

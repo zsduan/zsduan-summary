@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 10:51:51
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 17:10:26
- * @FilePath: \vue2+js+eui+template\src\views\ThemeColor\ThemeColor.vue
+ * @LastEditTime: 2022-11-22 19:16:12
+ * @FilePath: \vue2+elui+template\src\views\ThemeColor\ThemeColor.vue
 -->
 <template>
     <div>
@@ -16,6 +16,14 @@
                 <div class="back">注意看我的背景</div>
                 <el-button type="primary">我的背景也在变</el-button>
                 <dzs-code title="使用方法" :value="code1"></dzs-code>
+            </div>
+            <h2>更多功能</h2>
+            <div class="item">
+                <div class="tips-box">自己在源代码去看</div>
+            </div>
+            <h2>组件源代码下载</h2>
+            <div class="item">
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/views/ThemeColor/ThemeColor.vue">下载地址</a>
             </div>
         </div>
     </div>

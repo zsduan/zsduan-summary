@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-08 14:22:34
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-08 14:29:17
- * @FilePath: \vue2+js+eui+template\src\views\is-wx-Alipay\is-wx-Alipay.vue
+ * @LastEditTime: 2022-11-22 19:14:25
+ * @FilePath: \vue2+elui+template\src\views\is-wx-Alipay\is-wx-Alipay.vue
 -->
 <template>
     <div>
@@ -18,7 +18,7 @@
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
-                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/guid.js">下载/查看地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/guid.js">下载/查看地址</a>
             </div>
         </div>
     </div>

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 17:10:05
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 17:17:01
- * @FilePath: \vue2+js+eui+template\src\views\setTime\setTime.vue
+ * @LastEditTime: 2022-11-22 19:14:42
+ * @FilePath: \vue2+elui+template\src\views\setTime\setTime.vue
 -->
 
 <template>
@@ -19,7 +19,7 @@
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
-                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/setTime.js">下载/查看地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/setTime.js">下载/查看地址</a>
             </div>
         </div>
     </div>

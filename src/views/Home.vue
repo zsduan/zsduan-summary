@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-08 14:15:28
- * @FilePath: \vue2+js+eui+template\src\views\Home.vue
+ * @LastEditTime: 2022-11-22 19:20:18
+ * @FilePath: \vue2+elui+template\src\views\Home.vue
 -->
 <template>
     <div class="home">
@@ -20,11 +20,17 @@
                 <li v-for="(item,index) in jsList" :key="index" @click="goNav(item.path)" :class="item.title.length > 8 ? 'small-size' :''">{{item.title}}</li>
             </ul>
         </div>
+        <div class="components-box piblic-box">
+            <h2 class="title">动效/页面效果</h2>
+            <ul>
+                <li v-for="(item,index) in effectList" :key="index" @click="goNav(item.path)" :class="item.title.length > 8 ? 'small-size' :''">{{item.title}}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
-import { componentsList, jsList } from "../assets/data/homeData";
+import { componentsList, jsList , effectList } from "../assets/data/homeData";
 export default {
     name: "Home",
     components: {},
@@ -36,6 +42,9 @@ export default {
             jsList: jsList.filter((item) => {
                 return item.is_show == true;
             }),
+            effectList : effectList.filter((item) =>{
+                return item.is_show == true;
+            })
         };
     },
     methods: {
@@ -101,7 +110,7 @@ export default {
         }
     }
     .small-size{
-        font-size: 20px;
+        font-size: 18px;
     }
 }
 </style>

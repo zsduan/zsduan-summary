@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 15:01:00
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-10-08 09:30:53
- * @FilePath: \vue2+js+eui+template\src\views\calender\calender.vue
+ * @LastEditTime: 2022-11-22 19:14:11
+ * @FilePath: \vue2+elui+template\src\views\calender\calender.vue
 -->
 <template>
     <div>
@@ -21,7 +21,7 @@
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
-                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/calender.js">下载/查看地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/calender.js">下载/查看地址</a>
             </div>
         </div>
     </div>
