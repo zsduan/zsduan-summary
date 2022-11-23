@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:33:52
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:19:34
+ * @LastEditTime: 2022-11-23 12:08:34
  * @FilePath: \vue2+elui+template\src\views\blurSearch\blurSearch.vue
 -->
 <template>
@@ -67,6 +67,7 @@ export default {
             code1 : code1
         }
     },
+    
     mounted(){
         this.bulrList = this.searchList;
     },

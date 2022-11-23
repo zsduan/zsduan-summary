@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:23:48
+ * @LastEditTime: 2022-11-23 13:26:39
  * @FilePath: \vue2+elui+template\src\views\Home.vue
 -->
 <template>
@@ -27,11 +27,15 @@
             </ul>
         </div>
         <el-backtop :visibility-height="20"></el-backtop>
+        <div class="canvas-back"></div>
+        <canvas id="back">您的浏览器不支持canvas</canvas>
+        
     </div>
 </template>
 
 <script>
 import { componentsList, jsList , effectList } from "../assets/data/homeData";
+import {drawCanvasBack} from "../utils/canvas-back"
 export default {
     name: "Home",
     components: {},
@@ -47,6 +51,9 @@ export default {
                 return item.is_show == true;
             })
         };
+    },
+    mounted(){
+        drawCanvasBack("back" , 'zsduan的自我总结')
     },
     methods: {
         goNav(path) {
@@ -75,6 +82,9 @@ export default {
     -khtml-user-select: none;
     /*早期浏览器*/
     user-select: none;
+}
+.home{
+    padding-bottom: 20px;
 }
 .home-title {
     font-size: 36px;
@@ -105,6 +115,7 @@ export default {
             cursor: pointer;
             transition: all 0.3s;
             color: var(--fontColor);
+            background: #fff;
             &:hover {
                 box-shadow: 0 4px 8px 10px rgba(7, 17, 21, 0.1);
             }
@@ -113,5 +124,19 @@ export default {
     .small-size{
         font-size: 18px;
     }
+}
+
+#back{
+    position: fixed;
+    top: 0;
+    z-index: -2;
+}
+.canvas-back{
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: -1;
 }
 </style>

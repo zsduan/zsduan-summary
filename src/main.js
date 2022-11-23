@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 11:21:21
- * @FilePath: \vue2+js+eui+template\src\main.js
+ * @LastEditTime: 2022-11-23 15:01:45
+ * @FilePath: \vue2+elui+template\src\main.js
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -13,6 +13,7 @@ import "./router/setRouter"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import "./assets/css/reset.css"
+import {initDirective} from "./utils/instructions";
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
@@ -22,6 +23,9 @@ Vue.component("dzsHeader", dzsHeader);
 
 import dzsCode from "@/components/dzs-code/index"
 Vue.component("dzsCode", dzsCode);
+
+// 新增指令
+initDirective(Vue)
 
 new Vue({
   router,

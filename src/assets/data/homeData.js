@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 20:36:28
+ * @LastEditTime: 2022-11-23 14:58:29
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -47,13 +47,13 @@ export const jsList = [
         is_show : true
     },
     {
-        title : "防抖 指令",
-        path : "",
+        title : "防抖/节流 指令",
+        path : "/debounce",
         is_show : true
     },
     {
         title : "自动展开 指令",
-        path : "",
+        path : "/listOpen",
         is_show : true
     },
     {
