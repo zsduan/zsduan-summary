@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 14:58:29
+ * @LastEditTime: 2022-11-23 17:39:14
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -93,7 +93,7 @@ export const jsList = [
     },
     {
         title : "Notification 消息通知",
-        path : "",
+        path : "/myNotification",
         is_show : true
     },
     {
@@ -123,7 +123,7 @@ export const jsList = [
     },
     {
         title : "js复制",
-        path : "",
+        path : "/myCopy",
         is_show : true
     },
 ]

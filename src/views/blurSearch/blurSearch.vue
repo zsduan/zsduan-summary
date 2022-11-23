@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:33:52
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 12:08:34
+ * @LastEditTime: 2022-11-23 19:08:02
  * @FilePath: \vue2+elui+template\src\views\blurSearch\blurSearch.vue
 -->
 <template>
@@ -73,7 +73,11 @@ export default {
     },
     methods:{
         search(){
-            this.bulrList = blurSearch(this.searchList , this.Text , 'Text');
+            this.bulrList = blurSearch({
+                list : this.searchList,
+                searValue : this.Text,
+                key : "Text"
+            });
         },
     }
 }

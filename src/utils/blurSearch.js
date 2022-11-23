@@ -2,39 +2,43 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:46:13
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:05:28
+ * @LastEditTime: 2022-11-23 19:08:30
  * @FilePath: \vue2+elui+template\src\utils\blurSearch.js
  */
 
 /*
  * @name 模糊查询
- * @parame data 搜索的数据原始 Array 必填  searValue string 搜索的关键词 必填 key 匹配的对象key
+ * @parame data 搜索的数据原始 Array 必填
+ * @parame searValue string 搜索的关键词 必填
+ * @parame key 匹配的对象key
+ * @return 匹配对象列表
 */ 
-export const blurSearch = (data , searValue , key)=>{
-    if(!data) throw new Error("data must be not null");
-    if(!Array.isArray(data) || (!data.constructor === Array)){
-        throw new Error("data must be Array");
+export const blurSearch = (...arg)=>{
+    let data = arg[0];
+    if(!data.list) throw new Error("list must be not null");
+    if(!Array.isArray(data.list) || (!data.list.constructor === Array)){
+        throw new Error("list must be Array");
     }
-    if(!searValue){
-        return data;
+    if(!data.searValue){
+        return data.list;
     }
-    if(typeof searValue !== 'string' || (!Object.prototype.toString.call(searValue) === "[object String]")){
+    if(typeof data.searValue !== 'string' || (!Object.prototype.toString.call(data.searValue) === "[object String]")){
         throw new Error("searValue must be string")
     }
-    if(key && (typeof key !== 'string' || (!Object.prototype.toString.call(key) === "[object String]"))){
+    if(data.key && (typeof data.key !== 'string' || (!Object.prototype.toString.call(data.key) === "[object String]"))){
         throw new Error("key must be string")
     }
     let reslut = [];
-    const reg = new RegExp(searValue);
-    if(key){
-        data.forEach(element =>{
-            if(element[key].match(reg)){
+    const reg = new RegExp(data.searValue);
+    if(data.key){
+        data.list.forEach(element =>{
+            if(element[data.key].match(reg)){
                 reslut.push(element)
             }
         })
         return reslut;
     }
-    data.forEach(element => {
+    data.list.forEach(element => {
         if(element.match(reg)){
             reslut.push(element)
         }

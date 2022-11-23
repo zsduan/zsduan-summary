@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 13:26:39
+ * @LastEditTime: 2022-11-23 19:16:42
  * @FilePath: \vue2+elui+template\src\views\Home.vue
 -->
 <template>
@@ -53,7 +53,11 @@ export default {
         };
     },
     mounted(){
-        drawCanvasBack("back" , 'zsduan的自我总结')
+        drawCanvasBack({
+            canvasId : "back",
+            showWord : "zsduan的自我总结",
+            columnWidth : 21
+        })
     },
     methods: {
         goNav(path) {

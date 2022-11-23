@@ -2,28 +2,31 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 12:39:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 13:20:16
+ * @LastEditTime: 2022-11-23 19:15:28
  * @FilePath: \vue2+elui+template\src\utils\canvas-back.js
  */
 /*
  * @name 绘制动效
- * @parame canvasId 需要绘制的canvasId string  columnWidth 列宽 Number showWord 需要显示的文字 string
+ * @parame canvasId 需要绘制的canvasId string  
+ * @parame columnWidth 列宽 Number 
+ * @parame showWord 需要显示的文字 string
 */ 
-export const drawCanvasBack = (canvasId ,  showWord ,  columnWidth = 20) =>{
-    if(!canvasId){
+export const drawCanvasBack = (...arg) =>{
+    let data = arg[0];
+    if(!data.canvasId){
         throw new Error("canvasId must be not null")
     }
-    if((typeof canvasId !== 'string' || (!Object.prototype.toString.call(canvasId) === "[object String]")) && showWord){
-        throw new Error("showWord must be string")
-    }
-    if(typeof canvasId !== 'string' || (!Object.prototype.toString.call(canvasId) === "[object String]")){
+    if((typeof data.canvasId !== 'string' || (!Object.prototype.toString.call(data.canvasId) === "[object String]")) && showWord){
         throw new Error("canvasId must be string")
     }
-    columnWidth = Number(columnWidth);
+    if(typeof data.showWord !== 'string' || (!Object.prototype.toString.call(data.showWord) === "[object String]")){
+        throw new Error("showWord must be string")
+    }
+    let columnWidth = data.columnWidth ?  Number(data.columnWidth) : 20;
     if(!isFinite(columnWidth)){
         throw new Error("columnWidth must be Number or String Number");
     }
-    const canvas = document.querySelector("#" + canvasId);
+    const canvas = document.querySelector("#" + data.canvasId);
     const canvasWidth = window.innerWidth - 20;
     const canvasHeight = window.innerHeight;
     canvas.width = canvasWidth;
@@ -36,7 +39,7 @@ export const drawCanvasBack = (canvasId ,  showWord ,  columnWidth = 20) =>{
     let columnNextIndexes = new Array(columnCount);
     columnNextIndexes.fill(1);
     setInterval(()=>{
-      draw(ctx , showWord , columnCount , columnWidth , columnNextIndexes);  
+      draw(ctx , data.showWord , columnCount , columnWidth , columnNextIndexes);  
     },50)
 }
 

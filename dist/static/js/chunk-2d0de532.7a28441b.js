@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0de532"],{"84bb":function(n,t,e){"use strict";e.r(t),e.d(t,"code1",(function(){return o}));const o='\n// 导入\nimport {myCopy} from "@/utils/myCopy";\n// 使用\n/*\n * @name 复制\n * @parame Text 复制的文本\n * @return true\n*/ \nmyCopy({\n    Text : this.Text\n})\n'}}]);
+//# sourceMappingURL=chunk-2d0de532.7a28441b.js.map

@@ -2,10 +2,34 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 15:00:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-10-08 09:45:41
- * @FilePath: \vue2+js+eui+template\src\utils\calender.js
+ * @LastEditTime: 2022-11-23 17:45:20
+ * @FilePath: \vue2+elui+template\src\utils\calender.js
  */
-// 获取农历
+/*
+ * @name 获取农历
+ * @return 返回  {
+    gregorianYear: null, //公历年
+    gregorianMonth: null, //公历月
+    gregorianDay: null, //公历日
+    weekday: null, //星期
+    hours: null,
+    minutes: null,
+    seconds: null,
+
+    lunarYear: null, //农历年
+    lunarMonth: null, //农历月
+    lunarDay: null, //农历日
+
+    lunarYearCn: "", //农历天干地支纪年
+    lunarMonthCn: "", //农历中文月
+    lunarDayCn: "", //农历中文日
+    zodiacYear: "", //农历生肖年
+
+    solarTerm: "", //节气
+    gregorianFestival: "", //公历节日
+    lunarFestival: "", //农历节日
+}
+*/ 
 
 const calendar = {
     gregorianYear: null, //公历年

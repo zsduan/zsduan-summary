@@ -2,9 +2,14 @@
  * @Author: zs.duan
  * @Date: 2022-09-29 11:35:38
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-29 11:37:36
- * @FilePath: \vue2+js+eui+template\src\utils\guid.js
+ * @LastEditTime: 2022-11-23 17:47:50
+ * @FilePath: \vue2+elui+template\src\utils\guid.js
  */
+
+/*
+ * @name 生成guid
+ * @return 返回生成的guid
+*/ 
 function GUID() {
     this.date = new Date();   /* 判断是否初始化过，如果初始化过以下代码，则以下代码将不再执行，实际中只执行一次 */
     if (typeof this.newGUID != 'function') {   /* 生成GUID码 */
