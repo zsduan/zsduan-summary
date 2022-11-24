@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 17:39:14
+ * @LastEditTime: 2022-11-24 15:55:26
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -82,7 +82,12 @@ export const jsList = [
         is_show : true
     },
     {
-        title : "xlsx读取",
+        title : "xlsx/excel读取数据，没预览",
+        path : "/readeXlsx",
+        is_show : true
+    },
+    {
+        title : "word读取",
         path : "",
         is_show : true
     },
