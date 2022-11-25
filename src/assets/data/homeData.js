@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 14:38:24
+ * @LastEditTime: 2022-11-25 17:24:30
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -123,7 +123,7 @@ export const jsList = [
     },
     {
         title : "大文件切片与合并",
-        path : "",
+        path : "/file-slice-and-merge",
         is_show : true
     },
     {

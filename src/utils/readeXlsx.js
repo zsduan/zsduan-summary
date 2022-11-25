@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 12:39:33
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 14:07:57
+ * @LastEditTime: 2022-11-25 17:32:35
  * @FilePath: \vue2+elui+template\src\utils\readeXlsx.js
  */
 /*
@@ -37,7 +37,7 @@ export const readeXlsx = (...arg) =>{
     };
     for (const key in data) {
         if (Object.hasOwnProperty.call(data, key)) {
-            data[key] = arg[0][key];
+            data[key] = arg[0][key] ? arg[0][key] : data[key];
         }
     }
     if(!data.fileId && !data.file && !data.refs){

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-25 12:51:37
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 14:28:55
+ * @LastEditTime: 2022-11-25 17:32:46
  * @FilePath: \vue2+elui+template\src\utils\signalR.js
  */
 
@@ -35,7 +35,7 @@ export const signalRcoont = (...arg)=>{
     }
     for (const key in data) {
         if (Object.hasOwnProperty.call(data, key)) {
-           data[key] = arg[0][key];
+            data[key] = arg[0][key] ? arg[0][key] : data[key];
         }
     }
     if(!data.connUrl){
