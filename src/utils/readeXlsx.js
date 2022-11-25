@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 12:39:33
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-24 15:30:09
+ * @LastEditTime: 2022-11-25 14:07:57
  * @FilePath: \vue2+elui+template\src\utils\readeXlsx.js
  */
 /*
@@ -11,6 +11,8 @@
  * @parame file 文件本身 可选 fileId/file/refs 任选其一
  * @parame refs vue的ref 可选 fileId/file/refs 任选其一
  * @parame _this 全局的this指向 refs不为空可选
+ * @method fail 错误返回
+ * @method success 成功返回 返回数据为下面的数据
  * @desc 中文文档地址 https://github.com/rockboom/SheetJS-docs-zh-CN
  * @desc 更加强大 可以做在线编辑的 https://github.com/exceljs/exceljs/blob/master/README_zh.md
  * @return xlsxList = {
@@ -89,7 +91,6 @@ export const readeXlsx = (...arg) =>{
             msg : "success"
         };
         // 遍历每张表读取
-        console.log(workbook)
         for(let i = 0 ; i < workbook.SheetNames.length ; i ++){
             let is_paly = false;
             for (const key in workbook.Sheets[workbook.SheetNames[i]]) {

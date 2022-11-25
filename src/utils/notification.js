@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 17:35:29
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:00:20
+ * @LastEditTime: 2022-11-25 13:56:57
  * @FilePath: \vue2+elui+template\src\utils\notification.js
  */
 /*
@@ -44,7 +44,6 @@ export const notification = ( _this , ...arg) =>{
     });
     // 是否播放音频
     if(data.audioUrl)playAudio(data.audioUrl);
-    console.log(Notification.permission)
     if (Notification.permission === 'denied' && process.env.NODE_ENV != "development") {
         // 如果用户已拒绝显示通知
         let url = window.location.href;

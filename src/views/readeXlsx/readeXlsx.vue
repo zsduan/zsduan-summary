@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 13:09:29
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-24 15:51:00
+ * @LastEditTime: 2022-11-25 14:12:12
  * @FilePath: \vue2+elui+template\src\views\readeXlsx\readeXlsx.vue
 -->
 <template>
@@ -23,6 +23,7 @@
                 <div class="show-info-box">
                     <div>{{xlsxInfo}}</div>
                 </div>
+                <dzs-code title="源代码" :value="code1"></dzs-code>
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
@@ -34,11 +35,13 @@
     </div>
 </template>
 <script>
-import {readeXlsx} from "@/utils/readeXlsx"
+import {readeXlsx} from "@/utils/readeXlsx";
+import {code1} from "./config"
 export default {
     data(){
         return {
-            xlsxInfo : {}
+            xlsxInfo : {},
+            code1 : code1
         }
     },
     methods:{
@@ -48,7 +51,6 @@ export default {
                 _this : this,
                 success:(res) =>{
                     this.xlsxInfo = res;
-                    console.log(res)
                 },
                 fail : (e)=>{
                     console.log(e);

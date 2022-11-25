@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-24 15:55:26
+ * @LastEditTime: 2022-11-25 14:38:24
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -88,12 +88,12 @@ export const jsList = [
     },
     {
         title : "word读取",
-        path : "",
+        path : "/readeWord",
         is_show : true
     },
     {
         title : "signalR 及时通信",
-        path : "",
+        path : "/signalR",
         is_show : true
     },
     {
@@ -108,7 +108,7 @@ export const jsList = [
     },
     {
         title : "vue动态路由",
-        path : "",
+        path : "/myRouter",
         is_show : true
     },
     {

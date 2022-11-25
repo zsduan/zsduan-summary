@@ -169,5 +169,32 @@
         "page" : "readeXlsx/readeXlsx",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20221125142130",
+        "PID" : null ,
+        "title" : "signalR 连接",
+        "pathName" : "signalR",
+        "page" : "signalR/signalR",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20221125142912",
+        "PID" : null ,
+        "title" : "vue 动态路由",
+        "pathName" : "myRouter",
+        "page" : "myRouter/myRouter",
+        "isShow" : true,
+        "children" : []
+    },
+    {
+        "ID" : "20221125142912",
+        "PID" : null ,
+        "title" : "word读取",
+        "pathName" : "readeWord",
+        "page" : "readeWord/readeWord",
+        "isShow" : true,
+        "children" : []
     }
 ]
