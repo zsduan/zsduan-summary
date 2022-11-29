@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-25 17:20:17
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 18:37:42
+ * @LastEditTime: 2022-11-25 19:28:48
  * @FilePath: \vue2+elui+template\src\views\file-slice-and-merge\file-slice-and-merge.vue
 -->
 <template>
@@ -13,12 +13,12 @@
             <h2>切片</h2>
             <div class="item">
                 <input type="file" ref="myfile" @change="changeFile1"/>
-                <!-- <dzs-code title="源代码" :value="code1"></dzs-code> -->
+                <dzs-code title="源代码" :value="code1"></dzs-code>
             </div>
             <h2>合并</h2>
             <div class="item">
                 <input type="file" ref="myfile1" multiple @change="changeFile2"/>
-                <!-- <dzs-code title="源代码" :value="code1"></dzs-code> -->
+                <dzs-code title="源代码" :value="code2"></dzs-code>
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
@@ -31,12 +31,13 @@
     </div>
 </template>
 <script>
-// import {code1} from "./config";
+import {code1 , code2} from "./config";
 import {fileSliceAndMerge} from "@/utils/file-slice-and-merge"
 export default {
     data(){
         return {
-            // code1 : code1
+            code1 : code1,
+            code2 : code2
         }
     },
     mounted(){

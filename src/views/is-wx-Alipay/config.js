@@ -2,15 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-08 14:23:04
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-08 14:29:51
- * @FilePath: \vue2+js+eui+template\src\views\is-wx-Alipay\config.js
- */
-/*
- * @Author: zs.duan
- * @Date: 2022-09-30 10:01:05
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 14:46:21
- * @FilePath: \vue2+js+eui+template\src\views\guid\config.js
+ * @LastEditTime: 2022-11-29 17:58:22
+ * @FilePath: \vue2+elui+template\src\views\is-wx-Alipay\config.js
  */
 
 export const code1 = `

@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c9186"],{"584a":function(n,i,o){"use strict";o.r(i),o.d(i,"code1",(function(){return s}));const s='\n// 使用\nimport {is_wx_Alipays} from "@/utils/is_wx_Alipay";\n\n// 返回  other Alipay wx\n'}}]);
-//# sourceMappingURL=chunk-2d0c9186.68323e81.js.map
+//# sourceMappingURL=chunk-2d0c9186.50330d08.js.map

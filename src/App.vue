@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-24 15:36:59
+ * @LastEditTime: 2022-11-29 18:56:22
  * @FilePath: \vue2+elui+template\src\App.vue
 -->
 <template>
@@ -43,6 +43,7 @@ export default {
                 let rgba = `rgba(${arr.join(",")},0.${i})`;
                 document.body.style.setProperty(`--ThemeColor0${i}`, rgba);
             }
+            
         }, 200);
     }
 }
@@ -51,7 +52,7 @@ export default {
 <style lang="less">
 @import url("./assets/css/reset.css");
 :root {
-    --ThemeColor: #0065ff;
+    --ThemeColor: var(--ThemeColor , #0065ff);
     --fontColor: #333;
 }
 ::selection {

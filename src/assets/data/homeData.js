@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 17:24:30
+ * @LastEditTime: 2022-11-29 15:35:46
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -135,13 +135,13 @@ export const jsList = [
 
 export const effectList = [
     {
-        title : "模块拖动",
-        path : "",
+        title : "模块拖动更换位置",
+        path : "/drag",
         is_show : true
     },
     {
         title : "边框动画效果",
-        path : "",
+        path : "/button-border",
         is_show : true
     },
 ]
