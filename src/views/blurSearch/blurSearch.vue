@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:33:52
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:08:02
+ * @LastEditTime: 2022-11-29 20:36:59
  * @FilePath: \vue2+elui+template\src\views\blurSearch\blurSearch.vue
 -->
 <template>
@@ -87,6 +87,11 @@ export default {
     display: flex;
     .ipt{
         width: 40%;
+    }
+    @media screen and (max-width: 768px) {
+        .ipt{
+            width: 70%;
+        }
     }
 }
 </style>

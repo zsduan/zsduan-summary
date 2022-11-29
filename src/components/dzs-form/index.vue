@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2021-12-20 16:33:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-08 13:56:35
- * @FilePath: \vue2+js+eui+template\src\components\dzs-form\index.vue
+ * @LastEditTime: 2022-11-29 20:45:47
+ * @FilePath: \vue2+elui+template\src\components\dzs-form\index.vue
 -->
 <template>
     <div class="form-box">
@@ -325,6 +325,12 @@ export default {
             border: 1px solid #bbb;
             color: #666;
         }
+    }
+}
+@media screen and (max-width : 768px) {
+    .ruleForm{
+        width: 100%;
+        min-width: 100%;
     }
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 19:49:45
+ * @LastEditTime: 2022-11-29 21:15:07
  * @FilePath: \vue2+elui+template\src\views\Home.vue
 -->
 <template>
@@ -19,19 +19,45 @@
             <div class="components-box piblic-box">
                 <h2 class="title">组件篇(基于饿了吗ui)</h2>
                 <ul>
-                    <li v-for="(item,index) in componentsList" :key="index" @click="goNav(item.path)">{{item.title}}</li>
+                    <li
+                        v-for="(item,index) in componentsList"
+                        :key="index"
+                        @click="goNav(item.path)"
+                        :class="item.title.length > 8 ? 'small-size' :''"
+                    >{{item.title}}</li>
                 </ul>
             </div>
             <div class="components-box piblic-box">
                 <h2 class="title">js篇</h2>
                 <ul>
-                    <li v-for="(item,index) in jsList" :key="index" @click="goNav(item.path)" :class="item.title.length > 8 ? 'small-size' :''">{{item.title}}</li>
+                    <li
+                        v-for="(item,index) in jsList"
+                        :key="index"
+                        @click="goNav(item.path)"
+                        :class="item.title.length > 8 ? 'small-size' :''"
+                    >{{item.title}}</li>
                 </ul>
             </div>
             <div class="components-box piblic-box">
                 <h2 class="title">动效/页面效果</h2>
                 <ul>
-                    <li v-for="(item,index) in effectList" :key="index" @click="goNav(item.path)" :class="item.title.length > 8 ? 'small-size' :''">{{item.title}}</li>
+                    <li
+                        v-for="(item,index) in effectList"
+                        :key="index"
+                        @click="goNav(item.path)"
+                        :class="item.title.length > 8 ? 'small-size' :''"
+                    >{{item.title}}</li>
+                </ul>
+            </div>
+            <div class="components-box piblic-box">
+                <h2 class="title">好用的js片段</h2>
+                <ul>
+                    <li
+                        v-for="(item,index) in fragmentList"
+                        :key="index"
+                        @click="goNav(item.path)"
+                        :class="item.title.length > 8 ? 'small-size' :''"
+                    >{{item.title}}</li>
                 </ul>
             </div>
         </div>
@@ -39,7 +65,12 @@
             <div class="components-box piblic-box">
                 <h2 class="title">搜索结果</h2>
                 <ul>
-                    <li v-for="(item,index) in searchList" :key="index" @click="goNav(item.path)">{{item.title}}</li>
+                    <li
+                        v-for="(item,index) in searchList"
+                        :key="index"
+                        @click="goNav(item.path)"
+                        :class="item.title.length > 8 ? 'small-size' :''"
+                    >{{item.title}}</li>
                 </ul>
                 <el-empty v-if="!searchList.length" description="暂无数据,换个关键词试试"></el-empty>
             </div>
@@ -47,14 +78,18 @@
         <el-backtop :visibility-height="20"></el-backtop>
         <div class="canvas-back"></div>
         <canvas id="back">您的浏览器不支持canvas</canvas>
-        
     </div>
 </template>
 
 <script>
-import { componentsList, jsList , effectList } from "../assets/data/homeData";
-import {drawCanvasBack} from "../utils/canvas-back";
-import {blurSearch} from "@/utils/blurSearch.js";
+import {
+    componentsList,
+    jsList,
+    effectList,
+    fragmentList,
+} from "../assets/data/homeData";
+import { drawCanvasBack } from "../utils/canvas-back";
+import { blurSearch } from "@/utils/blurSearch.js";
 export default {
     name: "Home",
     components: {},
@@ -66,22 +101,30 @@ export default {
             jsList: jsList.filter((item) => {
                 return item.is_show == true;
             }),
-            effectList : effectList.filter((item) =>{
+            effectList: effectList.filter((item) => {
                 return item.is_show == true;
             }),
-            allList : [...componentsList,...jsList,...effectList].filter((item) =>{
-                return item.is_show
+            fragmentList: fragmentList.filter((item) => {
+                return item.is_show == true;
             }),
-            searchList : [] , 
-            searchValue : ""
+            allList: [
+                ...componentsList,
+                ...jsList,
+                ...effectList,
+                ...fragmentList,
+            ].filter((item) => {
+                return item.is_show;
+            }),
+            searchList: [],
+            searchValue: "",
         };
     },
-    mounted(){
+    mounted() {
         drawCanvasBack({
-            canvasId : "back",
-            showWord : "zsduan的自我总结",
-            columnWidth : 21
-        })
+            canvasId: "back",
+            showWord: "zsduan的自我总结",
+            columnWidth: 21,
+        });
     },
     methods: {
         goNav(path) {
@@ -94,13 +137,13 @@ export default {
             }
             this.$router.push({ path: path });
         },
-        inputValue(){
-            this.searchList =  blurSearch({
-                list : this.allList,
-                searValue : this.searchValue,
-                key : "title"
-            })
-        }
+        inputValue() {
+            this.searchList = blurSearch({
+                list: this.allList,
+                searValue: this.searchValue,
+                key: "title",
+            });
+        },
     },
 };
 </script>
@@ -118,7 +161,7 @@ export default {
     /*早期浏览器*/
     user-select: none;
 }
-.home{
+.home {
     padding-bottom: 20px;
 }
 .home-title {
@@ -156,17 +199,17 @@ export default {
             }
         }
     }
-    .small-size{
+    .small-size {
         font-size: 18px;
     }
 }
 
-#back{
+#back {
     position: fixed;
     top: 0;
     z-index: -2;
 }
-.canvas-back{
+.canvas-back {
     position: fixed;
     top: 0;
     width: 100vw;
@@ -175,21 +218,67 @@ export default {
     z-index: -1;
 }
 
-.search-box{
+.search-box {
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
     margin-top: 20px;
 
-    .right{
+    .right {
         display: flex;
-        .btn{
+        .btn {
             display: inline-block;
             margin-left: 5px;
         }
-        .ipt{
+        .ipt {
             width: 300px;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .piblic-box {
+        padding: 0 20px;
+        ul {
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 10px; //左右间距
+            row-gap: 20px; //上下间距
+            margin-top: 20px;
+        }
+    }
+    .search-box {
+        padding: 0 20px;
+        .right {
+            display: flex;
+            width: 80%;
+            .btn {
+                display: inline-block;
+                margin-left: 5px;
+            }
+            .ipt {
+                width: 80%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .piblic-box {
+        padding: 0 10px;
+        ul {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    .search-box {
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .piblic-box {
+        ul {
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 }

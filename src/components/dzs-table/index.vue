@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 10:21:11
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 13:54:04
- * @FilePath: \vue2+js+eui+template\src\components\dzs-table\index.vue
+ * @LastEditTime: 2022-11-29 20:34:22
+ * @FilePath: \vue2+elui+template\src\components\dzs-table\index.vue
 -->
 <template>
     <div class="table-wrop">
@@ -160,7 +160,9 @@ export default {
             deep: true,
         },
     },
-    mounted() {},
+    mounted() {
+        
+    },
     methods: {
         // 选择条数改变
         handleSizeChange(num) {
@@ -264,6 +266,8 @@ export default {
             margin-top: 20px;
             padding: 20px;
             text-align: right;
+            width: 100%;
+            overflow-x: auto;
         }
     }
 

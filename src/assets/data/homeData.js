@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 15:35:46
+ * @LastEditTime: 2022-11-29 21:13:49
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -144,4 +144,12 @@ export const effectList = [
         path : "/button-border",
         is_show : true
     },
+]
+
+export const fragmentList = [
+    {
+        title : "比较好用的js片段",
+        path : "",
+        is_show : true
+    },  
 ]

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-29 15:32:39
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 17:35:33
+ * @LastEditTime: 2022-11-29 20:52:50
  * @FilePath: \vue2+elui+template\src\views\drag\drag.vue
 -->
 <template>
@@ -11,6 +11,7 @@
         <div class="page">
             <h2>效果展示</h2>
             <div class="item">
+                <div class="tips-box">仅支持电脑端 手机端 请使用 vue-draggable</div>
                 <ul class="my-list" ref="myList">
                     <li
                         @dragover="Mydragover($event)"

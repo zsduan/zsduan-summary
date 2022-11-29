@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 17:37:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:52:49
+ * @LastEditTime: 2022-11-29 20:35:11
  * @FilePath: \vue2+elui+template\src\views\myCopy\myCopy.vue
 -->
 <template>
@@ -67,6 +67,11 @@ export default {
         margin-left: 10px;
         &:first-child{
             margin-left: 0;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .ipt{
+            width: 70%;
         }
     }
     .btn{

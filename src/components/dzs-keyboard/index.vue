@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-28 14:33:41
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 15:34:25
- * @FilePath: \vue2+js+eui+template\src\components\dzs-keyboard\index.vue
+ * @LastEditTime: 2022-11-29 20:49:09
+ * @FilePath: \vue2+elui+template\src\components\dzs-keyboard\index.vue
 -->
 <template>
     <div class="keyboard-box">
@@ -239,6 +239,14 @@ export default {
                 padding: 0 5px;
                 text-align: center;
             }
+        }
+    }
+}
+
+@media screen and (max-width : 768px) {
+    .keyboard-box {
+        .keyboard {
+            width: 100%;
         }
     }
 }

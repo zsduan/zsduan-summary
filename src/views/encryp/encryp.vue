@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 17:33:31
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:18:11
+ * @LastEditTime: 2022-11-29 20:37:34
  * @FilePath: \vue2+elui+template\src\views\encryp\encryp.vue
 -->
 <template>
@@ -20,7 +20,7 @@
             </div>
             <h2>对称加密 对象</h2>
             <div class="item">
-                <div>{{encryptText2}}</div>
+                <div style="width : 100%">{{encryptText2}}</div>
                 <dzs-code title="使用方法" :value="code2"></dzs-code>
             </div>
             <h2>对称解密 普通文本</h2>
@@ -146,6 +146,11 @@ export default {
     display: flex;
     .ipt{
         width: 40%;
+    }
+    @media screen and (max-width: 768px) {
+        .ipt{
+            width: 70%;
+        }
     }
     .btn{
         display: inline-block;

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-25 14:26:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 14:30:21
+ * @LastEditTime: 2022-11-29 20:41:05
  * @FilePath: \vue2+elui+template\src\views\myRouter\myRouter.vue
 -->
 <template>
@@ -41,6 +41,15 @@ export default {
         margin-left: 10px;
         &:first-child{
             margin-left: 0;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .item{
+        a{
+            display: block;
+            margin-left: 0;
+            margin-top: 10px;
         }
     }
 }

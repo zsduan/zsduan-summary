@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 16:14:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 12:35:56
+ * @LastEditTime: 2022-11-29 20:36:02
  * @FilePath: \vue2+elui+template\src\components\dzs-header\index.vue
 -->
 <template>
@@ -13,7 +13,7 @@
                     <i class="el-icon-s-home"></i>
                     <span>返回首页</span>
                 </div>
-                <div class="title-box">
+                <div class="title-box elli1">
                     <span v-for="(item , index) in setTitle" :key="index" class="title" :style="{animationDelay : index * 0.1 + 's'}">{{item}}</span>
                 </div>
             </div>
@@ -54,10 +54,11 @@ export default {
     z-index: 999;
 }
 .top-box{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    width: 1200px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: flex-end;
+    max-width: 1200px;
+    width: 100%;
     left: 50%;
     transform: translateX(-50%);
     position: fixed;
@@ -67,10 +68,15 @@ export default {
         font-size: 18px;
         flex: 2;
         cursor: pointer;
+        position: absolute;
+        left: 0;
+        top: 10px;
     }
     .title-box {
         text-align: center;
-        flex: 22;
+        max-width: calc(100% - 170px);
+        margin: 0 auto;
+        // flex: 22;
         .title{
             font-size: 30px;
             display: inline-block;
@@ -91,5 +97,21 @@ export default {
 .top-empty{
     width: 100%;
     height: 50px;
+}
+
+@media screen and (max-width : 1200px) {
+    .top-box{
+        .go-home{
+            left: 20px;
+        }
+    }
+}
+
+@media screen and (max-width : 768px) {
+    .top-box{
+        .go-home{
+            left: 10px;
+        }
+    }
 }
 </style>

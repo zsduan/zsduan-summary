@@ -18,6 +18,9 @@ body {
   font-size: 14px;
   box-sizing: border-box;
 }
+div {
+  word-break: break-all;
+}
 li {
   list-style: none;
 }

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 18:56:22
+ * @LastEditTime: 2022-11-29 20:42:09
  * @FilePath: \vue2+elui+template\src\App.vue
 -->
 <template>
@@ -60,7 +60,8 @@ export default {
     color: #fff;
 }
 .page {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     h2 {
         font-size: 20px;
@@ -84,5 +85,22 @@ export default {
     }
 }
 
+@media screen and (max-width : 1200px) {
+    .page{
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width : 768px) {
+    .page{
+        padding: 0 10px;
+        .item {
+            a{
+                display: block;
+                margin-top: 10px;
+            }
+        }
+    }
+}
 
 </style>
