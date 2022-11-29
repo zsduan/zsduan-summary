@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 18:13:32
+ * @LastEditTime: 2022-11-29 19:49:45
  * @FilePath: \vue2+elui+template\src\views\Home.vue
 -->
 <template>
@@ -179,7 +179,9 @@ export default {
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
+    margin: 0 auto;
     margin-top: 20px;
+
     .right{
         display: flex;
         .btn{
