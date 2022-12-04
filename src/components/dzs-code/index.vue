@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 16:57:00
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 21:05:56
+ * @LastEditTime: 2022-12-04 14:39:03
  * @FilePath: \vue2+elui+template\src\components\dzs-code\index.vue
 -->
 <template>
@@ -14,7 +14,7 @@
         <!-- <pre class="pre" v-if="value">
             {{value}}
         </pre> -->
-        <prism-editor v-if="value" class="my-editor" v-model="value" :highlight="highlighter" line-numbers></prism-editor>
+        <prism-editor v-if="value" class="my-editor" :readonly="true" v-model="value" :highlight="highlighter" line-numbers></prism-editor>
         <slot></slot>
     </div>
 </template>
@@ -27,6 +27,8 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-tomorrow.css'; // import syntax highlighting styles
+
+import {myCopy} from "@/utils/myCopy";
 
 export default {
     name: "dzs-code",
@@ -63,6 +65,18 @@ export default {
                 });
                 return ;
             }
+            myCopy({
+                copyContent : this.value,
+                type : "Text",
+                success : ()=>{
+                    this.$notify({
+                        message: '已经复制到剪贴板',
+                        type: 'success'
+                    });
+                }
+            })
+            
+            return ;
             let input = document.createElement("input");
             input.value = this.value;
             document.body.appendChild(input);

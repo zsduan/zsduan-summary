@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-17 15:23:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 18:59:46
+ * @LastEditTime: 2022-12-04 13:32:05
  * @FilePath: \vue2+elui+template\vue.config.js
  */
 
@@ -15,6 +15,6 @@ module.exports = {
     lintOnSave: false,
     assetsDir: "static",
     devServer:{
-        // https : true
+        https : true
     }
 };
