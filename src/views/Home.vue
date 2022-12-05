@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 21:15:07
+ * @LastEditTime: 2022-12-05 16:53:45
  * @FilePath: \vue2+elui+template\src\views\Home.vue
 -->
 <template>
@@ -20,6 +20,7 @@
                 <h2 class="title">组件篇(基于饿了吗ui)</h2>
                 <ul>
                     <li
+                        class="elli1"
                         v-for="(item,index) in componentsList"
                         :key="index"
                         @click="goNav(item.path)"
@@ -31,6 +32,7 @@
                 <h2 class="title">js篇</h2>
                 <ul>
                     <li
+                        class="elli1"
                         v-for="(item,index) in jsList"
                         :key="index"
                         @click="goNav(item.path)"
@@ -42,6 +44,7 @@
                 <h2 class="title">动效/页面效果</h2>
                 <ul>
                     <li
+                        class="elli1"
                         v-for="(item,index) in effectList"
                         :key="index"
                         @click="goNav(item.path)"
@@ -53,6 +56,7 @@
                 <h2 class="title">好用的js片段</h2>
                 <ul>
                     <li
+                        class="elli1"
                         v-for="(item,index) in fragmentList"
                         :key="index"
                         @click="goNav(item.path)"
@@ -66,6 +70,7 @@
                 <h2 class="title">搜索结果</h2>
                 <ul>
                     <li
+                        class="elli1"
                         v-for="(item,index) in searchList"
                         :key="index"
                         @click="goNav(item.path)"
@@ -268,6 +273,12 @@ export default {
         padding: 0 10px;
         ul {
             grid-template-columns: repeat(2, 1fr);
+            li{
+                font-size: 20px;
+            }
+        }
+        .small-size {
+            font-size: 14px;
         }
     }
     .search-box {

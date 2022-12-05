@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 21:13:49
+ * @LastEditTime: 2022-12-05 17:29:39
  * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
@@ -20,6 +20,11 @@ export const componentsList = [
     {
         title : "富文本组件",
         path : "/edit",
+        is_show : true
+    },
+    {
+        title : "markdown组件",
+        path : "/markdown",
         is_show : true
     },
     {

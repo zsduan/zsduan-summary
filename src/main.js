@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 15:01:45
+ * @LastEditTime: 2022-12-05 17:51:56
  * @FilePath: \vue2+elui+template\src\main.js
  */
 import Vue from 'vue'
@@ -15,6 +15,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 import "./assets/css/reset.css"
 import {initDirective} from "./utils/instructions";
 Vue.use(ElementUI);
+// markdown
+import mavonEditor from 'mavon-editor';
+Vue.use(mavonEditor);
 
 Vue.config.productionTip = false;
 

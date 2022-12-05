@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2021-12-17 15:23:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-01 09:40:48
- * @FilePath: \vue2+js+eui+template\src\components\dzs-editor\index.vue
+ * @LastEditTime: 2022-12-05 17:12:58
+ * @FilePath: \vue2+elui+template\src\components\dzs-editor\index.vue
 -->
 <template>
     <div>
@@ -23,6 +23,18 @@
 </template>
 
 <script>
+/*
+ * @name 富文本编辑组件
+ * @prop value string 默认值 改变值 可以使用 v-model / update:value
+ * @prop height Number | String default 500 富文本高度 
+ * @prop width string default 100% 富文本宽度
+ * @porp show_save Boolean default false 是否显示实时保存
+ * @porp placeholder string default "请输入类容" 默认提示文字
+ * @porp production_url string default "/zsduan-summary" hash模式下 语言和样式的配置文件的前缀目录
+ * @porp plugins string 菜单配置 支持菜单见文件
+ * @porp toolbar Array 快捷键配置 支持菜单见文件
+ * @method save 保存方法 返回 改变的value
+*/ 
 import tinymce from "tinymce/tinymce";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/themes/silver";
@@ -84,6 +96,27 @@ export default {
                 return "请输入内容";
             },
         },
+        // hash模式下打包的路径
+        production_url : {
+            type : String ,
+            default : ()=>{
+                return "/zsduan-summary"
+            }
+        },
+        // 菜单配置
+        plugins : {
+            type : String,
+            default : ()=>{
+                return "copy cut paste print link code table lists wordcount image media save searchreplace insertdatetime hr preview importword autosave fullscreen print help"
+            }
+        },
+        // 快捷键配置
+        toolbar : {
+            type : Array ,
+            default : ()=>{
+                return ["undo redo save| formatselect | fontsizeselect | fontselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | lists image searchreplace | bullist numlist outdent indent |  media table insertdatetime | removeformat hr | importword autosave fullscreen print help"]
+            }
+        }
     },
     components: {
         editor: Editor,
@@ -92,16 +125,16 @@ export default {
         return {
             editConfig: {},
             editValue: "",
-            is_save_now: true, //是否实时刷新
+            is_save_now: true, //是否实时保存
             showEdit : false,
         };
     },
     created() {
         let _this = this;
         (this.editConfig = {
-            language_url: process.env.NODE_ENV === 'production' ?  "/zsduan-summary/tinymce/langs/zh_CN.js" :  "/tinymce/langs/zh_CN.js", // 语言包的路径
+            language_url: process.env.NODE_ENV === 'production' ?  this.production_url + "/tinymce/langs/zh_CN.js" :  "/tinymce/langs/zh_CN.js", // 语言包的路径
             language: "zh_CN", //语言
-            skin_url: process.env.NODE_ENV === 'production' ? "/zsduan-summary/tinymce/skins/ui/oxide":"/tinymce/skins/ui/oxide", // skin路径
+            skin_url: process.env.NODE_ENV === 'production' ? this.production_url +  "/tinymce/skins/ui/oxide":"/tinymce/skins/ui/oxide", // skin路径
             browser_spellcheck: true, // 拼写检查
             branding: false, // 去水印
             height: this.height || 500, //编辑器高度
@@ -115,10 +148,8 @@ export default {
                 "14px 16px 18px 20px 24px 26px 28px 30px 32px 36px", //字体大小
             font_formats:
                 "微软雅黑=Microsoft YaHei,Helvetica Neue;PingFang SC;sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun;serifsans-serif;Terminal=terminal;monaco;Times New Roman=times new roman;times", //字体
-            plugins:"copy cut paste print link code table lists wordcount image media save searchreplace insertdatetime hr preview importword autosave fullscreen print help",
-            toolbar: [
-                "undo redo save| formatselect | fontsizeselect | fontselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | lists image searchreplace | bullist numlist outdent indent |  media table insertdatetime | removeformat hr | importword autosave fullscreen print help",
-            ],
+            plugins:this.plugins,
+            toolbar: this.toolbar,
             importword_handler: function(editor,files,next){
                 var file_name = files[0].name
                 if(file_name.substr(file_name.lastIndexOf(".")+1)=='docx'){

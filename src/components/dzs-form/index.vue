@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-20 16:33:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:45:47
+ * @LastEditTime: 2022-12-05 16:45:33
  * @FilePath: \vue2+elui+template\src\components\dzs-form\index.vue
 -->
 <template>
@@ -11,6 +11,7 @@
             v-bind="{...formProps}"
             :model="fromModel"
             :rules="fromRules"
+            :label-position="labelPosition"
             ref="dzsForm"
             class="ruleForm"
             @submit.native.prevent="submit('dzsForm')"
@@ -213,34 +214,30 @@ export default {
             formItem: [], //表单初始数据
             formProps: {}, //表单配置
             pickerOptions: pickerOptions,
+            screenWidth: document.body.clientWidth, //屏幕宽度
+            labelPosition: "left", //对其方式
         };
     },
     watch: {
         options: {
             handler(newValue, oldValue) {
                 if (!newValue.formItem || !newValue.formItem.length) return;
-                this.formProps = newValue.formProps || {};
-                this.formItem = newValue.formItem;
-                this.formItem.forEach((item) => {
-                    if ((item.type === "checkbox" || item.type === "uploadImg") && !item.defaultValue) {
-                        item.defaultValue = [];
-                    }
-                    if (item.type == "switch" && (!item.defaultValue || item.defaultValue == 'false') ) {
-                        item.defaultValue = false;
-                    }
-                    // input框 在饿了吗ui 中需要是 string类型
-                    if(item.type == 'input' && item.defaultValue) item.defaultValue = (item.defaultValue).toString();
-                    if (!item.props) item.props = {};
-                    this.fromRules[item.key] = item.rules || [];
-                    if (item.defaultValue) {
-                        this.changeVaule(item.defaultValue, item.key);
-                    }
-                    this.fromModel[item.key] = item.defaultValue || "";
-                });
+                this.initModel(newValue);
             },
             deep: true,
             immediate: true,
         },
+        screenWidth: {
+            handler() {
+                if (!this.options.formItem || !this.options.formItem.length) return;
+                this.initModel(this.options);
+            },
+        },
+    },
+    created() {
+        window.onresize = () => {
+            this.screenWidth = document.body.clientWidth;
+        };
     },
     methods: {
         // 改变输入的值
@@ -266,16 +263,19 @@ export default {
                                     sendList[key] = "";
                                     if (urlList && urlList.length > 0) {
                                         if (urlList.length == 1) {
-                                            sendList[key] = urlList[0].uploadUrl;
+                                            sendList[key] =
+                                                urlList[0].uploadUrl;
                                         } else {
                                             urlList.forEach((item) => {
-                                                sendList[key] += item.uploadUrl + ",";
+                                                sendList[key] +=
+                                                    item.uploadUrl + ",";
                                             });
                                         }
                                     }
                                 }
                                 if (item.type == "checkbox") {
-                                    sendList[key] = this.fromModel[key].join(",");
+                                    sendList[key] =
+                                        this.fromModel[key].join(",");
                                 }
                                 if (item.type == "switch") {
                                     sendList[key] = this.fromModel[key] ? 1 : 0;
@@ -297,6 +297,40 @@ export default {
         cancel() {
             this.$emit("onCancel");
         },
+
+        initModel(data) {
+            // 兼容手机端
+            this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
+            this.formProps = data.formProps || {};
+            this.formItem = data.formItem;
+            this.formItem.forEach((item) => {
+                // 兼容手机端
+                item.span = this.screenWidth <= 768 ? 24 : item.span;
+                // 初始化选项框 和上传图片框
+                if (
+                    (item.type === "checkbox" || item.type === "uploadImg") &&
+                    !item.defaultValue
+                ) {
+                    item.defaultValue = [];
+                }
+                // 初始化 开关
+                if (
+                    item.type == "switch" &&
+                    (!item.defaultValue || item.defaultValue == "false")
+                ) {
+                    item.defaultValue = false;
+                }
+                // input框 在饿了吗ui 中需要是 string类型
+                if (item.type == "input" && item.defaultValue)
+                    item.defaultValue = item.defaultValue.toString();
+                if (!item.props) item.props = {};
+                this.fromRules[item.key] = item.rules || [];
+                if (item.defaultValue) {
+                    this.changeVaule(item.defaultValue, item.key);
+                }
+                this.fromModel[item.key] = item.defaultValue || "";
+            });
+        },
     },
 };
 </script>
@@ -307,14 +341,14 @@ export default {
     .items {
         padding-right: 10px;
     }
-    .from-item-tips{
+    .from-item-tips {
         font-size: 12px;
         color: #ccc;
         padding-top: 3px;
+        line-height: 14px;
     }
 }
 .form-box {
-    
     .form-sbumit-box {
         display: flex;
         flex-wrap: wrap;
@@ -327,8 +361,8 @@ export default {
         }
     }
 }
-@media screen and (max-width : 768px) {
-    .ruleForm{
+@media screen and (max-width: 768px) {
+    .ruleForm {
         width: 100%;
         min-width: 100%;
     }
