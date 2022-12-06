@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-12-05 17:30:22
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-05 18:49:11
+ * @LastEditTime: 2022-12-06 13:21:43
  * @FilePath: \vue2+elui+template\src\views\markdown\markdown.vue
 -->
 <template>
@@ -24,7 +24,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-markdown/index.vue">markdown组件下载地址</a>
             </div>
         </div>
-        
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
