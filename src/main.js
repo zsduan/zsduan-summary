@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 11:21:21
+ * @LastEditTime: 2022-12-13 15:49:10
  * @FilePath: \vue2+js+eui+template\src\main.js
  */
 import Vue from 'vue'
