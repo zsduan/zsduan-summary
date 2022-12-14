@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 15:03:10
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 11:42:15
- * @FilePath: \vue2+js+eui+template\src\views\Popup\Popup.vue
+ * @LastEditTime: 2022-11-22 21:20:59
+ * @FilePath: \vue2+elui+template\src\views\Popup\Popup.vue
 -->
 <template >
     <div>
@@ -27,7 +27,7 @@
             </div>
             <h2>组件源代码下载</h2>
             <div class="item">
-                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-popup/index.vue">弹窗组件下载地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-popup/index.vue">弹窗组件下载地址</a>
             </div>
         </div>
         <dzs-popup :isShow.sync="defaultIsShow">
@@ -39,6 +39,7 @@
                 <el-button>提交</el-button>
             </template>
         </dzs-popup>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-28 14:12:31
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 15:31:03
- * @FilePath: \vue2+js+eui+template\src\views\license-plate-number\license-plate-number.vue
+ * @LastEditTime: 2022-11-22 21:20:43
+ * @FilePath: \vue2+elui+template\src\views\license-plate-number\license-plate-number.vue
 -->
 <template>
     <div>
@@ -24,9 +24,10 @@
             </div>
             <h2>组件源代码下载</h2>
             <div class="item">
-                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-keyboard/index.vue">键盘组件下载地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-keyboard/index.vue">键盘组件下载地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

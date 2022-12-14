@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-08 14:24:20
- * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
+ * @LastEditTime: 2022-12-05 17:29:39
+ * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
 export const componentsList = [
@@ -20,6 +20,11 @@ export const componentsList = [
     {
         title : "富文本组件",
         path : "/edit",
+        is_show : true
+    },
+    {
+        title : "markdown组件",
+        path : "/markdown",
         is_show : true
     },
     {
@@ -47,13 +52,13 @@ export const jsList = [
         is_show : true
     },
     {
-        title : "防抖 指令",
-        path : "",
+        title : "防抖/节流 指令",
+        path : "/debounce",
         is_show : true
     },
     {
         title : "自动展开 指令",
-        path : "",
+        path : "/listOpen",
         is_show : true
     },
     {
@@ -82,38 +87,74 @@ export const jsList = [
         is_show : true
     },
     {
-        title : "xlsx读取",
-        path : "",
+        title : "xlsx/excel读取数据，没预览",
+        path : "/readeXlsx",
+        is_show : true
+    },
+    {
+        title : "word读取",
+        path : "/readeWord",
         is_show : true
     },
     {
         title : "signalR 及时通信",
-        path : "",
+        path : "/signalR",
         is_show : true
     },
     {
         title : "Notification 消息通知",
-        path : "",
+        path : "/myNotification",
         is_show : true
     },
     {
         title : "js模糊搜索",
-        path : "",
+        path : "/blurSearch",
         is_show : true
     },
     {
         title : "vue动态路由",
-        path : "",
+        path : "/myRouter",
         is_show : true
     },
     {
-        title : "对称加密/解密",
-        path : "",
+        title : "对称加密/解密/MD5加密",
+        path : "/encryp",
         is_show : true
     },
     {
-        title : "微信/支付宝/其他浏览器",
+        title : "微信/支付宝/其他浏览器的判断",
         path : "/is-wx-Alipay",
         is_show : true
     },
+    {
+        title : "大文件切片与合并",
+        path : "/file-slice-and-merge",
+        is_show : true
+    },
+    {
+        title : "js复制",
+        path : "/myCopy",
+        is_show : true
+    },
+]
+
+export const effectList = [
+    {
+        title : "模块拖动更换位置",
+        path : "/drag",
+        is_show : true
+    },
+    {
+        title : "边框动画效果",
+        path : "/button-border",
+        is_show : true
+    },
+]
+
+export const fragmentList = [
+    {
+        title : "比较好用的js片段",
+        path : "",
+        is_show : true
+    },  
 ]

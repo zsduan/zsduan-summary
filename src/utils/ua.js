@@ -2,9 +2,20 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 14:12:25
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 14:12:25
- * @FilePath: \vue2+js+eui+template\src\utils\ua.js
+ * @LastEditTime: 2022-11-23 17:53:39
+ * @FilePath: \vue2+elui+template\src\utils\ua.js
  */
+
+/*
+ * @name 获取浏览器信息
+ * @return userAgentObj = {
+        browserName: '',    // 浏览器名称
+        browserVersion: '', // 浏览器版本
+        osName: '',         // 操作系统名称
+        osVersion: '',      // 操作系统版本
+        deviceName: '',     // 设备名称
+    }
+*/
 
 export default () => {
     let userAgentStr = navigator.userAgent
@@ -24,6 +35,9 @@ export default () => {
         Safari: /Version\/([\d.]+).*Safari/,
         '360': /360SE/,
         QQBrowswe: /QQ/,
+        sougou : /metasr/,
+        bidubrowser : /bidubrowser/,
+        ucbrowser : /ubrowser/,
       }
       
       let deviceReg = {
@@ -51,6 +65,12 @@ export default () => {
                 userAgentObj.browserVersion = '360'
             } else if (key === 'QQBrowswe') {
                 userAgentObj.browserVersion = userAgentStr.split('QQBrowser/')[1].split(' ')[0]
+            }else if(key === 'sougou'){
+                userAgentObj.browserVersion = userAgentStr.split('metasr/')[1].split(' ')[0]
+            }else if(key === 'bidubrowser'){
+                userAgentObj.browserVersion = userAgentStr.split('bidubrowser/')[1].split(' ')[0]
+            }else if(key === 'ucbrowser'){
+                userAgentObj.browserVersion = userAgentStr.split('ubrowser/')[1].split(' ')[0]
             }else{
                 userAgentObj.browserVersion = "other"
             }

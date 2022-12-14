@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 14:13:09
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 14:17:15
- * @FilePath: \vue2+js+eui+template\src\views\ua\ua.vue
+ * @LastEditTime: 2022-11-22 21:21:21
+ * @FilePath: \vue2+elui+template\src\views\ua\ua.vue
 -->
 <template>
     <div>
@@ -18,9 +18,10 @@
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
-                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/ua.js">下载/查看地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/ua.js">下载/查看地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>

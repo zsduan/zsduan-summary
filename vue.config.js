@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2021-12-17 15:23:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-07-29 16:21:56
- * @FilePath: \adminBlog\vue.config.js
+ * @LastEditTime: 2022-12-04 13:32:05
+ * @FilePath: \vue2+elui+template\vue.config.js
  */
 
 const path = require("path");
@@ -14,4 +14,7 @@ module.exports = {
     // publicPath: './',
     lintOnSave: false,
     assetsDir: "static",
+    devServer:{
+        https : true
+    }
 };

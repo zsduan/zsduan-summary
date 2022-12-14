@@ -2,9 +2,15 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 17:07:40
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 17:17:35
- * @FilePath: \vue2+js+eui+template\src\utils\setTime.js
+ * @LastEditTime: 2022-11-23 17:56:46
+ * @FilePath: \vue2+elui+template\src\utils\setTime.js
  */
+
+/*
+ * @name 处理时间
+ * @parame date Date/string 
+ * @return 处理后的时间
+*/ 
 const formatTime = (date) => {
   if (typeof date == "string") {
     date = new Date(date);

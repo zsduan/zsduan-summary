@@ -11,11 +11,15 @@ h5,
 header,
 main,
 footer,
-section {
+section,
+body {
   padding: 0;
   margin: 0;
   font-size: 14px;
   box-sizing: border-box;
+}
+div {
+  word-break: break-all;
 }
 li {
   list-style: none;
@@ -94,10 +98,6 @@ img {
 .el-button--primary {
   background-color: var(--ThemeColor);
   border-color: var(--ThemeColor);
-}
-.el-button--primary:hover {
-  background: var(--ThemeColor07);
-  border-color: var(--ThemeColor07);
 }
 .el-button--primary:focus {
   background-color: var(--ThemeColor);

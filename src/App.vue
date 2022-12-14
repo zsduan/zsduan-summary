@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 11:20:16
- * @FilePath: \vue2+js+eui+template\src\App.vue
+ * @LastEditTime: 2022-11-29 20:42:09
+ * @FilePath: \vue2+elui+template\src\App.vue
 -->
 <template>
     <div id="app">
@@ -43,6 +43,7 @@ export default {
                 let rgba = `rgba(${arr.join(",")},0.${i})`;
                 document.body.style.setProperty(`--ThemeColor0${i}`, rgba);
             }
+            
         }, 200);
     }
 }
@@ -51,7 +52,7 @@ export default {
 <style lang="less">
 @import url("./assets/css/reset.css");
 :root {
-    --ThemeColor: #0065ff;
+    --ThemeColor: var(--ThemeColor , #0065ff);
     --fontColor: #333;
 }
 ::selection {
@@ -59,7 +60,8 @@ export default {
     color: #fff;
 }
 .page {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     h2 {
         font-size: 20px;
@@ -83,5 +85,22 @@ export default {
     }
 }
 
+@media screen and (max-width : 1200px) {
+    .page{
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width : 768px) {
+    .page{
+        padding: 0 10px;
+        .item {
+            a{
+                display: block;
+                margin-top: 10px;
+            }
+        }
+    }
+}
 
 </style>

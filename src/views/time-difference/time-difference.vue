@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 09:53:35
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-30 14:45:48
- * @FilePath: \vue2+js+eui+template\src\views\time-difference\time-difference.vue
+ * @LastEditTime: 2022-11-23 19:23:06
+ * @FilePath: \vue2+elui+template\src\views\time-difference\time-difference.vue
 -->
 <template>
     <div>
@@ -17,9 +17,10 @@
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
-                <a href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/time-difference.js">下载/查看地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/time-difference.js">下载/查看地址</a>
             </div>
         </div>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
@@ -75,7 +76,10 @@ export default {
     },
     methods:{
         onSubmit(e){
-            this.time = timeDifference(e.startTime , e.endTime);
+            this.time = timeDifference({
+                startDate : e.startTime,
+                endDate : e.endTime
+            });
         },
     }
 }
