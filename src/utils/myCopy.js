@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 19:41:59
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-04 14:38:04
- * @FilePath: \vue2+elui+template\src\utils\myCopy.js
+ * @LastEditTime: 2022-12-15 10:35:52
+ * @FilePath: \vue2+js+eui+template\src\utils\myCopy.js
  */
 /*
  * @name 复制
@@ -16,7 +16,7 @@
 */
 import ua from "./ua";
 export const myCopy = (...arg) =>{
-    let data = {
+    let options = {
         copyContent : "",
         type : "Text",
         is_input : false,
@@ -24,50 +24,48 @@ export const myCopy = (...arg) =>{
         success : (reslut) =>{},
         fail : (error) =>{}
     };
-
-    for (const key in data) {
-        if (Object.hasOwnProperty.call(data, key)) {
-            data[key] = arg[0][key] ? arg[0][key] : data[key];
-        }
+    options = {
+        ...options,
+        ...arg[0]
     }
     
     if(ua().osName == "Windows" && window.location.protocol == "http:"){
-        data.is_input = true;
-        data.type = 'Text';
+        options.is_input = true;
+        options.type = 'Text';
         console.warn("osName is not Windows or protocol is not https");
     }
-    if(!data.copyContent){
+    if(!options.copyContent){
         throw new Error("copyContent must be not null");
     }
     // 浏览器自带方法
-    if(data.is_input && data.type == 'Text'){
+    if(options.is_input && options.type == 'Text'){
         // 原生方法
         let input = document.createElement("input");
-        input.value = data.copyContent;
+        input.value = options.copyContent;
         document.body.appendChild(input);
         input.select();
         document.execCommand("copy");
         document.body.removeChild(input);
-        data.success({
+        options.success({
             code : 200,
             msg : "success"
         })
         return true;
     }
 
-    if(data.type == 'Text'){
-        navigator.clipboard.writeText(data.copyContent);
-        data.success({
+    if(options.type == 'Text'){
+        navigator.clipboard.writeText(options.copyContent);
+        options.success({
             code : 200,
             msg : "success"
         })
     }
 
-    if(data.type == 'Html'){
-        const html = new Blob([data.copyContent],{type : "text/html"});
+    if(options.type == 'Html'){
+        const html = new Blob([options.copyContent],{type : "text/html"});
         const item = new ClipboardItem({"text/html":html});
         navigator.clipboard.write([item]);
-        data.success({
+        options.success({
             code : 200,
             msg : "success"
         })

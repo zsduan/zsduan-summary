@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 17:35:39
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:40:17
- * @FilePath: \vue2+elui+template\src\views\myNotification\myNotification.vue
+ * @LastEditTime: 2022-12-15 11:13:27
+ * @FilePath: \vue2+js+eui+template\src\views\myNotification\myNotification.vue
 -->
 <template>
     <div>
@@ -83,7 +83,7 @@ export default {
                 return
             }
             notification(this,{
-                title : this.Text
+                title : this.Text,
             })
         },
         sendMsg2(){

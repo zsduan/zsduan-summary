@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 12:39:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:15:28
- * @FilePath: \vue2+elui+template\src\utils\canvas-back.js
+ * @LastEditTime: 2022-12-14 17:59:03
+ * @FilePath: \vue2+js+eui+template\src\utils\canvas-back.js
  */
 /*
  * @name 绘制动效
@@ -12,21 +12,47 @@
  * @parame showWord 需要显示的文字 string
 */ 
 export const drawCanvasBack = (...arg) =>{
-    let data = arg[0];
-    if(!data.canvasId){
-        throw new Error("canvasId must be not null")
+    let options = {
+        canvasId : "",
+        showWord : "",
+        columnWidth : 20,
+        success : (reslut) =>{},
+        fail : (err) =>{}
     }
-    if((typeof data.canvasId !== 'string' || (!Object.prototype.toString.call(data.canvasId) === "[object String]")) && showWord){
-        throw new Error("canvasId must be string")
+    options = {
+        ...options,
+        ...arg[0]
     }
-    if(typeof data.showWord !== 'string' || (!Object.prototype.toString.call(data.showWord) === "[object String]")){
-        throw new Error("showWord must be string")
+    if(!options.canvasId){
+        options.fail({
+            code : -1,
+            msg : "canvasId must be not null"
+        })
+        return 
     }
-    let columnWidth = data.columnWidth ?  Number(data.columnWidth) : 20;
+    if((typeof options.canvasId !== 'string' || (!Object.prototype.toString.call(options.canvasId) === "[object String]")) && showWord){
+        options.fail({
+            code : -1,
+            msg : "canvasId must be string"
+        })
+        return 
+    }
+    if(typeof options.showWord !== 'string' || (!Object.prototype.toString.call(options.showWord) === "[object String]")){
+        options.fail({
+            code : -1,
+            msg : "showWord must be string"
+        })
+        return 
+    }
+    let columnWidth = options.columnWidth ?  Number(options.columnWidth) : 20;
     if(!isFinite(columnWidth)){
-        throw new Error("columnWidth must be Number or String Number");
+        options.fail({
+            code : -1,
+            msg : "columnWidth must be Number or String Number"
+        })
+        return 
     }
-    const canvas = document.querySelector("#" + data.canvasId);
+    const canvas = document.querySelector("#" + options.canvasId);
     const canvasWidth = window.innerWidth - 20;
     const canvasHeight = window.innerHeight;
     canvas.width = canvasWidth;
@@ -39,8 +65,9 @@ export const drawCanvasBack = (...arg) =>{
     let columnNextIndexes = new Array(columnCount);
     columnNextIndexes.fill(1);
     setInterval(()=>{
-      draw(ctx , data.showWord , columnCount , columnWidth , columnNextIndexes);  
+      draw(ctx , options.showWord , columnCount , columnWidth , columnNextIndexes);  
     },50)
+    options.success("success")
 }
 
 // 绘制
@@ -59,7 +86,6 @@ const draw = (ctx , showWord , columnCount , columnWidth , columnNextIndexes) =>
         }else{
             columnNextIndexes[i] ++ ;
         }
-        
     }
     
 }

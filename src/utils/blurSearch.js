@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:46:13
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:08:30
- * @FilePath: \vue2+elui+template\src\utils\blurSearch.js
+ * @LastEditTime: 2022-12-15 09:37:19
+ * @FilePath: \vue2+js+eui+template\src\utils\blurSearch.js
  */
 
 /*
@@ -11,37 +11,61 @@
  * @parame data 搜索的数据原始 Array 必填
  * @parame searValue string 搜索的关键词 必填
  * @parame key 匹配的对象key
- * @return 匹配对象列表
+ * @method success 返回成功
+ * @method fail 返回失败
 */ 
 export const blurSearch = (...arg)=>{
-    let data = arg[0];
-    if(!data.list) throw new Error("list must be not null");
-    if(!Array.isArray(data.list) || (!data.list.constructor === Array)){
-        throw new Error("list must be Array");
+    let options = {
+        list : [],
+        searValue : "",
+        key : "",
+        success : (reslut) =>{},
+        fail : (error) =>{}
+    } 
+    options = {
+        ...options,
+        ...arg[0]
     }
-    if(!data.searValue){
-        return data.list;
+    if(!options.list) throw new Error("list must be not null");
+    if(!Array.isArray(options.list) || (!options.list.constructor === Array)){
+        options.fail({
+            code : -1,
+            msg : "list must be Array"
+        })
+        return ;
     }
-    if(typeof data.searValue !== 'string' || (!Object.prototype.toString.call(data.searValue) === "[object String]")){
-        throw new Error("searValue must be string")
+    if(!options.searValue){
+        options.success(options.list);
+        return options.list;
     }
-    if(data.key && (typeof data.key !== 'string' || (!Object.prototype.toString.call(data.key) === "[object String]"))){
-        throw new Error("key must be string")
+    if(typeof options.searValue !== 'string' || (!Object.prototype.toString.call(options.searValue) === "[object String]")){
+        options.fail({
+            code : -1,
+            msg : "searValue must be string"
+        })
+        return 
+    }
+    if(options.key && (typeof options.key !== 'string' || (!Object.prototype.toString.call(options.key) === "[object String]"))){
+        options.fail({
+            code : -1,
+            msg : "key must be string"
+        })
+        return;
     }
     let reslut = [];
-    const reg = new RegExp(data.searValue);
-    if(data.key){
-        data.list.forEach(element =>{
-            if(element[data.key].match(reg)){
+    const reg = new RegExp(options.searValue);
+    if(options.key){
+        options.list.forEach(element =>{
+            if(element[options.key].match(reg)){
                 reslut.push(element)
             }
         })
-        return reslut;
+        options.success(reslut);
     }
-    data.list.forEach(element => {
+    options.list.forEach(element => {
         if(element.match(reg)){
             reslut.push(element)
         }
     });
-    return reslut;
+    options.success(reslut);
 }

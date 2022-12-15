@@ -2,11 +2,14 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 15:00:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 17:45:20
- * @FilePath: \vue2+elui+template\src\utils\calender.js
+ * @LastEditTime: 2022-12-15 09:57:12
+ * @FilePath: \vue2+js+eui+template\src\utils\calender.js
  */
 /*
  * @name 获取农历
+ * @parame time : "", ?/时间 string  / DATE
+ * @method success : (reslut) =>{},//成功后的相关数据
+ * @method fail : (error) =>{}, //失败返回     
  * @return 返回  {
     gregorianYear: null, //公历年
     gregorianMonth: null, //公历月
@@ -506,11 +509,21 @@ function getFestival(mouth, day) {
 }
 
 
-function getCalendar(time) {
-    if (typeof time == "string") {
-        time = new Date(time);
+function getCalendar(...arg) {
+
+    let options = {
+        time : "",
+        success : (reslut) =>{},
+        fail : (error) =>{},
     }
-    now = time || new Date();
+    options = {
+        ...options,
+        ...arg[0]
+    }
+    if (typeof options.time == "string" && options.time) {
+        options.time = new Date(options.time);
+    }
+    now = options.time || new Date();
     //用于计算农历年月日的数据
     let GY = now.getFullYear();
     let GM = now.getMonth();
@@ -561,7 +574,7 @@ function getCalendar(time) {
     //节气
     calendar.solarTerm = getSolarTerm(GY, GD, GM);
 
-    return calendar;
+    options.success(calendar);
 }
 
 export default getCalendar;

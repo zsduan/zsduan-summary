@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-29 11:35:38
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 17:47:50
- * @FilePath: \vue2+elui+template\src\utils\guid.js
+ * @LastEditTime: 2022-12-15 10:42:56
+ * @FilePath: \vue2+js+eui+template\src\utils\guid.js
  */
 
 /*
@@ -55,4 +55,9 @@ function GUID() {
         }
     }
 }
-export default new GUID();
+const myGUID = () =>{
+    let guid = new GUID();
+    return guid.newGUID();
+} ;
+
+export default myGUID;

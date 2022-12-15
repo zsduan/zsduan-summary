@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 09:53:35
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:23:06
- * @FilePath: \vue2+elui+template\src\views\time-difference\time-difference.vue
+ * @LastEditTime: 2022-12-15 13:50:20
+ * @FilePath: \vue2+js+eui+template\src\views\time-difference\time-difference.vue
 -->
 <template>
     <div>
@@ -26,66 +26,73 @@
 <script>
 import timeDifference from "@/utils/time-difference";
 import dzsForm from "@/components/dzs-form/index.vue";
-import {code1} from "./config";
+import { code1 } from "./config";
 export default {
-    components:{
-        dzsForm
+    components: {
+        dzsForm,
     },
-    computed:{
-        formOptions(){
+    computed: {
+        formOptions() {
             return {
-                formProps : {
-                    "label-width" : "110px",
+                formProps: {
+                    "label-width": "110px",
                 },
-                formItem : [
+                formItem: [
                     {
-                        label : "开始时间",
-                        key : "startTime",
-                        type : "date",
-                        span : 12,
-                        rules :[
-                            { required: true, message: '请选择开始时间', trigger: 'change' },
+                        label: "开始时间",
+                        key: "startTime",
+                        type: "date",
+                        span: 12,
+                        rules: [
+                            {
+                                required: true,
+                                message: "请选择开始时间",
+                                trigger: "change",
+                            },
                         ],
-                        props : {
-                            type : "datetime",
-                            "value-format" : "yyyy-MM-dd HH:mm:ss",
-                            placeholder : "请选择开始时间"
-                        }
+                        props: {
+                            type: "datetime",
+                            "value-format": "yyyy-MM-dd HH:mm:ss",
+                            placeholder: "请选择开始时间",
+                        },
                     },
                     {
-                        label : "结束时间",
-                        key : "endTime",
-                        type : "date",
-                        span : 12,
-                        rules :[],
-                        props : {
-                            type : "datetime",
-                            "value-format" : "yyyy-MM-dd HH:mm:ss",
-                            placeholder : "请选择结束时间"
-                        }
+                        label: "结束时间",
+                        key: "endTime",
+                        type: "date",
+                        span: 12,
+                        rules: [],
+                        props: {
+                            type: "datetime",
+                            "value-format": "yyyy-MM-dd HH:mm:ss",
+                            placeholder: "请选择结束时间",
+                        },
                     },
-                ]
-            }
-        }
+                ],
+            };
+        },
     },
-    data(){
+    data() {
         return {
-            time : "",
-            code1 : code1
-        }
+            time: {},
+            code1: code1,
+        };
     },
-    methods:{
-        onSubmit(e){
-            this.time = timeDifference({
-                startDate : e.startTime,
-                endDate : e.endTime
+    methods: {
+        onSubmit(e) {
+            timeDifference({
+                startDate: e.startTime,
+                endDate: e.endTime,
+                success: (res) => {
+                    this.time = res;
+                },
             });
         },
-    }
-}
+    },
+};
 </script>
 <style lang="less" scoped>
-.guid{
+.guid {
     padding-top: 10px;
 }
 </style>

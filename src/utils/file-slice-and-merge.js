@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-25 17:13:14
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 18:34:51
- * @FilePath: \vue2+elui+template\src\utils\file-slice-and-merge.js
+ * @LastEditTime: 2022-12-15 10:38:48
+ * @FilePath: \vue2+js+eui+template\src\utils\file-slice-and-merge.js
  */
 
 /*
@@ -37,7 +37,7 @@
 */ 
 
 export const fileSliceAndMerge = (...arg) =>{
-    let data = {
+    let options = {
         fileId : "",  //读取文件的id
         file : "" , //文件
         refs : "" ,
@@ -49,63 +49,62 @@ export const fileSliceAndMerge = (...arg) =>{
         success : (result)=>{} , //读取成功返回
         fail : (error) => {} , //读取失败返回
     }
-    for (const key in data) {
-        if (Object.hasOwnProperty.call(data, key)) {
-            data[key] = arg[0][key] ? arg[0][key] : data[key];
-        }
+    options = {
+        ...options,
+        ...arg[0]
     }
-    if(!data.fileId && !data.file && !data.refs){
-        data.fail({
+    if(!options.fileId && !options.file && !options.refs){
+        options.fail({
             code : -1,
             msg : "fileId or file or refs must be not null"
         })
         return ;
     }
-    if(data.refs && !data._this){
-        data.fail({
+    if(options.refs && !options._this){
+        options.fail({
             code : -1,
             msg : "_this must be not null"
         })
         return ;
     }
-    if(!data.type){
-        data.fail({
+    if(!options.type){
+        options.fail({
             code : -1,
             msg : "type must be not null"
         })
         return ;
     }
     let files = null;
-    if(data.refs){
-        files = data._this.$refs[data.refs].files
+    if(options.refs){
+        files = options._this.$refs[options.refs].files
     }
-    if(data.fileId){
-        files = document.querySelector(`#${data.fileId}`).files;
+    if(options.fileId){
+        files = document.querySelector(`#${options.fileId}`).files;
     }
-    if(data.file){
-        files = data.file;
+    if(options.file){
+        files = options.file;
     }
-    if(data.type == "slice"){
-        fileSlice(files[0] , data);
+    if(options.type == "slice"){
+        fileSlice(files[0] , options);
     }
-    if(data.type == 'merge'){
-        fileMerge(files , data)
+    if(options.type == 'merge'){
+        fileMerge(files , options)
     }
 }
 
 // 切片
-export const fileSlice = (files , data) =>{
+export const fileSlice = (files , options) =>{
     let fileList = [];
-    for(let i = 0 ; i < files.size ; i += data.fileSize){
-        let index = parseInt(i / data.fileSize) + 1;
+    for(let i = 0 ; i < files.size ; i += options.fileSize){
+        let index = parseInt(i / options.fileSize) + 1;
         let fileSort = {
             sort : index,
-            file : files.slice(i , data.fileSize * index),
+            file : files.slice(i , options.fileSize * index),
             file_name : `${files.name}-index` 
         }
         fileList.push(fileSort);
     }
-    data.success({
+    options.success({
         code : 200,
         fileList : fileList,
         file_name : files.name
@@ -113,16 +112,16 @@ export const fileSlice = (files , data) =>{
 }
 
 // 合并
-export const fileMerge = (files , data , fileName) =>{
+export const fileMerge = (files , options , fileName) =>{
     let fileList = [];
     if(!files.length){
-        data.fail({
+        options.fail({
             code : -1,
             msg : "files is null"
         })
         return ;
     }
-    if(data.isSort){
+    if(options.isSort){
         let file_name_arr = []
         for(let i = 0 ; i < files.length ; i ++){
             file_name_arr.push(files[i].name);
@@ -142,16 +141,9 @@ export const fileMerge = (files , data , fileName) =>{
     }
     const name = fileName ? fileName : files[0].name.replace(/-\d+$/,"");
     const file = new File(fileList , name)
-    data.success({
+    options.success({
         code : 200,
         file : file,
         file_name : name
     })
-}
-
-const downFile = (v , name) =>{
-    const a = document.createElement("a");
-    a.setAttribute("download",name);
-    a.href = URL.createObjectURL(v);
-    a.click();
 }

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-05 16:53:45
- * @FilePath: \vue2+elui+template\src\views\Home.vue
+ * @LastEditTime: 2022-12-15 09:34:16
+ * @FilePath: \vue2+js+eui+template\src\views\Home.vue
 -->
 <template>
     <div class="home">
@@ -143,10 +143,13 @@ export default {
             this.$router.push({ path: path });
         },
         inputValue() {
-            this.searchList = blurSearch({
+            blurSearch({
                 list: this.allList,
                 searValue: this.searchValue,
                 key: "title",
+                success : (res)=>{
+                    this.searchList = res;
+                }
             });
         },
     },

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 13:09:29
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 14:12:12
- * @FilePath: \vue2+elui+template\src\views\readeXlsx\readeXlsx.vue
+ * @LastEditTime: 2022-12-15 11:13:54
+ * @FilePath: \vue2+js+eui+template\src\views\readeXlsx\readeXlsx.vue
 -->
 <template>
     <div>
@@ -46,9 +46,8 @@ export default {
     },
     methods:{
         changeFile(){
-            readeXlsx({
+            readeXlsx(this,{
                 refs : "myfile",
-                _this : this,
                 success:(res) =>{
                     this.xlsxInfo = res;
                 },

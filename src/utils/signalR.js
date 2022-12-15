@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-25 12:51:37
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 17:32:46
- * @FilePath: \vue2+elui+template\src\utils\signalR.js
+ * @LastEditTime: 2022-12-15 10:45:52
+ * @FilePath: \vue2+js+eui+template\src\utils\signalR.js
  */
 
 
@@ -26,60 +26,59 @@ import * as signalR from "@microsoft/signalr"
 
 export const signalRcoont = (...arg)=>{
     let SR = {};
-    let data = {
+    let options = {
         connUrl : "/api/chathub",
         data : {},
         success : (reslut) =>{},
         fail : (error) =>{},
         stop : (stop) => {},
     }
-    for (const key in data) {
-        if (Object.hasOwnProperty.call(data, key)) {
-            data[key] = arg[0][key] ? arg[0][key] : data[key];
-        }
+    options = {
+        ...options,
+        ...arg[0]
     }
-    if(!data.connUrl){
-        data.fail({
+    if(!options.connUrl){
+        options.fail({
             code : -1,
             msg : "connUrl must be not null"
         })
         return ;
     }
-    if(typeof word !== 'string' || (!Object.prototype.toString.call(word) === "[object String]")){
-        data.fail({
+    if(typeof options.connUrl !== 'string' || (!Object.prototype.toString.call(options.connUrl) === "[object String]")){
+        options.fail({
             code : -1,
             msg : "connUrl must be string"
         })
         return ;
     }
-    if(typeof data.data != 'object'){
-        data.fail({
+    if(typeof options.data != 'object'){
+        options.fail({
             code : -1,
             msg : "data must be object"
         })
         return ;
     }
-    SR = initSignalR(SR , data);
-    startSignalR(SR , data);
+    SR = initSignalR(SR , options);
+    startSignalR(SR , options);
     SR.onclose(closeSignalR())
 }
 
-const initSignalR = (SR , data) =>{
+const initSignalR = (SR , options) =>{
     SR = new signalR.HubConnectionBuilder()
-        .withUrl(data.connUrl,data.data)
+        .withUrl(options.connUrl,options.data)
         .configureLogging(signalR.LogLevel.Error)
         .build()
     return SR;
 }
 
-const startSignalR = async (SR , data) =>{
+const startSignalR = async (SR , options) =>{
     try {
         await SR.start();
-        data.success({
+        options.success({
             code : 200,
             data : {
                 SR : SR,
-                stop : stopSignalR(SR,data)
+                stop : stopSignalR(SR,options)
             }
         });
     } catch {
@@ -91,9 +90,9 @@ const closeSignalR = async () =>{
     await startSignalR();
 }
 
-export const stopSignalR = async (SR , data) =>{
+export const stopSignalR = async (SR , options) =>{
     await SR.stop();
-    data.stop({
+    options.stop({
         code : 200,
         msg : "stop success"
     })

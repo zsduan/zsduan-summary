@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:33:52
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:36:59
- * @FilePath: \vue2+elui+template\src\views\blurSearch\blurSearch.vue
+ * @LastEditTime: 2022-12-15 09:34:45
+ * @FilePath: \vue2+js+eui+template\src\views\blurSearch\blurSearch.vue
 -->
 <template>
     <div>
@@ -73,10 +73,13 @@ export default {
     },
     methods:{
         search(){
-            this.bulrList = blurSearch({
+            blurSearch({
                 list : this.searchList,
                 searValue : this.Text,
-                key : "Text"
+                key : "Text",
+                success : (res)=>{
+                    this.bulrList = res;
+                }
             });
         },
     }

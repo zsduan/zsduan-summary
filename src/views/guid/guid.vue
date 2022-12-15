@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 09:53:35
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:20:33
- * @FilePath: \vue2+elui+template\src\views\guid\guid.vue
+ * @LastEditTime: 2022-12-15 10:41:06
+ * @FilePath: \vue2+js+eui+template\src\views\guid\guid.vue
 -->
 <template>
     <div>
@@ -36,7 +36,7 @@ export default {
     },
     methods:{
         setGuid(){
-            this.guid = guid.newGUID();
+            this.guid = guid();
         }
     }
 }

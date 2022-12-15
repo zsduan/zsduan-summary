@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 17:33:31
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:37:34
- * @FilePath: \vue2+elui+template\src\views\encryp\encryp.vue
+ * @LastEditTime: 2022-12-15 14:09:52
+ * @FilePath: \vue2+js+eui+template\src\views\encryp\encryp.vue
 -->
 <template>
     <div>
@@ -103,10 +103,20 @@ export default {
                 });
                 return ;
             }
-            this.encryptText1 = ACEencrypt(this.Text1);
+            ACEencrypt({
+                word : this.Text1,
+                success : (res) =>{
+                    this.encryptText1 = res;
+                }
+            });
         },
         encrypt2(){
-            this.encryptText2 = ACEencrypt(this.Text2);
+            ACEencrypt({
+                word : this.Text2,
+                success : (res) =>{
+                    this.encryptText2 = res;
+                }
+            });
         },
         decrypt1(){
             if(!this.Text3){
@@ -116,7 +126,12 @@ export default {
                 });
                 return ;
             }
-            this.decryptText1 = ACEdecrypt(this.Text3);
+            ACEdecrypt({
+                word : this.Text3,
+                success : (res)=>{
+                    this.decryptText1 = res;
+                }
+            });
         },
         decrypt2(){
             if(!this.Text4){
@@ -126,7 +141,13 @@ export default {
                 });
                 return ;
             }
-            this.decryptText2 = ACEdecrypt(this.Text4 , null , "object");
+            ACEdecrypt({
+                word : this.Text4,
+                type : "object",
+                success : (res)=>{
+                    this.decryptText2 = res;
+                }
+            });
         },
         md5Encrypt(){
             if(!this.Text5){
@@ -136,7 +157,12 @@ export default {
                 });
                 return ;
             }
-            this.md5Text = MD5(this.Text5);
+            MD5({
+                word : this.Text5,
+                success : (res) =>{
+                    this.md5Text = res;
+                }
+            });
         }
     }
 }
