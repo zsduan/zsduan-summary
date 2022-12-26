@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 12:39:33
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-15 13:46:43
+ * @LastEditTime: 2022-12-26 11:27:04
  * @FilePath: \vue2+js+eui+template\src\utils\readeXlsx.js
  */
 /*
@@ -25,7 +25,8 @@
             sheet_name : [],
         };
 */ 
-import xlsx from "./xlsx.full.min";
+// import  xlsx from "./xlsx.full.min.js"; // webpack
+import * as xlsx from 'xlsx/xlsx.mjs'; // vite
 export const readeXlsx = (_this , ...arg) =>{
     let options = {
         fileId : "",  //读取文件的id

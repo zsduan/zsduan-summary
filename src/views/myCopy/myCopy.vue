@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 17:37:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-04 14:33:11
- * @FilePath: \vue2+elui+template\src\views\myCopy\myCopy.vue
+ * @LastEditTime: 2022-12-26 11:04:56
+ * @FilePath: \vue2+js+eui+template\src\views\myCopy\myCopy.vue
 -->
 <template>
     <div>
@@ -37,8 +37,8 @@
     </div>
 </template>
 <script>
-import {myCopy} from "@/utils/myCopy";
-import {code1 , code2} from "./config"
+import {myCopy} from "@/utils/myCopy.js";
+import {code1 , code2} from "./config.js"
 export default {
     data(){
         return {
