@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-05 17:29:39
- * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
+ * @LastEditTime: 2022-12-26 14:54:18
+ * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
 export const componentsList = [
@@ -40,6 +40,11 @@ export const componentsList = [
     {
         title : "车牌号键盘组件",
         path : "/licensePlateNumber",
+        is_show : true
+    },
+    {
+        title : "canvas生成验证码",
+        path : "/VerificationCode",
         is_show : true
     }
 ]
@@ -154,7 +159,7 @@ export const effectList = [
 export const fragmentList = [
     {
         title : "比较好用的js片段",
-        path : "",
+        path : "/EasyJS",
         is_show : true
     },  
 ]
