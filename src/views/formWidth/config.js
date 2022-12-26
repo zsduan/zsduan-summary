@@ -1,5 +1,12 @@
 /*
  * @Author: zs.duan
+ * @Date: 2022-12-26 17:33:13
+ * @LastEditors: zs.duan
+ * @LastEditTime: 2022-12-26 17:33:13
+ * @FilePath: \vue2+js+eui+template\src\views\formWidth\config.js
+ */
+/*
+ * @Author: zs.duan
  * @Date: 2022-09-28 13:43:24
  * @LastEditors: zs.duan
  * @LastEditTime: 2022-12-26 16:39:51
@@ -97,15 +104,6 @@ formOptions(){
                 span : 12
             },
             {
-                label : "",
-                key : "divider",
-                type : "divider",
-                span : 24,
-                props:{
-                    tips : "我是分割线"
-                }
-            },
-            {
                 label: "多选框", 
                 key: "checkbox", 
                 type : "checkbox",
@@ -123,7 +121,7 @@ formOptions(){
                 ],
             },
             {
-                label: "单选框 默认值", 
+                label: "单选框", 
                 key: "radio", 
                 type : "radio",
                 rules:[],
@@ -139,22 +137,6 @@ formOptions(){
                     },
                 ],
                 defaultValue : 1
-            },
-            {
-                label: "图片", 
-                key: "uploadImg", 
-                type : "uploadImg",
-                rules:[],
-                props:{
-                    autoUpload : false
-                },
-            },
-            {
-                label: "富文本", 
-                key: "edit", 
-                type : "edit",
-                rules:[],
-                props:{},
             },
         ]
     }

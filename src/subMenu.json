@@ -250,5 +250,14 @@
         "page" : "VerificationCode/VerificationCode",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20221226145152",
+        "PID" : null ,
+        "title" : "横向表单",
+        "pathName" : "formWidth",
+        "page" : "formWidth/formWidth",
+        "isShow" : true,
+        "children" : []
     }
 ]

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 14:54:18
+ * @LastEditTime: 2022-12-26 16:20:56
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -32,6 +32,11 @@ export const componentsList = [
         path : "/form",
         is_show : true
     },  
+    {
+        title : "横向表单组件",
+        path : "/formWidth",
+        is_show : true
+    }, 
     // {
     //     title : "公共按钮组件",
     //     path : "",
