@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 15:03:54
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 11:29:01
+ * @LastEditTime: 2022-12-26 13:37:37
  * @FilePath: \vue2+js+eui+template\src\router\setRouter.js
  */
 import MENU from "../subMenu.json" ;
@@ -54,7 +54,8 @@ class setRouter {
 
     // 路由懒加载
     loadView(view) {
-        return () => import(`/src/views/${view}`); //vite
+        let modules = import.meta.glob("../views/**/*.vue");
+        return modules[`../views/${view}`]; //vite
         // return () => import(`@/views/${view}`);  //webpack
     }
 }
