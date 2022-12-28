@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 16:20:56
+ * @LastEditTime: 2022-12-27 13:38:04
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -50,6 +50,11 @@ export const componentsList = [
     {
         title : "canvas生成验证码",
         path : "/VerificationCode",
+        is_show : true
+    },
+    {
+        title : "滑动验证",
+        path : "/slide-verification",
         is_show : true
     }
 ]

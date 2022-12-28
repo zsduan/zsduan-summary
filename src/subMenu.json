@@ -259,5 +259,14 @@
         "page" : "formWidth/formWidth",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20221227133734",
+        "PID" : null ,
+        "title" : "滑动验证",
+        "pathName" : "slide-verification",
+        "page" : "slide-verification/slide-verification",
+        "isShow" : true,
+        "children" : []
     }
 ]

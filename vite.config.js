@@ -1,3 +1,10 @@
+/*
+ * @Author: zs.duan
+ * @Date: 2022-12-26 17:41:59
+ * @LastEditors: zs.duan
+ * @LastEditTime: 2022-12-27 09:21:56
+ * @FilePath: \vue2+js+eui+template\vite.config.js
+ */
 /* eslint-disable */
 import legacyPlugin from '@vitejs/plugin-legacy';
 import * as path from 'path';
@@ -44,6 +51,7 @@ export default ({
     server: {
       // 代理
       proxy,
+      port : 8073,
     },
     build: {
       target: 'es2015',
