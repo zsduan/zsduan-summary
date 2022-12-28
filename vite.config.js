@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-12-26 17:41:59
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-27 09:21:56
+ * @LastEditTime: 2022-12-28 14:11:23
  * @FilePath: \vue2+js+eui+template\vite.config.js
  */
 /* eslint-disable */
@@ -16,7 +16,29 @@ export default ({
   command,
   mode
 }) => {
-  let rollupOptions = {};
+  let rollupOptions = {
+    output: {
+      manualChunks(id) { //设置包的大小
+        if (id.includes('node_modules')) {
+          return id
+            .toString()
+            .split('node_modules/')[1]
+            .split('/')[0]
+            .toString();
+        }
+      },
+      chunkFileNames: (chunkInfo) => { //js单独文件
+        const facadeModuleId = chunkInfo.facadeModuleId
+          ? chunkInfo.facadeModuleId.split('/')
+          : [];
+        const fileName =
+          facadeModuleId[facadeModuleId.length - 2] || '[name]';
+        return `js/${fileName}/[name].[hash].js`;
+      },
+      assetFileNames: 'static/[ext]/name-[hash].[ext]',
+      entryFileNames: 'static/js/[name]-[hash].js',
+    }
+  };
 
 
   let optimizeDeps = {};
@@ -51,7 +73,7 @@ export default ({
     server: {
       // 代理
       proxy,
-      port : 8073,
+      port: 8073,
     },
     build: {
       target: 'es2015',
@@ -60,6 +82,7 @@ export default ({
       sourcemap: false, // 是否产出soucemap.json
       outDir: 'build', // 产出目录
       rollupOptions,
+      chunkSizeWarningLimit:1500
     },
     esbuild,
     optimizeDeps,
