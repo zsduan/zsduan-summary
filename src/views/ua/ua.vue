@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 14:13:09
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:21:21
- * @FilePath: \vue2+elui+template\src\views\ua\ua.vue
+ * @LastEditTime: 2023-01-11 15:35:17
+ * @FilePath: \vue2+js+eui+template\src\views\ua\ua.vue
 -->
 <template>
     <div>
-        <dzs-header title="获取浏览器信息"></dzs-header>
+        <dzs-header title="获取浏览器信息" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -21,13 +21,21 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/ua.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import ua from "@/utils/ua";
 import {code1} from "./config";
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             ua : "",

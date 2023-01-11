@@ -2,13 +2,13 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 17:10:05
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:21:03
- * @FilePath: \vue2+elui+template\src\views\setTime\setTime.vue
+ * @LastEditTime: 2023-01-11 15:34:18
+ * @FilePath: \vue2+js+eui+template\src\views\setTime\setTime.vue
 -->
 
 <template>
     <div>
-        <dzs-header title="返回安卓/苹果时间"></dzs-header>
+        <dzs-header title="返回安卓/苹果时间" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -22,7 +22,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/setTime.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
@@ -30,6 +30,14 @@ import dzsForm from "@/components/dzs-form/index.vue";
 import setTime from "@/utils/setTime";
 import {code1} from "./config";
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     components:{
         dzsForm
     },

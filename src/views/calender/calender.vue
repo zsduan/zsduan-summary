@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 15:01:00
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-15 09:54:22
+ * @LastEditTime: 2023-01-11 15:31:02
  * @FilePath: \vue2+js+eui+template\src\views\calender\calender.vue
 -->
 <template>
     <div>
-        <dzs-header title="获取农历"></dzs-header>
+        <dzs-header title="获取农历" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -24,7 +24,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/calender.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
@@ -35,7 +35,14 @@ export default {
     components:{
         dzsForm
     },
-    
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             time : {},

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:19:09
- * @FilePath: \vue2+elui+template\src\router\index.js
+ * @LastEditTime: 2023-01-11 17:08:46
+ * @FilePath: \vue2+js+eui+template\src\router\index.js
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -13,10 +13,15 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/old-index',
     name: 'Home',
     component: Home
   },
+  {
+    path : "/",
+    name : "Index",
+    component : ()=>import("../views/Index/Index.vue")
+  }
 ]
 
 const router = new VueRouter({

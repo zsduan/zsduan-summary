@@ -2,10 +2,13 @@
  * @Author: zs.duan
  * @Date: 2022-11-08 14:34:08
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-15 14:09:13
+ * @LastEditTime: 2023-01-11 15:55:35
  * @FilePath: \vue2+js+eui+template\src\utils\encryp.js
  */
-let CryptoJS = require('crypto-js/index.js');
+// webpack
+// let CryptoJS = require('crypto-js/index.js');
+// vite
+import CryptoJS from "crypto-js/index.js";
 let keyStr = "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JXU2NzkwJXU1RTczJXU1M0Yw";
 
 /*

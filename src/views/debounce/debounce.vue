@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 14:54:38
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 17:12:00
- * @FilePath: \vue2+elui+template\src\views\debounce\debounce.vue
+ * @LastEditTime: 2023-01-11 15:31:14
+ * @FilePath: \vue2+js+eui+template\src\views\debounce\debounce.vue
 -->
 <template>
     <div>
-        <dzs-header title="指令 防抖 节流"></dzs-header>
+        <dzs-header title="指令 防抖 节流" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>防抖 默认时间</h2>
             <div class="item">
@@ -44,12 +44,20 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/instructions.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import {code1 , code2 , code3 , code4 , code5 } from "./config"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             showText1 : [],

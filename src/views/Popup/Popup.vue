@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 15:03:10
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:20:59
- * @FilePath: \vue2+elui+template\src\views\Popup\Popup.vue
+ * @LastEditTime: 2023-01-11 14:59:47
+ * @FilePath: \vue2+js+eui+template\src\views\Popup\Popup.vue
 -->
 <template >
     <div>
-        <dzs-header title="弹窗组件"></dzs-header>
+        <dzs-header title="弹窗组件" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -39,7 +39,7 @@
                 <el-button>提交</el-button>
             </template>
         </dzs-popup>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
@@ -47,6 +47,14 @@ import dzsPopup from "@/components/dzs-popup/index.vue";
 export default {
     components: {
         dzsPopup,
+    },
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
     },
     data() {
         return {

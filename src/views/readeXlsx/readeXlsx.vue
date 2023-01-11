@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 13:09:29
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-15 11:13:54
+ * @LastEditTime: 2023-01-11 15:34:10
  * @FilePath: \vue2+js+eui+template\src\views\readeXlsx\readeXlsx.vue
 -->
 <template>
     <div>
-        <dzs-header title="xlsx/excel读取"></dzs-header>
+        <dzs-header title="xlsx/excel读取" v-if="!newIndex"></dzs-header>
         <div class="page">
             <div class="tips-box">目前只支持纯文本模式 其他模式暂时不支持</div>
             <h2>基础用法</h2>
@@ -30,7 +30,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/readeXlsx.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20">
+        <el-backtop :visibility-height="20" v-if="!newIndex">
         </el-backtop>
     </div>
 </template>
@@ -38,6 +38,14 @@
 import {readeXlsx} from "@/utils/readeXlsx";
 import {code1} from "./config"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             xlsxInfo : {},

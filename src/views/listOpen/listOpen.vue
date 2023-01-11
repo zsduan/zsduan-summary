@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 14:55:50
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 16:18:18
- * @FilePath: \vue2+elui+template\src\views\listOpen\listOpen.vue
+ * @LastEditTime: 2023-01-11 15:33:15
+ * @FilePath: \vue2+js+eui+template\src\views\listOpen\listOpen.vue
 -->
 <template>
     <div>
-        <dzs-header title="指令 展开列表"></dzs-header>
+        <dzs-header title="指令 展开列表" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -22,12 +22,20 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/instructions.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import {code1} from "./config"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             code1 : code1,

@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-29 15:32:39
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:52:50
- * @FilePath: \vue2+elui+template\src\views\drag\drag.vue
+ * @LastEditTime: 2023-01-11 15:31:25
+ * @FilePath: \vue2+js+eui+template\src\views\drag\drag.vue
 -->
 <template>
     <div>
-        <dzs-header title="拖动效果"></dzs-header>
+        <dzs-header title="拖动效果" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>效果展示</h2>
             <div class="item">
@@ -32,12 +32,20 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/views/drag.vue">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import {code1} from "./config"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data() {
         return {
             code1 : code1,

@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-12-26 14:02:46
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 14:43:12
+ * @LastEditTime: 2023-01-11 15:31:40
  * @FilePath: \vue2+js+eui+template\src\views\EasyJS\EasyJS.vue
 -->
 <template>
     <div>
-        <dzs-header title="好用的js片段"></dzs-header>
+        <dzs-header title="好用的js片段" v-if="!newIndex"></dzs-header>
         <div class="search-box">
             <div class="left"></div>
             <div class="right">
@@ -27,13 +27,21 @@
                 <dzs-code title="代码片段" :value="item.code"></dzs-code>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import { code1, code2 , code3 , code4 , code5 , code6 , code7} from "./config";
 import { blurSearch } from "@/utils/blurSearch.js";
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data() {
         return {
             list: [

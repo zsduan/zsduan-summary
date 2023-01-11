@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-27 13:38:04
+ * @LastEditTime: 2023-01-11 14:35:49
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -173,3 +173,10 @@ export const fragmentList = [
         is_show : true
     },  
 ]
+
+export default  {
+    fragmentList,
+    effectList ,
+    jsList , 
+    componentsList
+}

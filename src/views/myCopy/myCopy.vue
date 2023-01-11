@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 17:37:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 11:04:56
+ * @LastEditTime: 2023-01-11 15:33:25
  * @FilePath: \vue2+js+eui+template\src\views\myCopy\myCopy.vue
 -->
 <template>
     <div>
-        <dzs-header title="js复制"></dzs-header>
+        <dzs-header title="js复制" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法 复制文本</h2>
             <div class="item">
@@ -33,13 +33,21 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/myCopy.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import {myCopy} from "@/utils/myCopy.js";
 import {code1 , code2} from "./config.js"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             Text : "我是复制的文本",
