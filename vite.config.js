@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-12-26 17:41:59
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 17:21:33
+ * @LastEditTime: 2023-01-11 17:32:48
  * @FilePath: \vue2+js+eui+template\vite.config.js
  */
 /* eslint-disable */
@@ -26,6 +26,14 @@ export default ({
             .split('/')[0]
             .toString();
         }
+      },
+      chunkFileNames: (chunkInfo) => { //js单独文件
+        const facadeModuleId = chunkInfo.facadeModuleId
+          ? chunkInfo.facadeModuleId.split('/')
+          : [];
+        const fileName =
+          facadeModuleId[facadeModuleId.length - 2] || '[name]';
+        return `js/${fileName}/[name].[hash].js`;
       },
       assetFileNames: 'static/[ext]/name-[hash].[ext]',
       entryFileNames: 'static/js/[name]-[hash].js',
