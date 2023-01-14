@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-12-27 13:39:12
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-28 13:41:10
+ * @LastEditTime: 2023-01-14 14:43:07
  * @FilePath: \vue2+js+eui+template\src\components\dzs-slide-verification\index.vue
 -->
 <template>
@@ -59,19 +59,24 @@ export default {
         return {
             imgList: [
                 {
-                    url: new URL("./image/1.jpg", import.meta.url).href,
+                    // url: new URL("./image/1.jpg", import.meta.url).href, // vite
+                    url: "./image/1.jpg", // webpack
                 },
                 {
-                    url: new URL("./image/2.jpg", import.meta.url).href,
+                    // url: new URL("./image/2.jpg", import.meta.url).href,
+                    url: "./image/2.jpg",
                 },
                 {
-                    url: new URL("./image/3.jpg", import.meta.url).href,
+                    // url: new URL("./image/3.jpg", import.meta.url).href,
+                    url: "./image/3.jpg",
                 },
                 {
-                    url: new URL("./image/4.jpg", import.meta.url).href,
+                    // url: new URL("./image/4.jpg", import.meta.url).href,
+                    url: "./image/4.jpg",
                 },
                 {
-                    url: new URL("./image/5.jpg", import.meta.url).href,
+                    // url: new URL("./image/5.jpg", import.meta.url).href,
+                    url: "./image/5.jpg",
                 },
             ],
             imgUrl: "",

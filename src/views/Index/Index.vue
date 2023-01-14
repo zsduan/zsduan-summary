@@ -2,14 +2,14 @@
  * @Author: zs.duan
  * @Date: 2023-01-11 10:44:12
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 17:07:58
+ * @LastEditTime: 2023-01-14 16:00:31
  * @FilePath: \vue2+js+eui+template\src\views\Index\Index.vue
 -->
 <template>
     <div>
         <el-header class="my_header">
             <div class="header_box">
-                <a href="./index" class="title">zs.duan的个人总结</a>
+                <a href="./" class="title">zs.duan的个人总结</a>
                 <div class="nav_box">
                     <div class="nav">
                         <el-menu
@@ -135,14 +135,16 @@ export default {
     created() {
         this.initAside();
     },
-    mounted() {},
+    mounted() {
+        
+    },
     methods: {
         handleSelect(key, keyPath) {},
         // 初始化侧边栏数据
         initAside() {
             // 闭包处理是否显示
             const isShow = (data) => {
-                let list = data.filter((item) => {
+                let list = data.filter((item , index) => {
                     item.active = false;
                     return item.is_show;
                 });
@@ -152,16 +154,31 @@ export default {
                 this.aside[v.key] = isShow(pathList[v.key]);
                 this.allList.push(...isShow(pathList[v.key]));
             });
+            // 获取 query
+            let query = this.$route.query;
+            if(query.type){
+                this.asideList.forEach((v) => {
+                    this.aside[v.key].forEach((item , index) =>{
+                        if(item.path == query.type){
+                            item.active = true;
+                            this.goPath(index , v.key)
+                        }
+                    })
+                })
+            }
+            
+            
         },
         // 去相关页面
         goPath(index, key) {
+            let query = this.$route.query;
+            if(query.type != this.aside[key][index].path){
+                this.$router.push({name : "Index" , query:{type : this.aside[key][index].path}})
+            }
             this.is_search = false;
             this.is_empty = false;
             if (!this.aside[key][index].path) {
                 this.is_empty = true;
-            }
-            if (this.aside[key][index].active) {
-                return;
             }
             this.asideList.forEach((v) => {
                 this.aside[v.key].forEach((item) => {

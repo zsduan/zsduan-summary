@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2023-01-11 14:46:53
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:59:59
+ * @LastEditTime: 2023-01-14 14:51:23
  * @FilePath: \vue2+js+eui+template\src\components\dzs-components-list\dzs-components-list.vue
 -->
 <template>
@@ -37,6 +37,7 @@
         <drag v-else-if="type == '/drag'" :newIndex="true"></drag>
         <button-border v-else-if="type == '/button-border'" :newIndex="true"></button-border>
         <easyJS v-else-if="type == '/EasyJS'" :newIndex="true"></easyJS>
+        <binary-tree v-else-if="type == '/binary-tree'" :newIndex="true"></binary-tree>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -73,6 +74,7 @@ import myCopy from "@/views/myCopy/myCopy.vue";
 import drag from "@/views/drag/drag.vue";
 import buttonBorder from "@/views/button-border/button-border.vue";
 import EasyJS from "@/views/EasyJS/EasyJS.vue";
+import binaryTree from "@/views/binary-tree/binary-tree.vue";
 
 export default {
     name : "dzs-components-list",
@@ -106,7 +108,8 @@ export default {
         myCopy,
         drag,
         buttonBorder,
-        EasyJS
+        EasyJS,
+        binaryTree
     },
     props : {
         type : {

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 16:14:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:36:02
- * @FilePath: \vue2+elui+template\src\components\dzs-header\index.vue
+ * @LastEditTime: 2023-01-14 14:52:12
+ * @FilePath: \vue2+js+eui+template\src\components\dzs-header\index.vue
 -->
 <template>
     <div>
@@ -39,7 +39,7 @@ export default {
     },
     methods:{
         goHome(){
-            this.$router.push({path : "/"})
+            this.$router.push({path : "/old-index"})
         }
     }
 }

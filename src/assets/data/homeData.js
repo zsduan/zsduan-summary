@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 14:35:49
+ * @LastEditTime: 2023-01-14 14:45:32
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -171,7 +171,12 @@ export const fragmentList = [
         title : "比较好用的js片段",
         path : "/EasyJS",
         is_show : true
-    },  
+    },
+    {
+        title : "二叉树",
+        path : "/binary-tree",
+        is_show : true
+    },   
 ]
 
 export default  {
