@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22521b"],{e2a9:function(d,e,n){"use strict";n.r(e),n.d(e,"code1",(function(){return o})),n.d(e,"code2",(function(){return t}));const o="\n<dzs-editor></dzs-editor>\n",t='\n<dzs-editor v-model="defaultValue"></dzs-editor>\n\x3c!--两者选一个--\x3e\n<dzs-editor :value.sync="defaultValue"></dzs-editor>\n'}}]);
-//# sourceMappingURL=chunk-2d22521b.1263c108.js.map
