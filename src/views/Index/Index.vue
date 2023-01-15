@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2023-01-11 10:44:12
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-14 16:00:31
+ * @LastEditTime: 2023-01-15 16:14:37
  * @FilePath: \vue2+js+eui+template\src\views\Index\Index.vue
 -->
 <template>
@@ -74,14 +74,16 @@
                             @click="goPath(idx , item.key)"
                             v-for="(itm,idx) in aside[item.key]"
                             :key="idx"
-                        >{{itm.title}}</div>
+                        >
+                        {{itm.title}}</div>
                     </li>
                 </ul>
             </el-aside>
             <el-aside class="aside-empty" width="240px"></el-aside>
             <el-container>
                 <el-main>
-                    <p class="welcome" v-if="activeAside== -1 && !is_empty && !is_search">welcome</p>
+                    <dzs-new-year v-if="activeAside== -1 && !is_empty && !is_search"></dzs-new-year>
+                    <!-- <p class="welcome" v-if="activeAside== -1 && !is_empty && !is_search">welcome</p> -->
                     <div class="empty-tips" v-if="is_empty">
                         <el-empty description="该页面维护中~"></el-empty>
                     </div>
@@ -95,7 +97,9 @@
                                 :key="index"
                                 @click="searchClick(item)"
                                 :class="item.title.length > 8 ? 'small-size' :''"
-                            >{{item.title}}</li>
+                            >
+                                {{item.title}}
+                            </li>
                         </ul>
                         <el-empty v-if="!searchList.length" description="暂无数据,换个关键词试试"></el-empty>
                     </div>
@@ -110,10 +114,12 @@
 import { data } from "./data/data";
 import pathList from "../../assets/data/homeData";
 import dzsComponentsList from "../../components/dzs-components-list/dzs-components-list.vue";
+import dzsNewYear from "../../components/dzs-new-year/dzs-new-year.vue";
 import { blurSearch } from "@/utils/blurSearch.js";
 export default {
     components: {
         dzsComponentsList,
+        dzsNewYear
     },
     data() {
         return {

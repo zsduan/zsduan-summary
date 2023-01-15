@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-14 14:45:32
+ * @LastEditTime: 2023-01-15 14:45:29
  * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
  */
 
@@ -61,6 +61,16 @@ export const componentsList = [
 
 
 export const jsList = [
+    {
+        title : "二叉树",
+        path : "/binary-tree",
+        is_show : true
+    },
+    {
+        title : "手写 promise",
+        path : "/myPromise",
+        is_show : false
+    },
     {
         title : "处理时间 苹果/安卓",
         path : "/setTime",
@@ -173,10 +183,10 @@ export const fragmentList = [
         is_show : true
     },
     {
-        title : "二叉树",
-        path : "/binary-tree",
+        title : "99乘法表",
+        path : "/99-multiplication-table",
         is_show : true
-    },   
+    } 
 ]
 
 export default  {

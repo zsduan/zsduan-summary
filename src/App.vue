@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:42:09
- * @FilePath: \vue2+elui+template\src\App.vue
+ * @LastEditTime: 2023-01-15 09:31:40
+ * @FilePath: \vue2+js+eui+template\src\App.vue
 -->
 <template>
     <div id="app">

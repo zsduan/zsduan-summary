@@ -99,7 +99,7 @@
   line-height: 30px;
   cursor: pointer;
 }
-.my-aside .aside_list .path_name:hover {
+.my-aside .aside_list .path_name a:hover {
   color: var(--ThemeColor);
 }
 .my-aside .aside_list .active {

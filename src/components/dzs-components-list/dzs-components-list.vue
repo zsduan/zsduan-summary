@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2023-01-11 14:46:53
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-14 14:51:23
+ * @LastEditTime: 2023-01-15 14:06:42
  * @FilePath: \vue2+js+eui+template\src\components\dzs-components-list\dzs-components-list.vue
 -->
 <template>
@@ -38,6 +38,8 @@
         <button-border v-else-if="type == '/button-border'" :newIndex="true"></button-border>
         <easyJS v-else-if="type == '/EasyJS'" :newIndex="true"></easyJS>
         <binary-tree v-else-if="type == '/binary-tree'" :newIndex="true"></binary-tree>
+        <myPromise v-else-if="type == '/myPromise'" :newIndex="true"></myPromise>
+        <multiplicationTable v-else-if="type == '/99-multiplication-table'" :newIndex="true"></multiplicationTable>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -75,6 +77,8 @@ import drag from "@/views/drag/drag.vue";
 import buttonBorder from "@/views/button-border/button-border.vue";
 import EasyJS from "@/views/EasyJS/EasyJS.vue";
 import binaryTree from "@/views/binary-tree/binary-tree.vue";
+import myPromise from "@/views/myPromise/myPromise.vue";
+import MultiplicationTable from "@/views/99-multiplication-table/99-multiplication-table.vue";
 
 export default {
     name : "dzs-components-list",
@@ -109,7 +113,9 @@ export default {
         drag,
         buttonBorder,
         EasyJS,
-        binaryTree
+        binaryTree,
+        myPromise,
+        MultiplicationTable
     },
     props : {
         type : {

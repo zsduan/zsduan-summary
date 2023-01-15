@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2023-01-14 15:46:36
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-14 17:30:09
+ * @LastEditTime: 2023-01-15 09:47:35
  * @FilePath: \vue2+js+eui+template\src\utils\binary-tree.js
  */
 
@@ -164,4 +164,9 @@ export const CreatedTreeNodes = (...arg) =>{
         ...arg[0]
     }
     options.success(new BSTree(options.TreeNode));
+}
+
+export default {
+    CreatedTreeNode,
+    CreatedTreeNodes
 }
