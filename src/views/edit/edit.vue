@@ -2,20 +2,20 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 14:52:41
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:20:22
- * @FilePath: \vue2+elui+template\src\views\edit\edit.vue
+ * @LastEditTime: 2023-01-11 15:21:08
+ * @FilePath: \vue2+js+eui+template\src\views\edit\edit.vue
 -->
 <template>
     <div>
-        <dzs-header title="富文本组件"></dzs-header>
+        <dzs-header title="富文本组件" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <dzs-editor></dzs-editor>
+                <dzs-editor ></dzs-editor>
                 <dzs-code title="源代码" :value="code1"></dzs-code>
             </div>
             <h2>默认值</h2>
-            <div class="item">
+            <div class="item" v-if="shoeDefault">
                 <dzs-editor :value.sync="defaultValue"></dzs-editor>
                 <dzs-code title="源代码" :value="code2"></dzs-code>
             </div>
@@ -28,7 +28,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-editor/index.vue">富文本组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
@@ -38,14 +38,26 @@ export default {
     components : {
         dzsEditor
     },
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             code1 : code1,
             code2 : code2,
-            defaultValue : "<p>我是默认值</p>"
+            defaultValue : "<p>我是默认值</p>",
+            shoeDefault : false,
         }
     },
     mounted(){
+        setTimeout(()=>{
+            this.shoeDefault = true;
+        },3000)
         // console.log(process.env.NODE_ENV)
     }
 }

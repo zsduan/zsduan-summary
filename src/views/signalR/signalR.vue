@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-25 14:15:46
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 14:24:19
- * @FilePath: \vue2+elui+template\src\views\signalR\signalR.vue
+ * @LastEditTime: 2023-01-11 15:34:34
+ * @FilePath: \vue2+js+eui+template\src\views\signalR\signalR.vue
 -->
 <template>
     <div>
-        <dzs-header title="signalR连接"></dzs-header>
+        <dzs-header title="signalR连接" v-if="!newIndex"></dzs-header>
         <div class="page">
             <div class="tips-box">signalR 是.net 提供的及时通信</div>
             <h2>基础用法</h2>
@@ -19,7 +19,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/signalR.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20">
+        <el-backtop :visibility-height="20" v-if="!newIndex">
         </el-backtop>
     </div>
 </template>
@@ -27,6 +27,14 @@
 import {code1} from "./config";
 import {signalRcoont} from "@/utils/signalR";
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             code1 : code1

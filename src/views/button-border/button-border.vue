@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-29 15:31:38
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 16:31:16
- * @FilePath: \vue2+elui+template\src\views\button-border\button-border.vue
+ * @LastEditTime: 2023-01-11 15:30:52
+ * @FilePath: \vue2+js+eui+template\src\views\button-border\button-border.vue
 -->
 <template>
     <div>
-        <dzs-header title="按钮旋转动画"></dzs-header>
+        <dzs-header title="按钮旋转动画" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础动画样式样式</h2>
             <div class="item">
@@ -36,12 +36,20 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/views/button-border.vue">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import {code1 , code2 , code3 , code4} from "./config"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return{
             code1 : code1,

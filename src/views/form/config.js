@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-28 13:43:24
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-08 13:57:52
+ * @LastEditTime: 2022-12-26 16:39:51
  * @FilePath: \vue2+js+eui+template\src\views\form\config.js
  */
 export const code1 = `
@@ -95,6 +95,15 @@ formOptions(){
                 key : "switch",
                 type : "switch",
                 span : 12
+            },
+            {
+                label : "",
+                key : "divider",
+                type : "divider",
+                span : 24,
+                props:{
+                    tips : "我是分割线"
+                }
             },
             {
                 label: "多选框", 

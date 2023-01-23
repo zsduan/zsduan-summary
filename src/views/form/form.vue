@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-09-27 10:39:53
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:20:27
- * @FilePath: \vue2+elui+template\src\views\form\form.vue
+ * @LastEditTime: 2023-01-11 15:30:20
+ * @FilePath: \vue2+js+eui+template\src\views\form\form.vue
 -->
 <template>
     <div>
-        <dzs-header title="表单组件"></dzs-header>
+        <dzs-header title="表单组件" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -28,15 +28,23 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-form/index.vue">表单组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import dzsForm from "@/components/dzs-form/index.vue";
-import {code1 , code2} from "./config"
+import {code1 , code2} from "./config";
 export default {
     components:{
         dzsForm
+    },
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
     },
     computed:{
         formOptions(){
@@ -99,6 +107,15 @@ export default {
                         key : "switch",
                         type : "switch",
                         span : 12
+                    },
+                    {
+                        label : "",
+                        key : "divider",
+                        type : "divider",
+                        span : 24,
+                        props:{
+                            tips : "我是分割线"
+                        }
                     },
                     {
                         label: "多选框", 

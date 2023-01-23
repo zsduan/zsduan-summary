@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 17:35:29
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 13:56:57
- * @FilePath: \vue2+elui+template\src\utils\notification.js
+ * @LastEditTime: 2022-12-15 13:46:13
+ * @FilePath: \vue2+js+eui+template\src\utils\notification.js
  */
 /*
  * @name 通知
@@ -12,76 +12,125 @@
  * @parame msg 详情信息 string
  * @parame audioUrl 音频地址 string
  * @parame duration 延时时间 number
+ * @method success 成功返回 code 100网页成功 200网页和系统都成功
+ * @method fail 失败返回
  *
 */ 
 export const notification = ( _this , ...arg) =>{
-    let data = arg[0];
+    let options = {
+        title : "",
+        msg : "",
+        duration : 10000,
+        audioUrl : null ,
+        success : (reslut)=>{},
+        fail : (error)=>{}
+    }
+    options = {
+        ...options,
+        ...arg[0]
+    }
     if(!_this){
         throw new Error("_this must be not null")
     }
-    if(!data.title){
-        throw new Error("title must be not null")
+    if(!options.title){
+        options.fail({
+            code : -1,
+            msg : "title must be not null"
+        })
+        return ;
     }
-    if(typeof data.title !== 'string' || (!Object.prototype.toString.call(data.title) === "[object String]")){
-        throw new Error("title must be string");
+    if(typeof options.title !== 'string' || (!Object.prototype.toString.call(options.title) === "[object String]")){
+        options.fail({
+            code : -1,
+            msg : "title must be string"
+        })
+        return ;
     }
-    if((typeof data.msg !== 'string' || (!Object.prototype.toString.call(data.msg) === "[object String]")) && data.msg){
-        throw new Error("msg must be string");
+    if((typeof options.msg !== 'string' || (!Object.prototype.toString.call(options.msg) === "[object String]")) && options.msg){
+        options.fail({
+            code : -1,
+            msg : "msg must be string"
+        })
+        return ;
     }
     
-    data.duration = data.duration ? Number(data.duration) : 10000;
-    if(!isFinite(data.duration)){
-        throw new Error("duration must be Number or String Number");
+    options.duration = Number(options.duration);
+    if(!isFinite(options.duration)){
+        options.fail({
+            code : -1,
+            msg : "duration must be Number or String Number"
+        })
+        return ;
     }
     _this.$notify({
-        title: data.title,
-        duration : data.duration,
-        message: data.msg,
+        title: options.title,
+        duration : options.duration,
+        message: options.msg,
         position: 'bottom-right',
         onClick : function (){
             this.close();
         }
     });
     // 是否播放音频
-    if(data.audioUrl)playAudio(data.audioUrl);
+    if(options.audioUrl)playAudio(options.audioUrl);
     if (Notification.permission === 'denied' && process.env.NODE_ENV != "development") {
         // 如果用户已拒绝显示通知
         let url = window.location.href;
         let arr = url.split("//");
         if(arr[0] == 'http:'){
-            _this.$notify({
-                title: "请使用https",
-                message: "浏览器限制 http 不能使用 通知权限",
-                duration: 5000,
-                type : "error"
+            options.fail({
+                code : -1,
+                msg : "The browser restricts http from using notification permission"
+            })
+            options.success({
+                code : 100,
+                msg : "Web page notification succeeded but system notification failed"
             });
             return ;
         }
-        _this.$notify({
-            title: "系统通知被拒绝",
-            message: "点击左上角允许通知 或者在设置中开启通知",
-            duration: 5000,
-            type : "error"
-        });
+        options.fail({
+            code : -1,
+            msg : "Click the upper left corner to allow notification or enable notification in settings",
+        })
+        options.success({
+            code : 100,
+            msg : "Web page notification succeeded but system notification failed"
+        })
         return;
     }
     // 先检查浏览器是否支持
     if (!('Notification' in window)) {
         // IE浏览器不支持发送Notification通知!
+        options.fail({
+            code : -1,
+            msg : "Browser is IE",
+        })
         return;
     }
 
     if (Notification.permission === 'granted') {
         //用户已授权，直接发送通知
-        notify(data.title ,data.msg);
+        notify(options.title ,options.msg);
+        options.success({
+            code : 200,
+            msg : "success"
+        })
     } else {
         // 默认，先向用户询问是否允许显示通知
         Notification.requestPermission(function(permission) {
             // 如果用户同意，就可以直接发送通知
             if (permission === 'granted') {
-                notify(data.title ,data.msg);
+                notify(options.title ,options.msg);
             }
         });
+        options.fail({
+            code : -1,
+            msg : "Click the upper left corner to allow notification or enable notification in settings",
+        })
+        options.success({
+            code : 100,
+            msg : "Web page notification succeeded but system notification failed"
+        })
     }
 
 }

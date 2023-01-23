@@ -2,12 +2,15 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-05 16:53:45
- * @FilePath: \vue2+elui+template\src\views\Home.vue
+ * @LastEditTime: 2023-01-11 17:09:34
+ * @FilePath: \vue2+js+eui+template\src\views\Home.vue
 -->
 <template>
     <div class="home">
-        <h1 class="home-title">zs.duan的自我总结</h1>
+        <div class="home-title-box">
+            <h1 class="home-title">zs.duan的自我总结</h1>
+            <div class="change" @click="changeNew">切换新版</div>
+        </div>
         <div class="search-box">
             <div class="left"></div>
             <div class="right">
@@ -143,12 +146,18 @@ export default {
             this.$router.push({ path: path });
         },
         inputValue() {
-            this.searchList = blurSearch({
+            blurSearch({
                 list: this.allList,
                 searValue: this.searchValue,
                 key: "title",
+                success : (res)=>{
+                    this.searchList = res;
+                }
             });
         },
+        changeNew(){
+            this.$router.push({path : "/"})
+        }
     },
 };
 </script>
@@ -284,6 +293,11 @@ export default {
     .search-box {
         padding: 0 10px;
     }
+    .home-title-box{
+        .change{
+            display: none;
+        }
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -291,6 +305,16 @@ export default {
         ul {
             grid-template-columns: repeat(1, 1fr);
         }
+    }
+}
+
+.home-title-box{
+    position: relative;
+    .change{
+        position: absolute;
+        right: 10%;
+        top: 25px;
+        cursor: pointer;
     }
 }
 </style>

@@ -2,10 +2,13 @@
  * @Author: zs.duan
  * @Date: 2022-11-08 14:34:08
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 17:47:23
- * @FilePath: \vue2+elui+template\src\utils\encryp.js
+ * @LastEditTime: 2023-01-11 15:55:35
+ * @FilePath: \vue2+js+eui+template\src\utils\encryp.js
  */
-let CryptoJS = require('crypto-js/index.js');
+// webpack
+// let CryptoJS = require('crypto-js/index.js');
+// vite
+import CryptoJS from "crypto-js/index.js";
 let keyStr = "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JXU2NzkwJXU1RTczJXU1M0Yw";
 
 /*
@@ -14,24 +17,45 @@ let keyStr = "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JX
  * @parame key秘钥 非必填
  * @return 返回加密后的文本
 */ 
-export const ACEencrypt = (word , key ) =>{
-    if(!word) throw new Error("err : word must be not null");
+export const ACEencrypt = (...arg) =>{
+    let options = {
+        word : "",
+        key : "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JXU2NzkwJXU1RTczJXU1M0Yw",
+        success : (reslut) =>{},
+        fail : (error) =>{}
+    }
+    options = {
+        ...options,
+        ...arg[0]
+    }
+    if(!options.word){
+        options.fail({
+            code : -1,
+            msg : "word must be not null"
+        })
+        return ;
+    }
     let is_string = true;
-    if(typeof word !== 'string' || (!Object.prototype.toString.call(word) === "[object String]")) is_string = false;
+    if(typeof options.word !== 'string' || (!Object.prototype.toString.call(options.word) === "[object String]")) is_string = false;
     let is_object = true ;
-    if(typeof word !== 'object' || !(Object.prototype.toString.call(word) === '[object Object]')) is_object = false;
+    if(typeof options.word !== 'object' || !(Object.prototype.toString.call(options.word) === '[object Object]')) is_object = false;
     
     if(!is_string && !is_object){
-        throw new Error("err : word must be string or object");
+        options.fail({
+            code : -1,
+            msg : "word must be string or object"
+        })
+        return ;
     }
-    if(is_object) word = JSON.stringify(word);
-    const myKey = key ? key : keyStr ? keyStr : 'abcdefgabcdefg12';
+    if(is_object) options.word = JSON.stringify(options.word);
+    const myKey = options.key ? options.key : 'abcdefgabcdefg12';
     const utf8_key = CryptoJS.enc.Utf8.parse(myKey);
-    const Text = CryptoJS.enc.Utf8.parse(word);
+    const Text = CryptoJS.enc.Utf8.parse(options.word);
     let encrypText = CryptoJS.AES.encrypt(Text , utf8_key , {
         mode : CryptoJS.mode.ECB,
         padding :CryptoJS.pad.Pkcs7
     })
+    options.success(encrypText.toString())
     return encrypText.toString();
 }
 
@@ -42,22 +66,45 @@ export const ACEencrypt = (word , key ) =>{
  * @parame type 返回类型 string / object 非必填
  * @return 返回解密后的信息
 */ 
-export const ACEdecrypt = (word , key , type = 'string') => {
-    if(!word) throw new Error("err : word must be not null");
+export const ACEdecrypt = (...arg) => {
+    let options = {
+        word : "",
+        key : "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JXU2NzkwJXU1RTczJXU1M0Yw",
+        type : "string",
+        success : (reslut) =>{},
+        fail : (error) =>{}
+    }
+    options = {
+        ...options,
+        ...arg[0]
+    }
+    if(!options.word){
+        options.fail({
+            code : -1,
+            msg : "word must be not null"
+        })
+        return ;
+    }
     let is_string = true;
-    if(typeof word !== 'string' || (!Object.prototype.toString.call(word) === "[object String]")) is_string = false;
-    if(!is_string) throw new Error("err : word must be string");
-    const myKey = key ? key : keyStr ? keyStr : 'abcdefgabcdefg12';
+    if(typeof options.word !== 'string' || (!Object.prototype.toString.call(options.word) === "[object String]")) is_string = false;
+    if(!is_string){
+        options.fail({
+            code : -1,
+            msg : "word must be string"
+        })
+        return ;
+    }
+    const myKey = options.key ? options.key : 'abcdefgabcdefg12';
     const utf8_key = CryptoJS.enc.Utf8.parse(myKey);
-    let decryptText = CryptoJS.AES.decrypt(word , utf8_key , {
+    let decryptText = CryptoJS.AES.decrypt(options.word , utf8_key , {
         mode : CryptoJS.mode.ECB,
         padding :CryptoJS.pad.Pkcs7
     })
     decryptText = CryptoJS.enc.Utf8.stringify(decryptText).toString();
-    if(type == 'object'){
-        return JSON.parse(decryptText);
+    if(options.type == 'object'){
+        decryptText = JSON.parse(decryptText)
     }
-    return decryptText;
+    options.success(decryptText)
 }
 
 /*
@@ -65,17 +112,33 @@ export const ACEdecrypt = (word , key , type = 'string') => {
  * @parame word 加密的文本 string / object
  * @return 返回加密后的文本
 */ 
-export const MD5 = (word) =>{
-    if(!word) throw new Error("err : word must be not null");
-    let is_string = true;
-    if(typeof word !== 'string' || (!Object.prototype.toString.call(word) === "[object String]")) is_string = false;
-    let is_object = true ;
-    if(typeof word !== 'object' || !(Object.prototype.toString.call(word) === '[object Object]')) is_object = false;
-    if(!is_string && !is_object){
-        throw new Error("err : word must be string or object");
+export const MD5 = (...arg) =>{
+    let options ={
+        word : "",
+        success : (reslut) =>{},
+        fail : (error) =>{}
     }
-    if(is_object)word = JSON.stringify(word);
-    const Text = CryptoJS.enc.Utf8.parse(word);
+    options = {...options , ...arg[0]};
+    if(!options.word){
+        options.fail({
+            code : -1,
+            msg : "word must be not null"
+        })
+        return ;
+    }
+    let is_string = true;
+    if(typeof options.word !== 'string' || (!Object.prototype.toString.call(options.word) === "[object String]")) is_string = false;
+    let is_object = true ;
+    if(typeof options.word !== 'object' || !(Object.prototype.toString.call(options.word) === '[object Object]')) is_object = false;
+    if(!is_string && !is_object){
+        options.fail({
+            code : -1,
+            msg : "word must be string or object"
+        })
+        return ;
+    }
+    if(is_object)options.word = JSON.stringify(options.word);
+    const Text = CryptoJS.enc.Utf8.parse(options.word);
     let encrypText = CryptoJS.MD5(Text);
-    return encrypText;
+    options.success(encrypText)
 }

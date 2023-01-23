@@ -2,11 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 19:29:17
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:38:37
- * @FilePath: \vue2+elui+template\src\views\myNotification\config.js
+ * @LastEditTime: 2022-12-15 11:10:22
+ * @FilePath: \vue2+js+eui+template\src\views\myNotification\config.js
  */
 
 export const code1 = `
+
 // 导入
 import {notification} from "@/utils/notification.js";
 // 使用
@@ -19,6 +20,17 @@ import {notification} from "@/utils/notification.js";
 // data
 Text
 // methods
+/*
+ * @name 通知
+ * @parame _this 全局this
+ * @parame title 标题 string 必填
+ * @parame msg 详情信息 string
+ * @parame audioUrl 音频地址 string
+ * @parame duration 延时时间 number
+ * @method success 成功返回 code 100网页成功 200网页和系统都成功
+ * @method fail 失败返回
+ *
+*/ 
 sendMsg(){
     notification(this,{
         title : Text
@@ -38,6 +50,17 @@ import {notification} from "@/utils/notification.js";
     </div>
 </div>
 // methods
+/*
+ * @name 通知
+ * @parame _this 全局this
+ * @parame title 标题 string 必填
+ * @parame msg 详情信息 string
+ * @parame audioUrl 音频地址 string
+ * @parame duration 延时时间 number
+ * @method success 成功返回 code 100网页成功 200网页和系统都成功
+ * @method fail 失败返回
+ *
+*/ 
 sendMsg(){
     if(!this.Text){
         this.errorTips();
@@ -64,6 +87,17 @@ import {notification} from "@/utils/notification.js";
 // data
 Text
 // methods
+/*
+ * @name 通知
+ * @parame _this 全局this
+ * @parame title 标题 string 必填
+ * @parame msg 详情信息 string
+ * @parame audioUrl 音频地址 string
+ * @parame duration 延时时间 number
+ * @method success 成功返回 code 100网页成功 200网页和系统都成功
+ * @method fail 失败返回
+ *
+*/ 
 sendMsg(){
     if(!this.Text){
         this.errorTips();
@@ -92,6 +126,17 @@ import audioUrl from "../../assets/audio/newMsg.mp3";
 // data
 Text
 // methods
+/*
+ * @name 通知
+ * @parame _this 全局this
+ * @parame title 标题 string 必填
+ * @parame msg 详情信息 string
+ * @parame audioUrl 音频地址 string
+ * @parame duration 延时时间 number
+ * @method success 成功返回 code 100网页成功 200网页和系统都成功
+ * @method fail 失败返回
+ *
+*/ 
 sendMsg(){
     if(!this.Text){
         this.errorTips();

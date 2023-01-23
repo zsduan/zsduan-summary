@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-25 14:26:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:41:05
- * @FilePath: \vue2+elui+template\src\views\myRouter\myRouter.vue
+ * @LastEditTime: 2023-01-11 15:33:47
+ * @FilePath: \vue2+js+eui+template\src\views\myRouter\myRouter.vue
 -->
 <template>
     <div>
-        <dzs-header title="vue动态路由"></dzs-header>
+        <dzs-header title="vue动态路由" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -20,7 +20,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/subMenu.json">下载/查看地址3 menuJson</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20">
+        <el-backtop :visibility-height="20" v-if="!newIndex">
         </el-backtop>
     </div>
 </template>
@@ -28,6 +28,14 @@
 import {code1} from "./config";
 import {signalRcoont} from "@/utils/signalR";
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             code1 : code1

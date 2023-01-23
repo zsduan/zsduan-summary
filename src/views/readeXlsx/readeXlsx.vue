@@ -2,12 +2,17 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 13:09:29
  * @LastEditors: zs.duan
+<<<<<<< HEAD
  * @LastEditTime: 2023-01-23 18:03:11
  * @FilePath: \vue2+elui+template\src\views\readeXlsx\readeXlsx.vue
+=======
+ * @LastEditTime: 2023-01-11 15:34:10
+ * @FilePath: \vue2+js+eui+template\src\views\readeXlsx\readeXlsx.vue
+>>>>>>> 92192a1d56c7addac2486d65290e0f243fb99f86
 -->
 <template>
     <div>
-        <dzs-header title="xlsx/excel读取"></dzs-header>
+        <dzs-header title="xlsx/excel读取" v-if="!newIndex"></dzs-header>
         <div class="page">
             <div class="tips-box">目前只支持纯文本模式 其他模式暂时不支持</div>
             <h2>基础用法</h2>
@@ -30,7 +35,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/readeXlsx.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20">
+        <el-backtop :visibility-height="20" v-if="!newIndex">
         </el-backtop>
     </div>
 </template>
@@ -38,6 +43,14 @@
 import {readeXlsx} from "@/utils/readeXlsx";
 import {code1} from "./config"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             xlsxInfo : {},
@@ -46,9 +59,8 @@ export default {
     },
     methods:{
         changeFile(){
-            readeXlsx({
+            readeXlsx(this,{
                 refs : "myfile",
-                _this : this,
                 success:(res) =>{
                     this.xlsxInfo = res;
                     // console.log(this.xlsxInfo.data.Sheet1);

@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 10:51:51
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:21:12
- * @FilePath: \vue2+elui+template\src\views\ThemeColor\ThemeColor.vue
+ * @LastEditTime: 2023-01-11 15:34:57
+ * @FilePath: \vue2+js+eui+template\src\views\ThemeColor\ThemeColor.vue
 -->
 <template>
     <div>
-        <dzs-header title="设置主题色"></dzs-header>
+        <dzs-header title="设置主题色" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -26,12 +26,20 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/views/ThemeColor/ThemeColor.vue">下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
 import { code1 } from "./config";
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data() {
         return {
             defaultColor: window.localStorage.getItem("ThemeColor"),

@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-11-23 17:35:39
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:40:17
- * @FilePath: \vue2+elui+template\src\views\myNotification\myNotification.vue
+ * @LastEditTime: 2023-01-11 15:33:38
+ * @FilePath: \vue2+js+eui+template\src\views\myNotification\myNotification.vue
 -->
 <template>
     <div>
-        <dzs-header title="Notification 消息通知"></dzs-header>
+        <dzs-header title="Notification 消息通知" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法 不带提示</h2>
             <div class="tips-box">https才能发送系统通知</div>
@@ -50,7 +50,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/notification.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
@@ -58,6 +58,14 @@ import {notification} from "@/utils/notification.js";
 import audioUrl from "../../assets/audio/newMsg.mp3";
 import {code1 , code2 , code3 , code4 } from "./config"
 export default {
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
             Text : "我是消息",
@@ -83,7 +91,7 @@ export default {
                 return
             }
             notification(this,{
-                title : this.Text
+                title : this.Text,
             })
         },
         sendMsg2(){

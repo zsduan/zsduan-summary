@@ -2,15 +2,15 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 12:39:33
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 17:32:35
- * @FilePath: \vue2+elui+template\src\utils\readeXlsx.js
+ * @LastEditTime: 2022-12-26 11:27:04
+ * @FilePath: \vue2+js+eui+template\src\utils\readeXlsx.js
  */
 /*
  * @name 读取 xlsx 和 excel
  * @parame fileId 读取文件的 id 可选 fileId/file/refs 任选其一
  * @parame file 文件本身 可选 fileId/file/refs 任选其一
  * @parame refs vue的ref 可选 fileId/file/refs 任选其一
- * @parame _this 全局的this指向 refs不为空可选
+ * @parame _this 全局的this指向 refs不为空 可选
  * @method fail 错误返回
  * @method success 成功返回 返回数据为下面的数据
  * @desc 中文文档地址 https://github.com/rockboom/SheetJS-docs-zh-CN
@@ -25,49 +25,48 @@
             sheet_name : [],
         };
 */ 
-import xlsx from "./xlsx.full.min";
-export const readeXlsx = (...arg) =>{
-    let data = {
+// import  xlsx from "./xlsx.full.min.js"; // webpack
+import * as xlsx from 'xlsx/xlsx.mjs'; // vite
+export const readeXlsx = (_this , ...arg) =>{
+    let options = {
         fileId : "",  //读取文件的id
         file : "" , //文件
-        refs : "" , 
-        _this : null  , //全局this 指向 指向 Vue
+        refs : "" ,
         success : (result)=>{} , //读取成功返回
         fail : (error) => {} , //读取失败返回
     };
-    for (const key in data) {
-        if (Object.hasOwnProperty.call(data, key)) {
-            data[key] = arg[0][key] ? arg[0][key] : data[key];
-        }
+    options = {
+        ...options,
+        ...arg[0]
     }
-    if(!data.fileId && !data.file && !data.refs){
-        data.fail({
+    if(!options.fileId && !options.file && !options.refs){
+        options.fail({
             code : -1,
             msg : "fileId or file or refs must be not null"
         })
         return ;
     }
-    if(data.refs && !data._this){
-        data.fail({
+    if(options.refs && !_this){
+        options.fail({
             code : -1,
             msg : "_this must be not null"
         })
         return ;
     }
     let files = null;
-    if(data.refs){
-        files = data._this.$refs[data.refs].files[0]
+    if(options.refs){
+        files = _this.$refs[options.refs].files[0]
     }
-    if(data.fileId){
-        files = document.querySelector(`#${data.fileId}`).files[0];
+    if(options.fileId){
+        files = document.querySelector(`#${options.fileId}`).files[0];
     }
-    if(data.file){
+    if(options.file){
         files = data.file;
     }
     // 判断文件类型
     let suffix = files.name.substr(files.name.lastIndexOf("."))
     if(suffix != '.xls' && suffix != '.xlsx'){
-        data.fail({
+        options.fail({
             code : -1,
             msg : "Please upload xls and xlsx files"
         })
@@ -110,6 +109,6 @@ export const readeXlsx = (...arg) =>{
             }
             
         }
-        data.success(xlsxList);
+        options.success(xlsxList);
     }
 }

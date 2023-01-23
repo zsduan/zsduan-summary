@@ -2,18 +2,18 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 15:01:00
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:20:16
- * @FilePath: \vue2+elui+template\src\views\calender\calender.vue
+ * @LastEditTime: 2023-01-11 15:31:02
+ * @FilePath: \vue2+js+eui+template\src\views\calender\calender.vue
 -->
 <template>
     <div>
-        <dzs-header title="获取农历"></dzs-header>
+        <dzs-header title="获取农历" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
                 <dzs-form :options="formOptions" @onSubmit="onSubmit"></dzs-form>
                 <div class="guid">{{time}}</div>
-                <div class="guid">
+                <div class="guid" v-if="JSON.stringify(time) != '{}'">
                     <span>{{time.zodiacYear}}年 {{time.lunarYearCn}}  {{time.lunarMonthCn}}{{time.lunarDayCn}} {{time.weekday}}</span>
                     <span> {{time.solarTerm}} {{time.gregorianFestival}} {{time.lunarFestival}} {{time.constellation}}</span>
                 </div>
@@ -24,7 +24,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/calender.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
@@ -35,10 +35,17 @@ export default {
     components:{
         dzsForm
     },
-    
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
+    },
     data(){
         return {
-            time : "",
+            time : {},
             code1 : code1
         }
     },
@@ -70,7 +77,13 @@ export default {
     },
     methods:{
         onSubmit(e){
-            this.time = calender(e.Time)
+            calender({
+                time : e.Time,
+                success : (res) =>{
+                    console.log(res);
+                    this.time = res;
+                }
+            })
         }
     }
 }

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:34:33
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-23 19:10:51
- * @FilePath: \vue2+elui+template\src\views\blurSearch\config.js
+ * @LastEditTime: 2022-12-15 09:36:23
+ * @FilePath: \vue2+js+eui+template\src\views\blurSearch\config.js
  */
 
 export const code1 = `
@@ -36,16 +36,19 @@ searchList : [
  * @parame data 搜索的数据原始 Array 必填
  * @parame searValue string 搜索的关键词 必填
  * @parame key 匹配的对象key
- * @return 匹配对象列表
+ * @method success 返回成功
+ * @method fail 返回失败
 */ 
 
-
+// methods
 import {blurSearch} from "@/utils/blurSearch.js"
 blurSearch(
     {
-        list : Array,
-        searValue : Text,
-        key : key
+        list : [],
+        searValue : "",
+        key : "",
+        success : (reslut) =>{},
+        fail : (error) =>{}
     }
 );
 `

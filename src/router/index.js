@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-23 17:55:35
+ * @LastEditTime: 2023-01-23 18:18:04
  * @FilePath: \vue2+elui+template\src\router\index.js
  */
 import Vue from 'vue'
@@ -13,7 +13,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/old-index',
     name: 'Home',
     component: Home
   },

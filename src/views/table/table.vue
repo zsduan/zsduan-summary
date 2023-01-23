@@ -2,12 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 11:16:17
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 21:21:08
- * @FilePath: \vue2+elui+template\src\views\table\table.vue
+ * @LastEditTime: 2023-01-11 15:10:23
+ * @FilePath: \vue2+js+eui+template\src\views\table\table.vue
 -->
 <template>
     <div>
-        <dzs-header title="表格组件"></dzs-header>
+        <dzs-header title="表格组件" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -38,7 +38,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-table/index.vue">表格组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20"></el-backtop>
+        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
     </div>
 </template>
 <script>
@@ -47,6 +47,14 @@ import {TABALE_HEADER , operation , code1 , code2} from "./config"
 export default {
     components : {
         dzsTable
+    },
+    props:{
+        newIndex : {
+            type : Boolean,
+            default:()=>{
+                return false
+            }
+        }
     },
     data(){
         return {

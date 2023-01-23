@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-27 13:52:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-28 13:54:37
+ * @LastEditTime: 2022-12-26 16:38:49
  * @FilePath: \vue2+js+eui+template\src\components\dzs-upload-img\dzs-upload-img.vue
 -->
 <template>
@@ -249,6 +249,17 @@ export default {
     .avatar-uploader {
         height: 100%;
         :deep(.el-upload--picture-card) {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            i {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+        /deep/.el-upload--picture-card{
             width: 100%;
             height: 100%;
             position: relative;
