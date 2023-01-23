@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c51d8"],{"3e5e":function(n,e,t){"use strict";t.r(e),t.d(e,"code1",(function(){return i}));const i='\n// 传入\n\ntime string 2022-09-30 12:00:00 或者 new Date()\n\n// 使用\nimport setTime from "@/utils/setTime";\nsetTime(time ? )\n\n// 返回\nreturn {\n    android : string,\n    ios : string\n}\n'}}]);
-//# sourceMappingURL=chunk-2d0c51d8.bd33198c.js.map

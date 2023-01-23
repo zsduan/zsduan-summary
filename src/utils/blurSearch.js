@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:46:13
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 16:33:19
- * @FilePath: \vue2+js+eui+template\src\utils\blurSearch.js
+ * @LastEditTime: 2023-01-23 19:08:15
+ * @FilePath: \vue2+elui+template\src\utils\blurSearch.js
  */
 
 /*
@@ -53,9 +53,10 @@ export const blurSearch = (...arg)=>{
         return;
     }
     let reslut = [];
-    const reg = new RegExp(options.searValue);
+    const reg = new RegExp((options.searValue).toString());
     if(options.key){
         options.list.forEach(element =>{
+            element[options.key] = element[options.key].toString();
             if(element[options.key].match(reg)){
                 reslut.push(element)
             }

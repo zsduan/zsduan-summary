@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 14:54:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 14:45:29
- * @FilePath: \vue2+js+eui+template\src\assets\data\homeData.js
+ * @LastEditTime: 2023-01-23 19:43:43
+ * @FilePath: \vue2+elui+template\src\assets\data\homeData.js
  */
 
 export const componentsList = [
@@ -186,6 +186,12 @@ export const fragmentList = [
         title : "99乘法表",
         path : "/99-multiplication-table",
         is_show : true
+    },
+    {
+        title : "特殊记忆",
+        path : "",
+        is_show : true,
+        desc : "/about-father"
     } 
 ]
 

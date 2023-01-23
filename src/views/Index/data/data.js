@@ -2,13 +2,13 @@
  * @Author: zs.duan
  * @Date: 2023-01-11 11:42:30
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 17:09:16
- * @FilePath: \vue2+js+eui+template\src\views\Index\data\data.js
+ * @LastEditTime: 2023-01-23 19:44:26
+ * @FilePath: \vue2+elui+template\src\views\Index\data\data.js
  */
 const MenuList = [
     {
         menu : "首页",
-        herf : "./index",
+        herf : "/",
         list : []
     },
     {
@@ -29,10 +29,15 @@ const MenuList = [
         ]
     },
     {
+        menu : "关于我",
+        list : [],
+        herf : "",
+    },
+    {
         menu : "切换旧版",
         list : [],
         herf : "/old-index",
-    }
+    },
 ]
 
 

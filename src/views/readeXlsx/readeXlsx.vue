@@ -2,13 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 13:09:29
  * @LastEditors: zs.duan
-<<<<<<< HEAD
- * @LastEditTime: 2023-01-23 18:03:11
+ * @LastEditTime: 2023-01-23 19:03:14
  * @FilePath: \vue2+elui+template\src\views\readeXlsx\readeXlsx.vue
-=======
- * @LastEditTime: 2023-01-11 15:34:10
- * @FilePath: \vue2+js+eui+template\src\views\readeXlsx\readeXlsx.vue
->>>>>>> 92192a1d56c7addac2486d65290e0f243fb99f86
 -->
 <template>
     <div>

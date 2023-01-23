@@ -65,16 +65,16 @@
     {
         "name": "陈燕华",
         "price": 500,
-        "is_weixin": false,
+        "is_weixin": true,
         "is_special": false,
-        "remark": "微信支付"
+        "remark": "微信"
     },
     {
         "name": "黄月菊",
         "price": 400,
-        "is_weixin": false,
+        "is_weixin": true,
         "is_special": false,
-        "remark": "微信支付"
+        "remark": "微信"
     },
     {
         "name": "杨富章",
@@ -400,17 +400,17 @@
     },
     {
         "name": "徐鹏",
-        "price": 500,
+        "price": 0,
         "is_weixin": false,
         "is_special": false,
-        "remark": "合父余款200交给嬢嬢，嬢嬢要走"
+        "remark": "合父余款200交给嬢嬢，嬢嬢要走 送500"
     },
     {
         "name": "廖后珍",
-        "price": 300,
+        "price": 0,
         "is_weixin": false,
         "is_special": false,
-        "remark": ""
+        "remark": "合父余款200交给嬢嬢，嬢嬢要走 送300"
     },
     {
         "name": "段宇",
