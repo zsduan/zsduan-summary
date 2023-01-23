@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 13:49:02
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-22 19:19:09
+ * @LastEditTime: 2023-01-23 17:55:35
  * @FilePath: \vue2+elui+template\src\router\index.js
  */
 import Vue from 'vue'
@@ -16,6 +16,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/aboutFather',
+    name: 'boutFather',
+    component: ()=> import("../views/about-father/about-father.vue"),
+    meta : {
+      title : "父亲过世记账"
+    }
   },
 ]
 

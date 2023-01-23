@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-11-24 13:09:29
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-25 14:12:12
+ * @LastEditTime: 2023-01-23 18:03:11
  * @FilePath: \vue2+elui+template\src\views\readeXlsx\readeXlsx.vue
 -->
 <template>
@@ -51,6 +51,29 @@ export default {
                 _this : this,
                 success:(res) =>{
                     this.xlsxInfo = res;
+                    // console.log(this.xlsxInfo.data.Sheet1);
+                    // let arr = [];
+                    // this.xlsxInfo.data.Sheet1.forEach(element => {
+                    //     let json = {
+                    //         name : element['姓名'],
+                    //         price : element['金额'],
+                    //         is_weixin : element['备注'] == '微信' ? true : false,
+                    //         is_special : element['金额'] == 0 ? true : false,
+                    //         remark : element['备注'] ? element['备注'] : ''
+                    //     }
+                    //     arr.push(json)
+                    // });
+
+                    // this.xlsxInfo.data.Sheet1.forEach(element => {
+                    //     let json = {
+                    //         name : element['人名/物品'],
+                    //         price : element['金额'],
+                    //         num : element['数量（默认1）'] ? element['数量（默认1）'] : '1份/1次',
+                    //         remark : element['备注'] ? element['备注'] : ''
+                    //     }
+                    //     arr.push(json)
+                    // });
+                    console.log(JSON.stringify(arr));
                 },
                 fail : (e)=>{
                     console.log(e);
