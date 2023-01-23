@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0aaef7"],{"12aa":function(n,e,o){"use strict";o.r(e),o.d(e,"code1",(function(){return r}));const r="\n//返回数据\n// 目前支持 IE Firefox Chrome QQBrowswe Safari 360 Opera\nuserAgentObj = {\n    browserName: '',    // 浏览器名称\n    browserVersion: '', // 浏览器版本\n    osName: '',         // 操作系统名称\n    osVersion: '',      // 操作系统版本\n    deviceName: '',     // 设备名称\n}\n"}}]);
+//# sourceMappingURL=chunk-2d0aaef7.ac9419c2.js.map
