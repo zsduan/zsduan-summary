@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2023-01-11 14:46:53
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 14:06:42
+ * @LastEditTime: 2023-02-02 15:39:56
  * @FilePath: \vue2+js+eui+template\src\components\dzs-components-list\dzs-components-list.vue
 -->
 <template>
@@ -40,6 +40,7 @@
         <binary-tree v-else-if="type == '/binary-tree'" :newIndex="true"></binary-tree>
         <myPromise v-else-if="type == '/myPromise'" :newIndex="true"></myPromise>
         <multiplicationTable v-else-if="type == '/99-multiplication-table'" :newIndex="true"></multiplicationTable>
+        <setHtml v-else-if="type == '/setHtml'" :newIndex="true"></setHtml>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -79,6 +80,8 @@ import EasyJS from "@/views/EasyJS/EasyJS.vue";
 import binaryTree from "@/views/binary-tree/binary-tree.vue";
 import myPromise from "@/views/myPromise/myPromise.vue";
 import MultiplicationTable from "@/views/99-multiplication-table/99-multiplication-table.vue";
+import setHtml from "@/views/setHtml/setHtml.vue";
+
 
 export default {
     name : "dzs-components-list",
@@ -115,7 +118,8 @@ export default {
         EasyJS,
         binaryTree,
         myPromise,
-        MultiplicationTable
+        MultiplicationTable,
+        setHtml
     },
     props : {
         type : {

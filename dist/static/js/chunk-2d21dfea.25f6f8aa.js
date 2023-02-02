@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21dfea"],{d459:function(n,i,s){"use strict";s.r(i),s.d(i,"code1",(function(){return e}));const e='\n/*\n * @name 滑动验证\n * @prop ErrorRange 误差范围 number 默认10\n * @prop isShow 是否显示\n * @method success 成功返回\n * @method fail 失败返回\n */\n// html\n<dzs-slide-verification :isShow.sync="isShow" @success="isShow = false"></dzs-slide-verification>\n// js\nimport dzsSlideVerification from "@/components/dzs-slide-verification/index.vue"\n\n'}}]);
+//# sourceMappingURL=chunk-2d21dfea.25f6f8aa.js.map

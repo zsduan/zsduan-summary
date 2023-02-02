@@ -25,7 +25,7 @@
                                     <el-menu-item :index="(index + 1).toString()" :key="index">
                                         <template v-if="!item.herf">{{item.menu}}</template>
                                         <template v-else>
-                                            <a :href="item.herf">{{item.menu}}</a>
+                                            <a target="_blank" :href="item.herf">{{item.menu}}</a>
                                         </template>
                                     </el-menu-item>
                                 </template>
@@ -36,7 +36,7 @@
                                             <el-menu-item :index="(index + 1) + '-' + (idx + 1)" v-for="(itm,idx) in item.list" :key="idx">
                                                 <template v-if="!itm.herf">{{itm.menu}}</template>
                                                 <template v-else>
-                                                    <a :href="itm.herf">{{itm.menu}}</a>
+                                                    <a target="_blank" :href="itm.herf">{{itm.menu}}</a>
                                                 </template>
                                             </el-menu-item>
                                         </template>

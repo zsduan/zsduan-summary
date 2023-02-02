@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2023-01-11 11:42:30
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-23 19:44:26
- * @FilePath: \vue2+elui+template\src\views\Index\data\data.js
+ * @LastEditTime: 2023-02-02 16:46:03
+ * @FilePath: \vue2+js+eui+template\src\views\Index\data\data.js
  */
 const MenuList = [
     {
@@ -28,10 +28,15 @@ const MenuList = [
             }
         ]
     },
+    // {
+    //     menu : "关于我",
+    //     list : [],
+    //     herf : "",
+    // },
     {
-        menu : "关于我",
+        menu : "面试题",
         list : [],
-        herf : "",
+        herf : "https://www.html5iq.com/5fe8029ca1fe3d72b82e0b45.html",
     },
     {
         menu : "切换旧版",

@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2023-01-15 15:09:17
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 16:13:48
+ * @LastEditTime: 2023-02-02 16:43:58
  * @FilePath: \vue2+js+eui+template\src\components\dzs-new-year\dzs-new-year.vue
 -->
 <template>
@@ -32,8 +32,8 @@ export default {
         return {
             list : [
                 {
-                    pinyin : ["xīn","nián",'kuài','lè'],
-                    text : ['新','年','快','乐']
+                    pinyin : ["gōng","zuò",'shùn','lì'],
+                    text : ['工','作','顺','利']
                 },
                 {
                     pinyin : ["tù","fēi",'méng','jìn'],
@@ -42,6 +42,10 @@ export default {
                 {
                     pinyin : ["wàng","shì",'rú','yì'],
                     text : ['万','事','如','意']
+                },
+                {
+                    pinyin : ["caí","yuán",'guǎng','jìn'],
+                    text : ['财','事','广','进']
                 }
             ],
             showInfo : {}
