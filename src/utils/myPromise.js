@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2023-01-15 09:45:55
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 10:09:40
- * @FilePath: \vue2+js+eui+template\src\utils\myPromise.js
+ * @LastEditTime: 2023-01-28 21:41:15
+ * @FilePath: \vue2+elui+template\src\utils\myPromise.js
  */
 
 const PENDING = 'pending';
@@ -194,7 +194,7 @@ class myPromise {
     //all接收数组
     static all(promises) {
         const values = [];
-        const resolvedCount = 0;
+        let resolvedCount = 0;
         return new Promise((resolve, reject) => {
             //遍历promise获取每个promise的结果
             promises.forEach((p, index) => {

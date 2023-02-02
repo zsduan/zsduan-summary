@@ -2,37 +2,10 @@
  * @Author: zs.duan
  * @Date: 2022-09-30 15:00:42
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-15 09:57:12
- * @FilePath: \vue2+js+eui+template\src\utils\calender.js
+ * @LastEditTime: 2023-01-27 07:56:20
+ * @FilePath: \vue2+elui+template\src\utils\calender.js
  */
-/*
- * @name 获取农历
- * @parame time : "", ?/时间 string  / DATE
- * @method success : (reslut) =>{},//成功后的相关数据
- * @method fail : (error) =>{}, //失败返回     
- * @return 返回  {
-    gregorianYear: null, //公历年
-    gregorianMonth: null, //公历月
-    gregorianDay: null, //公历日
-    weekday: null, //星期
-    hours: null,
-    minutes: null,
-    seconds: null,
 
-    lunarYear: null, //农历年
-    lunarMonth: null, //农历月
-    lunarDay: null, //农历日
-
-    lunarYearCn: "", //农历天干地支纪年
-    lunarMonthCn: "", //农历中文月
-    lunarDayCn: "", //农历中文日
-    zodiacYear: "", //农历生肖年
-
-    solarTerm: "", //节气
-    gregorianFestival: "", //公历节日
-    lunarFestival: "", //农历节日
-}
-*/ 
 
 const calendar = {
     gregorianYear: null, //公历年
@@ -508,8 +481,36 @@ function getFestival(mouth, day) {
     return Festival.length ? Festival[0].name : "";
 }
 
+/**
+ * @name 获取农历
+ * @param {object} option 配置对象
+ * @param {string | Date } option.time 时间
+ * @param {Function} option.success 成功返回
+ * @param {Function} option.fail 失败返回
+ * @return 
+   {gregorianYear: null, //公历年
+    gregorianMonth: null, //公历月
+    gregorianDay: null, //公历日
+    weekday: null, //星期
+    hours: null,
+    minutes: null,
+    seconds: null,
 
-function getCalendar(...arg) {
+    lunarYear: null, //农历年
+    lunarMonth: null, //农历月
+    lunarDay: null, //农历日
+
+    lunarYearCn: "", //农历天干地支纪年
+    lunarMonthCn: "", //农历中文月
+    lunarDayCn: "", //农历中文日
+    zodiacYear: "", //农历生肖年
+
+    solarTerm: "", //节气
+    gregorianFestival: "", //公历节日
+    lunarFestival: "", //农历节日
+}
+*/ 
+function getCalendar(option) {
 
     let options = {
         time : "",
@@ -518,7 +519,7 @@ function getCalendar(...arg) {
     }
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     if (typeof options.time == "string" && options.time) {
         options.time = new Date(options.time);

@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2023-01-15 14:04:24
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 14:54:44
- * @FilePath: \vue2+js+eui+template\src\views\99-multiplication-table\99-multiplication-table.vue
+ * @LastEditTime: 2023-01-28 21:31:46
+ * @FilePath: \vue2+elui+template\src\views\99-multiplication-table\99-multiplication-table.vue
 -->
 <template>
     <div>

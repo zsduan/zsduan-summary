@@ -2,29 +2,33 @@
  * @Author: zs.duan
  * @Date: 2022-11-22 20:46:13
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-23 19:08:15
+ * @LastEditTime: 2023-01-28 21:50:44
  * @FilePath: \vue2+elui+template\src\utils\blurSearch.js
  */
 
-/*
- * @name 模糊查询
- * @parame data 搜索的数据原始 Array 必填
- * @parame searValue string 搜索的关键词 必填
- * @parame key 匹配的对象key
- * @method success 返回成功
- * @method fail 返回失败
+/**
+ * 模糊搜索/直接搜索
+ * @author zsduan
+ * @param {object} option 配置对象
+ * @param {Array} option.list 原始数组 必填
+ * @param {string} option.searValue 搜索的关键词 必填
+ * @param {string} [option.key] 为数组对象时必填
+ * @param {Boolean} [option.is_completely] //是否完全匹配
+ * @param {Function} option.success 成功返回
+ * @param {Function} [option.fail] 失败返回
 */ 
-export const blurSearch = (...arg)=>{
+const Search = (option)=>{ 
     let options = {
         list : [],
         searValue : "",
         key : "",
+        is_completely : false , //是都完全匹配
         success : (reslut) =>{},
         fail : (error) =>{}
     } 
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     if(!options.list) throw new Error("list must be not null");
     if(!Array.isArray(options.list) || (!options.list.constructor === Array)){
@@ -56,18 +60,29 @@ export const blurSearch = (...arg)=>{
     const reg = new RegExp((options.searValue).toString());
     if(options.key){
         options.list.forEach(element =>{
-            element[options.key] = element[options.key].toString();
-            if(element[options.key].match(reg)){
+            if(options.is_completely && element[options.key] === options.searValue){
                 reslut.push(element)
+            }
+            if(!options.is_completely){
+                // 需要转成成 string 因为其他类型没有match方法
+                element[options.key] = element[options.key].toString();
+                if(element[options.key].match(reg)){
+                    reslut.push(element)
+                }
             }
         })
         options.success(reslut);
         return;
     }
     options.list.forEach(element => {
-        if(element.match(reg)){
+        if(element.match(reg) && !options.is_completely){
+            reslut.push(element)
+        }
+        if(options.is_completely && element === options.searValue){
             reslut.push(element)
         }
     });
     options.success(reslut);
 }
+
+export const blurSearch = Search

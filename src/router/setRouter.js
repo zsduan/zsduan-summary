@@ -2,10 +2,12 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 15:03:54
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-14 14:41:42
- * @FilePath: \vue2+js+eui+template\src\router\setRouter.js
+ * @LastEditTime: 2023-01-28 22:08:10
+ * @FilePath: \vue2+elui+template\src\router\setRouter.js
  */
 import MENU from "../subMenu.json" ;
+const modules = import.meta.glob("../subMenu.json");
+console.log(modules["../subMenu.json"])
 import Router from "./index";
 
 class setRouter {
@@ -54,8 +56,11 @@ class setRouter {
 
     // 路由懒加载
     loadView(view) {
-        // let modules = import.meta.glob("../views/**/*.vue");
-        // return modules[`../views/${view}`]; //vite
+        console.log(process.env)
+        if(process.env.VUE_APP_IS_VITE == 'true'){
+            let modules = import.meta.glob("../views/**/*.vue");
+            return modules[`../views/${view}`]; //vite
+        }
         return () => import(`@/views/${view}`);  //webpack
     }
 }

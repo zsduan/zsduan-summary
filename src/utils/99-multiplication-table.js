@@ -2,23 +2,33 @@
  * @Author: zs.duan
  * @Date: 2023-01-15 14:11:32
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 14:53:20
- * @FilePath: \vue2+js+eui+template\src\utils\99-multiplication-table.js
+ * @LastEditTime: 2023-01-27 07:59:05
+ * @FilePath: \vue2+elui+template\src\utils\99-multiplication-table.js
  */
 
-/*
+/**
  * @name 99乘法表
- * @parame {boolen} true //是否填写空数组 
- * method success 成功返回
+ * @param {object} option 配置对象
+ * @param {Boolean} option.is_empty 是否添加空数组
+ * @param {Function} [option.success] 成功返回
+ * @retrun success return Array 
+ * @example retrun {
+ *      equation : String, //等式
+        reslut : Number, //结果
+        left : Number, //左边的值
+        right : Number, //右边的值
+        is_invalid : Boolean //是否有效
+    }
+ * 
 */ 
-export const multiplicationTable99 = (...arg)=>{
+export const multiplicationTable99 = (option)=>{
     let options = {
         is_empty : true, //是否填空数组
         success : (reslut)=>{}
     }
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     let list = [];
     let now_loop = 0;

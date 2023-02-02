@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2023-01-14 15:46:36
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 09:47:35
- * @FilePath: \vue2+js+eui+template\src\utils\binary-tree.js
+ * @LastEditTime: 2023-01-27 07:57:47
+ * @FilePath: \vue2+elui+template\src\utils\binary-tree.js
  */
 
 // 二叉树原理 左边一定比底数小（一层比一层小） 右边一定比底数大 （一层比一层大）
@@ -17,17 +17,20 @@ class CreatedTree{
     }
 }
 
-// 操作二叉树
-/*
- * method insert 插入节点
- * method romve 删除节点
- * method find 查找节点
- * method getMaxNode 获取最大节点
- * method getMinNode 获取最小节点
+/**
+ * 操作二叉树
+ * @method insert 插入节点
+ * @method romve 删除节点
+ * @method find 查找节点
+ * @method getMaxNode 获取最大节点
+ * @method getMinNode 获取最小节点
  * 
 */ 
 class BSTree{
     constructor(TreeNode = null){
+        /**
+         * 二叉树列
+         * */ 
         this.root = TreeNode || null;
     }
 
@@ -66,12 +69,18 @@ class BSTree{
         }
     }
 
-    // 删除指定节点数据
+    /**
+     * 删除指定节点数据
+     * @param {string} data 需要删除的数据
+     * */ 
     romve(data){
         this.root = this.#_romoveNode(this.root , data)
     }
 
-    // 插入节点
+    /**
+     * 插入节点
+     * @param {string} data 需要插入的数据
+     * */ 
     insert(data){
         let newNode = new CreatedTree(data , null , null)
         if(!this.root){
@@ -106,7 +115,11 @@ class BSTree{
         }
     }
 
-    // 查找节点
+    /**
+     * 查找节点
+     * @param {string} data 需要查找的数据
+     * @return findNode
+     */
     find(data){
         let currNode = this.root;
         while(currNode){
@@ -121,7 +134,10 @@ class BSTree{
         return null
     }
 
-    // 获取最小值节点
+    /**
+     * 获取最小值节点
+     * @return minNode
+     * */ 
     getMinNode(node = this.root){
         if(!node)return null;
         let currNode = node;
@@ -131,7 +147,10 @@ class BSTree{
         return currNode;
     }
 
-    // 获取最大值节点
+    /**
+     * 获取最大值节点
+     * @return maxNode
+     */
     getMaxNode(node = this.root){
         if(!node)return null;
         let currNode = node;
@@ -142,18 +161,31 @@ class BSTree{
     }
 }
 
-/*
- * 优点 导入之后 编辑器有提示可以操作的函数提示 
- * 缺点 导入之后只能用它 不能多变量使用
+/**
+ * 创建二叉树
+ * @method insert 插入节点
+ * @method romve 删除节点
+ * @method find 查找节点
+ * @method getMaxNode 获取最大节点
+ * @method getMinNode 获取最小节点
+ * @retrun treeNode
+ * @description 优点 导入之后 编辑器有提示可以操作的函数提示 
+ * @description 缺点 导入之后只能用它 不能多变量使用
 */ 
 export const CreatedTreeNode = new BSTree;
 
 
-/*
- * 优点 导入之后 可以多处使用 还可以使用上一个的二叉树
- * 缺点 导入之后 没有智能提示
+/**
+ * 创建多个二叉树列
+ * @param {object} option 配置对象
+ * @param {object} [option.TreeNode] 原始二叉树列
+ * @param {Function} option.success 成功返回
+ * @param {Function} [option.fail] 失败返回
+ * @retrun success return  treeNode
+ * @description 优点 导入之后 可以多处使用 还可以使用上一个的二叉树
+ * @description 缺点 导入之后 没有智能提示
 */ 
-export const CreatedTreeNodes = (...arg) =>{
+export const CreatedTreeNodes = (option) =>{
     let options = {
         TreeNode : null , 
         success : (reslut)=>{},
@@ -161,7 +193,7 @@ export const CreatedTreeNodes = (...arg) =>{
     }
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     options.success(new BSTree(options.TreeNode));
 }

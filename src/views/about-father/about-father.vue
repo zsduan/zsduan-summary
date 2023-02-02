@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2023-01-23 17:52:47
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-23 19:49:00
+ * @LastEditTime: 2023-01-28 21:32:18
  * @FilePath: \vue2+elui+template\src\views\about-father\about-father.vue
 -->
 
@@ -177,7 +177,6 @@ export default {
         },
         inputValue(type) {
             if (type == "en") {
-                console.log(this.EnSelect);
                 blurSearch({
                     list: entryPrice,
                     searValue: this.searchValueEn,
@@ -212,7 +211,6 @@ export default {
             OutPrice.forEach(element => {
                 this.outAllPrice += element.price;
             });
-            console.log(this.outAllPrice)
         }
     },
 };
