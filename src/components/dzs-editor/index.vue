@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2021-12-17 15:23:43
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-05 17:12:58
+ * @LastEditTime: 2023-03-02 19:34:06
  * @FilePath: \vue2+elui+template\src\components\dzs-editor\index.vue
 -->
 <template>
@@ -100,7 +100,7 @@ export default {
         production_url : {
             type : String ,
             default : ()=>{
-                return "/zsduan-summary"
+                return ""
             }
         },
         // 菜单配置
