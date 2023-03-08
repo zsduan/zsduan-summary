@@ -17,7 +17,7 @@
             @submit.native.prevent="submit('dzsForm')"
         >
             <!-- 自定义头部 -->
-            <el-row>
+            <el-row :gutter="10">
                 <div v-for="(item,index) in formItem" :key="index">
                     <el-col :span="item.span ? item.span : 24" v-if="!item.isHidden">
                         <!-- 自定义组件 -->
@@ -58,6 +58,15 @@
                                     v-bind="{...item.props}"
                                     @input="changeVaule($event,item.key)"
                                 ></el-date-picker>
+                                <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
+                            </el-form-item>
+                            <!-- 颜色选择器 -->
+                            <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'color'">
+                                <el-color-picker
+                                    v-model="fromModel[item.key]"
+                                    v-bind="{...item.props}"
+                                    @input="changeVaule($event,item.key)"
+                                ></el-color-picker>
                                 <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
                             <!-- 开关 -->

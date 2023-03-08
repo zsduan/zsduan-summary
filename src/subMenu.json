@@ -304,5 +304,14 @@
         "page" : "setHtml/setHtml",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20230308154737",
+        "PID" : null ,
+        "title" : "生成二维码",
+        "pathName" : "qr-code",
+        "page" : "qr-code/qr-code",
+        "isShow" : true,
+        "children" : []
     }
 ]

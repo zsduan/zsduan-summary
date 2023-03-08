@@ -41,6 +41,7 @@
         <myPromise v-else-if="type == '/myPromise'" :newIndex="true"></myPromise>
         <multiplicationTable v-else-if="type == '/99-multiplication-table'" :newIndex="true"></multiplicationTable>
         <setHtml v-else-if="type == '/setHtml'" :newIndex="true"></setHtml>
+        <qr-code v-else-if="type == '/qr-code'" :newIndex="true"></qr-code>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -81,6 +82,7 @@ import binaryTree from "@/views/binary-tree/binary-tree.vue";
 import myPromise from "@/views/myPromise/myPromise.vue";
 import MultiplicationTable from "@/views/99-multiplication-table/99-multiplication-table.vue";
 import setHtml from "@/views/setHtml/setHtml.vue";
+import qrCode from "@/views/qr-code/qr-code.vue";
 
 
 export default {
@@ -119,7 +121,8 @@ export default {
         binaryTree,
         myPromise,
         MultiplicationTable,
-        setHtml
+        setHtml,
+        qrCode
     },
     props : {
         type : {
