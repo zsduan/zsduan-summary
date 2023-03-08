@@ -1,23 +1,16 @@
-/*
- * @Author: zs.duan
- * @Date: 2022-11-08 14:34:08
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:55:35
- * @FilePath: \vue2+js+eui+template\src\utils\encryp.js
- */
-// webpack
-// let CryptoJS = require('crypto-js/index.js');
-// vite
-import CryptoJS from "crypto-js/index.js";
+let CryptoJS = require('crypto-js/index.js');
 let keyStr = "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JXU2NzkwJXU1RTczJXU1M0Yw";
 
-/*
+/**
  * @name 对称加密
- * @parame word 加密的文本 string / object 必填
- * @parame key秘钥 非必填
- * @return 返回加密后的文本
+ * @param {object} option 配置
+ * @param option配置说明
+ * @param {string | object} option.word 加密的文本 string / object 必填
+ * @param {string} [option.key] 秘钥 非必填
+ * @param {Function} option.success 返回加密后的文本
+ * @param {Function} [option.fail] 失败后返回
 */ 
-export const ACEencrypt = (...arg) =>{
+export const ACEencrypt = (option) =>{
     let options = {
         word : "",
         key : "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JXU2NzkwJXU1RTczJXU1M0Yw",
@@ -26,7 +19,7 @@ export const ACEencrypt = (...arg) =>{
     }
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     if(!options.word){
         options.fail({
@@ -59,14 +52,17 @@ export const ACEencrypt = (...arg) =>{
     return encrypText.toString();
 }
 
-/*
+/**
  * @name 对称解密
- * @parame word 解密的文本 string 必填 
- * @parame key秘钥 非必填 
- * @parame type 返回类型 string / object 非必填
- * @return 返回解密后的信息
+ * @param {object} option 配置
+ * @param option配置说明
+ * @param {string | object} option.word 加密的文本 string / object 必填
+ * @param {string} [option.key] 秘钥 非必填
+ * @param {'string' | 'object'} [option.type] 返回类型 string / object 非必填
+ * @param {Function} option.success 返回加密后的文本
+ * @param {Function} [option.fail] 失败后返回
 */ 
-export const ACEdecrypt = (...arg) => {
+export const ACEdecrypt = (option) => {
     let options = {
         word : "",
         key : "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JXU2NzkwJXU1RTczJXU1M0Yw",
@@ -76,7 +72,7 @@ export const ACEdecrypt = (...arg) => {
     }
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     if(!options.word){
         options.fail({
@@ -107,18 +103,21 @@ export const ACEdecrypt = (...arg) => {
     options.success(decryptText)
 }
 
-/*
+/**
  * @name MD5加密
- * @parame word 加密的文本 string / object
- * @return 返回加密后的文本
+ * @param {object} option 配置
+ * @param option配置说明
+ * @param {string | object} option.word 加密的文本 string / object 必填
+ * @param {Function} option.success 返回加密后的文本
+ * @param {Function} [option.fail] 失败后返回
 */ 
-export const MD5 = (...arg) =>{
+export const MD5 = (option) =>{
     let options ={
         word : "",
         success : (reslut) =>{},
         fail : (error) =>{}
     }
-    options = {...options , ...arg[0]};
+    options = {...options , ...option};
     if(!options.word){
         options.fail({
             code : -1,
