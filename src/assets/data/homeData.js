@@ -56,6 +56,11 @@ export const componentsList = [
         title : "滑动验证",
         path : "/slide-verification",
         is_show : true
+    },
+    {
+        title : "生成二维码",
+        path : "/qr-code",
+        is_show : true
     }
 ]
 
