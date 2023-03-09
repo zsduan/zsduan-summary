@@ -6,16 +6,16 @@
  * @FilePath: \vue2+js+eui+template\src\utils\file-slice-and-merge.js
  */
 
-/*
+/**
  * @name 文件切片与还原 合并文件要和切片的文件相同
- * @parame fileId 读取文件的 id 可选 fileId/file/refs 任选其一
- * @parame file 文件本身 可选 fileId/file/refs 任选其一
- * @parame refs vue的ref 可选 fileId/file/refs 任选其一
- * @parame _this 全局的this指向 refs不为空可选
- * @parame type Slice 分片 Merge 合并 
- * @parame fileSize 切片大小 默认 5M
- * @parame fileName 合并的文件名称
- * @parame isSort 合并进行排序
+ * @param fileId 读取文件的 id 可选 fileId/file/refs 任选其一
+ * @param file 文件本身 可选 fileId/file/refs 任选其一
+ * @param refs vue的ref 可选 fileId/file/refs 任选其一
+ * @param _this 全局的this指向 refs不为空可选
+ * @param type Slice 分片 Merge 合并 
+ * @param fileSize 切片大小 默认 5M
+ * @param fileName 合并的文件名称
+ * @param isSort 合并进行排序
  * @method fail 错误返回
  * @method success 成功返回 返回数据为下面的数据
  * @return { 分片返回
@@ -36,7 +36,7 @@
  * }
 */ 
 
-export const fileSliceAndMerge = (...arg) =>{
+export const fileSliceAndMerge = (option) =>{
     let options = {
         fileId : "",  //读取文件的id
         file : "" , //文件
@@ -51,7 +51,7 @@ export const fileSliceAndMerge = (...arg) =>{
     }
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     if(!options.fileId && !options.file && !options.refs){
         options.fail({

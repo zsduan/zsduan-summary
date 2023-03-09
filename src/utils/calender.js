@@ -485,8 +485,8 @@ function getFestival(mouth, day) {
  * @name 获取农历
  * @param {object} option 配置对象
  * @param {string | Date } option.time 时间
- * @param {Function} option.success 成功返回
- * @param {Function} option.fail 失败返回
+ * @param {Function} [option.success] 成功返回
+ * @param {Function} [option.fail] 失败返回
  * @return 
    {gregorianYear: null, //公历年
     gregorianMonth: null, //公历月

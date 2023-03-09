@@ -5,13 +5,24 @@
  * @LastEditTime: 2022-12-14 17:59:03
  * @FilePath: \vue2+js+eui+template\src\utils\canvas-back.js
  */
-/*
+/**
  * @name 绘制动效
- * @parame canvasId 需要绘制的canvasId string  
- * @parame columnWidth 列宽 Number 
- * @parame showWord 需要显示的文字 string
+ * @param {object} option 配置对象
+ * @param {string} option.canvasId canvasId 必填
+ * @param {string} option.showWord 显示文字 必填
+ * @param {number} [option.columnWidth] 列宽 默认 20
+ * @param {Function} [option.success] 成功返回
+ * @param {Function} [option.fail] 失败返回
+ * @example
+ * drawCanvasBack({
+ *     canvasId : "canvasId",
+ *     showWord : "showWord",
+ *     columnWidth : 20,
+ *     success : (reslut) =>{},
+ *     fail : (err) =>{}
+ * })
 */ 
-export const drawCanvasBack = (...arg) =>{
+export const drawCanvasBack = (option) =>{
     let options = {
         canvasId : "",
         showWord : "",
@@ -21,7 +32,7 @@ export const drawCanvasBack = (...arg) =>{
     }
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     if(!options.canvasId){
         options.fail({

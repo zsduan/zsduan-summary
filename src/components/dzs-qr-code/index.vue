@@ -44,7 +44,7 @@ export default {
                 level: "L",
                 bgColor: "#ffffff",
                 fgColor: "#000000",
-                margin: 4,
+                margin: 0,
                 scale: 4,
                 version: -1,
                 errorCorrectionLevel: "M",
@@ -95,7 +95,6 @@ export default {
                 },
                 function (error) {
                     if (error) console.error(error);
-                    console.log("success!");
                 }
             );
             // 设置logo
@@ -123,7 +122,6 @@ export default {
             let ctx = canvas.getContext("2d");
             let img = new Image();
             img.src = options.logo;
-            console.log((options.size - options.logoWidth) / 2 , (options.size - options.logoHeight) / 2)
             img.onload = function () {
                 ctx.drawImage(
                     img,

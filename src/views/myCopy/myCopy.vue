@@ -68,7 +68,7 @@ export default {
                 })
             }
             myCopy({
-                copyContent : this.Text,
+                content : this.Text,
                 success : ()=>{
                     this.$message({
                         message : "复制成功",
@@ -85,7 +85,7 @@ export default {
                 })
             }
             myCopy({
-                copyContent : this.Text1,
+                content : this.Text1,
                 type : "Html",
                 success : ()=>{
                     this.$message({

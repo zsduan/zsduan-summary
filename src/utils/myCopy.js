@@ -5,28 +5,29 @@
  * @LastEditTime: 2022-12-15 10:35:52
  * @FilePath: \vue2+js+eui+template\src\utils\myCopy.js
  */
-/*
+import ua from "./ua";
+/**
  * @name 复制
- * @parame copyContent 复制的内容
- * @parame is_input 是否为 原始的input复制 仅支持文字 默认 false
- * @parame is_input 为false 支持 Html Html 仅支持 windows  Text 全系统支持支持
+ * @param {object} option 配置对象
+ * @param {string} option.content 复制内容
+ * @param {string} [option.type] 复制类型 Text Html Image
+ * @param {Function} [option.success] 成功回调
+ * @param {Function} [option.fail] 失败回调
  * @return
     success : (reslut) =>{}, //成功
     fail : (error) =>{} //失败
 */
-import ua from "./ua";
-export const myCopy = (...arg) =>{
+export const myCopy = (option) =>{
     let options = {
-        copyContent : "",
+        content : "",
         type : "Text",
         is_input : false,
-        img_type : "image/png",
         success : (reslut) =>{},
         fail : (error) =>{}
     };
     options = {
         ...options,
-        ...arg[0]
+        ...option
     }
     
     if(ua().osName == "Windows" && window.location.protocol == "http:"){
@@ -34,14 +35,14 @@ export const myCopy = (...arg) =>{
         options.type = 'Text';
         console.warn("osName is not Windows or protocol is not https");
     }
-    if(!options.copyContent){
-        throw new Error("copyContent must be not null");
+    if(!options.content){
+        throw new Error("content must be not null");
     }
     // 浏览器自带方法
     if(options.is_input && options.type == 'Text'){
         // 原生方法
         let input = document.createElement("input");
-        input.value = options.copyContent;
+        input.value = options.content;
         document.body.appendChild(input);
         input.select();
         document.execCommand("copy");
@@ -54,7 +55,7 @@ export const myCopy = (...arg) =>{
     }
 
     if(options.type == 'Text'){
-        navigator.clipboard.writeText(options.copyContent);
+        navigator.clipboard.writeText(options.content);
         options.success({
             code : 200,
             msg : "success"
@@ -62,7 +63,7 @@ export const myCopy = (...arg) =>{
     }
 
     if(options.type == 'Html'){
-        const html = new Blob([options.copyContent],{type : "text/html"});
+        const html = new Blob([options.content],{type : "text/html"});
         const item = new ClipboardItem({"text/html":html});
         navigator.clipboard.write([item]);
         options.success({

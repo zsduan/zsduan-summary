@@ -2,10 +2,34 @@
     <div class="qr-code">
         <dzs-header title="生成二维码" v-if="!newIndex"></dzs-header>
         <div class="page">
-            <h2>基础用法</h2>
+            <h2>表单配置</h2>
             <div class="item">
                 <dzs-form :options="formOptions" @onSubmit="onSubmit"></dzs-form>
                 <dzs-qr-code :option="options"></dzs-qr-code>
+            </div>
+            <h2>基础用法</h2>
+            <div class="item">
+                <dzs-code :value="code1"></dzs-code>
+                <dzs-qr-code title="源代码" :option="options1"></dzs-qr-code>
+            </div>
+            <h2>设置大小</h2>
+            <div class="item">
+                <dzs-code :value="code2"></dzs-code>
+                <dzs-qr-code title="源代码" :option="options2"></dzs-qr-code>
+            </div>
+            <h2>设置logo</h2>
+            <div class="item">
+                <dzs-code :value="code3"></dzs-code>
+                <dzs-qr-code title="源代码" :option="options3"></dzs-qr-code>
+            </div>
+            <h2>全部属性</h2>
+            <div class="item">
+                <dzs-code :value="code4"></dzs-code>
+                <dzs-qr-code title="源代码" :option="options"></dzs-qr-code>
+            </div>
+            <h2>组件源代码下载</h2>
+            <div class="item">
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-qr-code/index.vue">横向表单组件下载地址</a>
             </div>
         </div>
         <el-backtop :visibility-height="20" v-if="!newIndex">
@@ -15,6 +39,7 @@
 <script>
 import dzsQrCode from "@/components/dzs-qr-code/index.vue";
 import dzsForm from "@/components/dzs-form/index.vue";
+import { code1 , code2 , code3 , code4 } from "./config";
 export default {
     props:{
         newIndex : {
@@ -190,6 +215,10 @@ export default {
     },
     data(){
         return {
+            code1 : code1,
+            code2 : code2,
+            code3 : code3,
+            code4 : code4,
             options : {
                 value : "https://www.baidu.com",
                 size : 400,
@@ -206,12 +235,22 @@ export default {
                 lineWidth: 2,
                 lineColor: "#000000",
                 showBoder: true,
+            },
+            options1 : {
+                value : "https://www.baidu.com",
+            },
+            options2 : {
+                value : "https://www.baidu.com",
+                size : 300,
+            },
+            options3 : {
+                value : "https://www.baidu.com",
+                logo : "https://yy.yunweicn.com/mp-wx-img/userIcon.png",
             }
         }
     },
     methods:{
         onSubmit(data){
-            console.log(data);
             this.options.size = data.size;
             this.options.value = data.value;
             this.options.margin = data.margin;

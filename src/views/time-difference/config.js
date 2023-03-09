@@ -7,12 +7,14 @@
  */
 
 export const code1 = `
-/*
+/**
  * @name 计算时间差
- * @parame startDate Date / string 开始时间 必填
- * @parame endDate Date / string 结束时间 
- * @method success 成功返回 code 100网页成功 200网页和系统都成功
- * @method fail 失败返回
+ * @param option 配置对象
+ * @desc option 配置说明
+ * @param {Date | string} option.startDate 开始时间 必填
+ * @param {Date | string} option.endDate 结束时间
+ * @param {Function} option.success 成功返回
+ * @param {Function} option.fail 失败返回
  * @return {
       day : dayDiff, //天数
       hours : hours, //小时

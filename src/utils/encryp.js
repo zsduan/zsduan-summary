@@ -4,10 +4,9 @@ let keyStr = "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JX
 /**
  * @name 对称加密
  * @param {object} option 配置
- * @param option配置说明
  * @param {string | object} option.word 加密的文本 string / object 必填
  * @param {string} [option.key] 秘钥 非必填
- * @param {Function} option.success 返回加密后的文本
+ * @param {Function} [option.success] 返回加密后的文本
  * @param {Function} [option.fail] 失败后返回
 */ 
 export const ACEencrypt = (option) =>{
@@ -55,11 +54,10 @@ export const ACEencrypt = (option) =>{
 /**
  * @name 对称解密
  * @param {object} option 配置
- * @param option配置说明
  * @param {string | object} option.word 加密的文本 string / object 必填
  * @param {string} [option.key] 秘钥 非必填
  * @param {'string' | 'object'} [option.type] 返回类型 string / object 非必填
- * @param {Function} option.success 返回加密后的文本
+ * @param {Function} [option.success] 返回加密后的文本
  * @param {Function} [option.fail] 失败后返回
 */ 
 export const ACEdecrypt = (option) => {
@@ -106,9 +104,8 @@ export const ACEdecrypt = (option) => {
 /**
  * @name MD5加密
  * @param {object} option 配置
- * @param option配置说明
  * @param {string | object} option.word 加密的文本 string / object 必填
- * @param {Function} option.success 返回加密后的文本
+ * @param {Function} [option.success] 返回加密后的文本
  * @param {Function} [option.fail] 失败后返回
 */ 
 export const MD5 = (option) =>{

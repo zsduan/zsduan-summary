@@ -10,17 +10,20 @@ export const code1 = `
 // 导入
 import {myCopy} from "@/utils/myCopy";
 // 使用
-/*
+/**
  * @name 复制
- * @parame copyContent 复制的内容
- * @parame is_input 是否为 原始的input复制 仅支持文字 默认 false
- * @parame is_input 为false 支持 Html Html 仅支持 windows  Text 全系统支持支持
+ * @param {object} option 配置对象
+ * @desc option 配置说明
+ * @param {string} option.content 复制内容
+ * @param {string} option.type 复制类型 Text Html Image
+ * @param {Function} option.success 成功回调
+ * @param {Function} option.fail 失败回调
  * @return
     success : (reslut) =>{}, //成功
     fail : (error) =>{} //失败
 */
 myCopy({
-    copyContent : copyContent,
+    content : content,
     type : "Text" , //Html Image 仅支持 windows  Text 全系统支持支持
     is_input : false , //是否为 原始的input复制 仅支持文字 默认 false
     success : (reslut) =>{}, //成功
@@ -32,17 +35,20 @@ export const code2 = `
 // 导入
 import {myCopy} from "@/utils/myCopy";
 // 使用
-/*
+/**
  * @name 复制
- * @parame copyContent 复制的内容
- * @parame is_input 是否为 原始的input复制 仅支持文字 默认 false
- * @parame is_input 为false 支持 Html Html 仅支持 windows  Text 全系统支持支持
+ * @param {object} option 配置对象
+ * @desc option 配置说明
+ * @param {string} option.content 复制内容
+ * @param {string} option.type 复制类型 Text Html Image
+ * @param {Function} option.success 成功回调
+ * @param {Function} option.fail 失败回调
  * @return
     success : (reslut) =>{}, //成功
     fail : (error) =>{} //失败
 */
 myCopy({
-    copyContent : copyContent,
+    content : content,
     type : "html" , //Html Image 仅支持 windows  Text 全系统支持支持
     is_input : false , //是否为 原始的input复制 仅支持文字 默认 false
     success : (reslut) =>{}, //成功

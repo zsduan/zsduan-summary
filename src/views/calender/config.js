@@ -13,13 +13,14 @@ export const code1 = `
 time string 2022-09-30 12:00:00 或者 new Date()
 
 
-/*
+/**
  * @name 获取农历
- * @parame time : "", ?/时间 string  / DATE
- * @method success : (reslut) =>{},//成功后的相关数据
- * @method fail : (error) =>{}, //失败返回     
- * @return 返回  {
-    gregorianYear: null, //公历年
+ * @param {object} option 配置对象
+ * @param {string | Date } option.time 时间
+ * @param {Function} option.success 成功返回
+ * @param {Function} option.fail 失败返回
+ * @return 
+   {gregorianYear: null, //公历年
     gregorianMonth: null, //公历月
     gregorianDay: null, //公历日
     weekday: null, //星期
