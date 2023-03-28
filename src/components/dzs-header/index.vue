@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-20 16:14:21
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-14 14:52:12
- * @FilePath: \vue2+js+eui+template\src\components\dzs-header\index.vue
+ * @LastEditTime: 2023-03-28 19:57:03
+ * @FilePath: \vue2+elui+template\src\components\dzs-header\index.vue
 -->
 <template>
     <div>
@@ -51,7 +51,7 @@ export default {
     box-shadow: 3px 3px 3px rgba(100, 100, 100, 0.3);
     position: fixed;
     background: #fff;
-    z-index: 999;
+    z-index: 99;
 }
 .top-box{
     // display: flex;
@@ -62,7 +62,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     position: fixed;
-    z-index: 999;
+    z-index: 99;
     
     .go-home{
         font-size: 18px;

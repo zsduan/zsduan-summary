@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 10:21:11
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:34:22
+ * @LastEditTime: 2023-03-28 19:54:00
  * @FilePath: \vue2+elui+template\src\components\dzs-table\index.vue
 -->
 <template>
@@ -182,7 +182,7 @@ export default {
         onEdit(item) {
             this.$emit("change", {
                 status: "edit",
-                title: this.$t("table.edit"),
+                title: "编辑",
                 data: item,
             });
         },
@@ -190,17 +190,15 @@ export default {
         onDetails(item) {
             this.$emit("change", {
                 status: "details",
-                title: this.$t("table.details"),
+                title: "详情",
                 data: item,
             });
         },
         // 删除
         onDel(item) {
-            this.loading = true;
-            this.onDelete(item);
             this.$emit("change", {
                 status: "delete",
-                title: this.$t("table.del"),
+                title: "删除",
                 data: item,
             });
         },

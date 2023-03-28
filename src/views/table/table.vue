@@ -2,8 +2,8 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 11:16:17
  * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:10:23
- * @FilePath: \vue2+js+eui+template\src\views\table\table.vue
+ * @LastEditTime: 2023-03-28 19:52:54
+ * @FilePath: \vue2+elui+template\src\views\table\table.vue
 -->
 <template>
     <div>
@@ -12,7 +12,7 @@
             <h2>基础用法</h2>
             <div class="item">
                 <div class="tips-box">自定义组件与指定宽度</div>
-                <dzs-table :tableHeader="TABALE_HEADER" :tableData="tableData" :operation="operation">
+                <dzs-table :tableHeader="TABALE_HEADER" :tableData="tableData" :operation="operation" @change="changeTabel">
                     <template #is_show="rowData">
                         <el-switch :value="rowData.row.is_show" :disabled="true"></el-switch>
                     </template>
@@ -90,6 +90,14 @@ export default {
             code2 : code2
         }
     },
+    methods:{
+        changeTabel(val){
+            this.$message({
+                message: val.title,
+                type: 'info'
+            });
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
