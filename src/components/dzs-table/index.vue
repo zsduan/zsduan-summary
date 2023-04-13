@@ -2,7 +2,7 @@
  * @Author: zs.duan
  * @Date: 2022-09-21 10:21:11
  * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:34:22
+ * @LastEditTime: 2023-03-28 19:54:00
  * @FilePath: \vue2+elui+template\src\components\dzs-table\index.vue
 -->
 <template>
@@ -197,8 +197,6 @@ export default {
         },
         // 删除
         onDel(item) {
-            this.loading = true;
-            this.onDelete(item);
             this.$emit("change", {
                 status: "delete",
                 title: "删除",
