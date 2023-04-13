@@ -22,8 +22,8 @@
                     v-for="(option,index) in tableHeader"
                     :key="index"
                     :width="option.width"
+                    v-bind="{...option.props}"
                 >
-                {{option}}
                     <template slot-scope="scope">
                         <div v-if="option.isSlot">
                             <slot :name="option.key" :row="{ ...scope.row }" />
@@ -31,7 +31,7 @@
                         <span class="scope-span" v-else>{{ scope.row[`${option.key}`] }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column fixed="right" :width="operationWidth" label="操作">
+                <el-table-column v-bind="operationOption" label="操作">
                     <template slot-scope="scope" >
                         <el-button type="text" class="btn" size="small" v-for="(item,index) in operation" :key="index">
                             <span @click="onEdit(scope.row)" v-if="item == 'edit'">编辑</span>
@@ -68,7 +68,7 @@
  *@props showCheckbox 是否显示多选 默认 false 不显示  true 显示
  *@props maxSize 每页显示条数 默认10
  *@props showPagination 是否显示分页 默认true 显示
- *@props operationWidth 操作列宽度 
+ *@props operationOption 操作列配置项
  *@props tableData 表格数据 
  *@props total 总条数
  *@props tableOptions 饿了吗ui的配置
@@ -118,13 +118,14 @@ export default {
                 return true;
             },
         },
-        operationWidth : {
-            type: String,
+        /**操作项配置信息*/ 
+        operationOption : {
+            type: Object,
             default: () => {
-                return "";
+                return {};
             }
         },
-        // 表单自定义 同 el-table一样
+        /**表单自定义 同 el-table一样*/ 
         tableOptions: {
             type: Object,
             default: () => {
@@ -182,7 +183,7 @@ export default {
         onEdit(item) {
             this.$emit("change", {
                 status: "edit",
-                title: this.$t("table.edit"),
+                title: "编辑",
                 data: item,
             });
         },
@@ -190,7 +191,7 @@ export default {
         onDetails(item) {
             this.$emit("change", {
                 status: "details",
-                title: this.$t("table.details"),
+                title: "详情",
                 data: item,
             });
         },
@@ -200,7 +201,7 @@ export default {
             this.onDelete(item);
             this.$emit("change", {
                 status: "delete",
-                title: this.$t("table.del"),
+                title: "删除",
                 data: item,
             });
         },

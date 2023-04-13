@@ -82,6 +82,28 @@
   overflow-y: scroll;
   position: fixed;
 }
+.my-aside::-webkit-scrollbar {
+  width: 6px;
+  background-color: #fff;
+}
+.my-aside::-webkit-scrollbar-track {
+  background-color: transparent;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+.my-aside::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+.my-aside::-webkit-scrollbar-thumb {
+  background-color: #e9e7e7;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
 .my-aside .aside_list {
   padding-bottom: 20px;
 }

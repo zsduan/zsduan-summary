@@ -99,11 +99,36 @@ img {
   background-color: var(--ThemeColor);
   border-color: var(--ThemeColor);
 }
-.el-button--primary:focus {
+.el-button--primary:hover {
   background-color: var(--ThemeColor);
   border-color: var(--ThemeColor);
 }
 .el-switch.is-checked .el-switch__core {
   border-color: var(--ThemeColor);
   background-color: var(--ThemeColor);
+}
+body {
+  overflow-y: scroll;
+}
+body::-webkit-scrollbar {
+  width: 6px;
+  background-color: #fff;
+}
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+body::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #e9e7e7;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
 }
