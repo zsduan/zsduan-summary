@@ -14,7 +14,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import "./assets/css/reset.css"
 import {initDirective} from "./utils/instructions";
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: 'small', zIndex: 3000 });
 // markdown
 import mavonEditor from 'mavon-editor';
 Vue.use(mavonEditor);
