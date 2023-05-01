@@ -31,6 +31,7 @@
                                     v-model="fromModel[item.key]"
                                     v-bind="{...item.props}"
                                     @input="changeVaule($event,item.key)"
+                                    :placeholder="item.props && item.props.placeholder ? item.props.placeholder : '请输入'"
                                 ></el-input>
                                 <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
@@ -40,6 +41,7 @@
                                     v-model="fromModel[item.key]"
                                     v-bind="{...item.props}"
                                     @input="changeVaule($event,item.key)"
+                                    :placeholder="item.props && item.props.placeholder ? item.props.placeholder : '请选择'"
                                 >
                                     <el-option
                                         style="padding : 0 6px;"
@@ -57,6 +59,7 @@
                                     v-model="fromModel[item.key]"
                                     v-bind="{...item.props}"
                                     @input="changeVaule($event,item.key)"
+                                    :placeholder="item.props && item.props.placeholder ? item.props.placeholder : '请选择日期'"
                                 ></el-date-picker>
                                 <div class="from-item-tips" v-if="item.props && item.props.tips">{{item.props.tips}}</div>
                             </el-form-item>
@@ -248,6 +251,18 @@ export default {
                 if (!this.options.formItem || !this.options.formItem.length) return;
                 this.initModel(this.options);
             },
+        },
+        value: {
+            handler(newValue, oldValue) {
+                if(!newValue) return;
+                if(JSON.stringify(newValue) == JSON.stringify(this.fromModel)) return;
+                if(JSON.stringify(newValue) == '{}') return;
+                this.fromModel = {
+                    ...this.fromModel,
+                    ...newValue,
+                };
+            },
+            deep: true,
         },
     },
     created() {

@@ -17,29 +17,29 @@ import ua from "./ua";
     success : (reslut) =>{}, //成功
     fail : (error) =>{} //失败
 */
-export const myCopy = (option) =>{
+export const myCopy = (option) => {
     let options = {
-        content : "",
-        type : "Text",
-        is_input : false,
-        success : (reslut) =>{},
-        fail : (error) =>{}
+        content: "",
+        type: "Text",
+        is_input: false,
+        success: (reslut) => { },
+        fail: (error) => { }
     };
     options = {
         ...options,
         ...option
     }
-    
-    if(ua().osName == "Windows" && window.location.protocol == "http:"){
+
+    if (ua().osName != "Windows" && window.location.protocol == "http:") {
         options.is_input = true;
         options.type = 'Text';
         console.warn("osName is not Windows or protocol is not https");
     }
-    if(!options.content){
+    if (!options.content) {
         throw new Error("content must be not null");
     }
     // 浏览器自带方法
-    if(options.is_input && options.type == 'Text'){
+    if (options.is_input && options.type == 'Text') {
         // 原生方法
         let input = document.createElement("input");
         input.value = options.content;
@@ -48,30 +48,39 @@ export const myCopy = (option) =>{
         document.execCommand("copy");
         document.body.removeChild(input);
         options.success({
-            code : 200,
-            msg : "success"
+            code: 200,
+            msg: "success"
         })
         return true;
     }
 
-    if(options.type == 'Text'){
+    if (options.type == 'Text') {
         navigator.clipboard.writeText(options.content);
         options.success({
-            code : 200,
-            msg : "success"
+            code: 200,
+            msg: "success"
         })
     }
 
-    if(options.type == 'Html'){
-        const html = new Blob([options.content],{type : "text/html"});
-        const item = new ClipboardItem({"text/html":html});
-        navigator.clipboard.write([item]);
-        options.success({
-            code : 200,
-            msg : "success"
-        })
+    if (options.type == 'Html') {
+        const { ClipboardItem } = window;
+        const html = new Blob([options.content], { type: "text/html" });
+        try {
+            const item = new ClipboardItem({ "text/html": html });
+            navigator.clipboard.write([item]);
+            options.success({
+                code: 200,
+                msg: "success"
+            })
+        } catch (e) {
+            console.warn("your browser is not support this method");
+            options.fail({
+                code: 500,
+                msg: "your browser is not support this method"
+            })
+        }
     }
-    
-    
+
+
     return true;
 }

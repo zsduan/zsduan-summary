@@ -161,6 +161,18 @@ export default {
                 this.initModel(this.options);
             },
         },
+        value: {
+            handler(newValue, oldValue) {
+                if(!newValue) return;
+                if(JSON.stringify(newValue) == JSON.stringify(this.fromModel)) return;
+                if(JSON.stringify(newValue) == '{}') return;
+                this.fromModel = {
+                    ...this.fromModel,
+                    ...newValue,
+                };
+            },
+            deep: true,
+        },
     },
     created() {
         window.onresize = () => {

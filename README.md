@@ -1,24 +1,12 @@
-# template
+::: hljs-center
 
-## Project setup
-```
-npm install
-```
+# 框架简介 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+:::
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 预览地址
+[预览地址1](https://zsduan.github.io/zsduan-summary/)
+[预览地址2](https://anran233.com/zhonogjie)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 博客地址
+[博客地址](https://anran233.com)
