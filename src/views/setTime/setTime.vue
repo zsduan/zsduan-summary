@@ -8,14 +8,20 @@
 
 <template>
     <div>
-        <dzs-header title="返回安卓/苹果时间" v-if="!newIndex"></dzs-header>
+        <dzs-header title="处理时间" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <div class="tips-box">返回安卓/苹果时间</div>
+                <div class="tips-box">获取当前时间 并按照固定格式处理</div>
                 <dzs-form :options="formOptions" @onSubmit="onSubmit"></dzs-form>
                 <div class="guid">{{time}}</div>
                 <dzs-code title="使用方法" :value="code1"></dzs-code>
+            </div>
+            <div class="item">
+                <div class="tips-box">自定义格式</div>
+                <dzs-form :options="formOptions" @onSubmit="onSubmit1"></dzs-form>
+                <div class="guid">{{time1}}</div>
+                <dzs-code title="使用方法" :value="code2"></dzs-code>
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
@@ -28,7 +34,7 @@
 <script>
 import dzsForm from "@/components/dzs-form/index.vue";
 import setTime from "@/utils/setTime";
-import {code1} from "./config";
+import {code1 , code2} from "./config";
 export default {
     props:{
         newIndex : {
@@ -67,12 +73,29 @@ export default {
     data(){
         return {
             time : setTime(),
-            code1 : code1
+            code1 : code1,
+            code2 : code2,
+            time1 : setTime({Format : "yyyy-MM-dd"})
         }
     },
     methods:{
         onSubmit(e){
-            this.time = setTime(e.Time)
+            setTime({
+                date : e.Time,
+                success : (res)=>{
+                    this.time = res
+                }
+            })
+        },
+
+        onSubmit1(e){
+            setTime({
+                date : e.Time,
+                Format : "yyyy-MM-dd",
+                success : (res)=>{
+                    this.time1 = res
+                }
+            })
         }
     }
 }

@@ -12,8 +12,9 @@
  * @description option 数据详情
  * @param {string} option.html html源码
  * @param {string} [option.imgUrl] 是否需要拼接图片的url 选填
- * @return {Function} option.success 成功返回
- * @return {Function} option.fail 失败返回
+ * @param {Function} option.success 成功返回
+ * @param {Function} option.fail 失败返回
+ * @returns {string} 返回处理后的html
  * */ 
 
 const setHtml = (option)=>{
@@ -49,7 +50,6 @@ const setHtml = (option)=>{
         options.success(newContent)
 		return;
 	}
-    console.log("newContent ==>",newContent)
     var allImg = newContent.match(str); // 取到所有img标签 放到数组 s里面
 	// console.log(allImg);
 	for (var i = 0; i < allImg.length; i++) {
@@ -61,7 +61,8 @@ const setHtml = (option)=>{
 			newContent = newContent.replace(new RegExp(srcImg, 'g'), options.imgUrl + srcImg);
 		}
 	}
-    options.success(newContent)
+    options.success(newContent);
+    return newContent;
 }
 
 export default setHtml

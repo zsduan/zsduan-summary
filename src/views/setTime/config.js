@@ -7,17 +7,52 @@
  */
 
 export const code1 = `
-// 传入
+/**
+ * 获取格式化时间
+ * @param {Object} option 配置对象
+ * @param {String} option.Format 格式化字符串 yyyy-MM-dd HH:mm:ss
+ * @param {Date | string} [option.date] 日期对象
+ * @param {Function} [option.success] 成功返回
+ * @param {Function} [option.fail] 失败返回
+ * @returns {String} 格式化后的时间
+ * @example
+ * getTime({
+ * Format : 'yyyy-MM-dd HH:mm:ss',
+ * date : new Date(),
+ * success : (reslut)=>{},
+ * }) // 2021-04-05 15:54:28
+ * */
 
-time string 2022-09-30 12:00:00 或者 new Date()
+setTime({
+    date : Time,
+    success : (res)=>{
+        this.time = res
+    }
+})
+`
 
-// 使用
-import setTime from "@/utils/setTime";
-setTime(time ? )
+export const code2 = `
+/**
+ * 获取格式化时间
+ * @param {Object} option 配置对象
+ * @param {String} option.Format 格式化字符串 yyyy-MM-dd HH:mm:ss
+ * @param {Date | string} [option.date] 日期对象
+ * @param {Function} [option.success] 成功返回
+ * @param {Function} [option.fail] 失败返回
+ * @returns {String} 格式化后的时间
+ * @example
+ * getTime({
+ * Format : 'yyyy-MM-dd HH:mm:ss',
+ * date : new Date(),
+ * success : (reslut)=>{},
+ * }) // 2021-04-05 15:54:28
+ * */
 
-// 返回
-return {
-    android : string,
-    ios : string
-}
+setTime({
+    date : e.Time,
+    Format : "yyyy-MM-dd",
+    success : (res)=>{
+        this.time1 = res
+    }
+})
 `

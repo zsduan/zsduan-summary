@@ -56,5 +56,6 @@ export const multiplicationTable99 = (option)=>{
         }
         list.push(multiplication);
     }
-    options.success(list)
+    options.success(list);
+    return list;
 }

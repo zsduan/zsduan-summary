@@ -77,7 +77,7 @@ export const jsList = [
         is_show : false
     },
     {
-        title : "处理时间 苹果/安卓",
+        title : "设置时间",
         path : "/setTime",
         is_show : true
     },

@@ -8,6 +8,7 @@ let keyStr = "JXU5NkM2JXU1NkUyJXU4RkQwJXU4NDI1JXU2NTcwJXU1QjU3JXU1MzE2JXU1MjA2JX
  * @param {string} [option.key] 秘钥 非必填
  * @param {Function} [option.success] 返回加密后的文本
  * @param {Function} [option.fail] 失败后返回
+ * @returns {string} 加密后的文本
 */ 
 export const ACEencrypt = (option) =>{
     let options = {
@@ -59,6 +60,7 @@ export const ACEencrypt = (option) =>{
  * @param {string | object} [option.type] 返回类型 string / object 非必填
  * @param {Function} [option.success] 返回加密后的文本
  * @param {Function} [option.fail] 失败后返回
+ * @returns {string | object} 解密后的文本
 */ 
 export const ACEdecrypt = (option) => {
     let options = {
@@ -98,7 +100,8 @@ export const ACEdecrypt = (option) => {
     if(options.type == 'object'){
         decryptText = JSON.parse(decryptText)
     }
-    options.success(decryptText)
+    options.success(decryptText);
+    return decryptText;
 }
 
 /**
@@ -107,6 +110,7 @@ export const ACEdecrypt = (option) => {
  * @param {string | object} option.word 加密的文本 string / object 必填
  * @param {Function} [option.success] 返回加密后的文本
  * @param {Function} [option.fail] 失败后返回
+ * @returns {string} 加密后的文本
 */ 
 export const MD5 = (option) =>{
     let options ={
@@ -136,5 +140,6 @@ export const MD5 = (option) =>{
     if(is_object)options.word = JSON.stringify(options.word);
     const Text = CryptoJS.enc.Utf8.parse(options.word);
     let encrypText = CryptoJS.MD5(Text);
-    options.success(encrypText)
+    options.success(encrypText);
+    return encrypText.toString();
 }

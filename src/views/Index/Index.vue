@@ -82,7 +82,8 @@
             <el-aside class="aside-empty" width="240px"></el-aside>
             <el-container>
                 <el-main>
-                    <dzs-new-year v-if="activeAside== -1 && !is_empty && !is_search"></dzs-new-year>
+                    <dzs-update-log v-if="activeAside== -1 && !is_empty && !is_search"></dzs-update-log>
+                    <!-- <dzs-new-year v-if="activeAside== -1 && !is_empty && !is_search"></dzs-new-year> -->
                     <!-- <p class="welcome" v-if="activeAside== -1 && !is_empty && !is_search">welcome</p> -->
                     <div class="empty-tips" v-if="is_empty">
                         <el-empty description="该页面维护中~"></el-empty>
@@ -115,11 +116,13 @@ import { data } from "./data/data";
 import pathList from "../../assets/data/homeData";
 import dzsComponentsList from "../../components/dzs-components-list/dzs-components-list.vue";
 import dzsNewYear from "../../components/dzs-new-year/dzs-new-year.vue";
+import dzsUpdateLog from "../../components/dzs-update-log/dzs-update-log.vue";
 import { blurSearch } from "@/utils/blurSearch.js";
 export default {
     components: {
         dzsComponentsList,
-        dzsNewYear
+        dzsNewYear,
+        dzsUpdateLog
     },
     data() {
         return {

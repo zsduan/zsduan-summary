@@ -16,7 +16,7 @@
  * @param {Boolean} [option.is_completely] //是否完全匹配
  * @param {Function} option.success 成功返回
  * @param {Function} [option.fail] 失败返回
- * @return success return Array
+ * @returns {Array} 返回搜索结果
  * @example Search({
  *      list : [],
  *      searValue : "",
@@ -81,7 +81,7 @@ const Search = (option) => {
             }
         })
         options.success(reslut);
-        return;
+        return reslut;
     }
     options.list.forEach(element => {
         if (element.match(reg) && !options.is_completely) {
@@ -92,6 +92,7 @@ const Search = (option) => {
         }
     });
     options.success(reslut);
+    return reslut;
 }
 
 export const blurSearch = Search

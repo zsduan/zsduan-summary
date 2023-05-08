@@ -326,7 +326,9 @@ export default {
         },
 
         cancel() {
+            this.$refs.dzsForm.resetFields();
             this.$emit("onCancel");
+            this.$emit("update:value", this.fromModel);
         },
 
         initModel(data) {
@@ -352,9 +354,16 @@ export default {
                     item.defaultValue = false;
                 }
                 // input框 在饿了吗ui 中需要是 string类型
-                if (item.type == "input" && item.defaultValue)
+                if (item.type == "input" && item.defaultValue){
                     item.defaultValue = item.defaultValue.toString();
-                if (!item.props) item.props = {};
+                }
+                if (!item.props) {
+                    item.props = {};
+                }
+                // 当下拉框为多选时，需要将默认值转换为数组
+                if (item.type == "select" && item.props.multiple) {
+                    item.defaultValue = [];
+                }
                 this.fromRules[item.key] = item.rules || [];
                 if (item.defaultValue) {
                     this.changeVaule(item.defaultValue, item.key);
@@ -362,6 +371,11 @@ export default {
                 this.fromModel[item.key] = item.defaultValue || "";
             });
         },
+
+        /**调用饿了么ui默认方法*/
+        getForm() {
+            return this.$refs.dzsForm;
+        }, 
     },
 };
 </script>
