@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d216b75"],{c43a:function(n,c,o){"use strict";o.r(c),o.d(c,"code1",(function(){return t}));const t="\n自行前往 router 查看 / 下载的东西\n"}}]);
+//# sourceMappingURL=chunk-2d216b75.fa6e0c05.js.map
