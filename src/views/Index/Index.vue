@@ -9,7 +9,8 @@
     <div>
         <el-header class="my_header">
             <div class="header_box">
-                <a href="./" class="title">zs.duan的个人总结</a>
+                <a v-if="NODE_ENV == 'development'" href="./" class="title">zs.duan的个人总结</a>
+                <a v-else href="/zhongjie" class="title">zs.duan的个人总结</a>
                 <div class="nav_box">
                     <div class="nav">
                         <el-menu
@@ -139,10 +140,12 @@ export default {
             activeComponent: "", //选中的组件
             searchList: [],
             is_search : false, //是否在搜索中
+            NODE_ENV : process.env.NODE_ENV
         };
     },
     created() {
         this.initAside();
+        console.log(process.env.NODE_ENV)
     },
     mounted() {
         

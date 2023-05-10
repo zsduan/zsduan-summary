@@ -13,7 +13,9 @@
             <div class="item">
                 <dzs-form-header :options="formOptions">
                     <template #mySlot>
-                        <el-button>我是自定义组件的button</el-button>
+                        <el-form-item label="自定义组件" prop="mySlot">
+                            <el-button>button</el-button>
+                        </el-form-item>
                     </template>
                 </dzs-form-header>
                 <dzs-code title="源代码" :value="code1"></dzs-code>

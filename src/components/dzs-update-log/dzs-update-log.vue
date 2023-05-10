@@ -3,6 +3,19 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.0.31</h2>
+                <div class="time">2023-05-10</div>
+            </div>
+            <div class="content">
+                <p>1. 修复了一些bug</p>
+                <p>2. 顶部表单组件 修复了 手机端显示出现bug的问题</p>
+                <p>3. 顶部表单组件 新增了 改变值可以有函数了 @change</p>
+                <p>4. 表单组件 修复了 有时候赋值不能成功的bug</p>
+                <p>5. 表单/顶部表单组件 修复了 时间类型为 datetimerange 报警告的bug</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.3</h2>
                 <div class="time">2023-05-08</div>
             </div>

@@ -21,9 +21,9 @@
                 <div v-for="(item,index) in formItem" :key="index">
                     <el-col class="my-col" :span="item.span ? item.span : 6" v-if="!item.isHidden">
                         <!-- 自定义组件 -->
-                        <el-form-item :label="item.label" v-if="item.isSlot">
+                        <div v-if="item.isSlot">
                             <slot :name="item.key"></slot>
-                        </el-form-item>
+                        </div>
                         <div v-if="!item.isSlot">
                             <!-- 输入框 -->
                             <el-form-item :label="item.label" :prop="item.key" v-if="item.type == 'input'">
@@ -148,18 +148,11 @@ export default {
                     !newValue.formItem ||
                     !newValue.formItem.length
                 )
-                    return;
-                this.initModel(newValue);
+                return;
+                this.initModel(JSON.parse(JSON.stringify(newValue)));
             },
             deep: true,
             immediate: true,
-        },
-        screenWidth: {
-            handler() {
-                if (!this.options.formItem || !this.options.formItem.length)
-                    return;
-                this.initModel(this.options);
-            },
         },
         value: {
             handler(newValue, oldValue) {
@@ -175,29 +168,60 @@ export default {
         },
     },
     created() {
-        window.onresize = () => {
-            this.screenWidth = document.body.clientWidth;
-        };
+        window.addEventListener("resize" , ()=>{
+            this.changeFormSize();
+        })
     },
     methods: {
-        // 改变输入的值
+        /**动态改变表单大小*/
+        changeFormSize() {
+            this.screenWidth = document.body.clientWidth;
+            // 兼容手机端
+            this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
+            if (this.formItem.length) {
+                let spanAll = 0;
+                this.formItem.forEach((item, index) => {
+                    let span = this.options.formItem[index].span;
+                    // 兼容手机端
+                    item.span = this.screenWidth <= 768 ? 24 : span ? span : 6;
+                    spanAll += item.span;
+                });
+                if (24 - (spanAll % 24) < 6) {
+                    this.btnSpan = 24;
+                } else {
+                    this.btnSpan = 6;
+                }
+                if (this.screenWidth <= 768) {
+                    this.btnSpan = 24;
+                }
+            }
+        },
+        /**改变输入的值*/ 
         changeVaule(value, key) {
             delete this.fromModel[key];
             this.$set(this.fromModel, key, value);
             this.$emit("update:value", this.fromModel);
+            this.$emit("change", {
+                value: value,
+                key: key,
+            });
         },
-        initModel(data) {
-            // 兼容手机端
-            this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
+        /**
+         * 初始化表单值
+         * @param {object} data 表单数据
+         * @param {object} data.formProps 表单配置
+         * @param {Array} data.formItem 表单数据
+         * @param {boolean} is_reset 是否重置
+         * */ 
+        initModel(data , is_reset = false) {
             this.formProps = data.formProps || {};
             this.formItem = data.formItem;
             let spanAll = 0;
             this.formItem.forEach((item) => {
                 // 兼容手机端
                 item.span = this.screenWidth <= 768 ? 24 : item.span ? item.span : 6;
-
                 spanAll += item.span;
-                // 初始化选项框 和上传图片框
+                // 初始化选项框
                 if (item.type === "checkbox" && !item.defaultValue) {
                     item.defaultValue = [];
                 }
@@ -209,23 +233,20 @@ export default {
                     item.defaultValue = false;
                 }
                 // input框 在饿了吗ui 中需要是 string类型
-                if (item.type == "input" && item.defaultValue){
+                if (item.type == "input" && item.defaultValue)
                     item.defaultValue = item.defaultValue.toString();
-                }
-                if (!item.props) {
-                    item.props = {};
-                }
-                // 当下拉框为多选时，需要将默认值转换为数组
-                if (item.type == "select" && item.props.multiple) {
-                    item.defaultValue = [];
-                }
+                if (!item.props) item.props = {};
                 this.fromRules[item.key] = item.rules || [];
-                if (item.defaultValue) {
-                    this.changeVaule(item.defaultValue, item.key);
+                if(item.props && item.props.type == 'datetimerange'){
+                    item.defaultValue = item.defaultValue || [];
                 }
-                this.fromModel[item.key] = item.defaultValue || "";
-            });
-            if(24 - (spanAll % 24) < 6){
+                if(is_reset){
+                    this.fromModel[item.key] = item.defaultValue || "";
+                }else{
+                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue || "";
+                }
+            })
+            if (24 - (spanAll % 24) < 6) {
                 this.btnSpan = 24;
             }
         },
@@ -261,7 +282,7 @@ export default {
             });
         },
         Reset(){
-            this.initModel(this.options);
+            this.initModel(this.options , true);
         },
         /**调用饿了么ui默认方法*/
         getForm() {

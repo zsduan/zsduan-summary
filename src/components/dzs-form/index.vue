@@ -365,8 +365,13 @@ export default {
                     item.defaultValue = [];
                 }
                 this.fromRules[item.key] = item.rules || [];
-                if (item.defaultValue) {
-                    this.changeVaule(item.defaultValue, item.key);
+                if(item.props && item.props.type == 'datetimerange'){
+                    item.defaultValue = item.defaultValue || [];
+                }
+                if(item.type != 'switch'){
+                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue || "";
+                }else{
+                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue;
                 }
                 this.fromModel[item.key] = item.defaultValue || "";
             });
