@@ -3,6 +3,19 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.0.32</h2>
+                <div class="time">2023-06-02</div>
+            </div>
+            <div class="content">
+                <p>1. 修复了一些bug</p>
+                <p>2. 顶部表单组件/表单组件 修复了 在多选框出现问题的bug</p>
+                <p>3. 顶部表单组件/表单组件 修复了 部分时候无法重新赋值的bug</p>
+                <p>5. 优化读入xlsx的option的读取</p>
+                <p>4. 新增一些好用的js</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.31</h2>
                 <div class="time">2023-05-10</div>
             </div>

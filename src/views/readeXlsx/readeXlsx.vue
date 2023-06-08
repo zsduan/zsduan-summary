@@ -54,32 +54,11 @@ export default {
     },
     methods:{
         changeFile(){
-            readeXlsx(this,{
+            readeXlsx({
                 refs : "myfile",
+                _this : this,
                 success:(res) =>{
                     this.xlsxInfo = res;
-                    // console.log(this.xlsxInfo.data.Sheet1);
-                    // let arr = [];
-                    // this.xlsxInfo.data.Sheet1.forEach(element => {
-                    //     let json = {
-                    //         name : element['姓名'],
-                    //         price : element['金额'],
-                    //         is_weixin : element['备注'] == '微信' ? true : false,
-                    //         is_special : element['金额'] == 0 ? true : false,
-                    //         remark : element['备注'] ? element['备注'] : ''
-                    //     }
-                    //     arr.push(json)
-                    // });
-
-                    // this.xlsxInfo.data.Sheet1.forEach(element => {
-                    //     let json = {
-                    //         name : element['人名/物品'],
-                    //         price : element['金额'],
-                    //         num : element['数量（默认1）'] ? element['数量（默认1）'] : '1份/1次',
-                    //         remark : element['备注'] ? element['备注'] : ''
-                    //     }
-                    //     arr.push(json)
-                    // });
                     console.log(JSON.stringify(arr));
                 },
                 fail : (e)=>{

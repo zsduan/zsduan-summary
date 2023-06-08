@@ -106,7 +106,7 @@ export default {
     z-index: 3;
     overflow: hidden;
     background: #fff;
-     &::before{
+    &::before{
         content: " ";
         position: absolute;
         background: var(--ThemeColor);

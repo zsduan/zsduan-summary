@@ -351,7 +351,11 @@ export default {
                     item.type == "switch" &&
                     (!item.defaultValue || item.defaultValue == "false")
                 ) {
-                    item.defaultValue = false;
+                    if(this.value[item.key] != undefined){
+                        item.defaultValue = this.value[item.key];
+                    }else{
+                        item.defaultValue = false;
+                    }
                 }
                 // input框 在饿了吗ui 中需要是 string类型
                 if (item.type == "input" && item.defaultValue){
@@ -361,13 +365,17 @@ export default {
                     item.props = {};
                 }
                 // 当下拉框为多选时，需要将默认值转换为数组
-                if (item.type == "select" && item.props.multiple) {
+                if (item.type == "select" && item.props.multiple && !item.defaultValue) {
                     item.defaultValue = [];
                 }
                 this.fromRules[item.key] = item.rules || [];
                 if(item.props && item.props.type == 'datetimerange'){
                     item.defaultValue = item.defaultValue || [];
                 }
+                if (item.defaultValue) {
+                    this.changeVaule(item.defaultValue, item.key);
+                }
+
                 if(item.type != 'switch'){
                     this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue || "";
                 }else{
@@ -380,6 +388,23 @@ export default {
         /**调用饿了么ui默认方法*/
         getForm() {
             return this.$refs.dzsForm;
+        },
+
+        /**
+         * 直接给表单赋值
+         * @param {object} data {key: value}
+         * */
+        setFormData(data) {
+            if (!data) {
+                throw new Error('data is not defined');
+            }
+            if(typeof data !== 'object' || !(Object.prototype.toString.call(data) === '[object Object]')){
+                throw new Error('data must be object');
+            }
+            this.fromModel = {
+                ...this.fromModel,
+                ...data,
+            };
         }, 
     },
 };

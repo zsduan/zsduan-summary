@@ -14,11 +14,22 @@ const newJson = {...oldJson}
 `;
 
 export const code2 = `
-const sleep = async (duration) => (
-    new Promise(resolve =>
-      setTimeout(resolve, duration)
-    )
-);
+/**
+ * 延时函数
+ * @param {Number} [time] 延时时间 默认500ms
+ * @param {Function} [fn] 回调函数
+ * */ 
+const sleep = (time = 500 , fn) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (fn && typeof fn === 'function') {
+                resolve(fn())
+            }else{
+                resolve(true)
+            }
+        }, time)
+    })
+}
 
 // 使用
 await sleep(1000);
@@ -101,4 +112,20 @@ export const code7 = `
             return -1; //不是ie浏览器
         }
     }
+`
+
+export const code8 = `
+/**
+ * 获取 当前天数的指定前后天数
+ * @param {Date} [date] 当前日期
+ * @param {Number} [day] 前后天数 -1：前一天 1：后一天
+ * */
+getNextDate(date, day) {
+    let dd = new Date(date);
+    dd.setDate(dd.getDate() + day);
+    let y = dd.getFullYear();
+    let m = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+    let d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+    return y + "-" + m + "-" + d;
+},
 `

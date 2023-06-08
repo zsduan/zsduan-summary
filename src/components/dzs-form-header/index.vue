@@ -287,6 +287,22 @@ export default {
         /**调用饿了么ui默认方法*/
         getForm() {
             return this.$refs.dzsForm;
+        },
+        /**
+         * 直接给表单赋值
+         * @param {object} data {key: value}
+         * */
+         setFormData(data) {
+            if (!data) {
+                throw new Error('data is not defined');
+            }
+            if(typeof data !== 'object' || !(Object.prototype.toString.call(data) === '[object Object]')){
+                throw new Error('data must be object');
+            }
+            this.fromModel = {
+                ...this.fromModel,
+                ...data,
+            };
         }, 
     },
 };
