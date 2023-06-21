@@ -101,7 +101,15 @@ export default {
     props: {
         options: {
             type: Object,
-            default: () => {},
+            default: () => {
+                return {};
+            },
+        },
+        success_txt: {
+            type: String,
+            default: () => {
+                return "搜索";
+            },
         },
         showBtn: {
             type: Boolean,
@@ -115,17 +123,30 @@ export default {
                 return {};
             },
         },
-        success_txt: {
+        fromStatus: {
             type: String,
             default: () => {
-                return "搜索";
+                return "";
             },
+        },
+        /**防抖时间*/
+        antiShakeTime: {
+            type: Number,
+            default: () => {
+                return 1000
+            }
+        },
+        btnSpan: {
+            type: Number,
+            default: () => {
+                return 6
+            }
         },
         btnIcon : {
             type: String,
             default: () => {
-                return "el-icon-search";
-            },
+                return "el-icon-search"
+            }
         }
     },
     data() {
@@ -137,66 +158,42 @@ export default {
             pickerOptions: pickerOptions,
             screenWidth: document.body.clientWidth, //屏幕宽度
             labelPosition: "left", //对其方式
-            btnSpan : 6
+            timer: null, //定时器 防止重复提交
+            initDataTimer: null, //定时器 防止重复提交
         };
     },
     watch: {
         options: {
             handler(newValue, oldValue) {
-                if (
-                    !newValue ||
-                    !newValue.formItem ||
-                    !newValue.formItem.length
-                )
-                return;
-                this.initModel(JSON.parse(JSON.stringify(newValue)));
+                if (!newValue.formItem || !newValue.formItem.length) return;
+                this.initModel(newValue);
+                this.initData(this.value || {}, newValue);
             },
             deep: true,
             immediate: true,
         },
+        screenWidth: {
+            handler() {
+                if (!this.options.formItem || !this.options.formItem.length) return;
+                this.initModel(this.options);
+            },
+        },
         value: {
             handler(newValue, oldValue) {
-                if(!newValue) return;
-                if(JSON.stringify(newValue) == JSON.stringify(this.fromModel)) return;
-                if(JSON.stringify(newValue) == '{}') return;
-                this.fromModel = {
-                    ...this.fromModel,
-                    ...newValue,
-                };
+                if (!newValue) return;
+                this.initData(this.value || {}, this.options || {});
             },
             deep: true,
+            immediate: true,
         },
     },
     created() {
-        window.addEventListener("resize" , ()=>{
-            this.changeFormSize();
-        })
+        window.onresize = () => {
+            this.screenWidth = document.body.clientWidth;
+        };
     },
     methods: {
-        /**动态改变表单大小*/
-        changeFormSize() {
-            this.screenWidth = document.body.clientWidth;
-            // 兼容手机端
-            this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
-            if (this.formItem.length) {
-                let spanAll = 0;
-                this.formItem.forEach((item, index) => {
-                    let span = this.options.formItem[index].span;
-                    // 兼容手机端
-                    item.span = this.screenWidth <= 768 ? 24 : span ? span : 6;
-                    spanAll += item.span;
-                });
-                if (24 - (spanAll % 24) < 6) {
-                    this.btnSpan = 24;
-                } else {
-                    this.btnSpan = 6;
-                }
-                if (this.screenWidth <= 768) {
-                    this.btnSpan = 24;
-                }
-            }
-        },
-        /**改变输入的值*/ 
+        // 改变输入的值
         changeVaule(value, key) {
             delete this.fromModel[key];
             this.$set(this.fromModel, key, value);
@@ -206,104 +203,142 @@ export default {
                 key: key,
             });
         },
-        /**
-         * 初始化表单值
-         * @param {object} data 表单数据
-         * @param {object} data.formProps 表单配置
-         * @param {Array} data.formItem 表单数据
-         * @param {boolean} is_reset 是否重置
-         * */ 
-        initModel(data , is_reset = false) {
-            this.formProps = data.formProps || {};
-            this.formItem = data.formItem;
-            let spanAll = 0;
-            this.formItem.forEach((item) => {
-                // 兼容手机端
-                item.span = this.screenWidth <= 768 ? 24 : item.span ? item.span : 6;
-                spanAll += item.span;
-                // 初始化选项框
-                if (item.type === "checkbox" && !item.defaultValue) {
-                    item.defaultValue = [];
-                }
-                // 初始化 开关
-                if (
-                    item.type == "switch" &&
-                    (!item.defaultValue || item.defaultValue == "false")
-                ) {
-                    item.defaultValue = false;
-                }
-                // input框 在饿了吗ui 中需要是 string类型
-                if (item.type == "input" && item.defaultValue)
-                    item.defaultValue = item.defaultValue.toString();
-                if (!item.props) item.props = {};
-                this.fromRules[item.key] = item.rules || [];
-                if(item.props && item.props.type == 'datetimerange'){
-                    item.defaultValue = item.defaultValue || [];
-                }
-                if(is_reset){
-                    this.fromModel[item.key] = item.defaultValue || "";
-                }else{
-                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue || "";
-                }
-            })
-            if (24 - (spanAll % 24) < 6) {
-                this.btnSpan = 24;
-            }
-        },
-        submit(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    let sendList = {};
-                    for (const key in this.fromModel) {
-                        if (Object.hasOwnProperty.call(this.fromModel, key)) {
-                            let item = this.formItem.filter(
-                                (item) => item.key == key
-                            )[0];
-                            sendList[key] = this.fromModel[key];
-                            if (item) {
-                                if (item.type == "checkbox") {
-                                    sendList[key] =
-                                        this.fromModel[key].join(",");
-                                }
-                                if (item.type == "switch") {
-                                    sendList[key] = this.fromModel[key] ? 1 : 0;
-                                }
-                                if (item.isNull) {
-                                    delete sendList[key];
-                                }
+
+        async submit(formName = "dzsForm") {
+            let next = await this.debounce();
+            if (!next) return;
+            return new Promise((resolve, reject) => {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let sendList = {};
+                        let formItem = this.formItem;
+                        formItem.forEach(v =>{
+                            sendList[v.key] = this.fromModel[v.key];
+                            if(v.isNull){
+                                delete sendList[v.key];
                             }
-                        }
+                        })
+                        this.$emit("Search", sendList);
+                        this.$emit("update:value", sendList);
+                        resolve(sendList);
+                    } else {
+                        this.$message.error("请填写完整信息");
+                        reject();
+                        return false;
                     }
-                    this.$emit("onSubmit", this.fromModel);
-                    this.$emit("update:value", this.fromModel);
-                } else {
-                    return false;
-                }
+                });
             });
         },
-        Reset(){
-            this.initModel(this.options , true);
+        /**重置*/
+        Reset() {
+            this.initData({}, this.options);
+            this.$emit("update:value", this.fromModel);
+            this.$emit("Reset");
         },
-        /**调用饿了么ui默认方法*/
-        getForm() {
-            return this.$refs.dzsForm;
-        },
+
         /**
-         * 直接给表单赋值
-         * @param {object} data {key: value}
+         * 初始化表单数据
+         * @param {Object} data v-model
+         * @param {Object} options 表单配置 中可能有默认值
          * */
-         setFormData(data) {
-            if (!data) {
-                throw new Error('data is not defined');
+        initData(data, options) {
+            if(this.initDataTimer){
+                clearTimeout(this.initDataTimer);
+                this.initDataTimer = null;
+                return ;
             }
-            if(typeof data !== 'object' || !(Object.prototype.toString.call(data) === '[object Object]')){
-                throw new Error('data must be object');
+            this.initDataTimer = setTimeout(()=>{
+                this.initDataTimer = null;
+            },500)
+            let formItem = options.formItem || [];
+            let formModel = {};
+            formItem.forEach((item) => {
+                if (item.defaultValue) {
+                    formModel[item.key] = item.defaultValue;
+                } else {
+                    switch (item.type) {
+                        case "select":
+                            if (item.props && item.props.multiple) {
+                                formModel[item.key] = [];
+                            } else {
+                                formModel[item.key] = "";
+                            }
+                            break;
+                        case "checkbox":
+                            formModel[item.key] = [];
+                            break;
+                        case "switch":
+                            formModel[item.key] = false;
+                            break;
+                        default:
+                            formModel[item.key] = "";
+                            break;
+                    }
+                }
+            });
+            // 如果data中有值 则覆盖默认值 不然就使用默认值
+            for (let key in data) {
+                if(data[key] == "" ){
+                    data[key] = formModel[key]
+                }
             }
+            this.fromModel = {
+                ...formModel,
+                ...data,
+            };
+        },
+
+        /**初始化表单配置*/
+        initModel(data) {
+            // 兼容手机端
+            this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
+            this.formProps = data.formProps || {};
+            this.formItem = data.formItem;
+            this.formItem.forEach((item) => {
+                // 兼容手机端
+                item.span = this.screenWidth <= 768 ? 24 : item.span || 6;
+                this.fromRules[item.key] = item.rules || [];
+            });
+        },
+
+        /**清空表单数据*/
+        clearForm() {
+            this.$refs["dzsForm"].resetFields();
+        },
+
+        /**调用饿了么表单的原生方法*/
+        getForm() {
+            return this.$refs["dzsForm"];
+        },
+
+        /**赋值*/
+        setFormData(data) {
             this.fromModel = {
                 ...this.fromModel,
                 ...data,
             };
-        }, 
+        },
+
+        /**防抖*/
+        debounce() {
+            return new Promise((resolve, reject) => {
+                if (this.timer) {
+                    this.$message({
+                        message: `请勿重复提交,${this.antiShakeTime / 1000} 秒后再试`,
+                        type: "warning",
+                    });
+                    resolve(false);
+                    return;
+                }
+                if (this.antiShakeTime) {
+                    this.timer = setTimeout(() => {
+                        clearTimeout(this.timer);
+                        this.timer = null;
+                    }, this.antiShakeTime);
+                }
+                resolve(true);
+            });
+        },
     },
 };
 </script>

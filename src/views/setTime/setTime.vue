@@ -75,7 +75,7 @@ export default {
             time : setTime(),
             code1 : code1,
             code2 : code2,
-            time1 : setTime({Format : "yyyy-MM-dd"})
+            time1 : setTime({format : "yyyy-MM-dd"})
         }
     },
     methods:{
@@ -91,7 +91,7 @@ export default {
         onSubmit1(e){
             setTime({
                 date : e.Time,
-                Format : "yyyy-MM-dd",
+                format : "yyyy-MM-dd",
                 success : (res)=>{
                     this.time1 = res
                 }

@@ -9,41 +9,49 @@
 /**
  * 获取格式化时间
  * @param {Object} option 配置对象
- * @param {String} option.Format 格式化字符串 yyyy-MM-dd HH:mm:ss
- * @param {Date | string} [option.date] 日期对象
+ * @param {String} option.format 格式化字符串 yyyy-MM-dd HH:mm:ss
+ * @param {Date | string | number} [option.date] 日期对象 | 日期字符串 | 时间戳
  * @param {Function} [option.success] 成功返回
  * @param {Function} [option.fail] 失败返回
  * @returns {String} 格式化后的时间
  * @example
  * getTime({
- * Format : 'yyyy-MM-dd HH:mm:ss',
+ * format : 'yyyy-MM-dd HH:mm:ss',
  * date : new Date(),
  * success : (reslut)=>{},
  * }) // 2021-04-05 15:54:28
  * */
-const getTime = (option) => {
+function getTime(option){
     let options = {
-        Format: "yyyy-MM-dd HH:mm:ss",
+        format: "yyyy-MM-dd HH:mm:ss",
         date: new Date(),
         success: (reslut) => { },
         fail : (error)=>{}
     }
     options = Object.assign(options, option);
-    if (!options.Format) {
-        options.Format = "yyyy-MM-dd HH:mm:ss"
+    if (!options.format) {
+        options.format = "yyyy-MM-dd HH:mm:ss"
     }
-    if (typeof options.Format !== 'string') {
-        options.fail('Format must be a string');
+    if (typeof options.format !== 'string') {
+        options.fail('format must be a string');
         return ;
     }
     let date = options.date;
-    let Format = options.Format;
+    let format = options.format;
+    if(date && typeof date == 'number'){
+        try {
+            date = new Date(date);
+        }catch (error) {
+            options.fail('Incorrect timing');
+            throw new Error('Incorrect timing');
+        }
+    }
     if (date && typeof date == 'string') {
         try {
             date = new Date(date);
         } catch (error) {
-            options.fail('date must be a Date object');
-            return ;
+            options.fail('Incorrect timing');
+            throw new Error('Incorrect timing');
         }
     }
     if (Object.prototype.toString.call(date) !== '[object Date]') {
@@ -65,22 +73,25 @@ const getTime = (option) => {
         "s+": second,
         "S+": millisecond,
     };
-    if (/(y+)/.test(Format)) {
-        Format = Format.replace(
+    if (/(y+)/.test(format)) {
+        format = format.replace(
             RegExp.$1,
             (year + "").substr(4 - RegExp.$1.length)
         );
     }
     for (var k in o) {
-        if (new RegExp("(" + k + ")").test(Format)) {
-            Format = Format.replace(
+        if (new RegExp("(" + k + ")").test(format)) {
+            format = format.replace(
                 RegExp.$1,
                 RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(String(o[k]).length)
             );
         }
     }
-    options.success(Format);
-    return Format;
+    options.success(format);
+    return format;
 }
 
+getTime.install = function (Vue) {
+    Vue.prototype.$getTime = getTime;
+}
 export default getTime;

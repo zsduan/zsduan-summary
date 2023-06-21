@@ -185,10 +185,10 @@ import dzsEditors from "../dzs-editor/index.vue";
 import dzsUploadImg from "../dzs-upload-img/dzs-upload-img.vue";
 
 export default {
-    name: "From",
+    name: "dzs-form",
     components: {
-        dzsEditors,
         dzsUploadImg,
+        dzsEditors,
     },
     model: {
         prop: "value",
@@ -225,6 +225,13 @@ export default {
                 return "";
             },
         },
+        /**防抖时间*/
+        antiShakeTime: {
+            type: Number,
+            default: () => {
+                return 1000
+            }
+        }
     },
     data() {
         return {
@@ -235,6 +242,7 @@ export default {
             pickerOptions: pickerOptions,
             screenWidth: document.body.clientWidth, //屏幕宽度
             labelPosition: "left", //对其方式
+            timer: null, //定时器 防止重复提交
         };
     },
     watch: {
@@ -242,6 +250,7 @@ export default {
             handler(newValue, oldValue) {
                 if (!newValue.formItem || !newValue.formItem.length) return;
                 this.initModel(newValue);
+                this.initData(this.value || {}, newValue);
             },
             deep: true,
             immediate: true,
@@ -254,15 +263,11 @@ export default {
         },
         value: {
             handler(newValue, oldValue) {
-                if(!newValue) return;
-                if(JSON.stringify(newValue) == JSON.stringify(this.fromModel)) return;
-                if(JSON.stringify(newValue) == '{}') return;
-                this.fromModel = {
-                    ...this.fromModel,
-                    ...newValue,
-                };
+                if (!newValue) return;
+                this.initData(this.value || {}, this.options || {});
             },
             deep: true,
+            immediate: true,
         },
     },
     created() {
@@ -276,61 +281,92 @@ export default {
             delete this.fromModel[key];
             this.$set(this.fromModel, key, value);
             this.$emit("update:value", this.fromModel);
-        },
-
-        submit(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    let sendList = {};
-                    for (const key in this.fromModel) {
-                        if (Object.hasOwnProperty.call(this.fromModel, key)) {
-                            let item = this.formItem.filter(
-                                (item) => item.key == key
-                            )[0];
-                            sendList[key] = this.fromModel[key];
-                            if (item) {
-                                if (item.type == "uploadImg") {
-                                    let urlList = this.fromModel[key];
-                                    sendList[key] = "";
-                                    if (urlList && urlList.length > 0) {
-                                        if (urlList.length == 1) {
-                                            sendList[key] =
-                                                urlList[0].uploadUrl;
-                                        } else {
-                                            urlList.forEach((item) => {
-                                                sendList[key] +=
-                                                    item.uploadUrl + ",";
-                                            });
-                                        }
-                                    }
-                                }
-                                if (item.type == "checkbox") {
-                                    sendList[key] =
-                                        this.fromModel[key].join(",");
-                                }
-                                if (item.type == "switch") {
-                                    sendList[key] = this.fromModel[key] ? 1 : 0;
-                                }
-                                if (item.isNull) {
-                                    delete sendList[key];
-                                }
-                            }
-                        }
-                    }
-                    this.$emit("onSubmit", this.fromModel);
-                    this.$emit("update:value", this.fromModel);
-                } else {
-                    return false;
-                }
+            this.$emit("change", {
+                value: value,
+                key: key,
             });
         },
 
+        async submit(formName = "dzsForm") {
+            let next = await this.debounce();
+            if (!next) return;
+            return new Promise((resolve, reject) => {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let sendList = {};
+                        let formItem = this.formItem;
+                        formItem.forEach(v =>{
+                            sendList[v.key] = this.fromModel[v.key];
+                            if(v.isNull){
+                                delete sendList[v.key];
+                            }
+                        })
+                        this.$emit("onSubmit", sendList);
+                        this.$emit("update:value", sendList);
+                        resolve(sendList);
+                    } else {
+                        this.$message.error("请填写完整信息");
+                        reject();
+                        return false;
+                    }
+                });
+            });
+        },
+        /**取消*/
         cancel() {
-            this.$refs.dzsForm.resetFields();
+            this.clearForm();
             this.$emit("onCancel");
+        },
+
+        /**
+         * 初始化表单数据
+         * @param {Object} data v-model
+         * @param {Object} options 表单配置 中可能有默认值
+         * */
+        initData(data, options) {
+            let formItem = options.formItem || [];
+            let formModel = {};
+            formItem.forEach((item) => {
+                if (item.defaultValue) {
+                    formModel[item.key] = item.defaultValue;
+                } else {
+                    switch (item.type) {
+                        case "select":
+                            if (item.props && item.props.multiple) {
+                                formModel[item.key] = [];
+                            } else {
+                                formModel[item.key] = "";
+                            }
+                            break;
+                        case "checkbox":
+                            formModel[item.key] = [];
+                            break;
+                        case "uploadImg":
+                            formModel[item.key] = [];
+                            break;
+                        case "switch":
+                            formModel[item.key] = false;
+                            break;
+                        default:
+                            formModel[item.key] = "";
+                            break;
+                    }
+                }
+            });
+            // 如果data中有值 则覆盖默认值 不然就使用默认值
+            for (let key in data) {
+                if(data[key] == "" ){
+                    data[key] = formModel[key]
+                }
+            }
+            this.fromModel = {
+                ...formModel,
+                ...data,
+            };
             this.$emit("update:value", this.fromModel);
         },
 
+        /**初始化表单配置*/
         initModel(data) {
             // 兼容手机端
             this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
@@ -338,74 +374,49 @@ export default {
             this.formItem = data.formItem;
             this.formItem.forEach((item) => {
                 // 兼容手机端
-                item.span = this.screenWidth <= 768 ? 24 : item.span;
-                // 初始化选项框 和上传图片框
-                if (
-                    (item.type === "checkbox" || item.type === "uploadImg") &&
-                    !item.defaultValue
-                ) {
-                    item.defaultValue = [];
-                }
-                // 初始化 开关
-                if (
-                    item.type == "switch" &&
-                    (!item.defaultValue || item.defaultValue == "false")
-                ) {
-                    if(this.value[item.key] != undefined){
-                        item.defaultValue = this.value[item.key];
-                    }else{
-                        item.defaultValue = false;
-                    }
-                }
-                // input框 在饿了吗ui 中需要是 string类型
-                if (item.type == "input" && item.defaultValue){
-                    item.defaultValue = item.defaultValue.toString();
-                }
-                if (!item.props) {
-                    item.props = {};
-                }
-                // 当下拉框为多选时，需要将默认值转换为数组
-                if (item.type == "select" && item.props.multiple && !item.defaultValue) {
-                    item.defaultValue = [];
-                }
+                item.span = this.screenWidth <= 768 ? 24 : item.span || 24;
                 this.fromRules[item.key] = item.rules || [];
-                if(item.props && item.props.type == 'datetimerange'){
-                    item.defaultValue = item.defaultValue || [];
-                }
-                if (item.defaultValue) {
-                    this.changeVaule(item.defaultValue, item.key);
-                }
-
-                if(item.type != 'switch'){
-                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue || "";
-                }else{
-                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue;
-                }
-                this.fromModel[item.key] = item.defaultValue || "";
             });
         },
 
-        /**调用饿了么ui默认方法*/
-        getForm() {
-            return this.$refs.dzsForm;
+        /**清空表单数据*/
+        clearForm() {
+            this.$refs["dzsForm"].resetFields();
         },
 
-        /**
-         * 直接给表单赋值
-         * @param {object} data {key: value}
-         * */
+        /**调用饿了么表单的原生方法*/
+        getForm() {
+            return this.$refs["dzsForm"];
+        },
+
+        /**赋值*/
         setFormData(data) {
-            if (!data) {
-                throw new Error('data is not defined');
-            }
-            if(typeof data !== 'object' || !(Object.prototype.toString.call(data) === '[object Object]')){
-                throw new Error('data must be object');
-            }
             this.fromModel = {
                 ...this.fromModel,
                 ...data,
             };
-        }, 
+        },
+
+        /**防抖*/
+        debounce() {
+            return new Promise((resolve, reject) => {
+                if (this.timer) {
+                    this.$message({
+                        message: `请勿重复提交,${this.antiShakeTime / 1000} 秒后再试`,
+                        type: "warning",
+                    });
+                    resolve(false);
+                    return;
+                }
+                if (this.antiShakeTime) {
+                    this.timer = setTimeout(() => {
+                        clearTimeout(this.timer);
+                        this.timer = null;
+                    }, this.antiShakeTime);
+                }
+                resolve(true);
+            });
+        },
     },
 };
 </script>
