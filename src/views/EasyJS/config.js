@@ -129,3 +129,62 @@ getNextDate(date, day) {
     return y + "-" + m + "-" + d;
 },
 `
+
+
+export const code9 = `
+/**
+ * 将url参数转换为对象
+ * @param {String} [url] url地址
+ * */ 
+parseQueryString(url) {
+    url = url == null ? window.location.href : url
+    const search = url.substring(url.lastIndexOf('?') + 1)
+    const obj = {}
+    const reg = /([^?&=]+)=([^?&=]*)/g
+    search.replace(reg, (rs, $1, $2) => {
+        const name = decodeURIComponent($1)
+        let val = decodeURIComponent($2)
+        val = String(val)
+        obj[name] = val
+        return rs
+    })
+    return obj
+}
+`
+
+export const code10 = `
+/**
+ * 将对象转换为url参数
+ * @param {Object} obj 对象
+ * */ 
+param(json) {
+    if (!json) return ''
+    return cleanArray(
+        Object.keys(json).map(key => {
+            if (json[key] === undefined) return ''
+            return encodeURIComponent(key) + '=' + encodeURIComponent(json[key])
+        })
+    ).join('&')
+}
+`
+
+export const code11 = `
+/**
+ * 深拷贝
+ * @param {Object} source 对象
+ * */ 
+deepClone(source) {
+    if (!source && typeof source !== 'object') {
+        throw new Error('error arguments', 'deepClone')
+    }
+    const targetObj = source.constructor === Array ? [] : {}
+    Object.keys(source).forEach(keys => {
+        if (source[keys] && typeof source[keys] === 'object') {
+            targetObj[keys] = deepClone(source[keys])
+        } else {
+            targetObj[keys] = source[keys]
+        }
+    })
+    return targetObj
+}
+`

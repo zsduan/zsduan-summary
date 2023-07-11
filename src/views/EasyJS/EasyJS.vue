@@ -32,6 +32,7 @@
 </template>
 <script>
 import { code1, code2 , code3 , code4 , code5 , code6 , code7 , code8} from "./config";
+import { code9, code10 , code11} from "./config";
 import { blurSearch } from "@/utils/blurSearch.js";
 export default {
     props:{
@@ -48,6 +49,10 @@ export default {
                 {
                     name: "深拷贝",
                     code: code1,
+                },
+                {
+                    name : "深拷贝2",
+                    code : code11
                 },
                 {
                     name: "在执行下一个操作之前等待指定的持续时间（以毫秒为单位）",
@@ -76,7 +81,15 @@ export default {
                 {
                     name : "获取某个时间的前n天/后n天",
                     code : code8
-                }
+                },
+                {
+                    name : "将url参数转换为对象",
+                    code : code9
+                },
+                {
+                    name : "将对象转换为url参数",
+                    code : code10
+                },
             ],
             searchList : [],
             searchValue : ""
