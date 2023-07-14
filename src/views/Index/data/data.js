@@ -56,7 +56,7 @@ const asideList = [
         key : "jsList"
     },
     {
-        name : "动效/页面效果",
+        name : "动效/页面效果/css",
         key : "effectList"
     },
     {

@@ -27,7 +27,8 @@
             </div>
             <h2>组件源代码下载</h2>
             <div class="item">
-                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-popup/index.vue">弹窗组件下载地址</a>
+                <a target="_blank"
+                    href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-popup/index.vue">弹窗组件下载地址</a>
             </div>
         </div>
         <dzs-popup :isShow.sync="defaultIsShow">
@@ -44,14 +45,15 @@
 </template>
 <script>
 import dzsPopup from "@/components/dzs-popup/index.vue";
+import {code1 , code2} from "./config";
 export default {
     components: {
         dzsPopup,
     },
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
+    props: {
+        newIndex: {
+            type: Boolean,
+            default: () => {
                 return false
             }
         }
@@ -59,18 +61,9 @@ export default {
     data() {
         return {
             defaultIsShow: false,
-            defaultValue: `
-<dzs-popup :isShow.sync="defaultIsShow">
-    <div>我是一个默认的弹窗</div>
-</dzs-popup>`,
+            defaultValue: code1,
             defaultBottomIsShow: false,
-            defaultBottomValue: `
-<dzs-popup :isShow.sync="defaultBottomIsShow">
-    <div>我是一个有底部的弹窗</div>
-    <template slot="footer">
-        <el-button>提交</el-button>
-    </template>
-</dzs-popup>`,
+            defaultBottomValue: code2,
         };
     },
     methods: {
@@ -87,7 +80,8 @@ export default {
 .page {
     .item {
         padding: 10px 0;
-        a{
+
+        a {
             display: inline-block;
             padding: 10px 20px;
             text-align: center;

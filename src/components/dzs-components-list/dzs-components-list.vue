@@ -42,6 +42,7 @@
         <multiplicationTable v-else-if="type == '/99-multiplication-table'" :newIndex="true"></multiplicationTable>
         <setHtml v-else-if="type == '/setHtml'" :newIndex="true"></setHtml>
         <qr-code v-else-if="type == '/qr-code'" :newIndex="true"></qr-code>
+        <easy-css v-else-if="type == '/EasyCss'" :newIndex="true"></easy-css>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -83,6 +84,7 @@ import myPromise from "@/views/myPromise/myPromise.vue";
 import MultiplicationTable from "@/views/99-multiplication-table/99-multiplication-table.vue";
 import setHtml from "@/views/setHtml/setHtml.vue";
 import qrCode from "@/views/qr-code/qr-code.vue";
+import EasyCss from "@/views/EasyCss/index.vue"
 
 
 export default {
@@ -122,7 +124,8 @@ export default {
         myPromise,
         MultiplicationTable,
         setHtml,
-        qrCode
+        qrCode,
+        EasyCss
     },
     props : {
         type : {

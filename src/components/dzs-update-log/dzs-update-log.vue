@@ -3,6 +3,15 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.0.33</h2>
+                <div class="time">2023-07-14</div>
+            </div>
+            <div class="content">
+                <p>1. 新增了可以拖动弹窗组件啦，弹窗组件可以点击放大缩小啦</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.32</h2>
                 <div class="time">2023-06-02</div>
             </div>
@@ -47,7 +56,9 @@
 <script>
 export default {
     data() {
-        return {};
+        return {
+           
+        };
     },
     methods: {},
     mounted() {},

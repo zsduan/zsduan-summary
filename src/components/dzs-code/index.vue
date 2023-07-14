@@ -66,7 +66,7 @@ export default {
                 return ;
             }
             myCopy({
-                copyContent : this.value,
+                content : this.value,
                 type : "Text",
                 success : ()=>{
                     this.$notify({
@@ -75,18 +75,6 @@ export default {
                     });
                 }
             })
-            
-            return ;
-            let input = document.createElement("input");
-            input.value = this.value;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand("copy");
-            document.body.removeChild(input);
-            this.$notify({
-                message: '已经复制到剪贴板',
-                type: 'success'
-            });
         },
         highlighter(code) {
             return highlight(code, languages.js); // languages.<insert language> to return html with markup

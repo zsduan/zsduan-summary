@@ -179,6 +179,11 @@ export const effectList = [
         path : "/button-border",
         is_show : true
     },
+    {
+        title : "一些不常用的css",
+        path : "/EasyCss",
+        is_show : true
+    },
 ]
 
 export const fragmentList = [
