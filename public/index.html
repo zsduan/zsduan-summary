@@ -1,22 +1,24 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-12-26 10:49:15
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 11:27:28
- * @FilePath: \vue2+js+eui+template\index.html
--->
-
 <!DOCTYPE html>
 <html lang="zh">
 
-<meta charset="UTF-8" />
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>zsduan的个人总结</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <script src="<%= BASE_URL %>js/config.js"></script>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
 
 <body>
-    <div id="app">
-    </div>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+                Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
     <div class="parentBox">
         <div class="tips">客观~等一会~~</div>
         <svg class="scalableBox" viewBox="0 0 128 256" width="128px" height="256px" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +41,7 @@
                 stroke="url(#ap-grad2)" stroke-width="16" stroke-linecap="round" stroke-dasharray="87.96 494" />
         </svg>
     </div>
-    <script type="module" src="/src/main.js"></script>
+
     <style>
         body{
             margin: 0;

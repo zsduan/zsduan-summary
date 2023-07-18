@@ -3,6 +3,16 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.0.34</h2>
+                <div class="time">2023-07-18</div>
+            </div>
+            <div class="content">
+                <p>1. 新增了水印js 可以添加水印了 ?type=%2Fwatermark</p>
+                <p>2. 新增了上传和下载的js 可以监听进度</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.33</h2>
                 <div class="time">2023-07-14</div>
             </div>

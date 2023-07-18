@@ -11,7 +11,6 @@ const path = require("path");
 module.exports = {
     //=>process.env.NODE_ENV：环境变量中存储的是开发环境还是生产环境
     publicPath: "./",
-    // publicPath: './',
     lintOnSave: false,
     assetsDir: "static",
     devServer:{

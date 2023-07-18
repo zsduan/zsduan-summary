@@ -12,7 +12,22 @@
 </template>
 
 <script>
+import watermark from "./utils/watermark.js";
+import ua from "@/utils/ua";
+import setTime from "@/utils/setTime";
 export default {
+    created() {
+        watermark({
+            watermark_txt : `<p>zsduan的个人总结</p><p>${ua().browserName} ${ua().browserVersion}</p><p>${setTime()}</p>`,
+            isHtml : true,
+            watermark_color : "rgba(0,0,0,0.1)",
+        })
+    },
+    watch: {
+        $route() {
+            console.log(this.$route);
+        },
+    },
     mounted(){
         setTimeout(() => {
             let ThemeColor = window.localStorage.getItem("ThemeColor");

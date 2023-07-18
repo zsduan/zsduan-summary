@@ -166,6 +166,11 @@ export const jsList = [
         path : "/myCopy",
         is_show : true
     },
+    {
+        title : "水印",
+        path : "/watermark",
+        is_show : true
+    },
 ]
 
 export const effectList = [
