@@ -6,49 +6,31 @@
  * @FilePath: \vue2+elui+template\src\components\dzs-table\index.vue
 -->
 <template>
-    <div class="table-wrop">
+    <div class="table-wrop" :style="{height : tableHeight ? tableHeight : ''}">
         <div class="list-wrop">
-            <el-table
-                v-if="!isRedraw"
-                :data="tableData"
-                class="table"
-                ref="dzsTable"
-                v-loading="loading"
-                @selection-change="handleSelectionChange"
-                :stripe="true"
-                v-bind="{...tableOptions}"
-            >
+            <el-table v-if="!isRedraw" :data="tableData" class="table" ref="dzsTable" v-loading="loading"
+                @selection-change="handleSelectionChange" :stripe="true" v-bind="{ ...tableOptions }">
                 <el-table-column type="selection" width="55" v-if="showCheckbox"></el-table-column>
-                <template v-for="(option,index) in headerData">
-                    <el-table-column
-                        v-if="!option.isSlot"
-                        :label="option.lable"
-                        :width="option.width"
-                        :show-overflow-tooltip="true"
-                        :prop="option.key"
-                        :class-name="'table-column_' + columnClassName"
-                        v-bind="{...option.props}"
-                        :key="index"
-                    ></el-table-column>
-                    <el-table-column
-                        v-else
-                        :class-name="'table-column_' + columnClassName"
-                        :key="index"
-                        :label="option.lable"
-                        :width="option.width"
-                        :show-overflow-tooltip="true"
-                        v-bind="{...option.props}"
-                    >
-                        <template slot-scope="scope">
-                            <div>
-                                <slot :name="option.key" :row="{ ...scope.row }" />
-                            </div>
-                        </template>
-                    </el-table-column>
+                <template v-for="(option, index) in headerData">
+                    <template v-if="!option.isSlot">
+                        <el-table-column :label="option.lable" :width="option.width" :show-overflow-tooltip="true"
+                            :prop="option.key" :class-name="'table-column_' + columnClassName" v-bind="{ ...option.props }"
+                            :key="index"></el-table-column>
+                    </template>
+                    <template v-else>
+                        <el-table-column :class-name="'table-column_' + columnClassName" :key="index" :label="option.lable"
+                            :width="option.width" :show-overflow-tooltip="true" v-bind="{ ...option.props }">
+                            <template slot-scope="scope">
+                                <div>
+                                    <slot :name="option.key" :row="{ ...scope.row }" />
+                                </div>
+                            </template>
+                        </el-table-column>
+                    </template>
                 </template>
                 <el-table-column v-bind="operationOption" label="操作">
                     <template slot-scope="scope">
-                        <el-button type="text" class="btn" size="small" v-for="(item,index) in operation" :key="index">
+                        <el-button type="text" class="btn" size="small" v-for="(item, index) in operation" :key="index">
                             <span @click="onEdit(scope.row)" v-if="item == 'edit'">编辑</span>
                             <span @click="onDetails(scope.row)" v-if="item == 'detail'">详情</span>
                             <el-popconfirm title="是否要删除？" @confirm="onDel(scope.row)">
@@ -57,23 +39,18 @@
                                 </template>
                             </el-popconfirm>
                         </el-button>
-                        <slot name="tableBtn" :row="{...scope.row }"></slot>
+                        <slot name="tableBtn" :row="{ ...scope.row }"></slot>
                     </template>
                 </el-table-column>
             </el-table>
             <div class="sider-box">
-                <dzs-tabel-sider :list="tableHeader" @change="onSiderChange" @changeHeight="changeHeight"></dzs-tabel-sider>
+                <dzs-tabel-sider v-if="showTabelSider" :list="tableHeader" @change="onSiderChange" @changeHeight="changeHeight"></dzs-tabel-sider>
             </div>
         </div>
         <div class="table-footer" v-if="(total > maxSize) && showPagination">
-            <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :page-sizes="[maxSize, maxSize * 2, maxSize * 4]"
-                :background="paginationSet.background"
-                :layout="paginationSet.layout"
-                :total="total"
-            ></el-pagination>
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                :page-sizes="[maxSize, maxSize * 2, maxSize * 4]" :background="paginationSet.background"
+                :layout="paginationSet.layout" :total="total"></el-pagination>
         </div>
     </div>
 </template>
@@ -92,6 +69,8 @@
  * @props total 总条数
  * @props tableOptions 饿了吗ui的配置
  * @props loading 是否开启加载中 可以在 tableOptions配置自己想要的加载 element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"
+ * @props height 高度
+ * @props showTabelSider 是否显示侧边栏 默认true 显示
  *
  * @methods SelectionChange 选中数据改变 返回当前选中的数据
  * @methods change 页码/条数改变 返回当前页码/条数  status:page 改变页码  status:size 改变条数
@@ -100,6 +79,7 @@
  * @methods onDetails 详情
  * @methods onDel 删除
  * @methods setSelection 设置选中的数据
+ * @methods getTableMethods 获取到原生方法
  *
  */
 import dzsTabelSider from "./sider/dzs-tabel-sider.vue";
@@ -179,6 +159,20 @@ export default {
                 return false;
             },
         },
+        /**高度*/
+        height: {
+            type: String | Number,
+            default: () => {
+                return "";
+            },
+        },
+        /**是否显示侧边栏*/
+        showTabelSider: {
+            type: Boolean,
+            default: () => {
+                return true;
+            },
+        },
     },
     data() {
         return {
@@ -188,7 +182,7 @@ export default {
             },
             isRedraw: false,
             headerData: [],
-            columnClassName : ""
+            columnClassName: ""
         };
     },
     watch: {
@@ -200,7 +194,22 @@ export default {
             immediate: true,
         },
     },
-    mounted() {},
+    computed: {
+        /**计算高度*/
+        tableHeight() {
+            let height = "";
+            if (this.height) {
+                if(Number(this.height) != NaN && Number(this.height) > 0){
+                    height = Number(this.height) + "px";
+                }else{
+                    height = this.height;
+                }
+            }
+            return height;
+        },
+        
+    },
+    mounted() { },
     methods: {
         /**选择条数改变*/
         handleSizeChange(num) {
@@ -275,6 +284,10 @@ export default {
                 this.isRedraw = false;
             }, 100);
         },
+        /**获取到原生方法*/
+        getTableMethods() {
+            return this.$refs.dzsTable;
+        }, 
     },
 };
 </script>
@@ -296,10 +309,13 @@ export default {
             /* Chrome Safari */
             display: none;
         }
+
         display: flex;
+
         :deep(.el-table th, .el-table tr) {
             background-color: var(--ThemeColor01);
             color: #282c33;
+
             .cell {
                 font-weight: normal;
             }
@@ -314,18 +330,22 @@ export default {
                 .table-column_mini {
                     height: 30px;
                 }
+
                 .table-column_middle {
                     height: 50px;
                 }
+
                 .table-column_max {
                     height: 70px;
                 }
             }
         }
     }
+
     .table {
         border: 1px solid #ebeef5;
     }
+
     @media screen and (max-width: 768px) {
         .table {
             height: auto;
@@ -354,7 +374,7 @@ export default {
     .operation {
         cursor: pointer;
 
-        > span {
+        >span {
             padding-right: 10px;
             color: var(--ThemeColor);
 
@@ -384,10 +404,12 @@ export default {
         margin: 0 auto;
     }
 }
+
 .btn {
     span {
         color: var(--ThemeColor);
     }
+
     :deep(span) {
         color: var(--ThemeColor);
     }

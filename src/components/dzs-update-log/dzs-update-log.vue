@@ -3,6 +3,19 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.0.35</h2>
+                <div class="time">2023-07-26</div>
+            </div>
+            <div class="content">
+                <p>1. 弹窗组件 新增两个功能 showFullscreen 是否显示全屏按钮 fullscreen 直接全屏</p>
+                <p>2. 表格组件 高度可以传string类型了</p>
+                <p>3. 表格组件 可以拉取原生方法了</p>
+                <p>4. 表格组件 可以控制侧边栏是否显示</p>
+                <p>5. 新增 消息通知栏组件 ?type=%2Fnotice-bar</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.34</h2>
                 <div class="time">2023-07-18</div>
             </div>

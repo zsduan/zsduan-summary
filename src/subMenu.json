@@ -331,5 +331,14 @@
         "page" : "watermark/index",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20230072614361534",
+        "PID" : null ,
+        "title" : "消息通知栏",
+        "pathName" : "notice-bar",
+        "page" : "notice-bar/notice-bar",
+        "isShow" : true,
+        "children" : []
     }
 ]

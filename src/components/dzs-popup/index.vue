@@ -6,11 +6,13 @@
  * @FilePath: \vue2+js+eui+template\src\components\dzs-popup\index.vue
 -->
 <template>
-    <el-dialog v-dialogDrag v-bind="{...options}" :visible="isShow" :width="width" :fullscreen="is_fullscreen" @opened="opened" @closed="opened" @close="close" @open="open">
+    <el-dialog v-dialogDrag v-bind="{ ...options }" :visible="isShow" :width="width" :fullscreen="is_fullscreen"
+        @opened="opened" @closed="opened" @close="close" @open="open">
         <template #title>
-                <div class="title-box">
-                    <slot name="title"></slot>
-                    <span class="title" v-if="!$slots.title">{{ title }}</span>
+            <div class="title-box">
+                <slot name="title"></slot>
+                <span class="title" v-if="!$slots.title">{{ title }}</span>
+                <div v-if="showFullscreen">
                     <i class="icon el-icon-full-screen" v-if="!is_fullscreen" @click="openFullscreen"></i>
                     <div class="close-fullscreen" v-else @click="closeFullscreen">
                         <svg t="1687859073485" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -21,7 +23,8 @@
                         </svg>
                     </div>
                 </div>
-            </template>
+            </div>
+        </template>
         <slot></slot>
 
         <div slot="footer" v-if="!$slots.footer">
@@ -36,6 +39,8 @@
  * @props : title 弹窗标题
  * @props : isShow  是否显示
  * @props : width 宽度
+ * @props : fullscreen 是否全屏
+ * @props : showFullscreen 是否显示全屏按钮
  * @props : options 饿了吗ui原生属性
  *
  * @method close 关闭弹窗
@@ -72,11 +77,31 @@ export default {
                 return {};
             },
         },
+        fullscreen: {
+            type: Boolean,
+            default: () => {
+                return false
+            }
+        },
+        showFullscreen: {
+            type: Boolean,
+            default: () => {
+                return true
+            }
+        }
     },
     data() {
         return {
-            is_fullscreen : false
+            is_fullscreen: false
         };
+    },
+    watch: {
+        fullscreen: {
+            handler(val) {
+                this.is_fullscreen = val;
+            },
+            immediate: true,
+        }
     },
     methods: {
         close() {
@@ -92,10 +117,10 @@ export default {
         closeFullscreen() {
             this.is_fullscreen = false;
         },
-        opened(){
+        opened() {
             this.$emit("opened")
         },
-        closed(){
+        closed() {
             this.$emit("closed")
         }
     },
@@ -112,21 +137,22 @@ export default {
         font-size: 20px;
         cursor: pointer;
     }
-    .title{
+
+    .title {
         font-size: 18px;
     }
 
-    .close-fullscreen{
+    .close-fullscreen {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 20px;
         height: 20px;
         cursor: pointer;
-        svg{
+
+        svg {
             width: 18px;
             height: 18px;
         }
     }
-}
-</style>
+}</style>

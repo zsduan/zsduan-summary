@@ -45,7 +45,9 @@ export const code1 =
  * @props tableData 表格数据
  * @props total 总条数
  * @props tableOptions 饿了吗ui的配置
- * @props loading 是否开启加载中 可以在 tableOptions配置自己想要的加载 element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"
+ * @props loading 是否开启加载中 可以在 tableOptions配置自己想要的加载 样式
+ * @props height 高度
+ * @props showTabelSider 是否显示侧边栏 默认true 显示
  *
  * @methods SelectionChange 选中数据改变 返回当前选中的数据
  * @methods change 页码/条数改变 返回当前页码/条数  status:page 改变页码  status:size 改变条数
@@ -54,6 +56,7 @@ export const code1 =
  * @methods onDetails 详情
  * @methods onDel 删除
  * @methods setSelection 设置选中的数据
+ * @methods getTableMethods 获取到原生方法
  *
  */
 

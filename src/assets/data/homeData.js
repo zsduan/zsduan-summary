@@ -61,6 +61,11 @@ export const componentsList = [
         title : "生成二维码",
         path : "/qr-code",
         is_show : true
+    },
+    {
+        title : "消息通知栏",
+        path : "/notice-bar",
+        is_show : true
     }
 ]
 
