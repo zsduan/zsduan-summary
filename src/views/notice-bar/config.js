@@ -22,6 +22,7 @@ export const code1 = `
  * @param {String} backgroundColor 背景颜色
  * 
  * @method close 关闭
+ * @method contentClick 点击内容
  * 
  * @slot left-icon 左边的icon
  * @slot right-icon 右边的icon

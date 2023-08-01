@@ -1,18 +1,18 @@
 <template>
-    <div class="dzs-notice-bar" v-if="showNoticeBar">
+    <div class="dzs-notice-bar" :style="{backgroundColor : backgroundColor}" v-if="showNoticeBar">
         <div class="left-icon" v-if="showIcon">
             <slot name="left-icon"></slot>
-            <i class="icon" :class="icon" v-if="icon && !imgSrc"></i>
+            <i class="icon" :style="{color:color}" :class="icon" v-if="icon && !imgSrc"></i>
             <img class="img" :src="imgSrc" v-if="imgSrc" />
         </div>
-        <div class="content-box">
+        <div class="content-box" @click="contentClick">
             <slot></slot>
-            <span v-if="!isEline" :class="['text' , isMove && 'text-move' ] " >{{text}}</span>
-            <div v-if="isEline" class="eline-text">{{text}}</div>
+            <span v-if="!isEline" :style="{color:color , animationDuration : speeds}" :class="['text' , isMove && 'text-move' ] " >{{text}}</span>
+            <div v-if="isEline" :style="{color:color}" class="eline-text">{{text}}</div>
         </div>
         <div class="right-icon" @click="close" v-if="showCloseIcon">
             <slot name="right-icon"></slot>
-            <i class="icon" :class="closeIcon" v-if="closeIcon && !closeImgSrc"></i>
+            <i class="icon" :style="{color:color}" :class="closeIcon" v-if="closeIcon && !closeImgSrc"></i>
             <img class="img" :src="closeImgSrc" v-if="closeImgSrc" />
         </div>
     </div>
@@ -39,6 +39,7 @@
  * @param {String} backgroundColor 背景颜色
  * 
  * @method close 关闭
+ * @method contentClick 点击内容
  * 
  * @slot left-icon 左边的icon
  * @slot right-icon 右边的icon
@@ -159,6 +160,9 @@ export default{
         close(){
             this.showNoticeBar = false;
             this.$emit("close")
+        },
+        contentClick(){
+            this.$emit("noticeClick")
         }
     },
 }
@@ -173,6 +177,7 @@ export default{
     width: 100%;
     background-color: v-bind(backgroundColor);
     border-radius: 2px;
+    cursor: pointer;
     .left-icon,.right-icon{
         width: 30px;
         height: 20px;

@@ -73,7 +73,8 @@ export default ({
     server: {
       // 代理
       proxy,
-      port: 8073,
+      port: 8080,
+      host: '0.0.0.0',
     },
     build: {
       target: 'es2015',

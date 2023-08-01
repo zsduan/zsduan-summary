@@ -15,5 +15,5 @@ module.exports = {
     assetsDir: "static",
     devServer:{
         https : false
-    }
+    },
 };
