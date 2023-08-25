@@ -23,6 +23,11 @@ export const componentsList = [
         is_show : true
     },
     {
+        title : "代码编辑器组件",
+        path : "/code-editor",
+        is_show : false
+    },
+    {
         title : "markdown组件",
         path : "/markdown",
         is_show : true
@@ -175,7 +180,7 @@ export const jsList = [
         title : "水印",
         path : "/watermark",
         is_show : true
-    },
+    }
 ]
 
 export const effectList = [

@@ -23,11 +23,6 @@ export default {
             watermark_color : "rgba(0,0,0,0.1)",
         })
     },
-    watch: {
-        $route() {
-            console.log(this.$route);
-        },
-    },
     mounted(){
         setTimeout(() => {
             let ThemeColor = window.localStorage.getItem("ThemeColor");

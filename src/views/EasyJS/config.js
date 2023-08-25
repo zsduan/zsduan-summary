@@ -258,3 +258,15 @@ const fileAxios = (options) => {
 
 export default fileAxios;
 `
+
+export const code13 =  `
+/**
+ * 生成随机数
+ * @param {Number} min 最小值
+ * @param {Number} max 最大值
+ * */ 
+function getRandom (min , max){
+    let reslut = Math.random()*(max - min) + min;
+    return reslut;
+}
+`

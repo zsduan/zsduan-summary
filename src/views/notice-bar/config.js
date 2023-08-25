@@ -100,7 +100,7 @@ components : {
 /**自定义颜色*/
 export const code6 = `
 
-<dzs-notice-bar :text="text"></dzs-notice-bar>
+<dzs-notice-bar :text="text" color="red" backgroundColor="rgba(255,0,0,0.1)"></dzs-notice-bar>
 
 import dzsNoticeBar from "@/components/dzs-notice-bar/index.vue";
 

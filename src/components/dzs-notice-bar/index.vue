@@ -23,7 +23,7 @@
  * @description : 消息通知栏
  * @date : 2021-06-28 13:56:00
  * @version : V1.0.0
- * @Author : dzs
+ * @Author : zs.duan
  * 
  * @param {String} icon 饿了吗 icon图标
  * @param {String} imgSrc 图片 icon 优先级高于icon

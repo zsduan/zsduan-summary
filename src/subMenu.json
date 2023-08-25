@@ -340,5 +340,14 @@
         "page" : "notice-bar/notice-bar",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20230801170523",
+        "PID" : null ,
+        "title" : "代码编辑器",
+        "pathName" : "code-editor",
+        "page" : "code-editor/code-editor",
+        "isShow" : false,
+        "children" : []
     }
 ]

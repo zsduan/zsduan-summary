@@ -45,6 +45,7 @@
         <easy-css v-else-if="type == '/EasyCss'" :newIndex="true"></easy-css>
         <watermark v-else-if="type == '/watermark'" :newIndex="true"></watermark>
         <notice-bar v-else-if="type == '/notice-bar'" :newIndex="true"></notice-bar>
+        <code-editor v-else-if="type == '/code-editor'" :newIndex="true"></code-editor>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -88,7 +89,8 @@ import setHtml from "@/views/setHtml/setHtml.vue";
 import qrCode from "@/views/qr-code/qr-code.vue";
 import EasyCss from "@/views/EasyCss/index.vue"
 import watermark from "@/views/watermark/index.vue"
-import noticeBar from "@/views/notice-bar/notice-bar.vue"
+import noticeBar from "@/views/notice-bar/notice-bar.vue";
+import codeEditor from "@/views/code-editor/code-editor.vue";
 
 
 export default {
@@ -131,7 +133,8 @@ export default {
         qrCode,
         EasyCss,
         watermark,
-        noticeBar
+        noticeBar,
+        codeEditor,
     },
     props : {
         type : {

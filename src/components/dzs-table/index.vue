@@ -287,7 +287,14 @@ export default {
         /**获取到原生方法*/
         getTableMethods() {
             return this.$refs.dzsTable;
-        }, 
+        },
+        /**设置选中状态*/ 
+        selectable(row, index) {
+            if(this.showCheckbox){
+                return row.selectable === false ? row.selectable : true;
+            }
+            return true;
+        },
     },
 };
 </script>

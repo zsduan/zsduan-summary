@@ -1,10 +1,3 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-30 15:01:00
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:31:02
- * @FilePath: \vue2+js+eui+template\src\views\calender\calender.vue
--->
 <template>
     <div>
         <dzs-header title="获取农历" v-if="!newIndex"></dzs-header>

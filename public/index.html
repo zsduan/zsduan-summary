@@ -147,7 +147,7 @@
     <script>
         let timer = setInterval(()=>{
             let titleDOM = document.querySelector(".title")
-            let title = titleDOM.innerText;
+            let title = titleDOM ? titleDOM.innerText : "zs.duan的个人博客";
             if(title){
                 clearInterval(timer);
                 document.querySelector(".parentBox").style.display = "none";

@@ -32,7 +32,7 @@
 </template>
 <script>
 import { code1, code2 , code3 , code4 , code5 , code6 , code7 , code8} from "./config";
-import { code9, code10 , code11 , code12} from "./config";
+import { code9, code10 , code11 , code12 , code13} from "./config";
 import { blurSearch } from "@/utils/blurSearch.js";
 export default {
     props:{
@@ -94,6 +94,10 @@ export default {
                     name : "文件的上传和下载 可以监听进度",
                     code : code12
                 },
+                {
+                    name : "随机数",
+                    code : code13
+                }
             ],
             searchList : [],
             searchValue : ""

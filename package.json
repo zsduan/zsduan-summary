@@ -16,6 +16,7 @@
     "@microsoft/signalr": "^5.0.0",
     "@tinymce/tinymce-vue": "^3.2.8",
     "axios": "^1.4.0",
+    "brace": "^0.11.1",
     "core-js": "^3.6.5",
     "crypto-js": "^4.1.1",
     "element-ui": "^2.15.10",
