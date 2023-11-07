@@ -11,7 +11,7 @@
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <dzs-form :options="formOptions">
+                <dzs-form :isFormData="true" :options="formOptions">
                     <template #mySlot>
                         <el-button>我是自定义组件的button</el-button>
                     </template>
@@ -156,6 +156,15 @@ export default {
                         label: "图片", 
                         key: "uploadImg", 
                         type : "uploadImg",
+                        rules:[],
+                        props:{
+                            autoUpload : false
+                        },
+                    },
+                    {
+                        label : "文件",
+                        key : "uploadFile",
+                        type : "uploadFile",
                         rules:[],
                         props:{
                             autoUpload : false

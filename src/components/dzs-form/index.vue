@@ -90,9 +90,16 @@
                                         @change="changeVaule($event, item.key)"></dzs-upload-img>
                                 </template>
 
+                                <!-- 上传文件 -->
+                                <template v-if="item.type == 'uploadFile'">
+                                    <dzs-upload-file v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        @change="changeVaule($event, item.key)"></dzs-upload-file>
+                                </template>
+
                                 <!-- 富文本组件 -->
                                 <dzs-editors v-if="item.type == 'edit'" @save="changeVaule($event, item.key)"
-                                    :show_save="false" v-bind="{ ...item.props }" v-model="fromModel[item.key]"></dzs-editors>
+                                    :show_save="false" v-bind="{ ...item.props }"
+                                    v-model="fromModel[item.key]"></dzs-editors>
 
                                 <!-- 支持除开自身外的组件 -->
                                 <template v-if="item.props && item.props.isSlot">
@@ -136,7 +143,7 @@
                 defaultValue : "" , //默认值 非必填
                 isHidden : false , //是否隐藏 非必填
                 props:{
-                    ...defalut , //内部参数 饿了吗ui相同 type == uploadImg 参数见组件
+                    ...defalut , //内部参数 饿了吗ui相同 type == uploadImg | uploadFile 参数见组件
                     tips : "" , //提示文字信息
                     isSlot : false , //是否在 from-item里面添加新的 slot 具名插槽:key+Children
                 },
@@ -157,12 +164,14 @@
 */
 import { pickerOptions } from "./config.js";
 import dzsUploadImg from "../dzs-upload-img/dzs-upload-img.vue";
-import dzsEditors from "../dzs-editor/index.vue"
+import dzsEditors from "../dzs-editor/index.vue";
+import dzsUploadFile from "../dzs-upload-file/dzs-upload-file.vue";
 export default {
     name: "From",
     components: {
         dzsUploadImg,
-        dzsEditors
+        dzsEditors,
+        dzsUploadFile
     },
     model: {
         prop: "value",
@@ -226,6 +235,13 @@ export default {
                 return ""
             }
         },
+        /**是否为formData*/
+        isFormData: {
+            type: Boolean,
+            default: () => {
+                return false
+            }
+        }
     },
     data() {
         return {
@@ -308,6 +324,10 @@ export default {
             return new Promise((resolve, reject) => {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        if (this.isFormData) {
+                            this.sendFormData(resolve);
+                            return;
+                        }
                         let sendList = {};
                         for (const key in this.fromModel) {
                             if (Object.hasOwnProperty.call(this.fromModel, key)) {
@@ -317,6 +337,21 @@ export default {
                                 sendList[key] = this.fromModel[key];
                                 if (item) {
                                     if (item.type == "uploadImg") {
+                                        let urlList = this.fromModel[key];
+                                        sendList[key] = "";
+                                        if (urlList && urlList.length > 0) {
+                                            if (urlList.length == 1) {
+                                                sendList[key] =
+                                                    urlList[0].uploadUrl;
+                                            } else {
+                                                urlList.forEach((item) => {
+                                                    sendList[key] +=
+                                                        item.uploadUrl + ",";
+                                                });
+                                            }
+                                        }
+                                    }
+                                    if(item.type == 'uploadFile'){
                                         let urlList = this.fromModel[key];
                                         sendList[key] = "";
                                         if (urlList && urlList.length > 0) {
@@ -343,9 +378,9 @@ export default {
                                 }
                             }
                         }
-                        this.$emit("onSubmit", this.fromModel);
-                        this.$emit("update:value", this.fromModel);
-                        resolve(this.fromModel);
+                        this.$emit("onSubmit", sendList);
+                        this.$emit("update:value", sendList);
+                        resolve(sendList);
                     } else {
                         this.$message.error("请填写完整信息");
                         reject();
@@ -353,6 +388,50 @@ export default {
                     }
                 });
             });
+        },
+
+        /**formData 发送数据*/
+        sendFormData(resolve) {
+            let sendList = new FormData();
+            for (const key in this.fromModel) {
+                if (Object.hasOwnProperty.call(this.fromModel, key)) {
+                    let item = this.formItem.filter(
+                        (item) => item.key == key
+                    )[0];
+                    if (item) {
+                        if (item.type == 'uploadImg') {
+                            if(formData[key] && formData[key].length > 1){
+                                throw new Error('formData 上传图片只能上传一张图片 请检查')
+                            }
+                            this.fromModel[key].forEach((item) => {
+                                sendList.append(key, item.file);
+                            });
+                        } else if (item.type == 'switch') {
+                            sendList.append(key, this.fromModel[key] ? 1 : 0);
+                        } else if (item.type == 'checkbox') {
+                            // 逗号分隔
+                            sendList.append(key, this.fromModel[key].join(','));
+                        }else if(item.type == 'uploadFile'){
+                            if(formData[key] && formData[key].length > 1){
+                                throw new Error('formData 上传文件只能上传一个文件 请检查')
+                            }
+                            this.fromModel[key].forEach((item) => {
+                                sendList.append(key, item.file);
+                            });
+                        } else {
+                            sendList.append(key, this.fromModel[key]);
+                        }
+                    } else {
+                        sendList.append(key, this.fromModel[key]);
+                    }
+                    if (item.isNull || item.type == 'divider') {
+                        sendList.delete(key);
+                    }
+                }
+            }
+            this.$emit("onSubmit", sendList);
+            this.$emit("update:value", sendList);
+            resolve(sendList);
         },
 
         cancel() {
@@ -369,7 +448,7 @@ export default {
                 item.span = this.screenWidth <= 768 ? 24 : item.span;
                 // 初始化选项框 和上传图片框
                 if (
-                    (item.type === "checkbox" || item.type === "uploadImg") &&
+                    (item.type === "checkbox" || item.type === "uploadImg" || item.type == 'uploadFile') &&
                     !item.defaultValue
                 ) {
                     if (this.value[item.key]) {
@@ -382,7 +461,7 @@ export default {
                 if (item.type === "switch" && this.value[item.key]) {
                     item.defaultValue = this.value[item.key];
                 }
-                if ( item.type == "switch" && !item.defaultValue ) {
+                if (item.type == "switch" && !item.defaultValue) {
                     item.defaultValue = false;
                 }
 
@@ -451,7 +530,7 @@ export default {
                             break;
                     }
                 }
-                
+
                 this.fromModel = formData;
                 resolve(true);
             })
@@ -483,7 +562,7 @@ export default {
             setTimeout(() => {
                 this.$refs['dzsForm'].clearValidate();
             }, 100)
-            
+
         },
 
         /**清空表单数据*/
@@ -500,10 +579,10 @@ export default {
         setFormData(data) {
             let data1 = JSON.parse(JSON.stringify(data));
             let data2 = JSON.parse(JSON.stringify(this.fromModel));
-            this.fromModel = {...data2 , ...data1};
-            setTimeout(()=>{
-                this.fromModel = {...data2 , ...data1};
-            },100)
+            this.fromModel = { ...data2, ...data1 };
+            setTimeout(() => {
+                this.fromModel = { ...data2, ...data1 };
+            }, 100)
         },
     },
 };

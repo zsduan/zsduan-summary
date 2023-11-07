@@ -3,6 +3,19 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.0.34</h2>
+                <div class="time">2023-11-7</div>
+            </div>
+            <div class="content">
+                <p>1. 表单组件 新增可以上传文件了</p>
+                <p>2. 表单组件 新增可以formData类型了</p>
+                <p>3. 新增上传文件组件 dzs-upload-file</p>
+                <p>4. 设置时间可用新版啦 新版支持Promise 取消了直接return 但是可以用 await支持</p>
+                <P>5. 消息通知栏组件 优化了自定义图标 只发送事件closeClick 不关闭 新增closeNoticeBar 可以用ref调用</P>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.35</h2>
                 <div class="time">2023-07-26</div>
             </div>
@@ -83,7 +96,9 @@ export default {
            
         };
     },
-    methods: {},
+    methods: {
+        
+    },
     mounted() {},
 };
 </script>

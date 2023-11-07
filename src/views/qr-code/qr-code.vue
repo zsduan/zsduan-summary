@@ -29,7 +29,7 @@
             </div>
             <h2>组件源代码下载</h2>
             <div class="item">
-                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-qr-code/index.vue">横向表单组件下载地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-qr-code/index.vue">二维码组件下载地址</a>
             </div>
         </div>
         <el-backtop :visibility-height="20" v-if="!newIndex">

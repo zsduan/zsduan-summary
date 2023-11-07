@@ -145,10 +145,8 @@ export default {
     },
     created() {
         this.initAside();
-        console.log(process.env.NODE_ENV)
     },
     mounted() {
-        
     },
     methods: {
         handleSelect(key, keyPath) {},

@@ -23,6 +23,16 @@
                 <div class="guid">{{time1}}</div>
                 <dzs-code title="使用方法" :value="code2"></dzs-code>
             </div>
+            <h2>新版格式化</h2>
+            <div class="item">
+                <div class="guid">{{time2}}</div>
+                <dzs-code title="使用方法" :value="code3"></dzs-code>
+            </div>
+            <h2>新版格式化支持Promise</h2>
+            <div class="item">
+                <div class="guid">{{time3}}</div>
+                <dzs-code title="使用方法" :value="code4"></dzs-code>
+            </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/setTime.js">下载/查看地址</a>
@@ -34,7 +44,8 @@
 <script>
 import dzsForm from "@/components/dzs-form/index.vue";
 import setTime from "@/utils/setTime";
-import {code1 , code2} from "./config";
+import {code1 , code2 , code3 , code4} from "./config";
+import formatTime from "../../utils/format-time";
 export default {
     props:{
         newIndex : {
@@ -75,8 +86,17 @@ export default {
             time : setTime(),
             code1 : code1,
             code2 : code2,
-            time1 : setTime({format : "yyyy-MM-dd"})
+            code3 : code3,
+            code4 : code4,
+            time1 : setTime({format : "yyyy-MM-dd"}),
+            time2 : "",
+            time3 : "",
+            
         }
+    },
+    mounted(){
+        this.setTime2();
+        this.setTime3();
     },
     methods:{
         onSubmit(e){
@@ -95,6 +115,34 @@ export default {
                 success : (res)=>{
                     this.time1 = res
                 }
+            })
+        },
+
+        setTime2(){
+            formatTime({
+                date : new Date(),
+                format : "yyyy-MM-dd HH:mm:ss",
+                success : (res)=>{
+                    this.time2 = res
+                },
+                fail : (err)=>{
+                    console.log(err)
+                },
+                complete : (reslut)=>{
+                    console.log("成功" , {code : 200 , msg : "成功" , date : "xxx"})
+                    console.log("失败" , {code : -1 , msg : "xxx"})
+                }
+            })
+        },
+
+        setTime3(){
+            formatTime({
+                date : new Date(),
+                format : "yyyy-MM-dd HH:mm:ss",
+            }).then((res)=>{
+                this.time3 = res
+            }).catch((err)=>{
+                console.log(err)
             })
         }
     }

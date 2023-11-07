@@ -10,7 +10,11 @@
             <span v-if="!isEline" :style="{color:color , animationDuration : speeds}" :class="['text' , isMove && 'text-move' ] " >{{text}}</span>
             <div v-if="isEline" :style="{color:color}" class="eline-text">{{text}}</div>
         </div>
-        <div class="right-icon" @click="close" v-if="showCloseIcon">
+        <div class="right-icon" @click="close" v-if="showCloseIcon && !closeIcon">
+            <slot name="right-icon"></slot>
+            <i class="icon el-icon-close" :style="{color:color}"></i>
+        </div>
+        <div class="right-icon" @click="closeClick" v-if="showCloseIcon && closeIcon">
             <slot name="right-icon"></slot>
             <i class="icon" :style="{color:color}" :class="closeIcon" v-if="closeIcon && !closeImgSrc"></i>
             <img class="img" :src="closeImgSrc" v-if="closeImgSrc" />
@@ -40,6 +44,8 @@
  * 
  * @method close 关闭
  * @method contentClick 点击内容
+ * @method closeClick 点击关闭按钮 自定义关闭按钮时使用
+ * @method closeNoticeBar  关闭通知栏 ref方式调用
  * 
  * @slot left-icon 左边的icon
  * @slot right-icon 右边的icon
@@ -65,7 +71,7 @@ export default{
         closeIcon : {
             type : String,
             default : ()=>{
-                return "el-icon-close"
+                return ""
             }
         },
         /**关闭按钮图片 icon 优先级低于closeIcon*/
@@ -158,11 +164,18 @@ export default{
     },
     methods : {
         close(){
-            this.showNoticeBar = false;
+            this.closeNoticeBar();
             this.$emit("close")
         },
         contentClick(){
             this.$emit("noticeClick")
+        },
+        closeClick(){
+            this.$emit("closeClick");
+        },
+        /**关闭natice*/ 
+        closeNoticeBar(){
+            this.showNoticeBar = false;
         }
     },
 }

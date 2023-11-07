@@ -4,8 +4,8 @@ export const code1 = `
 /**
  * @name : dzs-notice-bar 消息通知栏
  * @description : 消息通知栏
- * @date : 2021-06-28 13:56:00
- * @version : V1.0.0
+ * @date : 2023-11-07 15:24
+ * @version : V1.0.1
  * @Author : dzs
  * 
  * @param {String} icon 饿了吗 icon图标
@@ -23,10 +23,14 @@ export const code1 = `
  * 
  * @method close 关闭
  * @method contentClick 点击内容
+ * @method closeClick 点击关闭按钮 自定义关闭按钮时使用
+ * @method closeNoticeBar  关闭通知栏 ref方式调用
  * 
  * @slot left-icon 左边的icon
  * @slot right-icon 右边的icon
  * @slot 默认插槽
+ * 
+ * 
  * */ 
 
 <dzs-notice-bar :text="text"></dzs-notice-bar>

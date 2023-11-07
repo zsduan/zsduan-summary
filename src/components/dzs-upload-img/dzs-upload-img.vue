@@ -152,6 +152,7 @@ export default {
                 status: "success",
                 fromItem: "upload-img",
                 data : res,
+                file : file,
             };
             this.fileList.push(fileInfo);
             this.$emit("update:value", this.fileList);
@@ -169,7 +170,8 @@ export default {
                     url: files.url,
                     status: "success",
                     fromItem: "upload-img",
-                    data : files.row,
+                    data : files.raw,
+                    file : files.raw,
                 };
                 this.fileList.push(fileInfo);
                 this.$emit("update:value", this.fileList);
