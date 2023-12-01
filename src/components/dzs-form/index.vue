@@ -23,8 +23,11 @@
                                 <!-- 输入框 -->
                                 <template v-if="item.type == 'input' || !item.type">
                                     <el-input v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)"
-                                        :placeholder="getPlaceholder(item)"></el-input>
+                                        @input="changeVaule($event, item.key)" :placeholder="getPlaceholder(item)">
+                                        <template v-if="item.slots" :slot="item.slots.name">
+                                            {{ item.slots.text }}
+                                        </template>
+                                    </el-input>
                                 </template>
 
                                 <!-- 数字输入框 -->
@@ -50,6 +53,13 @@
                                     <el-date-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)"
                                         :placeholder="getPlaceholder(item, 'select')"></el-date-picker>
+                                </template>
+
+                                <!-- 时间选择器 -->
+                                <template v-if="item.type == 'time'">
+                                    <el-time-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        @input="changeVaule($event, item.key)"
+                                        :placeholder="getPlaceholder(item, 'select')"></el-time-picker>
                                 </template>
 
                                 <!-- 颜色选择器 -->
@@ -106,8 +116,8 @@
                                     <slot :name="`${item.key}Children`"></slot>
                                 </template>
 
-
-                                <div class="from-item-tips" v-if="getTips(item)">{{ getTips(item) }}</div>
+                                <div class="from-item-tips" v-if="getTips(item) && item.type != 'divider'">{{ getTips(item)
+                                }}</div>
                             </el-form-item>
                             <!-- 分割线 -->
                             <div v-if="item.type == 'divider'">
@@ -138,7 +148,7 @@
             {
                 label: "", //输入框名称 非必填
                 key: "", //输入框key 必填
-                type : "", //类型 非必填 默认input 输入框 input select date switch checkbox radio uploadImg edit 
+                type : "", //类型 非必填 默认input 输入框 input select date itme switch checkbox radio uploadImg edit 
                 children : [] , //列表数据 非必填
                 defaultValue : "" , //默认值 非必填
                 isHidden : false , //是否隐藏 非必填
@@ -147,7 +157,11 @@
                     tips : "" , //提示文字信息
                     isSlot : false , //是否在 from-item里面添加新的 slot 具名插槽:key+Children
                 },
-                rules：{ } ,// 规则 饿了吗ui相同 非必填
+                slots : { //插槽 非必填
+                    name : "" , //插槽名称
+                    text : "" , //插槽文字
+                },
+                rules：[] || { } ,// 规则 饿了吗ui相同 非必填
                 isNull : false , //是否不需要添加到提交表单中  非必填
                 isSlot : false , //非必填 是否为自定义组件
             }
@@ -156,6 +170,12 @@
  * @props success_txt 提交按钮文字 非必填
  * @props showBtn 是否显示按钮 非必填
  * @props value / v-model 返回值 表单数据
+ * @props fromStatus 表单状态 非必填
+ * @props antiShakeTime 防抖时间 非必填
+ * @props loadingText loading文字 非必填
+ * @props loading 是否显示loading 非必填
+ * @props height 高度 非必填
+ * @props isFormData 是否为formData 非必填
  * 
  * @methods onSubmit 提交事件 返回当前表单数据
  * @methods onCancel 取消事件
@@ -307,6 +327,16 @@ export default {
             });
         },
 
+        debounce(func, wait) {
+            let timeout;
+            return function () {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    func.apply(this, arguments);
+                }, wait);
+            };
+        },
+
         submit(formName = "dzsForm") {
             if (this.timer) {
                 this.$message({
@@ -315,76 +345,45 @@ export default {
                 });
                 return;
             }
-            if (this.antiShakeTime) {
-                this.timer = setTimeout(() => {
-                    clearTimeout(this.timer);
-                    this.timer = null;
-                }, this.antiShakeTime);
-            }
+            this.timer = this.debounce(() => {
+                this.timer = null;
+            }, this.antiShakeTime);
             return new Promise((resolve, reject) => {
                 this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        if (this.isFormData) {
-                            this.sendFormData(resolve);
-                            return;
-                        }
-                        let sendList = {};
-                        for (const key in this.fromModel) {
-                            if (Object.hasOwnProperty.call(this.fromModel, key)) {
-                                let item = this.formItem.filter(
-                                    (item) => item.key == key
-                                )[0];
-                                sendList[key] = this.fromModel[key];
-                                if (item) {
-                                    if (item.type == "uploadImg") {
+                    if (this.isFormData) {
+                        this.sendFormData(resolve);
+                        return;
+                    }
+                    let sendList = {};
+                    for (const key in this.fromModel) {
+                        if (Object.hasOwnProperty.call(this.fromModel, key)) {
+                            let item = this.formItem.find((item) => item.key == key);
+                            if (item) {
+                                switch (item.type) {
+                                    case "uploadImg":
                                         let urlList = this.fromModel[key];
-                                        sendList[key] = "";
-                                        if (urlList && urlList.length > 0) {
-                                            if (urlList.length == 1) {
-                                                sendList[key] =
-                                                    urlList[0].uploadUrl;
-                                            } else {
-                                                urlList.forEach((item) => {
-                                                    sendList[key] +=
-                                                        item.uploadUrl + ",";
-                                                });
-                                            }
-                                        }
-                                    }
-                                    if(item.type == 'uploadFile'){
-                                        let urlList = this.fromModel[key];
-                                        sendList[key] = "";
-                                        if (urlList && urlList.length > 0) {
-                                            if (urlList.length == 1) {
-                                                sendList[key] =
-                                                    urlList[0].uploadUrl;
-                                            } else {
-                                                urlList.forEach((item) => {
-                                                    sendList[key] +=
-                                                        item.uploadUrl + ",";
-                                                });
-                                            }
-                                        }
-                                    }
-                                    if (item.type == "checkbox") {
+                                        sendList[key] = urlList && urlList.length > 0 ? urlList.map(item => item.uploadUrl).join(",") : "";
+                                        break;
+                                    case "checkbox":
+                                    case "switch":
                                         sendList[key] = this.fromModel[key];
-                                    }
-                                    if (item.type == "switch") {
-                                        sendList[key] = this.fromModel[key] ? 1 : 0;
-                                    }
-                                    if (item.isNull) {
-                                        delete sendList[key];
-                                    }
+                                        break;
                                 }
+                                if (item.isNull) {
+                                    delete sendList[key];
+                                }
+                            } else {
+                                sendList[key] = this.fromModel[key];
                             }
                         }
-                        this.$emit("onSubmit", sendList);
-                        this.$emit("update:value", sendList);
-                        resolve(sendList);
+                    }
+                    this.$emit("onSubmit", this.fromModel);
+                    this.$emit("update:value", this.fromModel);
+                    if (valid) {
+                        resolve(this.fromModel);
                     } else {
                         this.$message.error("请填写完整信息");
                         reject();
-                        return false;
                     }
                 });
             });
@@ -394,45 +393,37 @@ export default {
         sendFormData(resolve) {
             let sendList = new FormData();
             for (const key in this.fromModel) {
-                if (Object.hasOwnProperty.call(this.fromModel, key)) {
-                    let item = this.formItem.filter(
-                        (item) => item.key == key
-                    )[0];
-                    if (item) {
-                        if (item.type == 'uploadImg') {
-                            if(formData[key] && formData[key].length > 1){
-                                throw new Error('formData 上传图片只能上传一张图片 请检查')
-                            }
-                            this.fromModel[key].forEach((item) => {
-                                sendList.append(key, item.file);
-                            });
-                        } else if (item.type == 'switch') {
-                            sendList.append(key, this.fromModel[key] ? 1 : 0);
-                        } else if (item.type == 'checkbox') {
-                            // 逗号分隔
-                            sendList.append(key, this.fromModel[key].join(','));
-                        }else if(item.type == 'uploadFile'){
-                            if(formData[key] && formData[key].length > 1){
-                                throw new Error('formData 上传文件只能上传一个文件 请检查')
-                            }
-                            this.fromModel[key].forEach((item) => {
-                                sendList.append(key, item.file);
-                            });
-                        } else {
-                            sendList.append(key, this.fromModel[key]);
+                if (!Object.hasOwnProperty.call(this.fromModel, key)) continue;
+                let item = this.formItem.find((item) => item.key == key);
+                if (item) {
+                    if (item.type == 'uploadImg' || item.type == 'uploadFile') {
+                        if (this.fromModel[key] && this.fromModel[key].length > 1) {
+                            throw new Error(`formData 上传${item.type == 'uploadImg' ? '图片' : '文件'}只能上传${item.type == 'uploadImg' ? '一张图片' : '一个文件'} 请检查`)
                         }
+                        this.fromModel[key].forEach((item) => {
+                            sendList.append(key, item.file);
+                        });
+                    } else if (item.type == 'switch') {
+                        sendList.append(key, this.fromModel[key] ? 1 : 0);
+                    } else if (item.type == 'checkbox') {
+                        // 逗号分隔
+                        sendList.append(key, this.fromModel[key].join(','));
                     } else {
                         sendList.append(key, this.fromModel[key]);
                     }
                     if (item.isNull || item.type == 'divider') {
                         sendList.delete(key);
+                        continue;
                     }
+                } else {
+                    sendList.append(key, this.fromModel[key]);
                 }
             }
             this.$emit("onSubmit", sendList);
             this.$emit("update:value", sendList);
             resolve(sendList);
         },
+
 
         cancel() {
             this.clearForm();

@@ -103,6 +103,12 @@ export default {
                         span : 12
                     },
                     {
+                        label : "时间",
+                        key : "time",
+                        type : "time",
+                        span : 12
+                    },
+                    {
                         label : "开关",
                         key : "switch",
                         type : "switch",

@@ -46,6 +46,7 @@
         <watermark v-else-if="type == '/watermark'" :newIndex="true"></watermark>
         <notice-bar v-else-if="type == '/notice-bar'" :newIndex="true"></notice-bar>
         <code-editor v-else-if="type == '/code-editor'" :newIndex="true"></code-editor>
+        <group-sorting v-else-if="type == '/group-sorting'" :newIndex="true"></group-sorting>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -91,6 +92,7 @@ import EasyCss from "@/views/EasyCss/index.vue"
 import watermark from "@/views/watermark/index.vue"
 import noticeBar from "@/views/notice-bar/notice-bar.vue";
 import codeEditor from "@/views/code-editor/code-editor.vue";
+import groupSorting from "@/views/group-sorting/group-sorting.vue";
 
 
 export default {
@@ -135,6 +137,7 @@ export default {
         watermark,
         noticeBar,
         codeEditor,
+        groupSorting
     },
     props : {
         type : {

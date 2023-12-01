@@ -180,6 +180,11 @@ export const jsList = [
         title : "水印",
         path : "/watermark",
         is_show : true
+    },
+    {
+        title : "分组排序",
+        path : "/group-sorting",
+        is_show : true
     }
 ]
 

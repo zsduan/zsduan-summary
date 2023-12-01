@@ -3,6 +3,28 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.0.36</h2>
+                <div class="time">2023-12-01</div>
+            </div>
+            <div class="content">
+                <p>1. 新增排序和分组/?type=/group-sorting</p>
+                <p>2. 修复了左边菜单栏刷新后没有滚动到响应的bug</p>
+                <p>3. 车牌号输入新增点击效果</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
+                <h2>版本号 v2.0.35</h2>
+                <div class="time">2023-11-21</div>
+            </div>
+            <div class="content">
+                <p>1. 表单组件 input可以和官方一样自定义组件了</p>
+                <p>2. 表单组件 新增时间(time)组件</p>
+                <p>3. 表单组件 修复分割线还显示12px的提示</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.34</h2>
                 <div class="time">2023-11-7</div>
             </div>

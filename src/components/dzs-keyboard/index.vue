@@ -12,7 +12,7 @@
             <div class="com-btn" @click="complete">完成</div>
             <div class="area-tag-wrap" v-if="!showNums">
                 <div class="flex first-line" v-for="(item,index) in area" :key="index">
-                    <span
+                    <button
                         class="flex1"
                         @click="selectOtherNum(itm)"
                         :key="idx"
@@ -22,47 +22,47 @@
                         <span v-if="itm != 'del' && itm != 'operation'">{{itm}}</span>
                         <span v-if="itm == 'operation'" @click.stop="showOtherWord">切换</span>
                         <span v-if="itm == 'del'">删除</span>
-                    </span>
+                    </button>
                 </div>
             </div>
 
             <!--数字与字母键盘-->
             <div class="area-tag-wrap" v-if="showNums">
                 <div class="flex first-line" v-if="plateNum.length!=0">
-                    <span
+                    <button
                         class="flex1"
                         v-for="(item,index) in num[0]"
                         :key="index"
                         @click="selectOtherNum(item)"
-                    >{{ item }}</span>
+                    >{{ item }}</button>
                 </div>
                 <div class="flex first-line" v-else>
-                    <span
+                    <button
                         class="flex1 flexWhite"
                         v-for="(item,index) in num[0]"
                         :key="index"
                         @click="selectOtherNum(item)"
-                    >{{ item }}</span>
+                    >{{ item }}</button>
                 </div>
                 <div class="flex first-line mt-3">
-                    <span
+                    <button
                         class="flex1"
                         v-for="(item,index) in num[1]"
                         :key="index"
                         @click="selectOtherNum(item)"
-                    >{{ item }}</span>
-                    <span class="flex1" @click="selectOtherNum('O')">O</span>
+                    >{{ item }}</button>
+                    <button class="flex1" @click="selectOtherNum('O')">O</button>
                 </div>
                 <div class="flex first-line mt-3">
-                    <span
+                    <button
                         class="flex1"
                         v-for="(item,index) in num[2]"
                         :key="index"
                         @click="selectOtherNum(item)"
-                    >{{ item }}</span>
+                    >{{ item }}</button>
                 </div>
                 <div class="flex first-line mt-3">
-                    <span
+                    <button
                         class="flex1"
                         :key="index"
                         @click="selectOtherNum(item)"
@@ -72,7 +72,7 @@
                         <span>{{ item == 'del' || item == 'operation'? '' : item }}</span>
                         <span v-if="item == 'operation'" @click.stop="showOtherWord">省份</span>
                         <span v-if="item == 'del'">删除</span>
-                    </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -220,9 +220,13 @@ export default {
                 line-height: 30px;
                 border-radius: 3px;
                 box-shadow: 1px 1px 1px 1px #adb2b9;
+                border: 0;
                 cursor: pointer;
                 &:last-child {
                     margin-right: 0;
+                }
+                &:active {
+                    background: #e6e6e6;
                 }
             }
             .bg-abc {

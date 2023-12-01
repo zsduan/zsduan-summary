@@ -70,6 +70,7 @@
                         <div class="title" v-if="aside[item.key]">{{item.name}}</div>
                         <div
                             class="path_name"
+                            :id="itm.path"
                             :data-path="itm.path"
                             :class="itm.active ? 'active':''"
                             @click="goPath(idx , item.key)"
@@ -175,6 +176,13 @@ export default {
                         }
                     })
                 })
+                // 滚动到指定位置
+                setTimeout(() => {
+                    let dom = document.getElementById(query.type);
+                    if(dom){
+                        dom.scrollIntoView();
+                    }
+                }, 100);
             }
             
             
@@ -198,6 +206,7 @@ export default {
             this.aside[key][index].active = true;
             this.activeAside = index;
             document.title = this.aside[key][index].title;
+            console.log(this.aside[key][index].path);
             this.activeComponent = this.aside[key][index].path;
         },
         inputValue() {

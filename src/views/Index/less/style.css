@@ -89,6 +89,28 @@
   overflow-y: scroll;
   position: fixed;
 }
+.my-aside::-webkit-scrollbar {
+  width: 6px;
+  background-color: #fff;
+}
+.my-aside::-webkit-scrollbar-track {
+  background-color: transparent;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+.my-aside::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+.my-aside::-webkit-scrollbar-thumb {
+  background-color: #e9e7e7;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
 .my-aside .aside_list {
   padding-bottom: 20px;
 }
@@ -101,6 +123,10 @@
   font-weight: 600;
   color: #213547;
   transition: color 0.5s;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  background-color: #fff;
 }
 .my-aside .aside_list .path_name {
   line-height: 30px;
