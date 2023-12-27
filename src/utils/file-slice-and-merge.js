@@ -1,149 +1,214 @@
-/*
- * @Author: zs.duan
- * @Date: 2022-11-25 17:13:14
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-15 10:38:48
- * @FilePath: \vue2+js+eui+template\src\utils\file-slice-and-merge.js
- */
+import SparkMD5 from "spark-md5";
 
 /**
- * @name 文件切片与还原 合并文件要和切片的文件相同
- * @param fileId 读取文件的 id 可选 fileId/file/refs 任选其一
- * @param file 文件本身 可选 fileId/file/refs 任选其一
- * @param refs vue的ref 可选 fileId/file/refs 任选其一
- * @param _this 全局的this指向 refs不为空可选
- * @param type Slice 分片 Merge 合并 
- * @param fileSize 切片大小 默认 5M
- * @param fileName 合并的文件名称
- * @param isSort 合并进行排序
- * @method fail 错误返回
- * @method success 成功返回 返回数据为下面的数据
- * @return { 分片返回
-     code : 200,
-     fileList : [
-        {
+ * 文件切片与合并
+ * @param {Object } options 配置对象
+ * @param {File | string | object | Array} options.file 文件(文件列表) 可选 fileId/file/refs 任选其一
+ * @param {any} options.Vue vue本身也就是this
+ * @param {'slice' | 'merge'} options.type 切片还是合并 默认切片 
+ * @param {boolean} options.md5 是否需要md5值 默认不需要 true 需要 false 不需要 md5会影响分片速度
+ * @param {number} options.chunkSize 切片大小 默认 5M
+ * @param {string} options.fileName 合并的文件名称
+ * @param {boolean} options.sort 合并进行排序 默认true 合并文件较多建议开启
+ * @param {Function} options.success 成功返回 
+ * @param {Function} options.fail 错误返回
+ * @returns Promise
+ * @description 分片返回数据
+ * @returns 
+ * { 
+ *    code : 200,
+ *    list : [
+ *      {
             sort : number, //排序
-            file : file, //文件bold
-            file_name : string ,//文件名称
+            file : file, //分片文件bold
+            filename : string ,//文件名称 name-1 name-2
+            md5 : string //分片文件的md5值
         }
-     ], //文件分片的list数据
-     file_name : files.name //文件名称
+ *    ], //文件分片的list数据
+ *    filename : string, //文件原始名称
+ *    file : file, //原始文件 blod数据
+ *    md5 : string //原始文件的md5值
  * }
- * @return { 合并返回
-     code : 200,
-     file : file, //文件 blod数据
-     file_name : string //文件名称
+ * @description 合并返回数据
+ * @returns
+ * {
+ *     code : 200,
+ *     file : file, //文件 blod数据
+ *     filename : string //文件名称
  * }
-*/ 
-
-export const fileSliceAndMerge = (option) =>{
-    let options = {
-        fileId : "",  //读取文件的id
-        file : "" , //文件
-        refs : "" ,
-        _this : null  , //全局this 指向 指向 Vue
-        type : "slice", //Slice 分片 Merge 合并
-        fileSize : 1024 * 1024 * 5 ,// 切片大小 5M
-        fileName : "" , //合并文件名称
-        isSort : true , //合并是否进行自动排序
-        success : (result)=>{} , //读取成功返回
-        fail : (error) => {} , //读取失败返回
+ * 
+ * */
+const fileSliceMerge = (options) => {
+    let option = {
+        file: "", // 文件 可选 fileId/file/refs 任选其一 
+        Vue: null, // vue本身也就是this
+        type: "slice", // 切片还是合并 默认切片
+        md5: false, // 是否需要md5值 默认不需要 true 需要 false 不需要 md5会影响分片速度
+        chunkSize: 1024 * 1024 * 5, // 切片大小 默认 5M
+        fileName: "", // 合并的文件名称
+        sort: true, // 合并进行排序
+        success: (result) => { }, // 成功返回
+        fail: (error) => { }, // 错误返回
     }
-    options = {
-        ...options,
-        ...option
-    }
-    if(!options.fileId && !options.file && !options.refs){
-        options.fail({
-            code : -1,
-            msg : "fileId or file or refs must be not null"
-        })
-        return ;
-    }
-    if(options.refs && !options._this){
-        options.fail({
-            code : -1,
-            msg : "_this must be not null"
-        })
-        return ;
-    }
-    if(!options.type){
-        options.fail({
-            code : -1,
-            msg : "type must be not null"
-        })
-        return ;
-    }
-    let files = null;
-    if(options.refs){
-        files = options._this.$refs[options.refs].files
-    }
-    if(options.fileId){
-        files = document.querySelector(`#${options.fileId}`).files;
-    }
-    if(options.file){
-        files = options.file;
-    }
-    if(options.type == "slice"){
-        fileSlice(files[0] , options);
-    }
-    if(options.type == 'merge'){
-        fileMerge(files , options)
-    }
-}
-
-// 切片
-export const fileSlice = (files , options) =>{
-    let fileList = [];
-    for(let i = 0 ; i < files.size ; i += options.fileSize){
-        let index = parseInt(i / options.fileSize) + 1;
-        let fileSort = {
-            sort : index,
-            file : files.slice(i , options.fileSize * index),
-            file_name : `${files.name}-index` 
+    Object.assign(option, options);
+    return new Promise((resolve, reject) => {
+        if (!option) {
+            reject({ code: -1, msg: "options不能为空!" })
+            option.fail({ code: -1, msg: "options不能为空" })
+            throw new Error("options不能为空")
         }
-        fileList.push(fileSort);
-    }
-    options.success({
-        code : 200,
-        fileList : fileList,
-        file_name : files.name
+        if (typeof options !== "object") {
+            reject({code: -1,msg: "options请传入对象!"})
+            option.fail({code: -1,msg: "options请传入对象"})
+            throw new Error("options请传入对象")
+        }
+        if (!option.file) {
+            reject({code: -1,msg: "options.file不能为空!"})
+            option.fail({code: -1,msg: "options.file不能为空"})
+            throw new Error("options.file不能为空")
+        }
+        let files = null;
+        if(typeof option.file === "string"){
+            if(option.Vue){
+                if(!option.Vue.$refs[option.file]){
+                    reject({code: -1,msg: "请确定您存在该ref!"})
+                    option.fail({code: -1,msg: "请确定您存在该ref!"})
+                    throw new Error("请确定您存在该ref!")
+                }
+                files = option.Vue.$refs[option.file].files;
+            }else{
+                if(!document.querySelector(`#${option.file}`)){
+                    reject({code: -1,msg: "请确定您存在该id!"})
+                    option.fail({code: -1,msg: "请确定您存在该id!"})
+                    throw new Error("请确定您存在该id!")
+                }
+                files = document.querySelector(`#${option.file}`).files;
+            }
+        }
+        switch(option.type){
+            case 'slice' : 
+                files = files[0] || files
+                slice(option, files ,resolve , reject);
+                break;
+            case 'merge' : 
+                if(!files.length){
+                    reject({code: -1,msg: "options.file不能为空!"})
+                    options.fail({code: -1,msg: "options.file不能为空!"})
+                    throw new Error("options.file不能为空!")
+                }
+                merge(option , files , resolve , reject);
+                break;
+            default : 
+                reject({code: -1,msg: "您输入的类型不正确！"})
+                options.fail({code: -1,msg: "您输入的类型不正确！"})
+                throw new Error("您输入的类型不正确！")
+        }
     })
 }
 
-// 合并
-export const fileMerge = (files , options , fileName) =>{
-    let fileList = [];
-    if(!files.length){
-        options.fail({
-            code : -1,
-            msg : "files is null"
-        })
+/**
+ * 分片
+ * @param {Object} option 
+ * @param {File} files 文件
+ * @param {Function} resolve 
+ * @param {Function} reject
+ * */
+const slice = (option , files  , resolve , reject) =>{
+    let filelist = [];
+    for (let i = 0; i < files.size; i += option.chunkSize) {
+        let index = parseInt(i / option.chunkSize) + 1;
+        let chunkFile = {
+            sort: index,
+            file: files.slice(i, option.chunkSize * index),
+            filename: `${files.name}-${index}`,
+            md5: ""
+        }
+        if (option.md5) {
+            // 对切片文件进行md5加密
+            let fileReader = new FileReader();
+            let spark = new SparkMD5.ArrayBuffer();
+            fileReader.readAsArrayBuffer(chunkFile.file);
+            fileReader.onload = (e) => {
+                spark.append(e.target.result);
+                chunkFile.md5 = spark.end();
+            }
+            fileReader.onerror = (err) => {
+                reject({code: -1,msg: "文件读取失败!"})
+                options.fail({code: -1,msg: "文件读取失败!"})
+                throw new Error("文件读取失败!")
+            }
+        }
+        filelist.push(chunkFile);
+    }
+    let sendFile = {
+        code: 200,
+        list: filelist,
+        filename: files.name,
+        file: files,
+        md5: ""
+    }
+    if(option.md5){
+        // 对原始文件进行md5加密
+        let fileReader = new FileReader();
+        let spark = new SparkMD5.ArrayBuffer();
+        fileReader.readAsArrayBuffer(files);
+        fileReader.onload = (e) => {
+            spark.append(e.target.result);
+            sendFile.md5 = spark.end();
+            option.success(sendFile);
+            resolve(sendFile);
+        }
+        fileReader.onerror = (err) => {
+            reject({code: -1,msg: "文件读取失败!"})
+            option.fail({code: -1,msg: "文件读取失败!"})
+            throw new Error("文件读取失败!")
+        }
         return ;
     }
-    if(options.isSort){
-        let file_name_arr = []
-        for(let i = 0 ; i < files.length ; i ++){
-            file_name_arr.push(files[i].name);
+    option.success(sendFile);
+    resolve(sendFile);
+}
+
+/**
+ * 合并
+ * @param {Object} option 
+ * @param {Function} resolve 
+ * @param {Function} reject
+ * */
+const merge = (option  , files , resolve , reject) =>{
+    if(!files.length){
+        reject({code: -1,msg: "合并文件需要一个数组！"})
+        option.fail({code: -1,msg: "合并文件需要一个数组！"})
+        throw new Error("合并文件需要一个数组！")
+    }
+    let filelist = [];
+    if(option.sort){
+        let sortFileList = []
+        for (let i = 0; i < files.length; i++) {
+            sortFileList.push(files[i].name);
         }
-        file_name_arr = file_name_arr.sort();
-        file_name_arr.forEach(v =>{
-            for(let i = 0 ; i < files.length ; i ++){
-                if(files[i].name == v){
-                    fileList.push(files[i].slice(0 , files[i].size))
+        sortFileList = sortFileList.sort();
+        sortFileList.forEach(v => {
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].name == v) {
+                    filelist.push(files[i].slice(0, files[i].size))
                 }
             }
         })
     }else{
-        fileList = [...files].map((v)=>{
-            return v.slice(0 , v.size);
+        filelist = [...files].map((v) => {
+            return v.slice(0, v.size);
         })
     }
-    const name = fileName ? fileName : files[0].name.replace(/-\d+$/,"");
-    const file = new File(fileList , name)
-    options.success({
-        code : 200,
-        file : file,
-        file_name : name
-    })
+    const name = option.fileName ? option.fileName : files[0].name.replace(/-\d+$/, "");
+    const file = new File(filelist, name)
+    let sendFile = {
+        code: 200,
+        file: file,
+        filename: name
+    }
+    option.success(sendFile);
+    resolve(sendFile);
 }
+
+export default fileSliceMerge;
