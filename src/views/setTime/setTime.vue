@@ -12,26 +12,15 @@
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <div class="tips-box">获取当前时间 并按照固定格式处理</div>
+                <div class="tips-box">正常使用</div>
                 <dzs-form :options="formOptions" @onSubmit="onSubmit"></dzs-form>
                 <div class="guid">{{time}}</div>
                 <dzs-code title="使用方法" :value="code1"></dzs-code>
             </div>
-            <div class="item">
-                <div class="tips-box">自定义格式</div>
-                <dzs-form :options="formOptions" @onSubmit="onSubmit1"></dzs-form>
-                <div class="guid">{{time1}}</div>
-                <dzs-code title="使用方法" :value="code2"></dzs-code>
-            </div>
-            <h2>新版格式化</h2>
-            <div class="item">
-                <div class="guid">{{time2}}</div>
-                <dzs-code title="使用方法" :value="code3"></dzs-code>
-            </div>
-            <h2>新版格式化支持Promise</h2>
+            <h2>格式化支持Promise</h2>
             <div class="item">
                 <div class="guid">{{time3}}</div>
-                <dzs-code title="使用方法" :value="code4"></dzs-code>
+                <dzs-code title="使用方法" :value="code2"></dzs-code>
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
@@ -44,8 +33,8 @@
 <script>
 import dzsForm from "@/components/dzs-form/index.vue";
 import setTime from "@/utils/setTime";
-import {code1 , code2 , code3 , code4} from "./config";
-import formatTime from "../../utils/format-time";
+import {code1 , code2} from "./config";
+import {formatTime , asyncFormatTime} from "../../utils/format-time";
 export default {
     props:{
         newIndex : {
@@ -86,8 +75,6 @@ export default {
             time : setTime(),
             code1 : code1,
             code2 : code2,
-            code3 : code3,
-            code4 : code4,
             time1 : setTime({format : "yyyy-MM-dd"}),
             time2 : "",
             time3 : "",
@@ -128,15 +115,11 @@ export default {
                 fail : (err)=>{
                     console.log(err)
                 },
-                complete : (reslut)=>{
-                    console.log("成功" , {code : 200 , msg : "成功" , date : "xxx"})
-                    console.log("失败" , {code : -1 , msg : "xxx"})
-                }
             })
         },
 
         setTime3(){
-            formatTime({
+            asyncFormatTime({
                 date : new Date(),
                 format : "yyyy-MM-dd HH:mm:ss",
             }).then((res)=>{

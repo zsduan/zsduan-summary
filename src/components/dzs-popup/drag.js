@@ -29,6 +29,10 @@ Vue.directive('dialogDrag', {
     // 获取原有属性 ie dom元素.currentStyle 火狐谷歌 window.getComputedStyle(dom元素, null);
     const sty = dragDom.currentStyle || window.getComputedStyle(dragDom, null)
     const moveDown = e => {
+      // 如果mousedown的目标是input，那么不启动拖动
+      if (e.target.nodeName === 'INPUT') {
+        return;
+      }
       // 鼠标按下，计算当前元素距离可视区的距离
       const disX = e.clientX - dialogHeaderEl.offsetLeft
       const disY = e.clientY - dialogHeaderEl.offsetTop
@@ -43,6 +47,10 @@ Vue.directive('dialogDrag', {
         styT = +sty.top.replace(/\px/g, '')
       }
       document.onmousemove = function (e) {
+        // 如果mousedown的目标是input，那么不启动拖动
+        if (e.target.nodeName === 'INPUT') {
+          return;
+        }
         // 通过事件委托，计算移动的距离
         const l = e.clientX - disX
         const t = e.clientY - disY

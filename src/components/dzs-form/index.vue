@@ -327,15 +327,6 @@ export default {
             });
         },
 
-        debounce(func, wait) {
-            let timeout;
-            return function () {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    func.apply(this, arguments);
-                }, wait);
-            };
-        },
 
         submit(formName = "dzsForm") {
             if (this.timer) {
@@ -345,7 +336,8 @@ export default {
                 });
                 return;
             }
-            this.timer = this.debounce(() => {
+            this.timer = setTimeout(() => {
+                clearTimeout(this.timer);
                 this.timer = null;
             }, this.antiShakeTime);
             return new Promise((resolve, reject) => {
