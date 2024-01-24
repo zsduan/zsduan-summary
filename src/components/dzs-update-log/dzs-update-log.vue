@@ -3,6 +3,17 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.0</h2>
+                <div class="time">2024-1-24</div>
+            </div>
+            <div class="content">
+                <p>1. 新增vue-office</p>
+                <p>2. 优化读取excel文件 支持 导出 cvs xls xlsx</p>
+                <p>3. 修复了其他一只bug</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.0.36</h2>
                 <div class="time">2023-12-01</div>
             </div>
