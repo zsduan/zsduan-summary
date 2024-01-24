@@ -137,6 +137,11 @@ export const jsList = [
         is_show : true
     },
     {
+        title : "vueOffice 支持 xlxs pdf word",
+        path : "/vue-office",
+        is_show : true
+    },
+    {
         title : "signalR 及时通信",
         path : "/signalR",
         is_show : true

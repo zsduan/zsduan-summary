@@ -13,6 +13,11 @@
             <h2>基础用法</h2>
             <div class="item">
                 <input type="file" ref="myfile" accept=".xls,.xlsx" @change="changeFile"/>
+                <div class="out-btn" v-if="xlsxInfo.html">
+                    <el-button type="primary" @click="outCvs">导出为 cvs</el-button>
+                    <el-button type="primary" @click="outXls">导出为 xls</el-button>
+                    <el-button type="primary" @click="outXlsx">导出为 xlsx</el-button>
+                </div>
                 <div >
                     <div class="title">预览</div>
                     <div  v-for="(item,index) in xlsxInfo.html" :key="index">
@@ -21,7 +26,7 @@
                     </div>
                 </div>
                 <div class="show-info-box">
-                    <div>{{xlsxInfo}}</div>
+                     <!-- <div>{{xlsxInfo}}</div> -->
                 </div>
                 <dzs-code title="源代码" :value="code1"></dzs-code>
             </div>
@@ -35,7 +40,7 @@
     </div>
 </template>
 <script>
-import {readeXlsx} from "@/utils/readeXlsx";
+import {readeExcel} from "../../utils/readeXlsx";
 import {code1} from "./config"
 export default {
     props:{
@@ -52,19 +57,30 @@ export default {
             code1 : code1
         }
     },
+    mounted(){
+        
+    },
     methods:{
         changeFile(){
-            readeXlsx({
-                refs : "myfile",
-                _this : this,
+            readeExcel({
+                file : "myfile",
+                Vue : this,
                 success:(res) =>{
                     this.xlsxInfo = res;
-                    console.log(JSON.stringify(arr));
                 },
-                fail : (e)=>{
-                    console.log(e);
-                }
             })
+        },
+        /**导出为 cvs*/ 
+        outCvs(){
+            this.xlsxInfo.outCvs();
+        },
+        /**导出为 xls*/ 
+        outXls(){
+            this.xlsxInfo.outXls();
+        },
+        /**导出为 xlsx*/ 
+        outXlsx(){
+            this.xlsxInfo.outXlsx();
         }
     }
 }
@@ -77,7 +93,9 @@ export default {
 }
 .views-box{
     margin: 10px 0;
-    border: 1px solid #ccc;
-    padding: 10px;
+}
+
+.out-btn{
+    margin: 10px 0;
 }
 </style>
