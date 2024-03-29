@@ -68,7 +68,7 @@ export default {
     },
     methods:{
         changeWordFile(e){
-            let file = e.target.files[0];
+            let file = e.target.files[0]; 
             // 转成 blod地址
             let url = URL.createObjectURL(file);
             this.wordSrc = url;

@@ -166,8 +166,6 @@ export default {
         };
     },
     mounted() {
-        // console.log("入账 ==>", entryPrice);
-        // console.log("出账 ==>", OutPrice);
         this.init();
     },
     methods: {

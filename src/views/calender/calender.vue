@@ -73,7 +73,6 @@ export default {
             calender({
                 time : e.Time,
                 success : (res) =>{
-                    console.log(res);
                     this.time = res;
                 }
             })

@@ -139,7 +139,7 @@ Vue.directive('dialogDrag', {
               // 往右拖拽
               if (clientX < e.clientX) {
                 if (dragDom.clientWidth < minWidth) {
-                  console.log()
+                  
                 } else {
                   dragDom.style.width = elW - (e.clientX - clientX) * 2 + 'px'
                 }
@@ -153,7 +153,7 @@ Vue.directive('dialogDrag', {
               // 往左拖拽
               if (clientX > e.clientX) {
                 if (dragDom.clientWidth < minWidth) {
-                  console.log()
+                  
                 } else {
                   dragDom.style.width = elW - (clientX - e.clientX) * 2 + 'px'
                 }

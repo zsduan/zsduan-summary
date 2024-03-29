@@ -8,17 +8,17 @@
 <template>
     <div class="table-wrop" :style="{height : tableHeight ? tableHeight : ''}">
         <div class="list-wrop">
-            <el-table v-if="!isRedraw" :data="tableData" class="table" ref="dzsTable" v-loading="loading"
+            <el-table v-if="!isRedraw" :data="list" class="table" ref="dzsTable" v-loading="loading"
                 @selection-change="handleSelectionChange" :stripe="true" v-bind="{ ...tableOptions }">
                 <el-table-column type="selection" width="55" v-if="showCheckbox"></el-table-column>
                 <template v-for="(option, index) in headerData">
                     <template v-if="!option.isSlot">
-                        <el-table-column :label="option.lable" :width="option.width" :show-overflow-tooltip="true"
+                        <el-table-column :label="option.label" :width="option.width" :show-overflow-tooltip="true"
                             :prop="option.key" :class-name="'table-column_' + columnClassName" v-bind="{ ...option.props }"
                             :key="index"></el-table-column>
                     </template>
                     <template v-else>
-                        <el-table-column :class-name="'table-column_' + columnClassName" :key="index" :label="option.lable"
+                        <el-table-column :class-name="'table-column_' + columnClassName" :key="index" :label="option.label"
                             :width="option.width" :show-overflow-tooltip="true" v-bind="{ ...option.props }">
                             <template slot-scope="scope">
                                 <div>
@@ -58,14 +58,13 @@
 <script>
 /**
  * @name 表格组件
- * @props tableList 列表数据 isSlot:自定义slot
  * @props operation 操作数据 add 新增 edit 编辑 details 详情 del 删除
- * @props tableHeader 表头数据及表单key  lable 表头名称  key 显示关键字 width 宽度 isSlot:自定义slot props:el-table-column的配置项
+ * @props tableHeader 表头数据及表单key  label 表头名称  key 显示关键字 width 宽度 isSlot:自定义slot props:el-table-column的配置项
  * @props showCheckbox 是否显示多选 默认 false 不显示  true 显示
  * @props maxSize 每页显示条数 默认10
  * @props showPagination 是否显示分页 默认true 显示
  * @props operationOption 操作列配置项
- * @props tableData 表格数据
+ * @props list 表格数据
  * @props total 总条数
  * @props tableOptions 饿了吗ui的配置
  * @props loading 是否开启加载中 可以在 tableOptions配置自己想要的加载 element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"
@@ -146,7 +145,7 @@ export default {
             },
         },
         /**表格数据*/
-        tableData: {
+        list: {
             type: Array,
             default: () => {
                 return [];

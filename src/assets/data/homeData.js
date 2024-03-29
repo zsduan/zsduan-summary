@@ -87,7 +87,7 @@ export const jsList = [
         is_show : false
     },
     {
-        title : "设置时间",
+        title : "时间相关处理",
         path : "/setTime",
         is_show : true
     },

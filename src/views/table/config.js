@@ -7,24 +7,24 @@
  */
 export const TABALE_HEADER = [
     {
-        lable: "能力(120px)",
+        label: "能力(120px)",
         key: "ability",
         width : '120px'
     },
     {
-        lable: "排序",
+        label: "排序",
         key: "sorts",
         props : {
             sortable : true
         }
     },
     {
-        lable: "是否显示",
+        label: "是否显示",
         key: "is_show",
         isSlot : true,
     },
     {
-        lable: "添加时间",
+        label: "添加时间",
         key: "addtime",
     }
 ];
@@ -37,7 +37,7 @@ export const code1 =
  * @name 表格组件
  * @props tableList 列表数据 isSlot:自定义slot
  * @props operation 操作数据 add 新增 edit 编辑 details 详情 del 删除
- * @props tableHeader 表头数据及表单key  lable 表头名称  key 显示关键字 width 宽度 isSlot:自定义slot props:el-table-column的配置项
+ * @props tableHeader 表头数据及表单key  label 表头名称  key 显示关键字 width 宽度 isSlot:自定义slot props:el-table-column的配置项
  * @props showCheckbox 是否显示多选 默认 false 不显示  true 显示
  * @props maxSize 每页显示条数 默认10
  * @props showPagination 是否显示分页 默认true 显示
@@ -71,21 +71,21 @@ html
 data
 TABALE_HEADER = [
     {
-        lable: "能力",
+        label: "能力",
         key: "ability",
         width : '120px'
     },
     {
-        lable: "排序",
+        label: "排序",
         key: "sorts",
     },
     {
-        lable: "是否显示",
+        label: "是否显示",
         key: "is_show",
         isSlot : true,
     },
     {
-        lable: "添加时间",
+        label: "添加时间",
         key: "addtime",
     }
 ]

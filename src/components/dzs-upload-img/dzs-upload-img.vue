@@ -178,7 +178,6 @@ export default {
                 this.$emit("upload-success", fileInfo);
                 this.$emit("change", this.fileList);
             }
-            console.log(files);
         },
         // 超出限制
         handleExceed(files, fileList) {

@@ -51,7 +51,6 @@ const setHtml = (option)=>{
 		return;
 	}
     var allImg = newContent.match(str); // 取到所有img标签 放到数组 s里面
-	// console.log(allImg);
 	for (var i = 0; i < allImg.length; i++) {
 		var srcImg = allImg[i].replace(str, '$1'); //取src面的内容
         // http https base64 不进行组合

@@ -94,7 +94,6 @@ export default {
             let index = this.widthList.findIndex((item) => {
                 return item.value === this.radio;
             });
-            console.log("index ==>" ,index);
             window.localStorage.setItem("tableHeight", this.widthList[index].value);
             this.$emit("changeHeight", this.widthList[index].value);
         }, 

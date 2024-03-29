@@ -14,11 +14,11 @@
 <script>
 import watermark from "./utils/watermark.js";
 import ua from "@/utils/ua";
-import setTime from "@/utils/setTime";
+import {formatTime , asyncFormatTime} from "./utils/format-time";
 export default {
     created() {
         watermark({
-            watermark_txt : `<p>zsduan的个人总结</p><p>${ua().browserName} ${ua().browserVersion}</p><p>${setTime()}</p>`,
+            watermark_txt : `<p>zsduan的个人总结</p><p>${ua().browserName} ${ua().browserVersion}</p><p>${formatTime()}</p>`,
             isHtml : true,
             watermark_color : "rgba(0,0,0,0.1)",
         })

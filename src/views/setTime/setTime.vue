@@ -32,7 +32,6 @@
 </template>
 <script>
 import dzsForm from "@/components/dzs-form/index.vue";
-import setTime from "@/utils/setTime";
 import {code1 , code2} from "./config";
 import {formatTime , asyncFormatTime} from "../../utils/format-time";
 export default {
@@ -72,13 +71,12 @@ export default {
     },
     data(){
         return {
-            time : setTime(),
+            time : formatTime(),
             code1 : code1,
             code2 : code2,
-            time1 : setTime({format : "yyyy-MM-dd"}),
+            time1 : formatTime({format : "yyyy-MM-dd"}),
             time2 : "",
             time3 : "",
-            
         }
     },
     mounted(){
@@ -87,7 +85,7 @@ export default {
     },
     methods:{
         onSubmit(e){
-            setTime({
+            formatTime({
                 date : e.Time,
                 success : (res)=>{
                     this.time = res
@@ -96,7 +94,7 @@ export default {
         },
 
         onSubmit1(e){
-            setTime({
+            formatTime({
                 date : e.Time,
                 format : "yyyy-MM-dd",
                 success : (res)=>{
@@ -113,7 +111,7 @@ export default {
                     this.time2 = res
                 },
                 fail : (err)=>{
-                    console.log(err)
+                    console.error(err)
                 },
             })
         },
@@ -125,7 +123,7 @@ export default {
             }).then((res)=>{
                 this.time3 = res
             }).catch((err)=>{
-                console.log(err)
+                console.error(err)
             })
         }
     }

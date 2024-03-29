@@ -53,7 +53,7 @@ fileSliceMerge({
     chunkSize :1024 * 1024 * 5,
     md5 : true,
     success : (res)=>{
-        console.log("分片文件返回 ==>" ,res);
+        // 分片文件返回
     }
 })
 `
@@ -65,7 +65,7 @@ fileSliceMerge({
     Vue : this,
     type : "merge",
     success : (res)=>{
-        console.log("合并文件返回 ==>" ,res);
+        // 合并文件返回
     }
 })
 `

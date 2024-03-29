@@ -58,7 +58,6 @@ export default {
         setTimeout(()=>{
             this.shoeDefault = true;
         },3000)
-        // console.log(process.env.NODE_ENV)
     }
 }
 </script>

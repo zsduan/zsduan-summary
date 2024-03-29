@@ -99,7 +99,6 @@ export default {
     created() {
         this.isPc();
         this.init();
-        console.log(process.env)
     },
     watch: {
         isShow: {

@@ -206,7 +206,6 @@ export default {
             this.aside[key][index].active = true;
             this.activeAside = index;
             document.title = this.aside[key][index].title;
-            console.log(this.aside[key][index].path);
             this.activeComponent = this.aside[key][index].path;
         },
         inputValue() {
@@ -226,7 +225,6 @@ export default {
             // 遍历查找
             this.asideList.forEach((v) => {
                 this.aside[v.key].forEach((itm , index) => {
-                    console.log(itm.path == item.path)
                     if(itm.path == item.path){
                         this.goPath(index , v.key);
                     }

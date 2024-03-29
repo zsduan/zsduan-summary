@@ -12,7 +12,7 @@
             <h2>基础用法</h2>
             <div class="item">
                 <div class="tips-box">自定义组件与指定宽度</div>
-                <dzs-table :tableHeader="TABALE_HEADER" :tableData="tableData" :operation="operation" @change="changeTabel">
+                <dzs-table :tableHeader="TABALE_HEADER" :list="tableData" :operation="operation" @change="changeTabel">
                     <template #is_show="rowData">
                         <el-switch :value="rowData.row.is_show" :disabled="true"></el-switch>
                     </template>
@@ -22,7 +22,7 @@
             <h2>分页与复选框</h2>
             <div class="item">
                 <div class="tips-box">分页与左边有复选框</div>
-                <dzs-table :tableHeader="TABALE_HEADER" :tableData="tableData" :operation="operation" :maxSize="2" :total="4" :showCheckbox="true">
+                <dzs-table :tableHeader="TABALE_HEADER" :list="tableData" :operation="operation" :maxSize="2" :total="4" :showCheckbox="true">
                     <template #is_show="rowData">
                         <el-switch :value="rowData.row.is_show" :disabled="true"></el-switch>
                     </template>
