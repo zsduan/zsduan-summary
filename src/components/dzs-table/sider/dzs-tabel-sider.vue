@@ -3,7 +3,7 @@
         <el-popover :offset="60" placement="left-start" width="80%" trigger="click">
             <div :style="{...titleStyle}">列设置</div>
             <el-checkbox-group v-model="goupList">
-                <el-checkbox v-for="(item,index) in columnList" :checked="item.isShow" :key="index" :label="item" @change="changeCheckbox(index)">{{item.lable}}</el-checkbox>
+                <el-checkbox v-for="(item,index) in columnList" :checked="item.isShow" :key="index" :label="item" @change="changeCheckbox(index)">{{item.label}}</el-checkbox>
             </el-checkbox-group>
             <div slot="reference" class="el-icon">
                 <i class="el-icon-setting"></i>
@@ -78,6 +78,9 @@ export default {
                 this.columnList.forEach((item) => {
                     item.isShow = true;
                 });
+                let tableHeight = window.localStorage.getItem("dzs-table-height");
+                this.radio = tableHeight ? tableHeight : '';
+                this.changeHeight();
             },
             deep: true,
             immediate: true,
@@ -94,7 +97,7 @@ export default {
             let index = this.widthList.findIndex((item) => {
                 return item.value === this.radio;
             });
-            window.localStorage.setItem("tableHeight", this.widthList[index].value);
+            window.localStorage.setItem("dzs-table-height", this.widthList[index].value);
             this.$emit("changeHeight", this.widthList[index].value);
         }, 
     }

@@ -29,6 +29,12 @@
                 </dzs-table>
                 <dzs-code title="源代码" :value="code2"></dzs-code>
             </div>
+            <h2>参数说明</h2>
+            <div class="item">
+                <dzs-table  :tableHeader="descHeader" :list="descData" :showOperation="false" :tableOptions="descTableOptions">
+                    
+                </dzs-table>
+            </div>
             <h2>更多功能</h2>
             <div class="item">
                 <div class="tips-box">自己在源代码去看</div>
@@ -43,7 +49,8 @@
 </template>
 <script>
 import dzsTable from "@/components/dzs-table/index.vue";
-import {TABALE_HEADER , operation , code1 , code2} from "./config"
+import {TABALE_HEADER , operation , code1 , code2} from "./config";
+import {descHeader , descData , descTableOptions} from "./desc";
 export default {
     components : {
         dzsTable
@@ -87,13 +94,16 @@ export default {
             ],
             operation : operation,
             code1 : code1,
-            code2 : code2
+            code2 : code2 ,
+            descHeader : descHeader,
+            descData : descData,
+            descTableOptions : descTableOptions
         }
     },
     methods:{
         changeTabel(val){
             this.$message({
-                message: val.title,
+                message: "点击了"  + val.title,
                 type: 'info'
             });
         }

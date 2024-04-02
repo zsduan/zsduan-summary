@@ -1,34 +1,29 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-21 10:21:11
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-03-28 19:54:00
- * @FilePath: \vue2+elui+template\src\components\dzs-table\index.vue
--->
 <template>
-    <div class="table-wrop" :style="{height : tableHeight ? tableHeight : ''}">
+    <div class="table-wrop">
         <div class="list-wrop">
-            <el-table v-if="!isRedraw" :data="list" class="table" ref="dzsTable" v-loading="loading"
-                @selection-change="handleSelectionChange" :stripe="true" v-bind="{ ...tableOptions }">
+            <el-table v-if="headerData.length" :data="list" class="table" ref="dzsTable" v-loading="loading"
+                @selection-change="handleSelectionChange" :stripe="true" v-bind="{ ...tableOptions }"
+                :height="tableHeight ? tableHeight : ''">
                 <el-table-column type="selection" width="55" v-if="showCheckbox"></el-table-column>
                 <template v-for="(option, index) in headerData">
                     <template v-if="!option.isSlot">
-                        <el-table-column :label="option.label" :width="option.width" :show-overflow-tooltip="true"
-                            :prop="option.key" :class-name="'table-column_' + columnClassName" v-bind="{ ...option.props }"
+                        <el-table-column :label="option.label" :width="option.width" :prop="option.key"
+                            :class-name="'table-column_' + columnClassName" v-bind="{ ...option.props }"
                             :key="index"></el-table-column>
                     </template>
                     <template v-else>
-                        <el-table-column :class-name="'table-column_' + columnClassName" :key="index" :label="option.label"
-                            :width="option.width" :show-overflow-tooltip="true" v-bind="{ ...option.props }">
+                        <el-table-column :class-name="'table-column_' + columnClassName" :key="index"
+                            :label="option.label" :width="option.width" v-bind="{ ...option.props }">
                             <template slot-scope="scope">
                                 <div>
-                                    <slot :name="option.key" :row="{ ...scope.row }" />
+                                    <slot :name="option.key" :row="{ ...scope.row }"></slot>
                                 </div>
                             </template>
                         </el-table-column>
                     </template>
                 </template>
-                <el-table-column v-bind="operationOption" label="操作">
+                <el-table-column v-if="showOperation && operation.length"
+                    :class-name="'table-column_' + columnClassName" v-bind="operationOption" label="操作">
                     <template slot-scope="scope">
                         <el-button type="text" class="btn" size="small" v-for="(item, index) in operation" :key="index">
                             <span @click="onEdit(scope.row)" v-if="item == 'edit'">编辑</span>
@@ -39,15 +34,19 @@
                                 </template>
                             </el-popconfirm>
                         </el-button>
-                        <slot name="tableBtn" :row="{ ...scope.row }"></slot>
+                        <slot name="button" :row="{ ...scope.row }"></slot>
                     </template>
                 </el-table-column>
             </el-table>
+            <div class="table-empty" v-if="!headerData.length">
+                你还没设置数据显示
+            </div>
             <div class="sider-box">
-                <dzs-tabel-sider v-if="showTabelSider" :list="tableHeader" @change="onSiderChange" @changeHeight="changeHeight"></dzs-tabel-sider>
+                <dzs-tabel-sider v-if="showSider" :list="tableHeader" @change="onSiderChange"
+                    @changeHeight="changeHeight"></dzs-tabel-sider>
             </div>
         </div>
-        <div class="table-footer" v-if="(total > maxSize) && showPagination">
+        <div class="table-footer" v-if="(total > maxSize) && showPage">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                 :page-sizes="[maxSize, maxSize * 2, maxSize * 4]" :background="paginationSet.background"
                 :layout="paginationSet.layout" :total="total"></el-pagination>
@@ -58,128 +57,48 @@
 <script>
 /**
  * @name 表格组件
- * @props operation 操作数据 add 新增 edit 编辑 details 详情 del 删除
- * @props tableHeader 表头数据及表单key  label 表头名称  key 显示关键字 width 宽度 isSlot:自定义slot props:el-table-column的配置项
+ * @props operation 操作数据 edit 编辑 details 详情 del 删除
+ * @props tableHeader 表头数据及表单key  label 表头名称  key 关键字/slot的name width 宽度 isSlot:自定义slot props:el-table-column的配置项
  * @props showCheckbox 是否显示多选 默认 false 不显示  true 显示
  * @props maxSize 每页显示条数 默认10
- * @props showPagination 是否显示分页 默认true 显示
+ * @props showPage 是否显示分页 默认true 显示
  * @props operationOption 操作列配置项
  * @props list 表格数据
  * @props total 总条数
  * @props tableOptions 饿了吗ui的配置
  * @props loading 是否开启加载中 可以在 tableOptions配置自己想要的加载 element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"
  * @props height 高度
- * @props showTabelSider 是否显示侧边栏 默认true 显示
+ * @props showSider 是否显示侧边栏 默认true 显示
+ * @props showOperation 是否显示操作列 默认true 显示
  *
- * @methods SelectionChange 选中数据改变 返回当前选中的数据
+ * @methods selectionChange 选中数据改变 返回当前选中的数据
  * @methods change 页码/条数改变 返回当前页码/条数  status:page 改变页码  status:size 改变条数
- * @methods change 列表数据改变 返回当前改变的数据  status:update 更新数据  status:delete 删除数据  status:edit 编辑数据 status:details 详情数据
+ * @methods change 列表数据改变 返回当前改变的数据  status:delete 删除数据  status:edit 编辑数据 status:details 详情数据
  * @methods onEdit 编辑
  * @methods onDetails 详情
- * @methods onDel 删除
+ * @methods onDelete 删除
  * @methods setSelection 设置选中的数据
  * @methods getTableMethods 获取到原生方法
+ * @methods sizeChange 选择条数改变
+ * @methods currentChange 页码改变
+ * 
+ * @slot button 操作列按钮
  *
  */
 import dzsTabelSider from "./sider/dzs-tabel-sider.vue";
+import defaultProps from "./props";
 export default {
     name: "dzs-table",
     components: {
         dzsTabelSider,
     },
-    props: {
-        /**操作栏 配置*/
-        operation: {
-            type: Array,
-            default: () => {
-                return [];
-            },
-        },
-        /**表格 显示配置*/
-        tableHeader: {
-            type: Array,
-            default: () => {
-                return [];
-            },
-        },
-        /**是否显示 复选框*/
-        showCheckbox: {
-            type: Boolean,
-            default: () => {
-                return false;
-            },
-        },
-        /**每条 最大显示数量*/
-        maxSize: {
-            type: Number,
-            default: () => {
-                return 10;
-            },
-        },
-        /**分页 总数*/
-        total: {
-            type: Number,
-            default: () => {
-                return 0;
-            },
-        },
-        /**是都显示 分页*/
-        showPagination: {
-            type: Boolean,
-            default: () => {
-                return true;
-            },
-        },
-        /**操作项配置信息*/
-        operationOption: {
-            type: Object,
-            default: () => {
-                return {};
-            },
-        },
-        /**表单自定义 同 el-table一样*/
-        tableOptions: {
-            type: Object,
-            default: () => {
-                return {};
-            },
-        },
-        /**表格数据*/
-        list: {
-            type: Array,
-            default: () => {
-                return [];
-            },
-        },
-        /**加载中*/
-        loading: {
-            type: Boolean,
-            default: () => {
-                return false;
-            },
-        },
-        /**高度*/
-        height: {
-            type: String | Number,
-            default: () => {
-                return "";
-            },
-        },
-        /**是否显示侧边栏*/
-        showTabelSider: {
-            type: Boolean,
-            default: () => {
-                return true;
-            },
-        },
-    },
+    props: defaultProps,
     data() {
         return {
             paginationSet: {
                 background: false,
                 layout: "total, sizes, prev, pager, next, jumper",
             },
-            isRedraw: false,
             headerData: [],
             columnClassName: ""
         };
@@ -198,64 +117,53 @@ export default {
         tableHeight() {
             let height = "";
             if (this.height) {
-                if(Number(this.height) != NaN && Number(this.height) > 0){
+                if (Number(this.height) != NaN && Number(this.height) > 0) {
                     height = Number(this.height) + "px";
-                }else{
+                } else {
                     height = this.height;
                 }
             }
             return height;
         },
-        
+
     },
-    mounted() { },
+    mounted() {
+    },
     methods: {
         /**选择条数改变*/
         handleSizeChange(num) {
-            this.$emit("change", {
-                status: "size",
-                data: num,
-            });
-            this.$emit("size-change", num);
+            this.onChange("size", '选择条数改变', num);
+            this.$emit("sizeChange", num);
         },
         /**页码改变*/
         handleCurrentChange(num) {
-            this.$emit("change", {
-                status: "page",
-                data: num,
-            });
-            this.$emit("current-change", num);
+            this.onChange("page", '页码改变', num);
+            this.$emit("currentChange", num);
         },
         /**编辑*/
         onEdit(item) {
-            this.$emit("change", {
-                status: "edit",
-                title: "编辑",
-                data: item,
-            });
-            this.$emit("on-edit", item);
+            this.onChange("edit", "编辑", item);
+            this.$emit("onEdit", item);
         },
         /**详情*/
         onDetails(item) {
-            this.$emit("change", {
-                status: "details",
-                title: "详情",
-                data: item,
-            });
-            this.$emit("on-details", item);
+            this.onChange("details", "详情", item);
+            this.$emit("onDetails", item);
         },
         /**删除*/
         onDel(item) {
-            this.$emit("change", {
-                status: "delete",
-                title: "删除",
-                data: item,
-            });
-            this.$emit("on-del", item);
+            this.onChange("delete", "删除", item);
+            this.$emit("onDelete", item);
+        },
+        /**改变事件*/
+        onChange(status, title, data) {
+            let obj = { status: status, title: title, data: data, };
+            this.$emit("change", obj);
+            this.$emit("onChange", obj);
         },
         /**选中事件*/
         handleSelectionChange(val) {
-            this.$emit("SelectionChange", val);
+            this.$emit("selectionChange", val);
         },
         /**设置选中行*/
         setSelection(rows) {
@@ -269,27 +177,19 @@ export default {
         },
         /**侧边栏改变*/
         onSiderChange(val) {
-            this.isRedraw = true;
             this.headerData = val;
-            setTimeout(() => {
-                this.isRedraw = false;
-            }, 100);
         },
         /**改变高度*/
         changeHeight(e) {
-            this.isRedraw = true;
             this.columnClassName = e;
-            setTimeout(() => {
-                this.isRedraw = false;
-            }, 100);
         },
         /**获取到原生方法*/
         getTableMethods() {
             return this.$refs.dzsTable;
         },
-        /**设置选中状态*/ 
+        /**设置选中状态*/
         selectable(row, index) {
-            if(this.showCheckbox){
+            if (this.showCheckbox) {
                 return row.selectable === false ? row.selectable : true;
             }
             return true;
@@ -327,6 +227,39 @@ export default {
             }
         }
 
+        :deep(.el-table__body-wrapper) {
+
+            // 滚动条宽度
+            &::-webkit-scrollbar {
+                width: 6px;
+                background-color: #fff;
+            }
+
+            // 滚动条轨道
+            &::-webkit-scrollbar-track {
+                background-color: transparent;
+                -webkit-border-radius: 2em;
+                -moz-border-radius: 2em;
+                border-radius: 2em;
+            }
+
+            // 滚动条背景
+            &::-webkit-scrollbar-track-piece {
+                background-color: transparent;
+                -webkit-border-radius: 2em;
+                -moz-border-radius: 2em;
+                border-radius: 2em;
+            }
+
+            // 滚动条滑块
+            &::-webkit-scrollbar-thumb {
+                background-color: #e9e7e7;
+                -webkit-border-radius: 2em;
+                -moz-border-radius: 2em;
+                border-radius: 2em;
+            }
+        }
+
         :deep(.el-table__fixed-right-patch) {
             background-color: #f3f8ff;
         }
@@ -335,6 +268,7 @@ export default {
             tr {
                 .table-column_mini {
                     height: 30px;
+                    padding: 0;
                 }
 
                 .table-column_middle {
@@ -350,6 +284,14 @@ export default {
 
     .table {
         border: 1px solid #ebeef5;
+    }
+
+    .table-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ebeef5;
+        width: 100%;
     }
 
     @media screen and (max-width: 768px) {
