@@ -1,6 +1,19 @@
 <template>
-    <div class="tabel-sider-box">
-        <el-popover :offset="60" placement="left-start" width="80%" trigger="click">
+    <div class="tabel-sider-box" v-if="showSiders.length">
+        <el-popover :offset="80" placement="left-start" width="80%" trigger="click" v-if="showSiders.includes('search')">
+            <div class="title" :style="{...titleStyle}">搜索</div>
+            <div class="ipt-box">
+                <el-input placeholder="请输入内容" v-model="searchValue" @input="changeSearch">
+                    <el-select v-model="searchSelect" slot="prepend" placeholder="请选择">
+                        <el-option :label="item.label" :value="item.key" v-for="(item,index) in columnList" :key="index"></el-option>
+                    </el-select>
+                </el-input>
+            </div>
+            <div slot="reference" class="el-icon">
+                <i class="el-icon-search"></i>
+            </div>
+        </el-popover>
+        <el-popover :offset="60" placement="left-start" width="80%" trigger="click" v-if="showSiders.includes('column')">
             <div :style="{...titleStyle}">列设置</div>
             <el-checkbox-group v-model="goupList">
                 <el-checkbox v-for="(item,index) in columnList" :checked="item.isShow" :key="index" :label="item" @change="changeCheckbox(index)">{{item.label}}</el-checkbox>
@@ -9,7 +22,7 @@
                 <i class="el-icon-setting"></i>
             </div>
         </el-popover>
-        <el-popover :offset="30" placement="left-start" width="80%" trigger="click">
+        <el-popover :offset="30" placement="left-start" width="80%" trigger="click" v-if="showSiders.includes('height')">
             <div class="title" :style="{...titleStyle}">表格栏高度设置</div>
             <el-radio-group v-model="radio" @change="changeHeight">
                 <el-radio-button v-for="(item,index) in widthList" :key="index" :label="item.value">{{item.label}}</el-radio-button>
@@ -21,15 +34,33 @@
     </div>
 </template>
 <script>
+import deepCopy from '../deepCopy';
+import blurSearch from './blurSearch';
 export default {
     name: "dzs-tabel-sider",
     props: {
-        list: {
+        column: {
             type: Array,
             default: () => {
                 return [];
             },
         },
+        list : {
+            type : Array,
+            default : ()=>{
+                return []
+            }
+        },
+        forceSearch: {
+            type: Boolean,
+            default: false,
+        },
+        'show-siders' : {
+            type : Array,
+            default : () =>{
+                return ['search','column','height']
+            }
+        }
     },
     computed: {
         returnList() {
@@ -68,10 +99,13 @@ export default {
                 color: '#606266',
                 'margin-bottom': '10px',
             },
+            searchValue : '',
+            searchSelect : "",
+            tableData : [],
         };
     },
     watch: {
-        list: {
+        column: {
             handler(val) {
                 if (!val.length) return;
                 this.columnList = JSON.parse(JSON.stringify(val));
@@ -80,11 +114,34 @@ export default {
                 });
                 let tableHeight = window.localStorage.getItem("dzs-table-height");
                 this.radio = tableHeight ? tableHeight : '';
+                this.searchSelect = this.columnList[0].key;
                 this.changeHeight();
             },
             deep: true,
             immediate: true,
         },
+        list : {
+            handler(val){
+                if(this.tableData.length) return;
+                const list = deepCopy(val);
+                // 拉平数据
+                let tableData = [];
+                const setData = (list) =>{
+                    list.forEach((item)=>{
+                        if(item.children && item.children.length){
+                            setData(item.children);
+                            tableData.push(item);
+                        }else{
+                            tableData.push(item);
+                        }
+                    });
+                }
+                setData(list);
+                this.tableData = tableData;
+            },
+            deep : true,
+            immediate : true,
+        }
     },
     methods : {
         changeCheckbox(index) {
@@ -99,7 +156,25 @@ export default {
             });
             window.localStorage.setItem("dzs-table-height", this.widthList[index].value);
             this.$emit("changeHeight", this.widthList[index].value);
-        }, 
+        },
+        /**搜索*/
+        changeSearch(){
+            if(this.tableData.length > 200 && !this.forceSearch){
+                this.$message({
+                    message : "数据量过大，搜索可能会影响性能，已经关闭该功能 如果需要可以使用强制搜索功能！",
+                    type : "warning"
+                });
+                return;
+            }
+            blurSearch({
+                list : this.tableData,
+                key : this.searchSelect,
+                searValue : this.searchValue,
+                success : (list)=>{
+                    this.$emit("search",list);
+                }
+            })
+        } 
     }
 };
 </script>
@@ -117,5 +192,8 @@ export default {
         font-size: 20px;
         cursor: pointer;
     }
+}
+:deep(.el-select .el-input) {
+    width: 100px;
 }
 </style>

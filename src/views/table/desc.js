@@ -164,6 +164,20 @@ export const descData = [
         remark : "默认 true 显示"
     },
     {
+        key : "forceSearch",
+        type : "props",
+        parameterType : "Boolean",
+        desc : "侧边栏是否强制搜索",
+        remark : "默认false 不强制搜索 true 强制搜索 侧边栏最大搜索条数为200"
+    },
+    {
+        key : "showSiders",
+        type : "props",
+        parameterType : "Array",
+        desc : "侧边栏配置",
+        remark : "height 高度设置  column 列配置 search 搜索配置 ['search','column','height']"
+    },
+    {
         key : "@selectionChange",
         type : "methods",
         parameterType : "",

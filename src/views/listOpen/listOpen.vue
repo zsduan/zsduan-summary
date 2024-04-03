@@ -69,7 +69,7 @@ export default {
                     Value : "shanxi"
                 }
             ],
-            is_open : false,
+            is_open : true,
         }
     },
     mounted(){

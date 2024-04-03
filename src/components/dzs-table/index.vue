@@ -1,9 +1,9 @@
 <template>
     <div class="table-wrop">
         <div class="list-wrop">
-            <el-table v-if="headerData.length" :data="list" class="table" ref="dzsTable" v-loading="loading"
+            <el-table v-if="headerData.length" :data="tableData" class="table" ref="dzsTable" v-loading="loading"
                 @selection-change="handleSelectionChange" :stripe="true" v-bind="{ ...tableOptions }"
-                :height="tableHeight ? tableHeight : ''">
+                :height="tableHeight ? tableHeight : '100%'">
                 <el-table-column type="selection" width="55" v-if="showCheckbox"></el-table-column>
                 <template v-for="(option, index) in headerData">
                     <template v-if="!option.isSlot">
@@ -42,8 +42,8 @@
                 你还没设置数据显示
             </div>
             <div class="sider-box">
-                <dzs-tabel-sider v-if="showSider" :list="tableHeader" @change="onSiderChange"
-                    @changeHeight="changeHeight"></dzs-tabel-sider>
+                <dzs-tabel-sider v-if="showSider" :column="tableHeader" :list="tableData"  @change="onSiderChange"
+                    @changeHeight="changeHeight" @search="siderSearch" :forceSearch="forceSearch" :show-siders="showSiders"></dzs-tabel-sider>
             </div>
         </div>
         <div class="table-footer" v-if="(total > maxSize) && showPage">
@@ -70,6 +70,7 @@
  * @props height 高度
  * @props showSider 是否显示侧边栏 默认true 显示
  * @props showOperation 是否显示操作列 默认true 显示
+ * @props forceSearch 是否强制搜索 默认false 不强制搜索 true 强制搜索
  *
  * @methods selectionChange 选中数据改变 返回当前选中的数据
  * @methods change 页码/条数改变 返回当前页码/条数  status:page 改变页码  status:size 改变条数
@@ -87,6 +88,7 @@
  */
 import dzsTabelSider from "./sider/dzs-tabel-sider.vue";
 import defaultProps from "./props";
+import deepCopy from "./deepCopy";
 export default {
     name: "dzs-table",
     components: {
@@ -100,7 +102,8 @@ export default {
                 layout: "total, sizes, prev, pager, next, jumper",
             },
             headerData: [],
-            columnClassName: ""
+            columnClassName: "" ,
+            tableData: [],
         };
     },
     watch: {
@@ -111,6 +114,13 @@ export default {
             deep: true,
             immediate: true,
         },
+        list : {
+            handler(val){
+                this.tableData = deepCopy(val);
+            },
+            deep : true,
+            immediate : true
+        }
     },
     computed: {
         /**计算高度*/
@@ -194,6 +204,10 @@ export default {
             }
             return true;
         },
+        /**侧边栏搜索*/
+        siderSearch(list){
+            this.tableData = list;
+        } 
     },
 };
 </script>

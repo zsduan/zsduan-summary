@@ -3,13 +3,28 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.1</h2>
+                <div class="time">2024-4-3</div>
+            </div>
+            <div class="content">
+                <p>1. 表格新增搜索啦 可以在侧边栏搜索</p>
+                <p>2. 修复侧边栏表格设置高度刷新不生效的问题</p>
+                <p>3. 修复了表格在设置高度滚动条会失效的bug</p>
+                <p>4. 优化了代码展示 可以展开和关闭列表了</p>
+                <p>5. 表格组件可以新增了 属性列表</p>
+                <p>6. 优化了表单组件在设置校验函数会失败的bug</p>
+                <p>7. 表格组件新增了更多的配置项</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.0</h2>
                 <div class="time">2024-1-24</div>
             </div>
             <div class="content">
                 <p>1. 新增vue-office</p>
                 <p>2. 优化读取excel文件 支持 导出 cvs xls xlsx</p>
-                <p>3. 修复了其他一只bug</p>
+                <p>3. 修复了其他一些bug</p>
             </div>
         </div>
         <div class="item">

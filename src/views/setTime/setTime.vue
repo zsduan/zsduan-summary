@@ -1,16 +1,8 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-30 17:10:05
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:34:18
- * @FilePath: \vue2+js+eui+template\src\views\setTime\setTime.vue
--->
-
 <template>
     <div>
         <dzs-header title="处理时间" v-if="!newIndex"></dzs-header>
         <div class="page">
-            <h2>基础用法</h2>
+            <h2>格式化时间</h2>
             <div class="item">
                 <div class="tips-box">正常使用</div>
                 <dzs-form :options="formOptions" @onSubmit="onSubmit"></dzs-form>

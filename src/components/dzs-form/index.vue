@@ -186,6 +186,7 @@ import { pickerOptions } from "./config.js";
 import dzsUploadImg from "../dzs-upload-img/dzs-upload-img.vue";
 import dzsEditors from "../dzs-editor/index.vue";
 import dzsUploadFile from "../dzs-upload-file/dzs-upload-file.vue";
+import deepCopy from "./deepCopy.js";
 export default {
     name: "From",
     components: {
@@ -425,7 +426,7 @@ export default {
         async initModel(data) {
             this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
             this.formProps = data.formProps || {};
-            this.formItem = JSON.parse(JSON.stringify(data.formItem));
+            this.formItem = deepCopy(data.formItem);
             this.formItem.forEach((item) => {
                 // 兼容手机端
                 item.span = this.screenWidth <= 768 ? 24 : item.span;

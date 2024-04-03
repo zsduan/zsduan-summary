@@ -91,6 +91,20 @@ const defaultProps = {
         default: () => {
             return true;
         },
+    },
+    /**强制搜索*/
+    'force-search' : {
+        type: Boolean,
+        default: () => {
+            return false;
+        },
+    },
+    /**侧边栏显示列表*/
+    'show-siders' : {
+        type : Array,
+        default : () =>{
+            return ['search','column','height']
+        }
     } 
 };
 

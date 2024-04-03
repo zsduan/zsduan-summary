@@ -1,10 +1,3 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-21 11:16:17
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-03-28 19:52:54
- * @FilePath: \vue2+elui+template\src\views\table\table.vue
--->
 <template>
     <div>
         <dzs-header title="表格组件" v-if="!newIndex"></dzs-header>
@@ -31,8 +24,7 @@
             </div>
             <h2>参数说明</h2>
             <div class="item">
-                <dzs-table  :tableHeader="descHeader" :list="descData" :showOperation="false" :tableOptions="descTableOptions">
-                    
+                <dzs-table :tableHeader="descHeader" :list="descData" :showOperation="false" :tableOptions="descTableOptions">
                 </dzs-table>
             </div>
             <h2>更多功能</h2>
