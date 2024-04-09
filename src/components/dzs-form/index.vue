@@ -1,17 +1,10 @@
-<!--
- * @Author: zs.duan
- * @Date: 2021-12-20 16:33:42
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 16:34:41
- * @FilePath: \vue2+js+eui+template\src\components\dzs-form\index.vue
--->
 <template>
-    <div class="form-box">
+    <div :id="fromId" class="form-box">
         <el-form v-loading="loading" :element-loading-text="loadingText" v-bind="{ ...formProps }" :model="fromModel"
             :rules="fromRules" :label-position="labelPosition" ref="dzsForm"
-            :class="['ruleForm', loading ? 'noScroll' : '']">
+            :class="{ ruleForm: true, noScroll: loading, 'phone-form': formBoxWidth <= 768 }">
             <!-- 自定义头部 -->
-            <el-row :gutter="10">
+            <el-row :gutter="gutter">
                 <div v-for="(item, index) in formItem" :key="index">
                     <el-col :span="item.span ? item.span : 24" v-if="!item.isHidden">
                         <!-- 自定义组件 -->
@@ -20,8 +13,13 @@
                         </template>
                         <template v-if="!item.isSlot">
                             <el-form-item :label="item.label" :prop="item.key">
+                                <!-- 自定义组件 -->
+                                <template v-if="item.props && item.props.isSlot">
+                                    <slot :name="`${item.key}`"></slot>
+                                </template>
+
                                 <!-- 输入框 -->
-                                <template v-if="item.type == 'input' || !item.type">
+                                <template v-if="(item.type == 'input' || !item.type) && !item.props.isSlot">
                                     <el-input v-model="fromModel[item.key]" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)" :placeholder="getPlaceholder(item)">
                                         <template v-if="item.slots" :slot="item.slots.name">
@@ -79,8 +77,10 @@
                                     <el-checkbox-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
                                         @change="changeVaule($event, item.key)">
                                         <el-checkbox class="items" v-for="(option, idx) in item.children"
-                                            v-bind="{ ...option.props }" :key="option.value + idx" :label="option.value">{{
-                                                option.label }}</el-checkbox>
+                                            v-bind="{ ...option.props }" :key="option.value + idx"
+                                            :label="option.value">
+                                            {{ option.label }}
+                                        </el-checkbox>
                                     </el-checkbox-group>
                                 </template>
 
@@ -89,8 +89,10 @@
                                     <el-radio-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
                                         @change="changeVaule($event, item.key)">
                                         <el-radio class="items" v-for="(option, idx) in item.children"
-                                            v-bind="{ ...option.props }" :key="option.value + idx" :label="option.value">{{
-                                                option.label }}</el-radio>
+                                            v-bind="{ ...option.props }" :key="option.value + idx"
+                                            :label="option.value">
+                                            {{ option.label }}
+                                        </el-radio>
                                     </el-radio-group>
                                 </template>
 
@@ -102,39 +104,38 @@
 
                                 <!-- 上传文件 -->
                                 <template v-if="item.type == 'uploadFile'">
-                                    <dzs-upload-file v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                    <dzs-upload-file :isPhone="formBoxWidth <= 768" v-model="fromModel[item.key]"
+                                        v-bind="{ ...item.props }"
                                         @change="changeVaule($event, item.key)"></dzs-upload-file>
                                 </template>
 
                                 <!-- 富文本组件 -->
-                                <dzs-editors v-if="item.type == 'edit'" @save="changeVaule($event, item.key)"
-                                    :show_save="false" v-bind="{ ...item.props }"
-                                    v-model="fromModel[item.key]"></dzs-editors>
-
-                                <!-- 支持除开自身外的组件 -->
-                                <template v-if="item.props && item.props.isSlot">
-                                    <slot :name="`${item.key}Children`"></slot>
+                                <template v-if="item.type == 'edit'">
+                                    <dzs-editors :toolbar="toolbar" @save="changeVaule($event, item.key)"
+                                        :show_save="false" v-bind="{ ...item.props }" v-model="fromModel[item.key]">
+                                    </dzs-editors>
                                 </template>
 
-                                <div class="from-item-tips" v-if="getTips(item) && item.type != 'divider'">{{ getTips(item)
-                                }}</div>
+                                <div class="from-item-tips" v-if="getTips(item) && item.type != 'divider'">
+                                    {{ getTips(item) }}
+                                </div>
                             </el-form-item>
                             <!-- 分割线 -->
-                            <div v-if="item.type == 'divider'">
+                            <template v-if="item.type == 'divider'">
                                 <el-divider v-bind="{ ...item.props }">
                                     <span v-if="item.props && item.props.tips">{{ item.props.tips }}</span>
                                     <i v-if="item.props && item.props.icon" :class="item.props.icon"></i>
                                 </el-divider>
-                            </div>
+                            </template>
                         </template>
                     </el-col>
                 </div>
             </el-row>
         </el-form>
         <div class="form-sbumit-box" v-if="showBtn">
-            <el-button type="info" @click.stop="cancel" class="btn cancel">取消</el-button>
+            <el-button type="info" @click.stop="cancel" class="btn cancel">{{ cancelText }}</el-button>
             <slot name="footerBtn"></slot>
-            <el-button class="btn" type="primary" @click.stop="submit('dzsForm')">{{ success_txt }}</el-button>
+            <el-button class="btn" type="primary" @click.stop="submit('dzsForm')">{{ submitText }}</el-button>
         </div>
     </div>
 </template>
@@ -148,10 +149,11 @@
             {
                 label: "", //输入框名称 非必填
                 key: "", //输入框key 必填
-                type : "", //类型 非必填 默认input 输入框 input select date itme switch checkbox radio uploadImg edit 
+                type : "", //类型 非必填 默认input 输入框 input select date time switch checkbox radio uploadImg edit divider uploadFile 
                 children : [] , //列表数据 非必填
                 defaultValue : "" , //默认值 非必填
                 isHidden : false , //是否隐藏 非必填
+                span : 24 , //宽度 el-col span 非必填
                 props:{
                     ...defalut , //内部参数 饿了吗ui相同 type == uploadImg | uploadFile 参数见组件
                     tips : "" , //提示文字信息
@@ -167,19 +169,21 @@
             }
         ] 
     }
- * @props success_txt 提交按钮文字 非必填
+ * @props submit-text 提交按钮文字 非必填
+ * @props cancel-text 取消按钮文字 非必填
  * @props showBtn 是否显示按钮 非必填
  * @props value / v-model 返回值 表单数据
- * @props fromStatus 表单状态 非必填
  * @props antiShakeTime 防抖时间 非必填
  * @props loadingText loading文字 非必填
  * @props loading 是否显示loading 非必填
- * @props height 高度 非必填
  * @props isFormData 是否为formData 非必填
  * 
  * @methods onSubmit 提交事件 返回当前表单数据
  * @methods onCancel 取消事件
- * 
+ * @methods change 输入框改变事件 返回当前输入框的值和key
+ * @methods getFormMethod 获取饿了吗表单的原生方法
+ * @methods clearForm 清空表单数据
+ * @methods setFormData 设置表单数据
  * 
 */
 import { pickerOptions } from "./config.js";
@@ -205,10 +209,16 @@ export default {
                 return {};
             },
         },
-        success_txt: {
+        submitText: {
             type: String,
             default: () => {
                 return "提交";
+            },
+        },
+        cancelText: {
+            type: String,
+            default: () => {
+                return "取消";
             },
         },
         showBtn: {
@@ -221,12 +231,6 @@ export default {
             type: Object,
             default: () => {
                 return {};
-            },
-        },
-        fromStatus: {
-            type: String,
-            default: () => {
-                return "";
             },
         },
         /**防抖时间*/
@@ -249,18 +253,18 @@ export default {
                 return false
             }
         },
-        /**高度*/
-        height: {
-            type: String,
-            default: () => {
-                return ""
-            }
-        },
         /**是否为formData*/
         isFormData: {
             type: Boolean,
             default: () => {
                 return false
+            }
+        },
+        /**el-row 配置*/
+        gutter: {
+            type: Number,
+            default: () => {
+                return 10
             }
         }
     },
@@ -271,9 +275,11 @@ export default {
             formItem: [], //表单初始数据
             formProps: {}, //表单配置
             pickerOptions: pickerOptions,
-            screenWidth: document.body.clientWidth, //屏幕宽度
+            formBoxWidth: 0, //form-box宽度
             labelPosition: "left", //对其方式
             timer: null, //定时器 防止重复提交
+            toolbar: [],
+            fromId: `dzsForm${new Date().getTime()}`
         };
     },
     watch: {
@@ -295,10 +301,10 @@ export default {
         },
     },
     created() {
-        window.onresize = () => {
-            this.screenWidth = document.body.clientWidth;
-            this.initModel(this.options)
-        };
+
+    },
+    mounted() {
+        this.listenFormBoxWidth();
     },
     methods: {
         /**
@@ -328,7 +334,7 @@ export default {
             });
         },
 
-
+        /**提交*/
         submit(formName = "dzsForm") {
             if (this.timer) {
                 this.$message({
@@ -343,6 +349,11 @@ export default {
             }, this.antiShakeTime);
             return new Promise((resolve, reject) => {
                 this.$refs[formName].validate((valid) => {
+                    if (!valid) {
+                        this.$message.error("请填写完整信息");
+                        reject({ code: -200, message: "请填写完整的信息" });
+                        return;
+                    }
                     if (this.isFormData) {
                         this.sendFormData(resolve);
                         return;
@@ -351,104 +362,106 @@ export default {
                     for (const key in this.fromModel) {
                         if (Object.hasOwnProperty.call(this.fromModel, key)) {
                             let item = this.formItem.find((item) => item.key == key);
-                            if (item) {
-                                switch (item.type) {
-                                    case "uploadImg":
-                                        let urlList = this.fromModel[key];
-                                        sendList[key] = urlList && urlList.length > 0 ? urlList.map(item => item.uploadUrl).join(",") : "";
-                                        break;
-                                    case "checkbox":
-                                    case "switch":
-                                        sendList[key] = this.fromModel[key];
-                                        break;
-                                }
-                                if (item.isNull) {
-                                    delete sendList[key];
-                                }
-                            } else {
-                                sendList[key] = this.fromModel[key];
+                            switch (item.type) {
+                                case "uploadImg":
+                                    let urlList = this.fromModel[key];
+                                    sendList[key] = urlList && urlList.length > 0 ? urlList.map(item => item.uploadUrl).join(",") : "";
+                                    break;
+                                case "switch":
+                                    sendList[key] = this.fromModel[key];
+                                    break;
+                                default:
+                                    sendList[key] = this.fromModel[key];
+                                    break;
                             }
+                            if (item.isNull) delete sendList[key];
                         }
                     }
                     this.$emit("onSubmit", this.fromModel);
                     this.$emit("update:value", this.fromModel);
-                    if (valid) {
-                        resolve(this.fromModel);
-                    } else {
-                        this.$message.error("请填写完整信息");
-                        reject();
-                    }
+                    resolve(this.fromModel);
                 });
             });
         },
 
         /**formData 发送数据*/
-        sendFormData(resolve) {
+        sendFormData(resolve, reject) {
             let sendList = new FormData();
             for (const key in this.fromModel) {
                 if (!Object.hasOwnProperty.call(this.fromModel, key)) continue;
                 let item = this.formItem.find((item) => item.key == key);
-                if (item) {
-                    if (item.type == 'uploadImg' || item.type == 'uploadFile') {
+                let files = null;
+                switch (item.type) {
+                    case 'uploadImg':
                         if (this.fromModel[key] && this.fromModel[key].length > 1) {
-                            throw new Error(`formData 上传${item.type == 'uploadImg' ? '图片' : '文件'}只能上传${item.type == 'uploadImg' ? '一张图片' : '一个文件'} 请检查`)
+                            reject({ code: -200, message: "formData 上传图片只能上传一张图片 请检查" });
+                            throw new Error(`formData 上传图片只能上传一张图片 请检查`)
                         }
-                        this.fromModel[key].forEach((item) => {
-                            sendList.append(key, item.file);
-                        });
-                    } else if (item.type == 'switch') {
-                        sendList.append(key, this.fromModel[key] ? 1 : 0);
-                    } else if (item.type == 'checkbox') {
-                        // 逗号分隔
+                        if (this.fromModel[key] && this.fromModel[key].length > 0) {
+                            files = this.fromModel[key][0].file;
+                        }
+                        if (!files && this.fromModel[key]) {
+                            files = this.fromModel[key].file || null;
+                        }
+                        sendList.append(key, files);
+                        break;
+                    case 'uploadFile':
+                        if (this.fromModel[key] && this.fromModel[key].length > 1) {
+                            reject({ code: -200, message: "formData 上传图片只能上传一张图片 请检查" });
+                            throw new Error(`formData 上传图片只能上传一张图片 请检查`)
+                        }
+                        if (this.fromModel[key] && this.fromModel[key].length > 0) {
+                            files = this.fromModel[key][0].file;
+                        }
+                        if (!files && this.fromModel[key]) {
+                            files = this.fromModel[key].file || null;
+                        }
+                        sendList.append(key, files);
+                        break;
+                    case 'switch':
+                        sendList.append(key, this.fromModel[key] ? 'true' : 'false');
+                        break;
+                    case 'checkbox':
                         sendList.append(key, this.fromModel[key].join(','));
-                    } else {
-                        sendList.append(key, this.fromModel[key]);
-                    }
-                    if (item.isNull || item.type == 'divider') {
+                        break;
+                    case 'divider':
                         sendList.delete(key);
-                        continue;
-                    }
-                } else {
-                    sendList.append(key, this.fromModel[key]);
+                        break;
+                    default:
+                        sendList.append(key, this.fromModel[key]);
+                        break;
                 }
+                if (item.isNull) sendList.delete(key);
             }
             this.$emit("onSubmit", sendList);
             this.$emit("update:value", sendList);
             resolve(sendList);
         },
-
-
         cancel() {
             this.clearForm();
             this.$emit("onCancel");
         },
 
-        async initModel(data) {
-            this.labelPosition = this.screenWidth <= 768 ? "top" : "left";
+        /**初始化数据*/ 
+        initModel(data) {
+            this.labelPosition = this.formBoxWidth <= 768 ? "top" : "left";
             this.formProps = data.formProps || {};
             this.formItem = deepCopy(data.formItem);
             this.formItem.forEach((item) => {
                 // 兼容手机端
-                item.span = this.screenWidth <= 768 ? 24 : item.span;
+                item.span = this.formBoxWidth <= 768 ? 24 : item.span;
+                if(this.value[item.key]) item.defaultValue = this.value[item.key];
                 // 初始化选项框 和上传图片框
                 if (
                     (item.type === "checkbox" || item.type === "uploadImg" || item.type == 'uploadFile') &&
                     !item.defaultValue
                 ) {
-                    if (this.value[item.key]) {
-                        item.defaultValue = this.value[item.key];
-                    } else {
-                        item.defaultValue = [];
-                    }
+                    item.defaultValue = [];
                 }
                 // 初始化 开关
-                if (item.type === "switch" && this.value[item.key]) {
-                    item.defaultValue = this.value[item.key];
-                }
                 if (item.type == "switch" && !item.defaultValue) {
                     item.defaultValue = false;
                 }
-
                 // input框 在饿了吗ui 中需要是 string类型
                 if (item.type == "input" && item.defaultValue) {
                     item.defaultValue = item.defaultValue.toString();
@@ -456,11 +469,7 @@ export default {
                 if (!item.props) item.props = {};
                 // 当下拉框为多选时，需要将默认值转换为数组
                 if (item.type == "select" && item.props.multiple && !item.defaultValue) {
-                    if (this.value[item.key]) {
-                        item.defaultValue = this.value[item.key];
-                    } else {
-                        item.defaultValue = [];
-                    }
+                    item.defaultValue = [];
                 }
                 this.fromRules[item.key] = item.rules || [];
                 if (item.defaultValue) {
@@ -471,103 +480,48 @@ export default {
                 } else {
                     this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue;
                 }
-
             });
-        },
-
-        /**
-         * 步骤一 初始化表单值
-         * @param {Array} data 初始化的数据 
-         * */
-        step1(data) {
-            return new Promise((resolve, reject) => {
-                if (JSON.stringify(this.fromModel) != '{}') {
-                    resolve(true);
-                    return;
-                }
-                let formData = {};
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i].isNull) continue;
-                    if (data[i].defaultValue) {
-                        formData[data[i].key] = data[i].defaultValue;
-                        continue;
-                    }
-                    switch (data[i].type) {
-                        case 'switch':
-                            formData[data[i].key] = false;
-                            break;
-                        case 'select':
-                            if (data[i].props && data[i].props.multiple) {
-                                formData[data[i].key] = []
-                            } else {
-                                formData[data[i].key] = ""
-                            }
-                            break;
-                        case "checkbox":
-                            formData[data[i].key] = [];
-                            break;
-                        case "uploadImg":
-                            formData[data[i].key] = [];
-                            break;
-                        default:
-                            formData[data[i].key] = "";
-                            break;
-                    }
-                }
-
-                this.fromModel = formData;
-                resolve(true);
-            })
-
-        },
-
-        /**
-         * 步骤二 初始化表单配置项
-         * @param {Object} data 需要配置的信息 
-         * */
-        step2(data) {
-            data.formProps ? this.formProps = data.formProps : null;
-            this.formProps['label-position'] || this.formProps['labelPosition'] ? this.labelPosition = this.formProps['label-position'] || this.formProps['labelPosition'] : null;
-            this.screenWidth < 768 ? this.labelPosition = 'top' : null;
-            let options = data.formItem;
-            let rulesOptions = {};
-            options.forEach((item) => {
-                // step1 初始化 宽度
-                item.span = item.span ? item.span : 24;
-                this.screenWidth < 768 ? item.span = 24 : null;
-                // step2 初始化 规则配置
-                rulesOptions[item.key] = item.rules || [];
-                delete item.rules;
-                // step3 初始化 配置项
-                item.props = item.props || {};
-            })
-            this.formItem = options;
-            this.fromRules = rulesOptions;
-            setTimeout(() => {
-                this.$refs['dzsForm'].clearValidate();
-            }, 100)
-
         },
 
         /**清空表单数据*/
         clearForm() {
             this.$refs["dzsForm"].resetFields();
+            this.initModel(this.options);
+            this.$emit("update:value", this.fromModel);
         },
 
         /**调用饿了么表单的原生方法*/
-        getForm() {
+        getFormMethod() {
             return this.$refs["dzsForm"];
         },
 
         /**赋值*/
         setFormData(data) {
-            let data1 = JSON.parse(JSON.stringify(data));
-            let data2 = JSON.parse(JSON.stringify(this.fromModel));
-            this.fromModel = { ...data2, ...data1 };
+            this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(data) };
+            // 避免数据未加载完毕时，数据未赋值
             setTimeout(() => {
-                this.fromModel = { ...data2, ...data1 };
+                this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(data) };
             }, 100)
         },
+        /**监听form-box宽度变化*/
+        listenFormBoxWidth() {
+            let phoneToolbar = ["undo redo save | importword autosave fullscreen print help"];
+            let toolbar = ["undo redo save| formatselect | fontsizeselect | fontselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | lists image searchreplace | bullist numlist outdent indent |  media table insertdatetime | removeformat hr | importword autosave fullscreen print help"];
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    const { width } = entry.contentRect;
+                    this.formBoxWidth = width;
+                    this.labelPosition = width <= 768 ? "top" : "left";
+                    this.toolbar = width <= 768 ? phoneToolbar : toolbar;
+                    this.formItem = deepCopy(this.options.formItem);
+                    this.formItem.forEach((item) => {
+                        // 兼容手机端
+                        item.span = width <= 768 ? 24 : item.span;
+                    })
+                }
+            })
+            resizeObserver.observe(document.querySelector(`#${this.fromId}`));
+        }
     },
 };
 </script>
@@ -588,6 +542,11 @@ export default {
     }
 }
 
+.phone-form {
+    min-width: 98%;
+    width: 98%;
+}
+
 .form-box {
     .form-sbumit-box {
         display: flex;
@@ -600,6 +559,9 @@ export default {
             border: 1px solid #bbb;
             color: #666;
         }
+    }
+    .el-date-editor.el-input{
+        width: 100%;
     }
 }
 

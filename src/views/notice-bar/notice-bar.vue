@@ -19,11 +19,11 @@
                 <el-divider content-position="left">饿了吗自带图标</el-divider>
                 <dzs-notice-bar icon="el-icon-warning-outline"></dzs-notice-bar>
                 <el-divider content-position="left">地址图标</el-divider>
-                <dzs-notice-bar imgSrc="https://yy.yunweicn.com/mp-wx-img/userIcon.png"></dzs-notice-bar>
+                <dzs-notice-bar imgSrc="https://anran233.com/img/Applet.jpg"></dzs-notice-bar>
                 <el-divider content-position="left">右边图标</el-divider>
                 <dzs-notice-bar closeIcon="el-icon-warning-outline"></dzs-notice-bar>
                 <el-divider content-position="left">右边地址图标</el-divider>
-                <dzs-notice-bar closeImgSrc="https://yy.yunweicn.com/mp-wx-img/userIcon.png"></dzs-notice-bar>
+                <dzs-notice-bar closeImgSrc="https://anran233.com/img/Applet.jpg"></dzs-notice-bar>
                 <dzs-code title="使用方法" :value="code2"></dzs-code>
             </div>
             <h2>关闭图标显示</h2>

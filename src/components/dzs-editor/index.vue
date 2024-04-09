@@ -34,7 +34,7 @@
  * @porp plugins string 菜单配置 支持菜单见文件
  * @porp toolbar Array 快捷键配置 支持菜单见文件
  * @method save 保存方法 返回 改变的value
-*/ 
+*/
 import tinymce from "tinymce/tinymce";
 import Editor from "@tinymce/tinymce-vue";
 import "tinymce/themes/silver";
@@ -61,9 +61,9 @@ import "tinymce/plugins/print"; //打印
 
 export default {
     name: "dzs-editors",
-    model : {
-        prop : "value",
-        event : "update:value"
+    model: {
+        prop: "value",
+        event: "update:value"
     },
     props: {
         height: {
@@ -90,30 +90,30 @@ export default {
                 return true;
             },
         },
-        placeholder : {
+        placeholder: {
             type: String,
             default: () => {
                 return "请输入内容";
             },
         },
         // hash模式下打包的路径
-        production_url : {
-            type : String ,
-            default : ()=>{
+        production_url: {
+            type: String,
+            default: () => {
                 return ""
             }
         },
         // 菜单配置
-        plugins : {
-            type : String,
-            default : ()=>{
+        plugins: {
+            type: String,
+            default: () => {
                 return "copy cut paste print link code table lists wordcount image media save searchreplace insertdatetime hr preview importword autosave fullscreen print help"
             }
         },
         // 快捷键配置
-        toolbar : {
-            type : Array ,
-            default : ()=>{
+        toolbar: {
+            type: Array,
+            default: () => {
                 return ["undo redo save| formatselect | fontsizeselect | fontselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | lists image searchreplace | bullist numlist outdent indent |  media table insertdatetime | removeformat hr | importword autosave fullscreen print help"]
             }
         }
@@ -126,83 +126,11 @@ export default {
             editConfig: {},
             editValue: "",
             is_save_now: true, //是否实时保存
-            showEdit : false,
+            showEdit: false,
         };
     },
     created() {
-        let _this = this;
-        (this.editConfig = {
-            language_url: process.env.NODE_ENV === 'production' ?  this.production_url + "/tinymce/langs/zh_CN.js" :  "/tinymce/langs/zh_CN.js", // 语言包的路径
-            language: "zh_CN", //语言
-            skin_url: process.env.NODE_ENV === 'production' ? this.production_url +  "/tinymce/skins/ui/oxide":"/tinymce/skins/ui/oxide", // skin路径
-            browser_spellcheck: true, // 拼写检查
-            branding: false, // 去水印
-            height: this.height || 500, //编辑器高度
-            branding: false, //  是否禁用 “Power by Tinymce”
-            menubar: true, // 菜单栏显示(默认为true)
-            file_picker_types: "image",
-            images_upload_credentials: true,
-            placeholder : this.placeholder,
-            autosave_interval: "20s",
-            fontsize_formats:
-                "14px 16px 18px 20px 24px 26px 28px 30px 32px 36px", //字体大小
-            font_formats:
-                "微软雅黑=Microsoft YaHei,Helvetica Neue;PingFang SC;sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun;serifsans-serif;Terminal=terminal;monaco;Times New Roman=times new roman;times", //字体
-            plugins:this.plugins,
-            toolbar: this.toolbar,
-            importword_handler: function(editor,files,next){
-                var file_name = files[0].name
-                if(file_name.substr(file_name.lastIndexOf(".")+1)=='docx'){
-                    editor.notificationManager.open({
-                        text: '正在转换中...',
-                        type: 'info',
-                        closeButton: false,
-                    });
-                     next(files);
-                }else{
-                    editor.notificationManager.open({
-                        text: '目前仅支持docx文件格式，若为doc，请将扩展名改为docx',
-                        type: 'warning',
-                    });
-                }
-                // next(files);
-            },
-            urlconverter_callback: (url, node, onSave, name) => {
-                if (node === "img" && url.startsWith("blob:")) {
-                    // Do some custom URL conversion
-                    tinymce.activeEditor && tinymce.activeEditor.uploadImages();
-                }
-                // Return new URL
-                return url;
-            },
-            images_upload_handler: function (blobInfo, success, failure) {
-                let formData = new FormData();
-                formData.append("file", blobInfo.blob());
-                // 需要自行修改上传api
-                _this.$api
-                    .editorProfileImg(formData)
-                    .then((res) => {
-                        success(res.path + res.url);
-                    })
-                    .catch((err) => {
-                        editor(err);
-                    });
-            },
-            save_onsavecallback: function () {
-                _this.save();
-            },
-            init_instance_callback: (editor) => {
-                editor.on("change", () => {
-                    if (_this.is_save_now) {
-                        _this.save();
-                    }
-                });
-            },
-        }),
-        this.editValue = this.value;
-        setTimeout(() => {
-            this.showEdit = true;
-        }, 50);
+        this.initEditor();
     },
     watch: {
         value: {
@@ -218,6 +146,11 @@ export default {
             immediate: true,
             deep: true,
         },
+        toolbar : {
+            handler(){
+                this.initEditor();
+            }
+        }
     },
     methods: {
         save() {
@@ -241,6 +174,82 @@ export default {
                 range.select();
             }
         },
+
+        /**初始化富文本*/
+        initEditor() {
+            let _this = this;
+            this.editConfig = {
+                language_url: process.env.NODE_ENV === 'production' ? this.production_url + "/tinymce/langs/zh_CN.js" : "/tinymce/langs/zh_CN.js", // 语言包的路径
+                language: "zh_CN", //语言
+                skin_url: process.env.NODE_ENV === 'production' ? this.production_url + "/tinymce/skins/ui/oxide" : "/tinymce/skins/ui/oxide", // skin路径
+                browser_spellcheck: true, // 拼写检查
+                branding: false, // 去水印
+                height: this.height || 500, //编辑器高度
+                branding: false, //  是否禁用 “Power by Tinymce”
+                menubar: true, // 菜单栏显示(默认为true)
+                file_picker_types: "image",
+                images_upload_credentials: true,
+                placeholder: this.placeholder,
+                autosave_interval: "20s",
+                fontsize_formats:
+                    "14px 16px 18px 20px 24px 26px 28px 30px 32px 36px", //字体大小
+                font_formats:
+                    "微软雅黑=Microsoft YaHei,Helvetica Neue;PingFang SC;sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun;serifsans-serif;Terminal=terminal;monaco;Times New Roman=times new roman;times", //字体
+                plugins: this.plugins,
+                toolbar: this.toolbar,
+                importword_handler: function (editor, files, next) {
+                    var file_name = files[0].name
+                    if (file_name.substr(file_name.lastIndexOf(".") + 1) == 'docx') {
+                        editor.notificationManager.open({
+                            text: '正在转换中...',
+                            type: 'info',
+                            closeButton: false,
+                        });
+                        next(files);
+                    } else {
+                        editor.notificationManager.open({
+                            text: '目前仅支持docx文件格式，若为doc，请将扩展名改为docx',
+                            type: 'warning',
+                        });
+                    }
+                },
+                urlconverter_callback: (url, node, onSave, name) => {
+                    if (node === "img" && url.startsWith("blob:")) {
+                        // Do some custom URL conversion
+                        tinymce.activeEditor && tinymce.activeEditor.uploadImages();
+                    }
+                    // Return new URL
+                    return url;
+                },
+                images_upload_handler: function (blobInfo, success, failure) {
+                    let formData = new FormData();
+                    formData.append("file", blobInfo.blob());
+                    // 需要自行修改上传api
+                    _this.$api
+                        .editorProfileImg(formData)
+                        .then((res) => {
+                            success(res.path + res.url);
+                        })
+                        .catch((err) => {
+                            editor(err);
+                        });
+                },
+                save_onsavecallback: function () {
+                    _this.save();
+                },
+                init_instance_callback: (editor) => {
+                    editor.on("change", () => {
+                        if (_this.is_save_now) {
+                            _this.save();
+                        }
+                    });
+                },
+            }
+            this.editValue = this.value;
+            setTimeout(() => {
+                this.showEdit = true;
+            }, 50);
+        }
     },
 };
 </script>
@@ -252,20 +261,25 @@ export default {
     display: flex;
     justify-content: right;
     flex-wrap: wrap;
-    .tips{
+
+    .tips {
         color: red;
     }
+
     .item {
         padding: 5px;
         padding-right: 10px;
     }
+
     .phone {
         display: flex;
         align-items: center;
+
         span {
             display: inline-block;
             padding: 0 8px;
         }
+
         .ipt {
             width: 100px;
         }

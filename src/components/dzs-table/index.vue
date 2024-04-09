@@ -1,5 +1,5 @@
 <template>
-    <div class="table-wrop">
+    <div :id="tableId" class="table-wrop">
         <div class="list-wrop">
             <el-table v-if="headerData.length" :data="tableData" class="table" ref="dzsTable" v-loading="loading"
                 @selection-change="handleSelectionChange" :stripe="true" v-bind="{ ...tableOptions }"
@@ -48,8 +48,7 @@
         </div>
         <div class="table-footer" v-if="(total > maxSize) && showPage">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                :page-sizes="[maxSize, maxSize * 2, maxSize * 4]" :background="paginationSet.background"
-                :layout="paginationSet.layout" :total="total"></el-pagination>
+                :page-sizes="[maxSize, maxSize * 2, maxSize * 4]"  v-bind="{...paginationSet}" :total="total"></el-pagination>
         </div>
     </div>
 </template>
@@ -104,6 +103,8 @@ export default {
             headerData: [],
             columnClassName: "" ,
             tableData: [],
+            tableId: `dzsTable${new Date().getTime()}`,
+            isPhone : false
         };
     },
     watch: {
@@ -138,6 +139,7 @@ export default {
 
     },
     mounted() {
+        this.listenFormBoxWidth();
     },
     methods: {
         /**选择条数改变*/
@@ -207,7 +209,25 @@ export default {
         /**侧边栏搜索*/
         siderSearch(list){
             this.tableData = list;
-        } 
+        },
+        /**监听form-box宽度变化*/
+        listenFormBoxWidth() {
+            let paginationSet =  {
+                background: false,
+                layout: "total, sizes, prev, pager, next, jumper",
+            }
+            let paginationSetPhone =  {
+                background: false,
+                layout: "sizes , total,  prev, next",
+            }
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    const { width } = entry.contentRect;
+                    this.paginationSet = width <= 768 ? paginationSetPhone : paginationSet;
+                }
+            })
+            resizeObserver.observe(document.querySelector(`#${this.tableId}`));
+        }
     },
 };
 </script>

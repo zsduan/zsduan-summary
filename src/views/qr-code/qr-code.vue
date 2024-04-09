@@ -129,7 +129,7 @@ export default {
                             placeholder : "请输入logo地址",
                             tips : "仅支持网络图片"
                         },
-                        defaultValue : "https://yy.yunweicn.com/mp-wx-img/userIcon.png",
+                        defaultValue : "https://anran233.com/img/Applet.jpg",
                         span : 24
                     },
                     {
@@ -226,7 +226,7 @@ export default {
                 fgColor : "#000000",
                 bgColor : "#ffffff",
                 correctLevel : "H",
-                logo : "https://yy.yunweicn.com/mp-wx-img/userIcon.png",
+                logo : "https://anran233.com/img/Applet.jpg",
                 logoWidth : 50,
                 logoHeight : 50,
                 text : "zs.duan的总结",
@@ -245,7 +245,7 @@ export default {
             },
             options3 : {
                 value : "https://www.baidu.com",
-                logo : "https://yy.yunweicn.com/mp-wx-img/userIcon.png",
+                logo : "https://anran233.com/img/Applet.jpg",
             }
         }
     },

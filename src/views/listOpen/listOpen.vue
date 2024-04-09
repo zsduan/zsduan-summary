@@ -1,17 +1,10 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-11-23 14:55:50
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:33:15
- * @FilePath: \vue2+js+eui+template\src\views\listOpen\listOpen.vue
--->
 <template>
     <div>
         <dzs-header title="指令 展开列表" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <el-button type="primary" @click="is_open = !is_open" v-dzs-debounce="1000">点我切换</el-button>
+                <el-button type="primary" @click="is_open = !is_open">点我切换</el-button>
                 <div class="open-list" v-dzs-list-open="is_open">
                     <div class="open-lsit-item" v-for="(item , index) in list" :key="index">{{item.Text}}</div>
                 </div>

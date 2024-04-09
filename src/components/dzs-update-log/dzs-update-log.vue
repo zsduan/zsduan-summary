@@ -3,6 +3,23 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.2</h2>
+                <div class="time">2024-4-9</div>
+            </div>
+            <div class="content">
+                <p>1. 修复手机端表格组件分页显示的bug</p>
+                <p>2. 新增表格组件手机端展示</p>
+                <p>3. 修复表单/横向表单组件有时候设置值失败的bug</p>
+                <p>4. 修复横向表单组件按钮单独一行会显示错位置的bug</p>
+                <p>5. 删除横向表单组件的加载中和加载文字props</p>
+                <p>6. 优化了在手机端选择文件提示和宽度</p>
+                <p>7. 修改了弹窗组件的名称 dzs-dialog</p>
+                <p>8. (横向)表单组件新增了手机端展示</p>
+                <p>9. (横向)表单组件新增了表格的配置展示</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.1</h2>
                 <div class="time">2024-4-3</div>
             </div>

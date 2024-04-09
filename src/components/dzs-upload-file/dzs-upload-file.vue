@@ -1,10 +1,11 @@
 <template>
     <div>
-        <el-upload class="upload-dzs" drag :action="action" :multiple="multiple" :file-list="fileList" :limit="limit"
-            :before-upload="beforeUpload" :on-success="handleSuccess" :on-exceed="handleExceed" :auto-upload="autoUpload"
-            :on-change="changeFile" :show-file-list="true">
+        <el-upload :class="{'upload-dzs' : true , 'upload-dzs-phone' : isPhone}" drag :action="action" :multiple="multiple" :file-list="fileList" :limit="limit"
+            :before-upload="beforeUpload" :on-success="handleSuccess" :on-exceed="handleExceed"
+            :auto-upload="autoUpload" :on-change="changeFile" :show-file-list="true">
             <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div class="el-upload__text" v-if="!isPhone">将文件拖到此处，或<em>点击上传</em></div>
+            <div class="el-upload__text" v-else><em>点击上传文件</em></div>
             <div class="el-upload__tip" slot="tip">
                 <div>只能上传不超过 {{ maxSize / 1024 / 1024 }}M 的{{ fileType.join("、") }}文件</div>
                 <div v-if="limit > 1">最多上传 {{ limit }} 个文件</div>
@@ -23,7 +24,7 @@
  * @props : autoUpload 是否自动上传 默认true
  * 
  * @methods : change 改变 function 返回所以文件list array
- * */ 
+ * */
 export default {
     model: {
         prop: "value",
@@ -70,6 +71,13 @@ export default {
             default: () => {
                 return true
             }
+        },
+        /**是否手机端*/
+        isPhone: {
+            type: Boolean,
+            default: () => {
+                return false
+            }
         }
     },
     data() {
@@ -108,7 +116,7 @@ export default {
     },
     methods: {
         /**上传之前*/
-        beforeUpload(file){
+        beforeUpload(file) {
             let fileType = file.name.split(".")[1];
             if (this.fileType.indexOf(fileType) == -1) {
                 this.$message.error(`上传文件格式不正确`);
@@ -127,8 +135,8 @@ export default {
                 path: res.path ? res.path : "",
                 uploadUrl: res.url ? res.url : "",
                 uid: file.uid,
-                type : file.type,
-                formItem : "upload-file",
+                type: file.type,
+                formItem: "upload-file",
                 status: "success",
             };
             this.fileList.push(fileInfo);
@@ -143,10 +151,10 @@ export default {
                     path: files.url,
                     uploadUrl: files.url,
                     uid: files.uid,
-                    type : files.type,
+                    type: files.type,
                     status: "success",
-                    fromItem : "upload-file",
-                    file : files.raw
+                    fromItem: "upload-file",
+                    file: files.raw
                 };
                 this.fileList.push(fileInfo);
                 this.$emit("update:value", this.fileList);
@@ -160,4 +168,15 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.upload-dzs-phone{
+    width: 100%;
+    :deep(.el-upload) {
+        width: 100%;
+
+        .el-upload-dragger {
+            width: 100%;
+        }
+    }
+}
+</style>

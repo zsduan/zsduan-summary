@@ -29,6 +29,9 @@ Vue.component("dzsHeader", dzsHeader);
 import dzsCode from "@/components/dzs-code/index.vue"
 Vue.component("dzsCode", dzsCode);
 
+import dzsTable from "@/components/dzs-table/index.vue"
+Vue.component("dzsTable", dzsTable);
+
 // 新增指令
 initDirective(Vue)
 

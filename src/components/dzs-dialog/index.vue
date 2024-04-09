@@ -1,13 +1,6 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-20 16:23:08
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-09-21 10:13:03
- * @FilePath: \vue2+js+eui+template\src\components\dzs-popup\index.vue
--->
 <template>
     <el-dialog v-dialogDrag v-bind="{ ...options }" :visible="isShow" :width="width" :fullscreen="is_fullscreen"
-        @opened="opened" @closed="opened" @close="close" @open="open">
+        @opened="opened" @closed="closed" @close="close" @open="open">
         <template #title>
             <div class="title-box">
                 <slot name="title"></slot>
@@ -26,8 +19,7 @@
             </div>
         </template>
         <slot></slot>
-
-        <div slot="footer" v-if="!$slots.footer">
+        <div slot="footer" v-if="$slots.footer">
             <slot name="footer"></slot>
         </div>
     </el-dialog>
@@ -51,12 +43,12 @@
  */
 import './drag.js' // 弹窗 拖动、放大、缩小
 export default {
-    name: "dzs-popup",
+    name: "dzs-dialog",
     props: {
         title: {
             type: String,
             default: () => {
-                return "提示";
+                return "";
             },
         },
         isShow: {
@@ -92,13 +84,17 @@ export default {
     },
     data() {
         return {
-            is_fullscreen: false
+            is_fullscreen: false,
         };
+    },
+    model : {
+        prop : "isShow",
+        event : "update:isShow"
     },
     watch: {
         fullscreen: {
             handler(val) {
-                this.is_fullscreen = val;
+                this.is_fullscreen = val !== undefined ? val : false;
             },
             immediate: true,
         }

@@ -113,4 +113,50 @@ export default {
     }
 }
 
+.is-phone-public {
+    background: url('./assets/image/iPhoneX_model.png') no-repeat;
+    width: 350px;
+    height: 708px;
+    background-size: 100% 100%;
+    padding: 48px 16px 38px 16px;
+    margin: 20px;
+
+    .phone-box {
+        background: #fff;
+        height: 100%;
+        overflow-y: auto;
+        box-sizing: border-box;
+
+        // 滚动条宽度
+        &::-webkit-scrollbar {
+            width: 6px;
+            background-color: #fff;
+        }
+
+        // 滚动条轨道
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            border-radius: 2em;
+        }
+
+        // 滚动条背景
+        &::-webkit-scrollbar-track-piece {
+            background-color: transparent;
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            border-radius: 2em;
+        }
+
+        // 滚动条滑块
+        &::-webkit-scrollbar-thumb {
+            background-color: #e9e7e7;
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            border-radius: 2em;
+        }
+
+    }
+}
 </style>
