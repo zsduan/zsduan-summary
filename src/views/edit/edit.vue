@@ -19,6 +19,11 @@
                 <dzs-editor :value.sync="defaultValue"></dzs-editor>
                 <dzs-code title="源代码" :value="code2"></dzs-code>
             </div>
+            <h2>参数说明</h2>
+            <div class="item">
+                <dzs-table :tableHeader="descHeader" :list="descData" :showOperation="false" :tableOptions="descTableOptions">
+                </dzs-table>
+            </div>
             <h2>更多功能</h2>
             <div class="item">
                 <div class="tips-box">自己在源代码去看</div>
@@ -33,7 +38,8 @@
 </template>
 <script>
 import dzsEditor from "@/components/dzs-editor/index.vue";
-import {code1 , code2} from "./config"
+import {code1 , code2} from "./config";
+import {descHeader , descData , descTableOptions} from "./desc";
 export default {
     components : {
         dzsEditor
@@ -52,6 +58,9 @@ export default {
             code2 : code2,
             defaultValue : "<p>我是默认值</p>",
             shoeDefault : false,
+            descHeader : descHeader,
+            descData : descData,
+            descTableOptions : descTableOptions
         }
     },
     mounted(){

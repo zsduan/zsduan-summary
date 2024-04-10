@@ -4,31 +4,32 @@
     </div>
 </template>
 <script>
+/**
+* 配置说明
+* @param {Object} option 配置
+* @param {String} option.value 二维码内容
+* @param {Number} option.size 二维码大小
+* @param {String} option.level 二维码等级
+* @param {String} option.bgColor 二维码背景色
+* @param {String} option.fgColor 二维码前景色
+* @param {Number} option.margin 二维码边距
+* @param {Number} option.scale 二维码缩放
+* @param {Number} option.version 二维码版本
+* @param {String} option.errorCorrectionLevel 二维码容错级别
+* @param {String} option.logo 二维码logo
+* @param {Number} option.logoWidth 二维码logo宽度
+* @param {Number} option.logoHeight 二维码logo高度
+* @param {String} option.text 二维码底部文字
+* @param {String} option.font 二维码底部文字字体
+* @param {String} option.fontColor 二维码底部文字颜色
+* @param {Number} option.lineWidth 二维码底部文字线条宽度
+* @param {String} option.lineColor 二维码底部文字线条颜色
+* @param {Boolean} option.showBoder 二维码是否显示边框
+*
+* */
 import QRCode from "qrcode";
 export default {
     props: {
-        /**
-         * 配置说明
-         * @param {String} value 二维码内容
-         * @param {Number} size 二维码大小
-         * @param {String} level 二维码等级
-         * @param {String} bgColor 二维码背景色
-         * @param {String} fgColor 二维码前景色
-         * @param {Number} margin 二维码边距
-         * @param {Number} scale 二维码缩放
-         * @param {Number} version 二维码版本
-         * @param {String} errorCorrectionLevel 二维码容错级别
-         * @param {String} logo 二维码logo
-         * @param {Number} logoWidth 二维码logo宽度
-         * @param {Number} logoHeight 二维码logo高度
-         * @param {String} text 二维码底部文字
-         * @param {String} font 二维码底部文字字体
-         * @param {String} fontColor 二维码底部文字颜色
-         * @param {Number} lineWidth 二维码底部文字线条宽度
-         * @param {String} lineColor 二维码底部文字线条颜色
-         * @param {Boolean} showBoder 二维码是否显示边框
-         *
-         * */
         option: {
             type: Object,
             default: () => {
@@ -143,7 +144,7 @@ export default {
             ctx.fillStyle = options.fontColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillText(options.text, options.size / 2, options.size - 20);
+            ctx.fillText(options.text, options.size / 2, options.size - 10);
         },
         /**
          * 绘制边框
@@ -161,5 +162,4 @@ export default {
     },
 };
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

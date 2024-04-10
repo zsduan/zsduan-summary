@@ -1,21 +1,14 @@
-<!--
- * @Author: zs.duan
- * @Date: 2023-01-14 14:46:23
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-27 07:51:03
- * @FilePath: \vue2+elui+template\src\views\binary-tree\binary-tree.vue
--->
 <template>
     <div>
         <dzs-header title="二叉树" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <dzs-code title="使用方法" :value="code1"></dzs-code>
+                <dzs-code title="使用方法" :value="code1" :open="true"></dzs-code>
             </div>
             <h2>可以自定义原始数据</h2>
             <div class="item">
-                <dzs-code title="使用方法" :value="code2"></dzs-code>
+                <dzs-code title="使用方法" :value="code2" :open="true"></dzs-code>
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">

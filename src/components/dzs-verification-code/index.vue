@@ -1,10 +1,3 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-12-26 14:55:22
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 15:35:32
- * @FilePath: \vue2+js+eui+template\src\components\dzs-verification-code\index.vue
--->
 <template>
     <div @click="generateCode" class="dzs-verification-code-box">
         <canvas id="dzs_verification_code" ref="dzs_verification_code" class="dzs-verification-code">您的浏览器不支持canvas</canvas>
@@ -13,7 +6,9 @@
 <script>
 /*
  * @name 生成随机字符串验证码 
- * @v-model 返回大写后的字符串
+ * @props value / v-model 校验码
+ * @props codeArr  自定义验证码
+ * @props uppercase 是否转大写
 */ 
 export default {
     name: "dzs-verification-code",
@@ -33,7 +28,13 @@ export default {
             default : ()=>{
                 return ""
             }
-        }
+        },
+        uppercase : {
+            type : Boolean,
+            default : ()=>{
+                return false
+            }
+        } 
     },
     data() {
         return {
@@ -83,7 +84,9 @@ export default {
             }
 
             this.code_show = show_num.join("");
-            this.code_show = this.code_show.toLocaleUpperCase();
+            if(this.uppercase){
+                this.code_show = this.code_show.toLocaleUpperCase();
+            }
             this.$emit("update:value",this.code_show);
             for (let i = 0; i <= 5; i++) {
                 //验证码上显示线条

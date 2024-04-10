@@ -487,7 +487,7 @@ function _leapYear(date , callback){
  * @description day 指定日期是当前(年、月、周)的多少天
  * @description leapYear 今年是否是闰年
  * */
-const setTime = new Time();
+export const setTime = new Time();
 
 /**
  * 挂载到Vue原型上

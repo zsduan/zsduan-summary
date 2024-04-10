@@ -55,11 +55,23 @@ export default {
             default: () => {
                 return true
             }
+        },
+        open : {
+            type : Boolean,
+            default : false
         }
     },
     data() {
         return {
             is_open: false
+        }
+    },
+    watch:{
+        open:{
+            handler(val){
+                this.is_open = val
+            },
+            immediate:true
         }
     },
     methods: {

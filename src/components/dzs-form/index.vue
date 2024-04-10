@@ -560,9 +560,6 @@ export default {
             color: #666;
         }
     }
-    .el-date-editor.el-input{
-        width: 100%;
-    }
 }
 
 @media screen and (max-width: 768px) {

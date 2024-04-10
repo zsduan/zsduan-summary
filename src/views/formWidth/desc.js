@@ -218,42 +218,42 @@ export const descData = [
         remark: "默认false"
     },
     {
-        key: "onSubmit",
+        key: "@onSubmit",
         type: "methods",
         parameterType: "",
         desc: "提交事件 返回一个promise",
         remark: "注意 isFormData为true时 返回的是一个FormData对象 否则返回一个对象"
     },
     {
-        key: "onReset",
+        key: "@onReset",
         type: "methods",
         parameterType: "",
         desc: "重置事件",
         remark: ""
     },
     {
-        key: "change",
+        key: "@change",
         type: "methods",
         parameterType: "",
         desc: "改变事件",
         remark: ""
     },
     {
-        key: "getFormMethod",
+        key: "getFormMethod()",
         type: "ref methods",
         parameterType: "",
         desc: "获取el-form的方法",
         remark: ""
     },
     {
-        key: "clearForm",
+        key: "clearForm()",
         type: "ref methods",
         parameterType: "",
         desc: "将表单重置为初始值",
         remark: ""
     },
     {
-        key: "setFormData",
+        key: "setFormData(data)",
         type: "ref methods",
         parameterType: "",
         desc: "设置表单数据",

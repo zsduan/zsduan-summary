@@ -3,6 +3,19 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.3</h2>
+                <div class="time">2024-4-10</div>
+            </div>
+            <div class="content">
+                <p>1. 更新了很多时间处理 具体见?type=%2FsetTime</p>
+                <p>2. 组件新增了表格写的配置</p>
+                <p>3. 验证码组件新增了是否转成大写字母</p>
+                <p>4. 修复车键盘的宽度事情 在小屏幕下改变了一下字体的大小</p>
+                <p>5. 修复日历js的相关bug</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.2</h2>
                 <div class="time">2024-4-9</div>
             </div>

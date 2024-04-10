@@ -59,23 +59,18 @@ export default {
         return {
             imgList: [
                 {
-                    // url: new URL("./image/1.jpg", import.meta.url).href , 
                     url:  require("./image/1.jpg"), 
                 },
                 {
-                    // url: new URL("./image/2.jpg", import.meta.url).href, 
                     url: require("./image/2.jpg"), 
                 },
                 {
-                    // url: new URL("./image/3.jpg", import.meta.url).href , 
                     url: require("./image/3.jpg"), 
                 },
                 {
-                    // url: new URL("./image/4.jpg", import.meta.url).href , 
                     url: require("./image/4.jpg"), 
                 },
                 {
-                    // url: new URL("./image/5.jpg", import.meta.url).href, 
                     url: require("./image/5.jpg"), 
                 },
             ],

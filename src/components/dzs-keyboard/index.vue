@@ -1,25 +1,17 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-28 14:33:41
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-11-29 20:49:09
- * @FilePath: \vue2+elui+template\src\components\dzs-keyboard\index.vue
--->
 <template>
     <div class="keyboard-box">
-        <div :class="showKeyboard ? 'keyboard-height' : 'keyboard-bottom'" class="keyboard" :style="{bottom:bottom}">
+        <div :id="keyboardId" :class="showKeyboard ? 'keyboard-height' : 'keyboard-bottom'" class="keyboard"
+            :style="{ bottom: bottom }">
             <!--省份简称键盘-->
-            <div class="com-btn" @click="complete">完成</div>
+            <div class="com-btn">
+                <span @click="complete">完成</span>
+            </div>
             <div class="area-tag-wrap" v-if="!showNums">
-                <div class="flex first-line" v-for="(item,index) in area" :key="index">
-                    <button
-                        class="flex1"
-                        @click="selectOtherNum(itm)"
-                        :key="idx"
-                        :class="{'bg-del': itm == 'del','bg-abc': itm == 'operation'}"
-                        v-for="(itm,idx) in item"
-                    >
-                        <span v-if="itm != 'del' && itm != 'operation'">{{itm}}</span>
+                <div class="flex first-line" v-for="(item, index) in area" :key="index">
+                    <button @click="selectOtherNum(itm)" :key="idx"
+                        :class="{ 'bg-del': itm == 'del', 'bg-abc': itm == 'operation', flex1: true, 'min-fiex1': keyboardWidth < 375 }"
+                        v-for="(itm, idx) in item">
+                        <span v-if="itm != 'del' && itm != 'operation'">{{ itm }}</span>
                         <span v-if="itm == 'operation'" @click.stop="showOtherWord">切换</span>
                         <span v-if="itm == 'del'">删除</span>
                     </button>
@@ -28,48 +20,35 @@
 
             <!--数字与字母键盘-->
             <div class="area-tag-wrap" v-if="showNums">
-                <div class="flex first-line" v-if="plateNum.length!=0">
-                    <button
-                        class="flex1"
-                        v-for="(item,index) in num[0]"
-                        :key="index"
-                        @click="selectOtherNum(item)"
-                    >{{ item }}</button>
+                <div class="flex first-line" v-if="plateNum.length != 0">
+                    <button class="flex1" :class="{ flex1: true, 'min-fiex1': keyboardWidth < 375 }"
+                        v-for="(item, index) in num[0]" :key="index" @click="selectOtherNum(item)">
+                        {{ item }}
+                    </button>
                 </div>
                 <div class="flex first-line" v-else>
-                    <button
-                        class="flex1 flexWhite"
-                        v-for="(item,index) in num[0]"
-                        :key="index"
-                        @click="selectOtherNum(item)"
-                    >{{ item }}</button>
+                    <button class="flex1 flexWhite" :class="{ flex1: true, 'min-fiex1': keyboardWidth < 375 }"
+                        v-for="(item, index) in num[0]" :key="index" @click="selectOtherNum(item)">{{ item }}</button>
                 </div>
                 <div class="flex first-line mt-3">
-                    <button
-                        class="flex1"
-                        v-for="(item,index) in num[1]"
-                        :key="index"
-                        @click="selectOtherNum(item)"
-                    >{{ item }}</button>
-                    <button class="flex1" @click="selectOtherNum('O')">O</button>
+                    <button :class="{ flex1: true, 'min-fiex1': keyboardWidth < 375 }" v-for="(item, index) in num[1]"
+                        :key="index" @click="selectOtherNum(item)">
+                        {{ item }}
+                    </button>
+                    <button :class="{ flex1: true, 'min-fiex1': keyboardWidth < 375 }"
+                        @click="selectOtherNum('O')">O</button>
                 </div>
                 <div class="flex first-line mt-3">
-                    <button
-                        class="flex1"
-                        v-for="(item,index) in num[2]"
-                        :key="index"
-                        @click="selectOtherNum(item)"
-                    >{{ item }}</button>
+                    <button :class="{ flex1: true, 'min-fiex1': keyboardWidth < 375 }" v-for="(item, index) in num[2]"
+                        :key="index" @click="selectOtherNum(item)">
+                        {{ item }}
+                    </button>
                 </div>
                 <div class="flex first-line mt-3">
-                    <button
-                        class="flex1"
-                        :key="index"
-                        @click="selectOtherNum(item)"
-                        :class="{'bg-del': item == 'del','bg-abc': item == 'operation'}"
-                        v-for="(item,index) in num[3]"
-                    >
-                        <span>{{ item == 'del' || item == 'operation'? '' : item }}</span>
+                    <button :key="index" @click="selectOtherNum(item)"
+                        :class="{ 'bg-del': item == 'del', 'bg-abc': item == 'operation', flex1: true, 'min-fiex1': keyboardWidth < 375 }"
+                        v-for="(item, index) in num[3]">
+                        <span>{{ item == 'del' || item == 'operation' ? '' : item }}</span>
                         <span v-if="item == 'operation'" @click.stop="showOtherWord">省份</span>
                         <span v-if="item == 'del'">删除</span>
                     </button>
@@ -80,15 +59,15 @@
 </template>
 <script>
 /*
- * @props  showKeyboard 是否显示键盘  
+ * @props showKeyboard 是否显示键盘  
  * @props bottom 距离底部的距离
  * 
  * 
  * @methods complete 点击完成
  * @methods change 点击改变事件
- * @methods changeShow 点击切换 /省份
-
-*/ 
+ * @methods validatePlateNumber 基础的车牌号校验
+ * 
+*/
 export default {
     name: "keyboard",
     props: {
@@ -144,18 +123,23 @@ export default {
                 ["operation", "Z", "X", "C", "V", "B", "N", "M", "del"],
             ], //数字与字母键盘（车牌号中没有I，老式警车含有O的进行特殊处理，只能在第二位输入O，其他为不能选中）
             plateNum: "",
-            showNums : false
+            showNums: false,
+            keyboardWidth: 0,
+            keyboardId: `keyboard${new Date().getTime()}`
         };
+    },
+    mounted() {
+        this.keyboardWidth = document.querySelector(`#${this.keyboardId}`).offsetWidth;
+        console.log(this.keyboardWidth);
     },
     methods: {
         // 切换
         showOtherWord() {
             this.showNums = !this.showNums;
-            this.$emit("changeShow", !this.showNums);
         },
         // 点击完成
         complete() {
-            this.$emit("update:showKeyboard",false);
+            this.$emit("update:showKeyboard", false);
             this.$emit("complete");
         },
         // 点击按钮
@@ -168,19 +152,35 @@ export default {
             }
             this.$emit("change", item);
         },
+        /**车牌校验*/
+        validatePlateNumber(plateNumber) {
+            // 车牌号规则：省份简称（1位汉字）+ 发牌机关代号（1位字母）+ 序号（5位，新能源车6位）+ 特殊标识（可选，1位，如挂）
+            // 新能源车牌号以D或F开头
+            const regex = /^[\u4e00-\u9fa5]{1}(使|港|澳|学|警|领)?[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学领警澳港使]{1}$/; // 普通车牌号
+            const newEnergyRegex = /^[\u4e00-\u9fa5]{1}(使|港|澳|学|警|领)?[A-Z]{1}[DF]{1}[A-HJ-NP-Z0-9]{5}[挂学领警澳港使]{1}$/; // 新能源车牌号
+
+            // 首先尝试匹配新能源车牌号
+            if (newEnergyRegex.test(plateNumber)) {
+                return true;
+            }
+            // 如果不是新能源车牌号，则尝试匹配普通车牌号
+            return regex.test(plateNumber);
+        }
     },
 };
 </script>
 <style lang="less" scoped>
 .keyboard-box {
     user-select: none;
+
     .keyboard {
         position: absolute;
-        width: 390px;
+        width: 100%;
         z-index: 99;
         height: 0;
         overflow: hidden;
         transition: all .3s;
+
         .com-btn {
             text-align: right;
             padding: 10px;
@@ -198,9 +198,11 @@ export default {
     .keyboard-bottom {
         bottom: 0 !important;
     }
+
     .area-tag-wrap {
         background: #cfd2de;
         padding: 20px;
+
         .flex {
             display: flex;
             justify-content: center;
@@ -210,10 +212,11 @@ export default {
             &:first-child {
                 margin-top: 0;
             }
+
             .flex1 {
                 background: #ffffff;
                 font-size: 16px;
-                width: 30px;
+                width: calc(100% / 11);
                 text-align: center;
                 margin-right: 5px;
                 height: 30px;
@@ -222,13 +225,22 @@ export default {
                 box-shadow: 1px 1px 1px 1px #adb2b9;
                 border: 0;
                 cursor: pointer;
+
                 &:last-child {
                     margin-right: 0;
                 }
+
                 &:active {
                     background: #e6e6e6;
                 }
             }
+
+            .min-fiex1 {
+                span {
+                    font-size: 12px;
+                }
+            }
+
             .bg-abc {
                 width: 40px;
                 padding: 0;
@@ -237,9 +249,11 @@ export default {
                 height: 30px;
                 margin-right: 5px;
             }
+
             .bg-del {
                 background: #aab3bd;
-                width: auto;
+                // width: auto;
+                width: 40px;
                 padding: 0 5px;
                 text-align: center;
             }

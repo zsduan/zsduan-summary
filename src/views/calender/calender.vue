@@ -66,7 +66,12 @@ export default {
         }
     },
     mounted(){
-        this.time = calender()
+        calender({
+            time : new Date(),
+            success : (res) =>{
+                this.time = res;
+            }
+        });
     },
     methods:{
         onSubmit(e){

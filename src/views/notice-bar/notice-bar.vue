@@ -46,6 +46,11 @@
                 <dzs-notice-bar color="red" backgroundColor="rgba(255,0,0,0.1)"></dzs-notice-bar>
                 <dzs-code title="使用方法" :value="code6"></dzs-code>
             </div>
+            <h2>参数说明</h2>
+            <div class="item">
+                <dzs-table :tableHeader="descHeader" :list="descData" :showOperation="false" :tableOptions="descTableOptions">
+                </dzs-table>
+            </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-notice-bar/index.vue">下载/查看地址</a>
@@ -56,7 +61,8 @@
 </template>
 <script>
 import dzsNoticeBar from "@/components/dzs-notice-bar/index.vue";
-import {code1 , code2 , code3 , code4 , code5 , code6} from "./config.js"
+import {code1 , code2 , code3 , code4 , code5 , code6} from "./config.js";
+import {descHeader , descData , descTableOptions} from "./desc";
 export default {
     props:{
         newIndex : {
@@ -77,6 +83,9 @@ export default {
             code4 : code4,
             code5 : code5,
             code6 : code6,
+            descHeader : descHeader,
+            descData : descData,
+            descTableOptions : descTableOptions
         }
     },
     mounted(){

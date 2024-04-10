@@ -28,7 +28,7 @@
  * @prop value string 默认值 改变值 可以使用 v-model / update:value
  * @prop height Number | String default 500 富文本高度 
  * @prop width string default 100% 富文本宽度
- * @porp show_save Boolean default false 是否显示实时保存
+ * @porp show_save Boolean default true 是否显示实时保存
  * @porp placeholder string default "请输入类容" 默认提示文字
  * @porp production_url string default "/zsduan-summary" hash模式下 语言和样式的配置文件的前缀目录
  * @porp plugins string 菜单配置 支持菜单见文件

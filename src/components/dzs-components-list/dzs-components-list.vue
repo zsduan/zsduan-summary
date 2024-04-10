@@ -71,7 +71,6 @@ import ua from "@/views/ua/ua.vue";
 import timeDifference from "@/views/time-difference/time-difference.vue";
 import calender from "@/views/calender/calender.vue";
 import readeXlsx from "@/views/readeXlsx/readeXlsx.vue";
-import readeWord from "@/views/readeWord/readeWord.vue";
 import signalR from "@/views/signalR/signalR.vue";
 import myNotification from "@/views/myNotification/myNotification.vue";
 import blurSearch from "@/views/blurSearch/blurSearch.vue";
@@ -115,7 +114,6 @@ export default {
         timeDifference,
         calender,
         readeXlsx,
-        readeWord,
         signalR,
         myNotification,
         blurSearch,

@@ -4,7 +4,7 @@
         <div class="page">
             <h2>表单配置</h2>
             <div class="item">
-                <dzs-form :options="formOptions" @onSubmit="onSubmit"></dzs-form>
+                <dzs-form :options="formOptions"  v-model="options" :showBtn="false"></dzs-form>
                 <dzs-qr-code :option="options"></dzs-qr-code>
             </div>
             <h2>基础用法</h2>
@@ -22,10 +22,10 @@
                 <dzs-code :value="code3"></dzs-code>
                 <dzs-qr-code title="源代码" :option="options3"></dzs-qr-code>
             </div>
-            <h2>全部属性</h2>
+            <h2>参数说明</h2>
             <div class="item">
-                <dzs-code :value="code4"></dzs-code>
-                <dzs-qr-code title="源代码" :option="options"></dzs-qr-code>
+                <dzs-table :tableHeader="descHeader" :list="descData" :showOperation="false" :tableOptions="descTableOptions">
+                </dzs-table>
             </div>
             <h2>组件源代码下载</h2>
             <div class="item">
@@ -39,7 +39,8 @@
 <script>
 import dzsQrCode from "@/components/dzs-qr-code/index.vue";
 import dzsForm from "@/components/dzs-form/index.vue";
-import { code1 , code2 , code3 , code4 } from "./config";
+import { code1 , code2 , code3 } from "./config";
+import {descHeader , descData , descTableOptions} from "./desc";
 export default {
     props:{
         newIndex : {
@@ -70,7 +71,6 @@ export default {
                         props:{
                             placeholder : "请输入二维码内容",
                         },
-                        defaultValue : "https://www.baidu.com",
                         span : 24
                     },
                     {
@@ -84,7 +84,6 @@ export default {
                             placeholder : "请输入二维码大小",
                             type : "number",
                         },
-                        defaultValue : 400,
                         span : 12
                     },
                     {
@@ -98,7 +97,6 @@ export default {
                             placeholder : "请输入二维码间距",
                             type : "number",
                         },
-                        defaultValue : 4,
                         span : 12
                     },
                     {
@@ -108,7 +106,6 @@ export default {
                         rules:[
                             { required: true, message: '请选择二维码颜色', trigger: 'blur' },
                         ],
-                        defaultValue : "#000000",
                         span : 12
                     },
                     {
@@ -118,7 +115,6 @@ export default {
                         rules:[
                             { required: true, message: '请选择二维码背景颜色', trigger: 'blur' },
                         ],
-                        defaultValue : "#ffffff",
                         span : 12
                     },
                     {
@@ -129,7 +125,6 @@ export default {
                             placeholder : "请输入logo地址",
                             tips : "仅支持网络图片"
                         },
-                        defaultValue : "https://anran233.com/img/Applet.jpg",
                         span : 24
                     },
                     {
@@ -161,7 +156,6 @@ export default {
                         props:{
                             placeholder : "请输入底部文字",
                         },
-                        defaultValue : "zs.duan的总结",
                         span : 24
                     },
                     {
@@ -171,7 +165,6 @@ export default {
                         props:{
                             placeholder : "请输入底部文字",
                         },
-                        defaultValue : "bold 16px Arial",
                         span : 12
                     },
                     {
@@ -181,14 +174,12 @@ export default {
                         props:{
                             placeholder : "请输入字体颜色",
                         },
-                        defaultValue : "#000000",
                         span : 12
                     },
                     {
                         label: "是否绘制边框", 
                         key: "showBoder", 
                         type : "switch",
-                        defaultValue : true,
                         span : 24
                     },
                     {
@@ -199,14 +190,12 @@ export default {
                             placeholder : "请输入边框大小",
                             type : "number",
                         },
-                        defaultValue : 2,
                         span : 12
                     },
                     {
                         label: "边框颜色", 
                         key: "lineColor", 
                         type : "color",
-                        defaultValue : "#000000",
                         span : 12
                     },
                 ]
@@ -218,10 +207,9 @@ export default {
             code1 : code1,
             code2 : code2,
             code3 : code3,
-            code4 : code4,
             options : {
-                value : "https://www.baidu.com",
-                size : 400,
+                value : "https://anran233.com",
+                size : 200,
                 margin : 4,
                 fgColor : "#000000",
                 bgColor : "#ffffff",
@@ -237,34 +225,37 @@ export default {
                 showBoder: true,
             },
             options1 : {
-                value : "https://www.baidu.com",
+                value : "https://anran233.com",
             },
             options2 : {
-                value : "https://www.baidu.com",
-                size : 300,
+                value : "https://anran233.com",
+                size : 100,
             },
             options3 : {
-                value : "https://www.baidu.com",
+                value : "https://anran233.com",
                 logo : "https://anran233.com/img/Applet.jpg",
-            }
+            },
+            descHeader : descHeader,
+            descData : descData,
+            descTableOptions : descTableOptions
         }
     },
     methods:{
         onSubmit(data){
-            this.options.size = data.size;
-            this.options.value = data.value;
-            this.options.margin = data.margin;
-            this.options.fgColor = data.fgColor;
-            this.options.bgColor = data.bgColor;
-            this.options.logo = data.logo;
-            this.options.logoWidth = data.logoWidth;
-            this.options.logoHeight = data.logoHeight;
-            this.options.text = data.text;
-            this.options.font = data.font;
-            this.options.fontColor = data.fontColor;
-            this.options.showBoder = data.showBoder;
-            this.options.lineWidth = data.lineWidth;
-            this.options.lineColor = data.lineColor;
+            // this.options.size = data.size;
+            // this.options.value = data.value;
+            // this.options.margin = data.margin;
+            // this.options.fgColor = data.fgColor;
+            // this.options.bgColor = data.bgColor;
+            // this.options.logo = data.logo;
+            // this.options.logoWidth = data.logoWidth;
+            // this.options.logoHeight = data.logoHeight;
+            // this.options.text = data.text;
+            // this.options.font = data.font;
+            // this.options.fontColor = data.fontColor;
+            // this.options.showBoder = data.showBoder;
+            // this.options.lineWidth = data.lineWidth;
+            // this.options.lineColor = data.lineColor;
             // this.options = data;
         }
     }

@@ -132,11 +132,6 @@ export const jsList = [
         is_show : true
     },
     {
-        title : "word读取",
-        path : "/readeWord",
-        is_show : true
-    },
-    {
         title : "vueOffice 支持 xlxs pdf word",
         path : "/vue-office",
         is_show : true

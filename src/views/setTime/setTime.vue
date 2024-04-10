@@ -4,19 +4,37 @@
         <div class="page">
             <h2>格式化时间</h2>
             <div class="item">
-                <div class="tips-box">正常使用</div>
-                <dzs-form :options="formOptions" @onSubmit="onSubmit"></dzs-form>
                 <div class="guid">{{time}}</div>
                 <dzs-code title="使用方法" :value="code1"></dzs-code>
             </div>
-            <h2>格式化支持Promise</h2>
+            <h2>对比时间差</h2>
             <div class="item">
-                <div class="guid">{{time3}}</div>
+                <div class="guid">{{diffTime}}</div>
                 <dzs-code title="使用方法" :value="code2"></dzs-code>
+            </div>
+            <h2>前n天(小时/周)后n天(小时/周) 前用负数 后用正数</h2>
+            <div class="item">
+                <div class="guid">{{lastTime}}</div>
+                <dzs-code title="使用方法" :value="code3"></dzs-code>
+            </div>
+            <h2>获取当前日期是星期几</h2>
+            <div class="item">
+                <div class="guid">{{week}}</div>
+                <dzs-code title="使用方法" :value="code4"></dzs-code>
+            </div>
+            <h2>指定日期是当前(年、月、周)的多少天</h2>
+            <div class="item">
+                <div class="guid">{{day}}</div>
+                <dzs-code title="使用方法" :value="code5"></dzs-code>
+            </div>
+            <h2>是否为闰年</h2>
+            <div class="item">
+                <div class="guid">{{leapYear}}</div>
+                <dzs-code title="使用方法" :value="code6"></dzs-code>
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
-                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/setTime.js">下载/查看地址</a>
+                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/format-time.js">下载/查看地址</a>
             </div>
         </div>
         <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
@@ -24,8 +42,9 @@
 </template>
 <script>
 import dzsForm from "@/components/dzs-form/index.vue";
-import {code1 , code2} from "./config";
-import {formatTime , asyncFormatTime} from "../../utils/format-time";
+import {code1 , code2 , code3 , code4 , code5 , code6} from "./config";
+import {formatTime , asyncFormatTime , chainFormatTime} from "../../utils/format-time";
+import {setTime} from "../../utils/format-time";
 export default {
     props:{
         newIndex : {
@@ -38,85 +57,55 @@ export default {
     components:{
         dzsForm
     },
-    computed:{
-        formOptions(){
-            return {
-                formProps : {
-                    "label-width" : "60px",
-                },
-                formItem : [
-                    {
-                        label : "时间",
-                        key : "Time",
-                        type : "date",
-                        span : 24,
-                        rules :[],
-                        props : {
-                            type : "datetime",
-                            "value-format" : "yyyy-MM-dd HH:mm:ss",
-                            placeholder : "请选择时间"
-                        }
-                    },
-                ]
-            }
-        }
-    },
     data(){
         return {
             time : formatTime(),
             code1 : code1,
             code2 : code2,
+            code3 : code3,
+            code4 : code4,
+            code5 : code5,
+            code6 : code6,
             time1 : formatTime({format : "yyyy-MM-dd"}),
-            time2 : "",
-            time3 : "",
+            diffTime : {},
+            lastTime : {} ,
+            week : "",
+            day : "" ,
+            leapYear : false
         }
     },
     mounted(){
-        this.setTime2();
-        this.setTime3();
+        this.getDiffTime();
+        this.setLastTime();
+        this.setWeek();
+        this.setDay();
+        this.setLeapYear();
     },
     methods:{
-        onSubmit(e){
-            formatTime({
-                date : e.Time,
-                success : (res)=>{
-                    this.time = res
-                }
+        getDiffTime(){
+            this.diffTime = setTime.diff({
+                startDate : "2024-01-01 12:00:00",
+                endDate : "2023-01-01 18:00:00",
             })
         },
-
-        onSubmit1(e){
-            formatTime({
-                date : e.Time,
-                format : "yyyy-MM-dd",
-                success : (res)=>{
-                    this.time1 = res
-                }
-            })
-        },
-
-        setTime2(){
-            formatTime({
+        setLastTime(){
+            this.lastTime = setTime.last({
                 date : new Date(),
-                format : "yyyy-MM-dd HH:mm:ss",
-                success : (res)=>{
-                    this.time2 = res
-                },
-                fail : (err)=>{
-                    console.error(err)
-                },
+                num : 2 ,
+                type : "day"
             })
         },
-
-        setTime3(){
-            asyncFormatTime({
+        setWeek(){
+            this.week = setTime.week()
+        },
+        setDay(){
+            this.day= setTime.day({
                 date : new Date(),
-                format : "yyyy-MM-dd HH:mm:ss",
-            }).then((res)=>{
-                this.time3 = res
-            }).catch((err)=>{
-                console.error(err)
+                type : "year"
             })
+        },
+        setLeapYear(){
+            this.leapYear =setTime.leapYear(new Date())
         }
     }
 }
