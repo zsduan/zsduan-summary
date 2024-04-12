@@ -161,7 +161,7 @@ export default {
         submitText: {
             type: String,
             default: () => {
-                return "提交";
+                return "搜索";
             },
         },
         resetText: {
