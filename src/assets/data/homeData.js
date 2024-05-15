@@ -230,9 +230,18 @@ export const fragmentList = [
     } 
 ]
 
+export const imagineList = [
+    {
+        title : "大屏抽奖",
+        path : "/big-screen-draw",
+        is_show : true
+    }
+]
+
 export default  {
     fragmentList,
     effectList ,
     jsList , 
-    componentsList
+    componentsList,
+    imagineList
 }

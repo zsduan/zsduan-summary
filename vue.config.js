@@ -1,11 +1,3 @@
-/*
- * @Author: zs.duan
- * @Date: 2021-12-17 15:23:43
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-02-02 13:58:02
- * @FilePath: \vue2+js+eui+template\vue.config.js
- */
-const path = require("path");
 let date = new Date();
 const addZroe = (num) => {
     return num < 10 ? `0${num}` : num;

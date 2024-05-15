@@ -1,10 +1,3 @@
-/*
- * @Author: zs.duan
- * @Date: 2022-09-20 13:49:02
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 10:59:49
- * @FilePath: \vue2+js+eui+template\src\main.js
- */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'

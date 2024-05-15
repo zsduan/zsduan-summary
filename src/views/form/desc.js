@@ -267,10 +267,31 @@ export const descData = [
         remark: ""
     },
     {
-        key: "setFormData(date)",
+        key: "setFormData(data)",
         type: "ref methods",
         parameterType: "",
         desc: "设置表单数据",
         remark: "参数为一个对象 某些时候v-model失败时可以使用"
+    },
+    {
+        key : "key + Before",
+        type : "slot" ,
+        parameterType : "",
+        desc : "表单项的前置插槽",
+        remark : "flex布局 key为formItem的key"
+    },
+    {
+        key : "key + After",
+        type : "slot" ,
+        parameterType : "",
+        desc : "表单项的后置插槽",
+        remark : "flex布局 key为formItem的key"
+    },
+    {
+        key : "key",
+        type : "slot" ,
+        parameterType : "",
+        desc : "表单项的插槽",
+        remark : "key为formItem的key isSlot为true时生效"
     }
 ]

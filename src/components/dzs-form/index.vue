@@ -13,108 +13,113 @@
                         </template>
                         <template v-if="!item.isSlot">
                             <el-form-item :label="item.label" :prop="item.key">
-                                <!-- 自定义组件 -->
-                                <template v-if="item.props && item.props.isSlot">
-                                    <slot :name="`${item.key}`"></slot>
-                                </template>
+                                <div class="dzs-form-item">
+                                    <slot :name="`${item.key}Before`"></slot>
+                                    <!-- 自定义组件 -->
+                                    <template v-if="item.props && item.props.isSlot">
+                                        <slot :name="`${item.key}`"></slot>
+                                    </template>
 
-                                <!-- 输入框 -->
-                                <template v-if="(item.type == 'input' || !item.type) && !item.props.isSlot">
-                                    <el-input v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)" :placeholder="getPlaceholder(item)">
-                                        <template v-if="item.slots" :slot="item.slots.name">
-                                            {{ item.slots.text }}
-                                        </template>
-                                    </el-input>
-                                </template>
+                                    <!-- 输入框 -->
+                                    <template v-if="(item.type == 'input' || !item.type) && !item.props.isSlot">
+                                        <el-input v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)" :placeholder="getPlaceholder(item)">
+                                            <template v-if="item.slots" :slot="item.slots.name">
+                                                {{ item.slots.text }}
+                                            </template>
+                                        </el-input>
+                                    </template>
 
-                                <!-- 数字输入框 -->
-                                <template v-if="item.type == 'number'">
-                                    <el-input-number v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)"
-                                        :placeholder="getPlaceholder(item)"></el-input-number>
-                                </template>
+                                    <!-- 数字输入框 -->
+                                    <template v-if="item.type == 'number'">
+                                        <el-input-number v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)"
+                                            :placeholder="getPlaceholder(item)"></el-input-number>
+                                    </template>
 
-                                <!-- 选择框 -->
-                                <template v-if="item.type == 'select'">
-                                    <el-select v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)"
-                                        :placeholder="getPlaceholder(item, 'select')">
-                                        <el-option style="padding : 0 6px;" v-for="(option, idx) in item.children"
-                                            :key="option.value + (idx).toString()" :label="option.label"
-                                            :value="option.value"></el-option>
-                                    </el-select>
-                                </template>
+                                    <!-- 选择框 -->
+                                    <template v-if="item.type == 'select'">
+                                        <el-select v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)"
+                                            :placeholder="getPlaceholder(item, 'select')">
+                                            <el-option style="padding : 0 6px;" v-for="(option, idx) in item.children"
+                                                :key="option.value + (idx).toString()" :label="option.label"
+                                                :value="option.value"></el-option>
+                                        </el-select>
+                                    </template>
 
-                                <!-- 日期选择器 -->
-                                <template v-if="item.type == 'date'">
-                                    <el-date-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)"
-                                        :placeholder="getPlaceholder(item, 'select')"></el-date-picker>
-                                </template>
+                                    <!-- 日期选择器 -->
+                                    <template v-if="item.type == 'date'">
+                                        <el-date-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)"
+                                            :placeholder="getPlaceholder(item, 'select')"></el-date-picker>
+                                    </template>
 
-                                <!-- 时间选择器 -->
-                                <template v-if="item.type == 'time'">
-                                    <el-time-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)"
-                                        :placeholder="getPlaceholder(item, 'select')"></el-time-picker>
-                                </template>
+                                    <!-- 时间选择器 -->
+                                    <template v-if="item.type == 'time'">
+                                        <el-time-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)"
+                                            :placeholder="getPlaceholder(item, 'select')"></el-time-picker>
+                                    </template>
 
-                                <!-- 颜色选择器 -->
-                                <template v-if="item.type == 'color'">
-                                    <el-color-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)"></el-color-picker>
-                                </template>
+                                    <!-- 颜色选择器 -->
+                                    <template v-if="item.type == 'color'">
+                                        <el-color-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)"></el-color-picker>
+                                    </template>
 
-                                <!-- 开关 -->
-                                <template v-if="item.type == 'switch'">
-                                    <el-switch v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @input="changeVaule($event, item.key)"></el-switch>
-                                </template>
+                                    <!-- 开关 -->
+                                    <template v-if="item.type == 'switch'">
+                                        <el-switch v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)"></el-switch>
+                                    </template>
 
-                                <!-- 多选框 -->
-                                <template v-if="item.type == 'checkbox'">
-                                    <el-checkbox-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @change="changeVaule($event, item.key)">
-                                        <el-checkbox class="items" v-for="(option, idx) in item.children"
-                                            v-bind="{ ...option.props }" :key="option.value + idx"
-                                            :label="option.value">
-                                            {{ option.label }}
-                                        </el-checkbox>
-                                    </el-checkbox-group>
-                                </template>
+                                    <!-- 多选框 -->
+                                    <template v-if="item.type == 'checkbox'">
+                                        <el-checkbox-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @change="changeVaule($event, item.key)">
+                                            <el-checkbox class="items" v-for="(option, idx) in item.children"
+                                                v-bind="{ ...option.props }" :key="option.value + idx"
+                                                :label="option.value">
+                                                {{ option.label }}
+                                            </el-checkbox>
+                                        </el-checkbox-group>
+                                    </template>
 
-                                <!-- 单选框 -->
-                                <template v-if="item.type == 'radio'">
-                                    <el-radio-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @change="changeVaule($event, item.key)">
-                                        <el-radio class="items" v-for="(option, idx) in item.children"
-                                            v-bind="{ ...option.props }" :key="option.value + idx"
-                                            :label="option.value">
-                                            {{ option.label }}
-                                        </el-radio>
-                                    </el-radio-group>
-                                </template>
+                                    <!-- 单选框 -->
+                                    <template v-if="item.type == 'radio'">
+                                        <el-radio-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @change="changeVaule($event, item.key)">
+                                            <el-radio class="items" v-for="(option, idx) in item.children"
+                                                v-bind="{ ...option.props }" :key="option.value + idx"
+                                                :label="option.value">
+                                                {{ option.label }}
+                                            </el-radio>
+                                        </el-radio-group>
+                                    </template>
 
-                                <!-- 上传图片 -->
-                                <template v-if="item.type == 'uploadImg'">
-                                    <dzs-upload-img v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @change="changeVaule($event, item.key)"></dzs-upload-img>
-                                </template>
+                                    <!-- 上传图片 -->
+                                    <template v-if="item.type == 'uploadImg'">
+                                        <dzs-upload-img v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                            @change="changeVaule($event, item.key)"></dzs-upload-img>
+                                    </template>
 
-                                <!-- 上传文件 -->
-                                <template v-if="item.type == 'uploadFile'">
-                                    <dzs-upload-file :isPhone="formBoxWidth <= 768" v-model="fromModel[item.key]"
-                                        v-bind="{ ...item.props }"
-                                        @change="changeVaule($event, item.key)"></dzs-upload-file>
-                                </template>
+                                    <!-- 上传文件 -->
+                                    <template v-if="item.type == 'uploadFile'">
+                                        <dzs-upload-file :isPhone="formBoxWidth <= 768" v-model="fromModel[item.key]"
+                                            v-bind="{ ...item.props }"
+                                            @change="changeVaule($event, item.key)"></dzs-upload-file>
+                                    </template>
 
-                                <!-- 富文本组件 -->
-                                <template v-if="item.type == 'edit'">
-                                    <dzs-editors :toolbar="toolbar" @save="changeVaule($event, item.key)"
-                                        :show_save="false" v-bind="{ ...item.props }" v-model="fromModel[item.key]">
-                                    </dzs-editors>
-                                </template>
+                                    <!-- 富文本组件 -->
+                                    <template v-if="item.type == 'edit'">
+                                        <dzs-editors :toolbar="toolbar" @save="changeVaule($event, item.key)"
+                                            :show_save="false" v-bind="{ ...item.props }" v-model="fromModel[item.key]">
+                                        </dzs-editors>
+                                    </template>
+
+                                    <slot :name="`${item.key}After`"></slot>
+                                </div>
 
                                 <div class="from-item-tips" v-if="getTips(item) && item.type != 'divider'">
                                     {{ getTips(item) }}
@@ -442,7 +447,7 @@ export default {
             this.$emit("onCancel");
         },
 
-        /**初始化数据*/ 
+        /**初始化数据*/
         initModel(data) {
             this.labelPosition = this.formBoxWidth <= 768 ? "top" : "left";
             this.formProps = data.formProps || {};
@@ -450,7 +455,7 @@ export default {
             this.formItem.forEach((item) => {
                 // 兼容手机端
                 item.span = this.formBoxWidth <= 768 ? 24 : item.span;
-                if(this.value[item.key]) item.defaultValue = this.value[item.key];
+                if (this.value[item.key]) item.defaultValue = this.value[item.key];
                 // 初始化选项框 和上传图片框
                 if (
                     (item.type === "checkbox" || item.type === "uploadImg" || item.type == 'uploadFile') &&
@@ -559,6 +564,10 @@ export default {
             border: 1px solid #bbb;
             color: #666;
         }
+    }
+    .dzs-form-item {
+        display: flex;
+        align-items: center;
     }
 }
 

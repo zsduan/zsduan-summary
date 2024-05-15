@@ -51,8 +51,8 @@ const _formatTime = function (date, format) {
  * @name 格式化时间 
  * @description options 建议使用对象传参 也可以使用字符串 | 时间戳 | 日期对象
  * @description 所有参数不传时 默认为当前时间
- * @param {Object | string | Date | number} [options] 配置对象 | 日期字符串 | 日期对象 | 时间戳
- * @param {String} options.format 格式化字符串 yyyy-MM-dd HH:mm:ss
+ * @param {object | string | Date | number} [options] 配置对象 | 日期字符串 | 日期对象 | 时间戳
+ * @param {string} options.format 格式化字符串 yyyy-MM-dd HH:mm:ss
  * @param {Date | string | number} [options.date] 日期对象 | 日期字符串 | 时间戳
  * @param {Function} [options.success] 成功返回
  * @param {Function} [options.fail] 失败返回
@@ -121,7 +121,7 @@ export const formatTime = function (options) {
  * @name 格式化时间 
  * @description options 建议使用对象传参 也可以使用字符串 | 时间戳 | 日期对象
  * @description 所有参数不传时 默认为当前时间
- * @param {Object | string | Date | number} [options] 配置对象 | 日期字符串 | 日期对象 | 时间戳
+ * @param {object | string | Date | number} [options] 配置对象 | 日期字符串 | 日期对象 | 时间戳
  * @param {String} options.format 格式化字符串 yyyy-MM-dd HH:mm:ss
  * @param {Date | string | number} [options.date] 日期对象 | 日期字符串 | 时间戳
  * @param {Function} [options.success] 成功返回

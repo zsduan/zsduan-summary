@@ -349,5 +349,14 @@
         "page" : "vue-office/index",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20240506142645",
+        "PID" : null ,
+        "title" : "大屏抽奖",
+        "pathName" : "big-screen-draw",
+        "page" : "large-screen-lottery/large-screen-lottery",
+        "isShow" : true,
+        "children" : []
     }
 ]

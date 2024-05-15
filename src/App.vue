@@ -20,7 +20,7 @@ export default {
         watermark({
             watermark_txt : `<p>zsduan的个人总结</p><p>${ua().browserName} ${ua().browserVersion}</p><p>${formatTime()}</p>`,
             isHtml : true,
-            watermark_color : "rgba(0,0,0,0.1)",
+            watermark_color : "rgba(0,0,0,0.2)",
         })
     },
     mounted(){

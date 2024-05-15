@@ -3,6 +3,16 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.4</h2>
+                <div class="time">2024-5-15</div>
+            </div>
+            <div class="content">
+                <p>1. 新增了大屏抽奖组件 见 ?type=%2Fbig-screen-draw</p>
+                <p>2. 修复了一些bug</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.3</h2>
                 <div class="time">2024-4-10</div>
             </div>

@@ -67,6 +67,18 @@
                     >{{item.title}}</li>
                 </ul>
             </div>
+            <div class="components-box piblic-box">
+                <h2 class="title">一些奇妙的想法</h2>
+                <ul>
+                    <li
+                        class="elli1"
+                        v-for="(item,index) in imagineList"
+                        :key="index"
+                        @click="goNav(item.path)"
+                        :class="item.title.length > 8 ? 'small-size' :''"
+                    >{{item.title}}</li>
+                </ul>
+            </div>
         </div>
         <div v-else>
             <div class="components-box piblic-box">
@@ -95,6 +107,7 @@ import {
     jsList,
     effectList,
     fragmentList,
+    imagineList
 } from "../assets/data/homeData";
 import { drawCanvasBack } from "../utils/canvas-back";
 import { blurSearch } from "@/utils/blurSearch.js";
@@ -115,11 +128,15 @@ export default {
             fragmentList: fragmentList.filter((item) => {
                 return item.is_show == true;
             }),
+            imagineList : imagineList.filter((item) => {
+                return item.is_show == true;
+            }),
             allList: [
                 ...componentsList,
                 ...jsList,
                 ...effectList,
                 ...fragmentList,
+                ...imagineList
             ].filter((item) => {
                 return item.is_show;
             }),

@@ -1,12 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2023-01-11 14:46:53
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-02-02 15:39:56
- * @FilePath: \vue2+js+eui+template\src\components\dzs-components-list\dzs-components-list.vue
--->
 <template>
-    <div v-if="type">
+    <div v-if="type" class="dzs-components-list-box">
         <popup v-if="type == '/Popup'" :newIndex="true"></popup>
         <mytable v-else-if="type == '/table'" :newIndex="true"></mytable>
         <myedit v-else-if="type == '/edit'" :newIndex="true"></myedit>
@@ -47,6 +40,7 @@
         <code-editor v-else-if="type == '/code-editor'" :newIndex="true"></code-editor>
         <group-sorting v-else-if="type == '/group-sorting'" :newIndex="true"></group-sorting>
         <vue-office v-else-if="type == '/vue-office'" :newIndex="true"></vue-office>
+        <large-screen-lottery v-else-if="type == '/big-screen-draw'" :newIndex="true"></large-screen-lottery>
         <div v-else class="empty-list">
             <el-empty  description="页面开发中~"></el-empty>
         </div>
@@ -92,6 +86,7 @@ import noticeBar from "@/views/notice-bar/notice-bar.vue";
 import codeEditor from "@/views/code-editor/code-editor.vue";
 import groupSorting from "@/views/group-sorting/group-sorting.vue";
 import vueOffice from "@/views/vue-office/index.vue";
+import largeScreenLottery from "@/views/large-screen-lottery/large-screen-lottery.vue";
 
 export default {
     name : "dzs-components-list",
@@ -134,7 +129,8 @@ export default {
         noticeBar,
         codeEditor,
         groupSorting,
-        vueOffice
+        vueOffice,
+        largeScreenLottery,
     },
     props : {
         type : {
@@ -152,5 +148,9 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50% , -50%);
+}
+.dzs-components-list-box{
+    width: 100%;
+    height: 100%;
 }
 </style>
