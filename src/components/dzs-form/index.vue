@@ -450,6 +450,10 @@ export default {
         /**初始化数据*/
         initModel(data) {
             this.labelPosition = this.formBoxWidth <= 768 ? "top" : "left";
+            let labelPosition = this.options?.formProps['label-position'] || this.options?.formProps['labelPosition']
+            if (labelPosition) {
+                this.labelPosition = labelPosition;
+            }
             this.formProps = data.formProps || {};
             this.formItem = deepCopy(data.formItem);
             this.formItem.forEach((item) => {
@@ -517,6 +521,10 @@ export default {
                     const { width } = entry.contentRect;
                     this.formBoxWidth = width;
                     this.labelPosition = width <= 768 ? "top" : "left";
+                    let labelPosition = this.options?.formProps['label-position'] || this.options?.formProps['labelPosition']
+                    if(labelPosition){
+                        this.labelPosition = labelPosition;
+                    }
                     this.toolbar = width <= 768 ? phoneToolbar : toolbar;
                     this.formItem = deepCopy(this.options.formItem);
                     this.formItem.forEach((item) => {
@@ -565,6 +573,7 @@ export default {
             color: #666;
         }
     }
+
     .dzs-form-item {
         display: flex;
         align-items: center;

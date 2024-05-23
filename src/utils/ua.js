@@ -7,14 +7,14 @@
  */
 
 /*
- * @name 获取浏览器信息
- * @return userAgentObj = {
-        browserName: '',    // 浏览器名称
-        browserVersion: '', // 浏览器版本
-        osName: '',         // 操作系统名称
-        osVersion: '',      // 操作系统版本
-        deviceName: '',     // 设备名称
-    }
+ * 获取浏览器信息
+ * @returns userAgentObj = {
+ *      browserName: '',    // 浏览器名称
+ *      browserVersion: '', // 浏览器版本
+ *      osName: '',         // 操作系统名称
+ *      osVersion: '',      // 操作系统版本
+ *      deviceName: '',     // 设备名称
+ *  }
 */
 
 export default () => {
