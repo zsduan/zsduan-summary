@@ -3,6 +3,27 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.6</h2>
+                <div class="time">2024-6-3</div>
+            </div>
+            <div class="content">
+                <p>1. 表单支持 xx.xx 最后会返回一个对象 具体可以查看表单组件</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
+                <h2>版本号 v2.1.5</h2>
+                <div class="time">2024-5-30</div>
+            </div>
+            <div class="content">
+                <p>1. 优化表单(包含横向表单)组件在不设置 fromItem 会出现的bug</p>
+                <p>2. 优化表单组件 把 edit 更换成 editor </p>
+                <p>3. 对横向表单组件进行优化 把 onSubmit 更换 onSearch </p>
+                <p>3. 优化了表单 支持滚动 为了在dialog框里面的高度 </p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.4</h2>
                 <div class="time">2024-5-15</div>
             </div>

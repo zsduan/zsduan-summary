@@ -2,7 +2,8 @@
     <div :id="fromId" class="form-box">
         <el-form v-loading="loading" :element-loading-text="loadingText" v-bind="{ ...formProps }" :model="fromModel"
             :rules="fromRules" :label-position="labelPosition" ref="dzsForm"
-            :class="{ ruleForm: true, noScroll: loading, 'phone-form': formBoxWidth <= 768 }">
+            :class="{ ruleForm: true, noScroll: loading, 'phone-form': formBoxWidth <= 768 ,  'form-box-scroll' : isScroll }"
+            :style="{ height: isScroll ? height : '100%' }">
             <!-- 自定义头部 -->
             <el-row :gutter="gutter">
                 <div v-for="(item, index) in formItem" :key="index">
@@ -21,8 +22,8 @@
                                     </template>
 
                                     <!-- 输入框 -->
-                                    <template v-if="(item.type == 'input' || !item.type) && !item.props.isSlot">
-                                        <el-input v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                    <template v-if="item.type == 'input'">
+                                        <el-input :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @input="changeVaule($event, item.key)" :placeholder="getPlaceholder(item)">
                                             <template v-if="item.slots" :slot="item.slots.name">
                                                 {{ item.slots.text }}
@@ -32,14 +33,14 @@
 
                                     <!-- 数字输入框 -->
                                     <template v-if="item.type == 'number'">
-                                        <el-input-number v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        <el-input-number :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @input="changeVaule($event, item.key)"
                                             :placeholder="getPlaceholder(item)"></el-input-number>
                                     </template>
 
                                     <!-- 选择框 -->
                                     <template v-if="item.type == 'select'">
-                                        <el-select v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        <el-select :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @input="changeVaule($event, item.key)"
                                             :placeholder="getPlaceholder(item, 'select')">
                                             <el-option style="padding : 0 6px;" v-for="(option, idx) in item.children"
@@ -50,37 +51,37 @@
 
                                     <!-- 日期选择器 -->
                                     <template v-if="item.type == 'date'">
-                                        <el-date-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        <el-date-picker :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @input="changeVaule($event, item.key)"
                                             :placeholder="getPlaceholder(item, 'select')"></el-date-picker>
                                     </template>
 
                                     <!-- 时间选择器 -->
                                     <template v-if="item.type == 'time'">
-                                        <el-time-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        <el-time-picker :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @input="changeVaule($event, item.key)"
                                             :placeholder="getPlaceholder(item, 'select')"></el-time-picker>
                                     </template>
 
                                     <!-- 颜色选择器 -->
                                     <template v-if="item.type == 'color'">
-                                        <el-color-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        <el-color-picker :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @input="changeVaule($event, item.key)"></el-color-picker>
                                     </template>
 
                                     <!-- 开关 -->
                                     <template v-if="item.type == 'switch'">
-                                        <el-switch v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        <el-switch :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @input="changeVaule($event, item.key)"></el-switch>
                                     </template>
 
                                     <!-- 多选框 -->
                                     <template v-if="item.type == 'checkbox'">
-                                        <el-checkbox-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                            @change="changeVaule($event, item.key)">
+                                        <el-checkbox-group :value="getFromModelValue(item.key)" v-bind="{ ...item.props }" @input="changeVaule($event, item.key)">
                                             <el-checkbox class="items" v-for="(option, idx) in item.children"
                                                 v-bind="{ ...option.props }" :key="option.value + idx"
-                                                :label="option.value">
+                                                :label="option.value"
+                                                >
                                                 {{ option.label }}
                                             </el-checkbox>
                                         </el-checkbox-group>
@@ -88,8 +89,8 @@
 
                                     <!-- 单选框 -->
                                     <template v-if="item.type == 'radio'">
-                                        <el-radio-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                            @change="changeVaule($event, item.key)">
+                                        <el-radio-group :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
+                                            @input="changeVaule($event, item.key)">
                                             <el-radio class="items" v-for="(option, idx) in item.children"
                                                 v-bind="{ ...option.props }" :key="option.value + idx"
                                                 :label="option.value">
@@ -100,21 +101,21 @@
 
                                     <!-- 上传图片 -->
                                     <template v-if="item.type == 'uploadImg'">
-                                        <dzs-upload-img v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                        <dzs-upload-img :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @change="changeVaule($event, item.key)"></dzs-upload-img>
                                     </template>
 
                                     <!-- 上传文件 -->
                                     <template v-if="item.type == 'uploadFile'">
-                                        <dzs-upload-file :isPhone="formBoxWidth <= 768" v-model="fromModel[item.key]"
+                                        <dzs-upload-file :isPhone="formBoxWidth <= 768" :value="getFromModelValue(item.key)"
                                             v-bind="{ ...item.props }"
                                             @change="changeVaule($event, item.key)"></dzs-upload-file>
                                     </template>
 
                                     <!-- 富文本组件 -->
-                                    <template v-if="item.type == 'edit'">
+                                    <template v-if="item.type == 'editor'">
                                         <dzs-editors :toolbar="toolbar" @save="changeVaule($event, item.key)"
-                                            :show_save="false" v-bind="{ ...item.props }" v-model="fromModel[item.key]">
+                                            :show_save="false" v-bind="{ ...item.props }" :value="getFromModelValue(item.key)">
                                         </dzs-editors>
                                     </template>
 
@@ -182,6 +183,9 @@
  * @props loadingText loading文字 非必填
  * @props loading 是否显示loading 非必填
  * @props isFormData 是否为formData 非必填
+ * @props gutter el-row 配置 非必填
+ * @props isScroll 是否开启超出滚动 非必填
+ * @props height form表单高度 非必填
  * 
  * @methods onSubmit 提交事件 返回当前表单数据
  * @methods onCancel 取消事件
@@ -271,7 +275,21 @@ export default {
             default: () => {
                 return 10
             }
-        }
+        },
+        /**是否开启超出滚动*/
+        isScroll: {
+            type: Boolean,
+            default: () => {
+                return true
+            }
+        },
+        /**form表单高度*/
+        height: {
+            type: String,
+            default: () => {
+                return "500px"
+            }
+        },  
     },
     data() {
         return {
@@ -330,13 +348,28 @@ export default {
             return ""
         },
         /**改变输入的值*/
-        changeVaule(value, key) {
-            this.$set(this.fromModel, key, value);
+        changeVaule(value, keyPath) {
+            let keyList = keyPath.split('.');
+            let obj = this.fromModel;
+            for (let i = 0; i < keyList.length - 1; i++) {
+                obj = obj[keyList[i]];
+            }
+            obj[keyList[keyList.length - 1]] = value;
             this.$emit("update:value", this.fromModel);
             this.$emit("change", {
                 value: value,
-                key: key,
+                key: keyPath,
             });
+        },
+
+        /**获取FromModel的参数*/
+        getFromModelValue(keyPath) {
+            let keyList = keyPath.split('.');
+            let value = this.fromModel;
+            for (let i = 0; i < keyList.length; i++) {
+                value = value[keyList[i]];
+            }
+            return value;
         },
 
         /**提交*/
@@ -364,27 +397,30 @@ export default {
                         return;
                     }
                     let sendList = {};
-                    for (const key in this.fromModel) {
-                        if (Object.hasOwnProperty.call(this.fromModel, key)) {
-                            let item = this.formItem.find((item) => item.key == key);
-                            switch (item.type) {
-                                case "uploadImg":
-                                    let urlList = this.fromModel[key];
-                                    sendList[key] = urlList && urlList.length > 0 ? urlList.map(item => item.uploadUrl).join(",") : "";
-                                    break;
-                                case "switch":
-                                    sendList[key] = this.fromModel[key];
-                                    break;
-                                default:
-                                    sendList[key] = this.fromModel[key];
-                                    break;
-                            }
-                            if (item.isNull) delete sendList[key];
+                    this.formItem.forEach(item => {
+                        let keyPath = item.key.split('.');
+                        let value = this.fromModel;
+                        for (let i = 0; i < keyPath.length; i++) {
+                            value = value[keyPath[i]];
                         }
-                    }
-                    this.$emit("onSubmit", this.fromModel);
-                    this.$emit("update:value", this.fromModel);
-                    resolve(this.fromModel);
+                        switch (item.type) {
+                            case "uploadImg":
+                                let urlList = value;
+                                sendList[item.key] = urlList && urlList.length > 0 ? urlList.map(item => item.uploadUrl).join(",") : "";
+                                break;
+                            case "switch":
+                                sendList[item.key] = value || false;
+                                break;
+                            default:
+                                sendList[item.key] = value;
+                                break;
+                        }
+                        if (item.isNull) delete sendList[item.key];
+                        sendList = this.transformKeysToNestedObject(sendList);
+                    })
+                    this.$emit("onSubmit", sendList);
+                    this.$emit("update:value", sendList);
+                    resolve(sendList);
                 });
             });
         },
@@ -392,54 +428,63 @@ export default {
         /**formData 发送数据*/
         sendFormData(resolve, reject) {
             let sendList = new FormData();
-            for (const key in this.fromModel) {
-                if (!Object.hasOwnProperty.call(this.fromModel, key)) continue;
-                let item = this.formItem.find((item) => item.key == key);
+            this.formItem.forEach((item) => {
+                if (item.isNull) return;
+                let keyPath = item.key.split('.');
+                let value = this.fromModel;
+                for (let i = 0; i < keyPath.length; i++) {
+                    value = value[keyPath[i]];
+                }
                 let files = null;
                 switch (item.type) {
-                    case 'uploadImg':
-                        if (this.fromModel[key] && this.fromModel[key].length > 1) {
+                    case "uploadImg":
+                        let urlList = value;
+                        if (urlList && urlList.length > 1) {
                             reject({ code: -200, message: "formData 上传图片只能上传一张图片 请检查" });
                             throw new Error(`formData 上传图片只能上传一张图片 请检查`)
                         }
-                        if (this.fromModel[key] && this.fromModel[key].length > 0) {
-                            files = this.fromModel[key][0].file;
+                        if (urlList && urlList.length > 0) {
+                            files = urlList[0].file;
                         }
-                        if (!files && this.fromModel[key]) {
-                            files = this.fromModel[key].file || null;
+                        if (!files && urlList) {
+                            files = urlList.file || null;
                         }
-                        sendList.append(key, files);
+                        if (urlList && urlList.length > 0) {
+                            sendList.append(item.key, files);
+                        }
                         break;
-                    case 'uploadFile':
-                        if (this.fromModel[key] && this.fromModel[key].length > 1) {
-                            reject({ code: -200, message: "formData 上传图片只能上传一张图片 请检查" });
-                            throw new Error(`formData 上传图片只能上传一张图片 请检查`)
+                    case "uploadFile":
+                        let fileList = value;
+                        if (fileList && fileList.length > 1) {
+                            reject({ code: -200, message: "formData 上传图片只能上传一个文件 请检查" });
+                            throw new Error(`formData 上传图片只能上传一个文件 请检查`)
                         }
-                        if (this.fromModel[key] && this.fromModel[key].length > 0) {
-                            files = this.fromModel[key][0].file;
+                        if (fileList && fileList.length > 0) {
+                            files = fileList[0].file;
                         }
-                        if (!files && this.fromModel[key]) {
-                            files = this.fromModel[key].file || null;
+                        if (!files && fileList) {
+                            files = fileList.file || null;
                         }
-                        sendList.append(key, files);
+
+                        if (fileList && fileList.length > 0) {
+                            sendList.append(item.key, files);
+                        }
                         break;
-                    case 'switch':
-                        sendList.append(key, this.fromModel[key] ? 'true' : 'false');
+                    case "switch":
+                        sendList.append(item.key, value ? 'true' : 'false');
                         break;
-                    case 'checkbox':
-                        sendList.append(key, this.fromModel[key].join(','));
+                    case "checkbox":
+                        sendList.append(item.key, value.join(','));
                         break;
-                    case 'divider':
-                        sendList.delete(key);
+                    case "divider":
+                        sendList.delete(item.key);
                         break;
                     default:
-                        sendList.append(key, this.fromModel[key]);
+                        sendList.append(item.key, value);
                         break;
                 }
-                if (item.isNull) sendList.delete(key);
-            }
+            });
             this.$emit("onSubmit", sendList);
-            this.$emit("update:value", sendList);
             resolve(sendList);
         },
         cancel() {
@@ -456,6 +501,7 @@ export default {
             }
             this.formProps = data.formProps || {};
             this.formItem = deepCopy(data.formItem);
+            let fromModel = {};
             this.formItem.forEach((item) => {
                 // 兼容手机端
                 item.span = this.formBoxWidth <= 768 ? 24 : item.span;
@@ -482,14 +528,43 @@ export default {
                 }
                 this.fromRules[item.key] = item.rules || [];
                 if (item.defaultValue) {
-                    this.changeVaule(item.defaultValue, item.key);
+                    fromModel[item.key] = item.defaultValue;
                 }
                 if (item.type != 'switch') {
-                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue || "";
+                    fromModel[item.key] = fromModel[item.key] ? fromModel[item.key] : item.defaultValue || "";
                 } else {
-                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue;
+                    fromModel[item.key] = fromModel[item.key] ? fromModel[item.key] : item.defaultValue;
                 }
             });
+            fromModel = this.transformKeysToNestedObject(fromModel);
+            this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(fromModel) };
+        },
+
+        /**格式化值*/
+        transformKeysToNestedObject(obj) {
+            let result = {};
+
+            // 获取对象的所有键（避免在for-in循环中检查hasOwnProperty）  
+            const keys = Object.keys(obj);
+
+            for (let i = 0; i < keys.length; i++) {
+                const keyPath = keys[i].split('.');
+                const value = obj[keys[i]];
+                let currentNode = result;
+
+                // 遍历嵌套键数组，除了最后一个键  
+                for (let j = 0; j < keyPath.length - 1; j++) {
+                    const currentKey = keyPath[j];
+
+                    // 使用逻辑或运算符来避免额外的检查  
+                    currentNode = currentNode[currentKey] || (currentNode[currentKey] = {});
+                }
+
+                // 将最后一个键和值赋给当前节点  
+                currentNode[keyPath[keyPath.length - 1]] = value;
+            }
+
+            return result;
         },
 
         /**清空表单数据*/
@@ -527,6 +602,7 @@ export default {
                     }
                     this.toolbar = width <= 768 ? phoneToolbar : toolbar;
                     this.formItem = deepCopy(this.options.formItem);
+                    if(!this.formItem)return ;
                     this.formItem.forEach((item) => {
                         // 兼容手机端
                         item.span = width <= 768 ? 24 : item.span;
@@ -541,8 +617,6 @@ export default {
 
 <style lang="less" scoped>
 .ruleForm {
-    min-width: 650px;
-
     .items {
         padding-right: 10px;
     }
@@ -553,6 +627,15 @@ export default {
         padding-top: 3px;
         line-height: 14px;
     }
+}
+
+.form-box-scroll{
+    overflow-y: auto;
+    -ms-overflow-style: none;
+	/*IE10*/
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .phone-form {
@@ -572,11 +655,6 @@ export default {
             border: 1px solid #bbb;
             color: #666;
         }
-    }
-
-    .dzs-form-item {
-        display: flex;
-        align-items: center;
     }
 }
 

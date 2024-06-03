@@ -4,7 +4,7 @@
         <div class="page">
             <h2>电脑端</h2>
             <div class="item">
-                <dzs-form :isFormData="true" :options="formOptions">
+                <dzs-form :options="formOptions" height="100%" @onSubmit="onSubmit">
                     <template #mySlot>
                         <el-button>我是自定义组件的button</el-button>
                     </template>
@@ -70,7 +70,7 @@ export default {
         formOptions() {
             return {
                 formProps: {
-                    "label-width": "110px",
+                    "label-width": "120px",
                 },
                 formItem: [
                     {
@@ -81,9 +81,8 @@ export default {
                         span: 24
                     },
                     {
-                        label: "带有lable自定义组件",
+                        label: "lable自定义组件",
                         key: "lableSlot",
-                        type: "input",
                         span: 24,
                         props: {
                             isSlot: true
@@ -101,6 +100,24 @@ export default {
                             tips: "这个是一个输入框"
                         },
                         span: 24
+                    },
+                    {
+                        label : "支持xx.xx的参数",
+                        key : "title.type",
+                        type : "input",
+                        props : {
+                            placeholder : "请输入输入框",
+                            tips : "支持xx.xx的参数理论可以支持无限 该输入框为 title.type"
+                        },
+                    },
+                    {
+                        label : "xx.xx.xx的参数",
+                        key : "titles.type.name",
+                        type : "input",
+                        props : {
+                            placeholder : "请输入输入框",
+                            tips : "xx.xx.xx的参数 titles.type.name"
+                        },
                     },
                     {
                         label: "下拉框",
@@ -191,7 +208,6 @@ export default {
                         label: "图片",
                         key: "uploadImg",
                         type: "uploadImg",
-                        rules: [],
                         props: {
                             autoUpload: false
                         },
@@ -222,6 +238,11 @@ export default {
             descHeader : descHeader,
             descData : descData,
             descTableOptions : descTableOptions
+        }
+    },
+    methods: {
+        onSubmit(data) {
+            console.log(data)
         }
     }
 }

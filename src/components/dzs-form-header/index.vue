@@ -18,8 +18,8 @@
                                 </template>
 
                                 <!-- 输入框 -->
-                                <template v-if="(item.type == 'input' || !item.type) && !item.props.isSlot">
-                                    <el-input v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                <template v-if="item.type == 'input'">
+                                    <el-input :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)" :placeholder="getPlaceholder(item)">
                                         <template v-if="item.slots" :slot="item.slots.name">
                                             {{ item.slots.text }}
@@ -29,14 +29,14 @@
 
                                 <!-- 数字输入框 -->
                                 <template v-if="item.type == 'number'">
-                                    <el-input-number v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                    <el-input-number :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)"
                                         :placeholder="getPlaceholder(item)"></el-input-number>
                                 </template>
 
                                 <!-- 选择框 -->
                                 <template v-if="item.type == 'select'">
-                                    <el-select v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                    <el-select :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)"
                                         :placeholder="getPlaceholder(item, 'select')">
                                         <el-option style="padding : 0 6px;" v-for="(option, idx) in item.children"
@@ -47,22 +47,22 @@
 
                                 <!-- 日期选择器 -->
                                 <template v-if="item.type == 'date'">
-                                    <el-date-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                    <el-date-picker :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)"
                                         :placeholder="getPlaceholder(item, 'select')"></el-date-picker>
                                 </template>
 
                                 <!-- 时间选择器 -->
                                 <template v-if="item.type == 'time'">
-                                    <el-time-picker v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                    <el-time-picker :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)"
                                         :placeholder="getPlaceholder(item, 'select')"></el-time-picker>
                                 </template>
 
                                 <!-- 多选框 -->
                                 <template v-if="item.type == 'checkbox'">
-                                    <el-checkbox-group v-model="fromModel[item.key]" v-bind="{ ...item.props }"
-                                        @change="changeVaule($event, item.key)">
+                                    <el-checkbox-group :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
+                                        @input="changeVaule($event, item.key)">
                                         <el-checkbox class="items" v-for="(option, idx) in item.children"
                                             v-bind="{ ...option.props }" :key="option.value + idx"
                                             :label="option.value">
@@ -73,9 +73,13 @@
 
                                 <!-- 开关 -->
                                 <template v-if="item.type == 'switch'">
-                                    <el-switch v-model="fromModel[item.key]" v-bind="{ ...item.props }"
+                                    <el-switch :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                         @input="changeVaule($event, item.key)"></el-switch>
                                 </template>
+
+                                <div class="from-item-tips" v-if="getTips(item) && item.type != 'divider'">
+                                    {{ getTips(item) }}
+                                </div>
                             </el-form-item>
                         </template>
                     </el-col>
@@ -87,7 +91,7 @@
                             <el-button class="btn" type="primary" :icon="btnIcon" @click.stop="submit('dzsForm')">
                                 {{ submitText }}
                             </el-button>
-                            <el-button type="info" @click.stop="Reset" class="btn cancel">{{resetText}}</el-button>
+                            <el-button type="info" @click.stop="Reset" class="btn cancel">{{ resetText }}</el-button>
                             <slot name="footerBtn"></slot>
                         </div>
                     </el-col>
@@ -268,13 +272,28 @@ export default {
             return ""
         },
         /**改变输入的值*/
-        changeVaule(value, key) {
-            this.$set(this.fromModel, key, value);
+        changeVaule(value, keyPath) {
+            let keyList = keyPath.split('.');
+            let obj = this.fromModel;
+            for (let i = 0; i < keyList.length - 1; i++) {
+                obj = obj[keyList[i]];
+            }
+            obj[keyList[keyList.length - 1]] = value;
             this.$emit("update:value", this.fromModel);
             this.$emit("change", {
                 value: value,
-                key: key,
+                key: keyPath,
             });
+        },
+
+        /**获取FromModel的参数*/
+        getFromModelValue(keyPath) {
+            let keyList = keyPath.split('.');
+            let value = this.fromModel;
+            for (let i = 0; i < keyList.length; i++) {
+                value = value[keyList[i]];
+            }
+            return value;
         },
 
         /**提交*/
@@ -302,23 +321,26 @@ export default {
                         return;
                     }
                     let sendList = {};
-                    for (const key in this.fromModel) {
-                        if (Object.hasOwnProperty.call(this.fromModel, key)) {
-                            let item = this.formItem.find((item) => item.key == key);
-                            switch (item.type) {
-                                case "switch":
-                                    sendList[key] = this.fromModel[key];
-                                    break;
-                                default:
-                                    sendList[key] = this.fromModel[key];
-                                    break;
-                            }
-                            if (item.isNull) delete sendList[key];
+                    this.formItem.forEach(item => {
+                        let keyPath = item.key.split('.');
+                        let value = this.fromModel;
+                        for (let i = 0; i < keyPath.length; i++) {
+                            value = value[keyPath[i]];
                         }
-                    }
-                    this.$emit("onSubmit", this.fromModel);
-                    this.$emit("update:value", this.fromModel);
-                    resolve(this.fromModel);
+                        switch (item.type) {
+                            case "switch":
+                                sendList[item.key] = value || false;
+                                break;
+                            default:
+                                sendList[item.key] = value;
+                                break;
+                        }
+                        if (item.isNull) delete sendList[item.key];
+                        sendList = this.transformKeysToNestedObject(sendList);
+                    })
+                    this.$emit("onSubmit", sendList);
+                    this.$emit("update:value", sendList);
+                    resolve(sendList);
                 });
             });
         },
@@ -326,27 +348,26 @@ export default {
         /**formData 发送数据*/
         sendFormData(resolve, reject) {
             let sendList = new FormData();
-            for (const key in this.fromModel) {
-                if (!Object.hasOwnProperty.call(this.fromModel, key)) continue;
-                let item = this.formItem.find((item) => item.key == key);
+            this.formItem.forEach((item) => {
+                if (item.isNull) return;
+                let keyPath = item.key.split('.');
+                let value = this.fromModel;
+                for (let i = 0; i < keyPath.length; i++) {
+                    value = value[keyPath[i]];
+                }
                 switch (item.type) {
-                    case 'switch':
-                        sendList.append(key, this.fromModel[key] ? 'true' : 'false');
+                    case "switch":
+                        sendList.append(item.key, value ? 'true' : 'false');
                         break;
-                    case 'checkbox':
-                        sendList.append(key, this.fromModel[key].join(','));
-                        break;
-                    case 'divider':
-                        sendList.delete(key);
+                    case "checkbox":
+                        sendList.append(item.key, value.join(','));
                         break;
                     default:
-                        sendList.append(key, this.fromModel[key]);
+                        sendList.append(item.key, value);
                         break;
                 }
-                if (item.isNull) sendList.delete(key);
-            }
+            });
             this.$emit("onSubmit", sendList);
-            this.$emit("update:value", sendList);
             resolve(sendList);
         },
         cancel() {
@@ -357,19 +378,19 @@ export default {
         initModel(data) {
             this.formProps = data.formProps || {};
             this.formItem = deepCopy(data.formItem);
+            let fromModel = {};
             this.formItem.forEach((item) => {
                 // 兼容手机端
                 item.span = this.formBoxWidth <= 768 ? 24 : item.span;
                 if (this.value[item.key]) item.defaultValue = this.value[item.key];
-                // 初始化选项框
-                if (item.type === "checkbox" && !item.defaultValue) {
+                // 初始化选项框 和上传图片框
+                if ( item.type === "checkbox" && !item.defaultValue ) {
                     item.defaultValue = [];
                 }
                 // 初始化 开关
                 if (item.type == "switch" && !item.defaultValue) {
                     item.defaultValue = false;
                 }
-
                 // input框 在饿了吗ui 中需要是 string类型
                 if (item.type == "input" && item.defaultValue) {
                     item.defaultValue = item.defaultValue.toString();
@@ -380,13 +401,44 @@ export default {
                     item.defaultValue = [];
                 }
                 this.fromRules[item.key] = item.rules || [];
-                if (item.defaultValue) this.changeVaule(item.defaultValue, item.key);
+                if (item.defaultValue) {
+                    fromModel[item.key] = item.defaultValue;
+                }
                 if (item.type != 'switch') {
-                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue || "";
+                    fromModel[item.key] = fromModel[item.key] ? fromModel[item.key] : item.defaultValue || "";
                 } else {
-                    this.fromModel[item.key] = this.fromModel[item.key] ? this.fromModel[item.key] : item.defaultValue;
+                    fromModel[item.key] = fromModel[item.key] ? fromModel[item.key] : item.defaultValue;
                 }
             });
+            fromModel = this.transformKeysToNestedObject(fromModel);
+            this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(fromModel) };
+        },
+
+        /**格式化值*/
+        transformKeysToNestedObject(obj) {
+            let result = {};
+
+            // 获取对象的所有键（避免在for-in循环中检查hasOwnProperty）  
+            const keys = Object.keys(obj);
+
+            for (let i = 0; i < keys.length; i++) {
+                const keyPath = keys[i].split('.');
+                const value = obj[keys[i]];
+                let currentNode = result;
+
+                // 遍历嵌套键数组，除了最后一个键  
+                for (let j = 0; j < keyPath.length - 1; j++) {
+                    const currentKey = keyPath[j];
+
+                    // 使用逻辑或运算符来避免额外的检查  
+                    currentNode = currentNode[currentKey] || (currentNode[currentKey] = {});
+                }
+
+                // 将最后一个键和值赋给当前节点  
+                currentNode[keyPath[keyPath.length - 1]] = value;
+            }
+
+            return result;
         },
 
         /**清空表单数据*/
@@ -416,6 +468,7 @@ export default {
                     const { width } = entry.contentRect;
                     this.formBoxWidth = width;
                     this.formItem = deepCopy(this.options.formItem);
+                    if (!this.formItem) return;
                     this.formItem.forEach((item) => {
                         // 兼容手机端
                         item.span = width <= 768 ? 24 : item.span;
@@ -440,6 +493,13 @@ export default {
 
     .items {
         padding-right: 10px;
+    }
+
+    .from-item-tips {
+        font-size: 12px;
+        color: #ccc;
+        padding-top: 3px;
+        line-height: 14px;
     }
 }
 

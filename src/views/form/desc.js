@@ -63,18 +63,18 @@ export const descData = [
                         remark: "非必填"
                     },
                     {
-                        key: "key",
+                        key: "key(避免更新错误)",
                         type: "props",
                         parameterType: "String",
                         desc: "需要组合的字段 通过key来获取对应的值",
-                        remark: ""
+                        remark: "支持xx.xx的参数理论可以支持无限 会返回一个对象"
                     },
                     {
                         key: "type",
                         type: "props",
                         parameterType: "String",
                         desc: "类型",
-                        remark: "input | select | radio | checkbox | date | time | switch | uploadImg | edit | uploadFile | divider"
+                        remark: "input | select | radio | checkbox | date | time | switch | uploadImg | editor | uploadFile | divider"
                     },
                     {
                         key: "span",
@@ -165,7 +165,7 @@ export const descData = [
                         remark: ""
                     },
                     {
-                        key: "isSlot",
+                        key: "isSlot(避免更新错误)",
                         type: "props",
                         parameterType: "Boolean",
                         desc: "是否为自定义组件",
@@ -230,6 +230,27 @@ export const descData = [
         parameterType: "Boolean",
         desc: "是否以FormData的形式提交",
         remark: "默认false"
+    },
+    {
+        key : 'gutter',
+        type : 'props',
+        parameterType : 'Number',
+        desc : '栅格间隔',
+        remark : '默认 20'
+    },
+    {
+        key : 'isScroll',
+        type : 'props',
+        parameterType : 'Boolean',
+        desc : '是否开启滚动',
+        remark : '默认 true false时高度自适应'
+    },
+    {
+        key : 'height',
+        type : 'props',
+        parameterType : 'String',
+        desc : '高度',
+        remark : '默认 500px'
     },
     {
         key: "@onSubmit",

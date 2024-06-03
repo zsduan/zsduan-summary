@@ -63,11 +63,11 @@ export const descData = [
                         remark: "非必填"
                     },
                     {
-                        key: "key",
+                        key: "key(防止更新失败)",
                         type: "props",
                         parameterType: "String",
                         desc: "需要组合的字段 通过key来获取对应的值",
-                        remark: ""
+                        remark: "支持xx.xx的参数理论可以支持无限"
                     },
                     {
                         key: "type",
@@ -158,7 +158,7 @@ export const descData = [
                         remark: ""
                     },
                     {
-                        key: "isSlot",
+                        key: "isSlot(防止更新失败)",
                         type: "props",
                         parameterType: "Boolean",
                         desc: "是否为自定义组件",
@@ -218,7 +218,7 @@ export const descData = [
         remark: "默认false"
     },
     {
-        key: "@onSubmit",
+        key: "@search",
         type: "methods",
         parameterType: "",
         desc: "提交事件 返回一个promise",
