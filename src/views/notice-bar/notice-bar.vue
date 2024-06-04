@@ -1,13 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-11-23 17:35:39
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:33:38
- * @FilePath: \vue2+js+eui+template\src\views\myNotification\myNotification.vue
--->
 <template>
     <div>
-        <dzs-header title="消息通知栏" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -56,7 +48,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-notice-bar/index.vue">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
@@ -64,14 +56,6 @@ import dzsNoticeBar from "@/components/dzs-notice-bar/index.vue";
 import {code1 , code2 , code3 , code4 , code5 , code6} from "./config.js";
 import {descHeader , descData , descTableOptions} from "./desc";
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     components:{
         dzsNoticeBar
     },

@@ -1,13 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-30 09:53:35
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:32:40
- * @FilePath: \vue2+js+eui+template\src\views\guid\guid.vue
--->
 <template>
     <div>
-        <dzs-header title="生成guid" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -21,21 +13,13 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/guid.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
 import guid from "@/utils/guid";
 import {code1} from "./config";
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     data(){
         return {
             guid : "",

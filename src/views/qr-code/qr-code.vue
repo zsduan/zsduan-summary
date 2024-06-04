@@ -1,6 +1,5 @@
 <template>
     <div class="qr-code">
-        <dzs-header title="生成二维码" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>表单配置</h2>
             <div class="item">
@@ -32,8 +31,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-qr-code/index.vue">二维码组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex">
-        </el-backtop>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
@@ -42,14 +40,6 @@ import dzsForm from "@/components/dzs-form/index.vue";
 import { code1 , code2 , code3 } from "./config";
 import {descHeader , descData , descTableOptions} from "./desc";
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     components:{
         dzsQrCode,
         dzsForm

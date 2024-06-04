@@ -1,13 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-09-30 09:53:35
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:35:09
- * @FilePath: \vue2+js+eui+template\src\views\time-difference\time-difference.vue
--->
 <template>
     <div>
-        <dzs-header title="时间差" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -20,7 +12,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/time-difference.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
@@ -28,14 +20,6 @@ import timeDifference from "@/utils/time-difference";
 import dzsForm from "@/components/dzs-form/index.vue";
 import { code1 } from "./config";
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     components: {
         dzsForm,
     },

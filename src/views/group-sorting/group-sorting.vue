@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="分组排序" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法-排序</h2>
             <div class="item">
@@ -22,21 +21,13 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/group-sorting.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
 import groupOrSort from "../../utils/group-sorting";
 import { code1 , code2 , code3 } from "./config";
 export default {
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
-    },
     data() {
         return {
             code1: code1,

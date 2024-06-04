@@ -1,6 +1,5 @@
 <template >
     <div>
-        <dzs-header title="弹窗组件" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -38,7 +37,7 @@
                 <el-button>提交</el-button>
             </template>
         </dzs-dialog>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
@@ -50,14 +49,6 @@ export default {
     components: {
         dzsDialog,
         dzsTable
-    },
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
     },
     data() {
         return {

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="代码编辑器" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -12,7 +11,7 @@
                     href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/calender.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
@@ -21,14 +20,6 @@ import { code1 } from "./config";
 export default {
     components: {
         dzsCodeEditor
-    },
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
     },
     data() {
         return {

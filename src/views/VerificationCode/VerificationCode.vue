@@ -1,13 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-12-26 14:52:36
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:35:36
- * @FilePath: \vue2+js+eui+template\src\views\VerificationCode\VerificationCode.vue
--->
 <template>
     <div>
-        <dzs-header title="canvas生成验证码" v-if="!newIndex"></dzs-header>
         <div class="page" >
             <div class="item">
                 <h2>基本用法</h2>
@@ -43,7 +35,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-verification-code/index.vue">表单组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
@@ -52,14 +44,6 @@ import {code1 , code2} from "./config";
 import {descHeader , descData , descTableOptions} from "./desc";
 export default {
     components:{dzsVerificationCode},
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     data() {
         return {
             myCode : "",

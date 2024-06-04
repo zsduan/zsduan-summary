@@ -1,22 +1,9 @@
-/*
- * @Author: zs.duan
- * @Date: 2022-09-20 13:49:02
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-23 19:40:40
- * @FilePath: \vue2+elui+template\src\router\index.js
- */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/old-index',
-    name: 'Home',
-    component: Home
-  },
   {
     path: '/aboutFather',
     name: 'boutFather',

@@ -1,7 +1,6 @@
 
 <template>
     <div>
-        <dzs-header title="设置html" v-if="!newIndex"></dzs-header>
         <div class="page">
             <div class="tips-box">目前只支持图片适应屏幕模式 其他模式暂时不支持</div>
             <h2>基础用法</h2>
@@ -17,7 +16,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/sethtml.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex">
+        <el-backtop :visibility-height="20">
         </el-backtop>
     </div>
 </template>

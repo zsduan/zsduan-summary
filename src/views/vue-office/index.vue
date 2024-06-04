@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="xlsx/excel读取" v-if="!newIndex"></dzs-header>
         <div class="page">
             <div class="item">
                 <h2>word预览</h2>
@@ -30,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex">
+        <el-backtop :visibility-height="20" >
         </el-backtop>
     </div>
 </template>
@@ -44,14 +43,6 @@ import VueOfficePdf from '@vue-office/pdf';
 const ExcelJS = require('exceljs');
 export default {
     name : "vue-office",
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     components:{
         VueOfficeDocx,
         VueOfficeExcel,

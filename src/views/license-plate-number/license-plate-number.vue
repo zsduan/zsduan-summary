@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="车牌号键盘" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -37,21 +36,13 @@
                     href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-keyboard/index.vue">键盘组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
 import dzsKeyboard from "@/components/dzs-keyboard/index.vue";
 import {descHeader , descData , descTableOptions} from "./desc";
 export default {
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
-    },
     components: {
         dzsKeyboard,
     },

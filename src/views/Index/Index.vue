@@ -1,10 +1,3 @@
-<!--
- * @Author: zs.duan
- * @Date: 2023-01-11 10:44:12
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-15 16:14:37
- * @FilePath: \vue2+js+eui+template\src\views\Index\Index.vue
--->
 <template>
     <div>
         <el-header class="my_header">

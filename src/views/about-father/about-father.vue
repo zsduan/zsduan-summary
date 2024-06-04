@@ -1,11 +1,3 @@
-<!--
- * @Author: zs.duan
- * @Date: 2023-01-23 17:52:47
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-28 21:32:18
- * @FilePath: \vue2+elui+template\src\views\about-father\about-father.vue
--->
-
 <template>
     <div>
         <div class="entryPrice-box">
@@ -13,18 +5,20 @@
                 <el-radio-button label="收入"></el-radio-button>
                 <el-radio-button label="支出"></el-radio-button>
             </el-radio-group>
-            
+
             <el-card class="item" v-if="radio == '收入'">
                 <h1>人情钱 收入一览表</h1>
                 <el-row :gutter="20">
                     <el-col :span="6">
                         <div>
-                            <el-statistic group-separator="," :precision="2" :value="weixinPrice" title="微信收入"></el-statistic>
+                            <el-statistic group-separator="," :precision="2" :value="weixinPrice"
+                                title="微信收入"></el-statistic>
                         </div>
                     </el-col>
                     <el-col :span="6">
                         <div>
-                            <el-statistic group-separator="," :precision="2" :value="notWeixinPrice" title="普通人情收入"></el-statistic>
+                            <el-statistic group-separator="," :precision="2" :value="notWeixinPrice"
+                                title="普通人情收入"></el-statistic>
                         </div>
                     </el-col>
                     <el-col :span="6">
@@ -40,24 +34,12 @@
                 </el-row>
                 <div class="search_box_top">
                     <div></div>
-                    <div class="search_box" :class="is_focus_en ? 'search_focus':''">
+                    <div class="search_box" :class="is_focus_en ? 'search_focus' : ''">
                         <div class="input_box">
-                            <el-input
-                                v-model="searchValueEn"
-                                @input="inputValue('en')"
-                                class="input"
-                                placeholder="Search"
-                                clearable
-                                @focus="is_focus_en = true"
-                                @blur="inputBlur('en')"
-                            >
-                                <el-select
-                                    slot="prepend"
-                                    :disabled="is_focus_en"
-                                    v-model="EnSelect"
-                                    placeholder="请选择搜索方式"
-                                    @change="inputValue('en')"
-                                >
+                            <el-input v-model="searchValueEn" @input="inputValue('en')" class="input"
+                                placeholder="Search" clearable @focus="is_focus_en = true" @blur="inputBlur('en')">
+                                <el-select slot="prepend" :disabled="is_focus_en" v-model="EnSelect"
+                                    placeholder="请选择搜索方式" @change="inputValue('en')">
                                     <el-option key="name" label="送情人姓名" value="name"></el-option>
                                     <el-option key="price" label="送情价格" value="price"></el-option>
                                 </el-select>
@@ -87,7 +69,8 @@
                 <el-row :gutter="20">
                     <el-col :span="6">
                         <div>
-                            <el-statistic group-separator="," :precision="2" :value="outAllPrice" title="共计花费"></el-statistic>
+                            <el-statistic group-separator="," :precision="2" :value="outAllPrice"
+                                title="共计花费"></el-statistic>
                         </div>
                     </el-col>
                     <el-col :span="6">
@@ -108,24 +91,12 @@
                 </el-row>
                 <div class="search_box_top">
                     <div></div>
-                    <div class="search_box" :class="is_focus_out ? 'search_focus':''">
+                    <div class="search_box" :class="is_focus_out ? 'search_focus' : ''">
                         <div class="input_box">
-                            <el-input
-                                v-model="searchValueOut"
-                                @input="inputValue('out')"
-                                class="input"
-                                placeholder="Search"
-                                clearable
-                                @focus="is_focus_out = true"
-                                @blur="inputBlur('out')"
-                            >
-                                <el-select
-                                    slot="prepend"
-                                    :disabled="is_focus_out"
-                                    v-model="OutSelect"
-                                    placeholder="请选择搜索方式"
-                                    @change="inputValue('out')"
-                                >
+                            <el-input v-model="searchValueOut" @input="inputValue('out')" class="input"
+                                placeholder="Search" clearable @focus="is_focus_out = true" @blur="inputBlur('out')">
+                                <el-select slot="prepend" :disabled="is_focus_out" v-model="OutSelect"
+                                    placeholder="请选择搜索方式" @change="inputValue('out')">
                                     <el-option key="name" label="事件名称/人物名称" value="name"></el-option>
                                     <el-option key="price" label="支出价格" value="price"></el-option>
                                 </el-select>
@@ -162,7 +133,7 @@ export default {
             radio: "收入",
             weixinPrice: 0,
             notWeixinPrice: 0,
-            outAllPrice : 0 , 
+            outAllPrice: 0,
         };
     },
     mounted() {
@@ -194,13 +165,13 @@ export default {
                 });
             }
         },
-        init(){
-            let weixin = entryPrice.filter(item => {return item.is_weixin});
+        init() {
+            let weixin = entryPrice.filter(item => { return item.is_weixin });
             this.weixinPrice = 0;
             weixin.forEach(element => {
                 this.weixinPrice += element.price;
             });
-            let NotWeixin = entryPrice.filter(item => {return !item.is_weixin});
+            let NotWeixin = entryPrice.filter(item => { return !item.is_weixin });
             this.notWeixinPrice = 0;
             NotWeixin.forEach(element => {
                 this.notWeixinPrice += element.price;
@@ -218,17 +189,21 @@ export default {
     width: 1200px;
     margin: 0 auto;
     padding-bottom: 30px;
+
     .radio-group {
         padding-top: 30px;
     }
+
     h1 {
         font-size: 30px;
         padding: 10px 0;
         text-align: center;
     }
+
     .item {
         margin-top: 40px;
     }
+
     .search_box {
         background-color: #d1d0d06b;
         border-radius: 20px;
@@ -241,17 +216,21 @@ export default {
         padding-right: 10px;
         transition: all 0.3s;
         margin-left: 20px;
+
         /deep/.el-select {
             width: 160px;
         }
+
         /deep/.el-input-group__prepend {
             border: 0;
             background: transparent;
         }
+
         /deep/.el-input__suffix {
             // top: 50%;
             display: none;
         }
+
         .input {
             width: 80%;
             height: 36px;
@@ -271,6 +250,7 @@ export default {
         width: 500px;
         padding-right: 20px;
     }
+
     .search_box_top {
         padding: 10px 0;
         display: flex;

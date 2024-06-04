@@ -1,6 +1,5 @@
 <template>
     <div class="large-screen-page" :style="backImg">
-        <dzs-header title="大屏抽奖" v-if="!newIndex"></dzs-header>
         <div class="full-screen" @click="fullScreen">
             <i class="el-icon-full-screen" :style="{ 'font-size': iconSize + 'px' }"></i>
         </div>
@@ -71,14 +70,6 @@
 <script>
 export default {
     name: "large-screen-lottery",
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
-    },
     data() {
         return {
             backImg: {

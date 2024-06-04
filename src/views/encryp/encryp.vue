@@ -1,13 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-11-22 17:33:31
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:31:58
- * @FilePath: \vue2+js+eui+template\src\views\encryp\encryp.vue
--->
 <template>
     <div>
-        <dzs-header title="对称加密/解密/MD5加密" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>对称加密 普通文本</h2>
             <div class="item">
@@ -59,21 +51,13 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/encryp.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
 import {ACEencrypt , ACEdecrypt , MD5} from "@/utils/encryp";
 import {code1 , code2 , code3 , code4  , code5} from "./config" 
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     data(){
         return {
             Text1 : "我是加密的文本",

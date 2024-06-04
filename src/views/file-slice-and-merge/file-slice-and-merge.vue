@@ -1,13 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-11-25 17:20:17
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-31 11:53:26
- * @FilePath: \vue2+elui+template\src\views\file-slice-and-merge\file-slice-and-merge.vue
--->
 <template>
     <div>
-        <dzs-header title="vue动态路由" v-if="!newIndex"></dzs-header>
         <div class="page">
             <div class="tips-box">大文件的切片和分割</div>
             <h2>切片</h2>
@@ -37,21 +29,13 @@
 
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
 import { code1, code2 } from "./config";
 import fileSliceMerge from "../../utils/file-slice-and-merge"
 export default {
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
-    },
     data() {
         return {
             code1: code1,

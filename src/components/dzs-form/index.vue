@@ -287,7 +287,7 @@ export default {
         height: {
             type: String,
             default: () => {
-                return "500px"
+                return "100%"
             }
         },  
     },

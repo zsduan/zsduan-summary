@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="滑动验证" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
@@ -21,7 +20,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-slide-verification/index.vue">滑动验证组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
@@ -29,14 +28,6 @@ import dzsSlideVerification from "@/components/dzs-slide-verification/index.vue"
 import {code1} from "./config";
 import {descHeader , descData , descTableOptions} from "./desc";
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     components:{
         dzsSlideVerification
     },

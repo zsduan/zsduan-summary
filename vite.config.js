@@ -1,10 +1,3 @@
-/*
- * @Author: zs.duan
- * @Date: 2022-12-26 17:41:59
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 17:32:48
- * @FilePath: \vue2+js+eui+template\vite.config.js
- */
 /* eslint-disable */
 import legacyPlugin from '@vitejs/plugin-legacy';
 import * as path from 'path';

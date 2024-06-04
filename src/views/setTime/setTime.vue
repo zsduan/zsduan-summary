@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="处理时间" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>格式化时间</h2>
             <div class="item">
@@ -37,7 +36,7 @@
                 <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/utils/format-time.js">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
@@ -46,14 +45,6 @@ import {code1 , code2 , code3 , code4 , code5 , code6} from "./config";
 import {formatTime , asyncFormatTime , chainFormatTime} from "../../utils/format-time";
 import {setTime} from "../../utils/format-time";
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
     components:{
         dzsForm
     },

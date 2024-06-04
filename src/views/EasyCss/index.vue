@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="好用的css" v-if="!newIndex"></dzs-header>
         <div class="search-box">
             <div class="left"></div>
             <div class="right">
@@ -20,21 +19,13 @@
                 <dzs-code title="代码片段" :value="item.code"></dzs-code>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
 import { blurSearch } from "@/utils/blurSearch.js";
 import { code1 , code2 } from "./config";
 export default{
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
-    },
     data(){
         return {
             list : [

@@ -1,13 +1,5 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-11-29 15:31:38
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-11 15:30:52
- * @FilePath: \vue2+js+eui+template\src\views\button-border\button-border.vue
--->
 <template>
     <div>
-        <dzs-header title="按钮旋转动画" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>基础动画样式样式</h2>
             <div class="item">
@@ -33,35 +25,28 @@
             </div>
             <h2>源代码下载/查看</h2>
             <div class="item">
-                <a target="_blank" href="https://github.com/zsduan/zsduan-summary/blob/master/src/views/button-border.vue">下载/查看地址</a>
+                <a target="_blank"
+                    href="https://github.com/zsduan/zsduan-summary/blob/master/src/views/button-border.vue">下载/查看地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20"></el-backtop>
     </div>
 </template>
 <script>
-import {code1 , code2 , code3 , code4} from "./config"
+import { code1, code2, code3, code4 } from "./config"
 export default {
-    props:{
-        newIndex : {
-            type : Boolean,
-            default:()=>{
-                return false
-            }
-        }
-    },
-    data(){
-        return{
-            code1 : code1,
-            code2 : code2,
-            code3 : code3,
-            code4 : code4,
+    data() {
+        return {
+            code1: code1,
+            code2: code2,
+            code3: code3,
+            code4: code4,
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.btn{
+.btn {
     width: 150px;
     height: 50px;
     text-align: center;
@@ -71,7 +56,8 @@ export default {
     z-index: 3;
     overflow: hidden;
     background: #fff;
-    &::before{
+
+    &::before {
         content: " ";
         position: absolute;
         background: var(--ThemeColor);
@@ -80,11 +66,12 @@ export default {
         z-index: -2;
         left: 50%;
         top: 50%;
-        transform-origin: 0 0 ;
+        transform-origin: 0 0;
         animation: rotate 3s infinite linear;
     }
-    &::after{
-        content:"";
+
+    &::after {
+        content: "";
         width: calc(150px - 5px);
         height: calc(50px - 5px);
         position: absolute;
@@ -96,7 +83,7 @@ export default {
     }
 }
 
-.circular{
+.circular {
     width: 150px;
     height: 150px;
     text-align: center;
@@ -106,7 +93,8 @@ export default {
     z-index: 3;
     overflow: hidden;
     background: #fff;
-    &::before{
+
+    &::before {
         content: " ";
         position: absolute;
         background: var(--ThemeColor);
@@ -115,11 +103,12 @@ export default {
         z-index: -2;
         left: 50%;
         top: 50%;
-        transform-origin: 0 0 ;
+        transform-origin: 0 0;
         animation: rotate 2s infinite linear;
     }
-    &::after{
-        content:"";
+
+    &::after {
+        content: "";
         width: calc(150px - 5px);
         height: calc(150px - 5px);
         position: absolute;
@@ -130,22 +119,24 @@ export default {
         border-radius: 50%;
     }
 }
+
 @keyframes rotate {
-    to{
+    to {
         transform: rotate(1turn);
     }
 }
 
-.taiji{
+.taiji {
     width: 200px;
     height: 200px;
     outline: 3px solid #000;
     border-radius: 50%;
-    background: linear-gradient(to right,#fff 50%,#000 50%);
+    background: linear-gradient(to right, #fff 50%, #000 50%);
     position: relative;
     z-index: 2;
     animation: rotate 2s infinite linear;
-    .top{
+
+    .top {
         width: calc(200px / 2);
         height: calc(200px / 2);
         background: #fff;
@@ -154,7 +145,8 @@ export default {
         left: 25%;
         top: 0;
         z-index: -1;
-        &::after{
+
+        &::after {
             content: "";
             display: block;
             width: calc(200px / 6);
@@ -164,10 +156,11 @@ export default {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50% , -50%);
+            transform: translate(-50%, -50%);
         }
     }
-    .bottom{
+
+    .bottom {
         width: calc(200px / 2);
         height: calc(200px / 2);
         background: #000;
@@ -176,7 +169,8 @@ export default {
         left: 25%;
         bottom: 0;
         z-index: -1;
-        &::after{
+
+        &::after {
             content: "";
             display: block;
             width: calc(200px / 6);
@@ -186,9 +180,9 @@ export default {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50% , -50%);
+            transform: translate(-50%, -50%);
         }
     }
-    
+
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dzs-header title="表单组件" v-if="!newIndex"></dzs-header>
         <div class="page">
             <h2>电脑端</h2>
             <div class="item">
@@ -47,7 +46,7 @@
                     href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-form/index.vue">表单组件下载地址</a>
             </div>
         </div>
-        <el-backtop :visibility-height="20" v-if="!newIndex"></el-backtop>
+        <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
@@ -57,14 +56,6 @@ import {descHeader , descData , descTableOptions} from "./desc";
 export default {
     components: {
         dzsForm
-    },
-    props: {
-        newIndex: {
-            type: Boolean,
-            default: () => {
-                return false
-            }
-        }
     },
     computed: {
         formOptions() {

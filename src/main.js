@@ -16,9 +16,6 @@ Vue.use(mavonEditor);
 
 Vue.config.productionTip = false;
 
-import dzsHeader from "@/components/dzs-header/index.vue"
-Vue.component("dzsHeader", dzsHeader);
-
 import dzsCode from "@/components/dzs-code/index.vue"
 Vue.component("dzsCode", dzsCode);
 

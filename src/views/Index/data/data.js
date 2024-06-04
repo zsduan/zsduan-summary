@@ -28,20 +28,15 @@ const MenuList = [
             }
         ]
     },
-    // {
-    //     menu : "关于我",
-    //     list : [],
-    //     herf : "",
-    // },
+    {
+        menu : "关于我",
+        list : [],
+        herf : "https://anran233.com/aboutme",
+    },
     {
         menu : "面试题",
         list : [],
         herf : "https://www.html5iq.com/5fe8029ca1fe3d72b82e0b45.html",
-    },
-    {
-        menu : "切换旧版",
-        list : [],
-        herf : "/old-index",
     },
 ]
 
