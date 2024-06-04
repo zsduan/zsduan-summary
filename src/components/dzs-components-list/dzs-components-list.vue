@@ -1,48 +1,49 @@
 <template>
     <div v-if="type" class="dzs-components-list-box">
-        <popup v-if="type == '/Popup'" :newIndex="true"></popup>
-        <mytable v-else-if="type == '/table'" :newIndex="true"></mytable>
-        <myedit v-else-if="type == '/edit'" :newIndex="true"></myedit>
-        <mymarkdown v-else-if="type == '/markdown'" :newIndex="true"></mymarkdown>
-        <myform v-else-if="type == '/form'" :newIndex="true"></myform>
-        <formWidth v-else-if="type == '/formWidth'" :newIndex="true"></formWidth>
-        <licensePlateNumber v-else-if="type == '/licensePlateNumber'" :newIndex="true"></licensePlateNumber>
-        <verificationCode v-else-if="type == '/VerificationCode'" :newIndex="true"></verificationCode>
-        <slide-verification v-else-if="type == '/slide-verification'" :newIndex="true"></slide-verification>
-        <setTime v-else-if="type == '/setTime'" :newIndex="true"></setTime>
-        <debounce v-else-if="type == '/debounce'" :newIndex="true"></debounce>
-        <listOpen v-else-if="type == '/listOpen'" :newIndex="true"></listOpen>
-        <guid v-else-if="type == '/guid'" :newIndex="true"></guid>
-        <themeColor v-else-if="type == '/ThemeColor'" :newIndex="true"></themeColor>
-        <ua v-else-if="type == '/ua'" :newIndex="true"></ua>
-        <time-difference v-else-if="type == '/timeDifference'" :newIndex="true"></time-difference>
-        <calender v-else-if="type == '/calender'" :newIndex="true"></calender>
-        <readeXlsx v-else-if="type == '/readeXlsx'" :newIndex="true"></readeXlsx>
-        <readeWord v-else-if="type == '/readeWord'" :newIndex="true"></readeWord>
-        <signalR v-else-if="type == '/signalR'" :newIndex="true"></signalR>
-        <myNotification v-else-if="type == '/myNotification'" :newIndex="true"></myNotification>
-        <blurSearch v-else-if="type == '/blurSearch'" :newIndex="true"></blurSearch>
-        <myRouter v-else-if="type == '/myRouter'" :newIndex="true"></myRouter>
-        <encryp v-else-if="type == '/encryp'" :newIndex="true"></encryp>
-        <is-wx-Alipay v-else-if="type == '/is-wx-Alipay'" :newIndex="true"></is-wx-Alipay>
-        <file-slice-and-merge v-else-if="type == '/file-slice-and-merge'" :newIndex="true"></file-slice-and-merge>
-        <myCopy v-else-if="type == '/myCopy'" :newIndex="true"></myCopy>
-        <drag v-else-if="type == '/drag'" :newIndex="true"></drag>
-        <button-border v-else-if="type == '/button-border'" :newIndex="true"></button-border>
-        <easyJS v-else-if="type == '/EasyJS'" :newIndex="true"></easyJS>
-        <binary-tree v-else-if="type == '/binary-tree'" :newIndex="true"></binary-tree>
-        <multiplicationTable v-else-if="type == '/99-multiplication-table'" :newIndex="true"></multiplicationTable>
-        <setHtml v-else-if="type == '/setHtml'" :newIndex="true"></setHtml>
-        <qr-code v-else-if="type == '/qr-code'" :newIndex="true"></qr-code>
-        <easy-css v-else-if="type == '/EasyCss'" :newIndex="true"></easy-css>
-        <watermark v-else-if="type == '/watermark'" :newIndex="true"></watermark>
-        <notice-bar v-else-if="type == '/notice-bar'" :newIndex="true"></notice-bar>
-        <code-editor v-else-if="type == '/code-editor'" :newIndex="true"></code-editor>
-        <group-sorting v-else-if="type == '/group-sorting'" :newIndex="true"></group-sorting>
-        <vue-office v-else-if="type == '/vue-office'" :newIndex="true"></vue-office>
-        <large-screen-lottery v-else-if="type == '/big-screen-draw'" :newIndex="true"></large-screen-lottery>
+        <popup v-if="type == '/Popup'"></popup>
+        <mytable v-else-if="type == '/table'"></mytable>
+        <myedit v-else-if="type == '/edit'"></myedit>
+        <mymarkdown v-else-if="type == '/markdown'"></mymarkdown>
+        <myform v-else-if="type == '/form'"></myform>
+        <formWidth v-else-if="type == '/formWidth'"></formWidth>
+        <licensePlateNumber v-else-if="type == '/licensePlateNumber'"></licensePlateNumber>
+        <verificationCode v-else-if="type == '/VerificationCode'"></verificationCode>
+        <slide-verification v-else-if="type == '/slide-verification'"></slide-verification>
+        <setTime v-else-if="type == '/setTime'"></setTime>
+        <debounce v-else-if="type == '/debounce'"></debounce>
+        <listOpen v-else-if="type == '/listOpen'"></listOpen>
+        <guid v-else-if="type == '/guid'"></guid>
+        <themeColor v-else-if="type == '/ThemeColor'"></themeColor>
+        <ua v-else-if="type == '/ua'"></ua>
+        <time-difference v-else-if="type == '/timeDifference'"></time-difference>
+        <calender v-else-if="type == '/calender'"></calender>
+        <readeXlsx v-else-if="type == '/readeXlsx'"></readeXlsx>
+        <readeWord v-else-if="type == '/readeWord'"></readeWord>
+        <signalR v-else-if="type == '/signalR'"></signalR>
+        <myNotification v-else-if="type == '/myNotification'"></myNotification>
+        <blurSearch v-else-if="type == '/blurSearch'"></blurSearch>
+        <myRouter v-else-if="type == '/myRouter'"></myRouter>
+        <encryp v-else-if="type == '/encryp'"></encryp>
+        <is-wx-Alipay v-else-if="type == '/is-wx-Alipay'"></is-wx-Alipay>
+        <file-slice-and-merge v-else-if="type == '/file-slice-and-merge'"></file-slice-and-merge>
+        <myCopy v-else-if="type == '/myCopy'"></myCopy>
+        <drag v-else-if="type == '/drag'"></drag>
+        <button-border v-else-if="type == '/button-border'"></button-border>
+        <easyJS v-else-if="type == '/EasyJS'"></easyJS>
+        <binary-tree v-else-if="type == '/binary-tree'"></binary-tree>
+        <multiplicationTable v-else-if="type == '/99-multiplication-table'"></multiplicationTable>
+        <setHtml v-else-if="type == '/setHtml'"></setHtml>
+        <qr-code v-else-if="type == '/qr-code'"></qr-code>
+        <easy-css v-else-if="type == '/EasyCss'"></easy-css>
+        <watermark v-else-if="type == '/watermark'"></watermark>
+        <notice-bar v-else-if="type == '/notice-bar'"></notice-bar>
+        <code-editor v-else-if="type == '/code-editor'"></code-editor>
+        <group-sorting v-else-if="type == '/group-sorting'"></group-sorting>
+        <vue-office v-else-if="type == '/vue-office'"></vue-office>
+        <large-screen-lottery v-else-if="type == '/big-screen-draw'"></large-screen-lottery>
+        <public-button v-else-if="type == '/public-button'"></public-button>
         <div v-else class="empty-list">
-            <el-empty  description="页面开发中~"></el-empty>
+            <el-empty description="页面开发中~"></el-empty>
         </div>
     </div>
 </template>
@@ -87,10 +88,10 @@ import codeEditor from "@/views/code-editor/code-editor.vue";
 import groupSorting from "@/views/group-sorting/group-sorting.vue";
 import vueOffice from "@/views/vue-office/index.vue";
 import largeScreenLottery from "@/views/large-screen-lottery/large-screen-lottery.vue";
-
+import publicButton from "@/views/public-button/index.vue";
 export default {
-    name : "dzs-components-list",
-    components:{
+    name: "dzs-components-list",
+    components: {
         Popup,
         Mytable,
         Myedit,
@@ -131,11 +132,12 @@ export default {
         groupSorting,
         vueOffice,
         largeScreenLottery,
+        publicButton
     },
-    props : {
-        type : {
-            type : String,
-            default : ()=>{
+    props: {
+        type: {
+            type: String,
+            default: () => {
                 return ""
             }
         }
@@ -143,14 +145,25 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.empty-list{
+.empty-list {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
 }
-.dzs-components-list-box{
+
+.dzs-components-list-box {
     width: 100%;
     height: 100%;
+    // 隐藏滚动条
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    scrollbar-width: none;
+
+    /* Firefox */
+    &::-webkit-scrollbar {
+        /* Chrome Safari */
+        display: none;
+    }
 }
 </style>

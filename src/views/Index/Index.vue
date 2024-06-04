@@ -12,8 +12,7 @@
                             text-color="#333"
                             background-color="#f9f9f9"
                             mode="horizontal"
-                            @select="handleSelect"
-                        >
+                            @select="handleSelect">
                             <template v-for="(item , index) in menuList">
                                 <template v-if="!item.list.length">
                                     <el-menu-item :index="(index + 1).toString()" :key="index">

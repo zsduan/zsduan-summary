@@ -6,23 +6,23 @@
             <el-button slot="reference" type="primary" icon="el-icon-upload2">导入</el-button>
         </el-popover>
         <el-button v-if="getRules('delete')" type="danger" icon="el-icon-delete" :disabled="isBatchDelete"
-            @click="batchDelete">{{ $t('global.deleteAll') }}</el-button>
+            @click="batchDelete">删除全部</el-button>
         <el-button v-if="getRules('export')" type="primary" icon="el-icon-download" @click="exportMethod('export')">
-           导出
+            导出
         </el-button>
-        <el-dropdown v-if="getRules(['export-all','export-current','export-select' ])">
+        <el-dropdown v-if="getRules(['export-all', 'export-current', 'export-select'])">
             <el-button type="primary" icon="el-icon-download">
                 <span>导出</span>
                 <i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item >
+                <el-dropdown-item>
                     <div @click="exportMethod('exportAll')">导出全部</div>
                 </el-dropdown-item>
-                <el-dropdown-item >
+                <el-dropdown-item>
                     <div @click="exportMethod('exportCurrent')">导出当前页面</div>
                 </el-dropdown-item>
-                <el-dropdown-item >
+                <el-dropdown-item>
                     <div @click="exportMethod('exportSelect')">导出选中</div>
                 </el-dropdown-item>
             </el-dropdown-menu>
@@ -54,32 +54,33 @@ export default {
         /**
          * 规则
          * @param {Array} rules add|import|export|export-all|export-current|export-select|delete
-         * */ 
+         * */
         rules: {
             type: Array,
             default: () => {
-                return ['add','import' , 'export-all', 'export-current', 'export-select', 'delete']
+                return ['add', 'import', 'export', 'export-all', 'export-current', 'export-select', 'delete']
             }
         }
     },
     components: {
         dzsUploadFile
     },
-    computed:{
-        myRules(){
+    computed: {
+        myRules() {
             return this.rules
         }
     },
     methods: {
         /**文件上传*/
         changeFile(fileList) {
-            this.$emit('change-file', fileList)
+            this.$emit('change-file', fileList);
+            this.$emit('changeFile', fileList)
         },
         /**批量删除*/
         batchDelete() {
-            this.$confirm(this.$t('global.deleteTips'), this.$t('global.prompt'), {
-                confirmButtonText: this.$t('global.confirm'),
-                cancelButtonText: this.$t('global.cancel'),
+            this.$confirm("是否要删除这些内容", "确认删除", {
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
                 type: 'warning'
             }).then(() => {
                 this.$emit('batch-delete');
@@ -102,15 +103,20 @@ export default {
                 })
             }
             return this.myRules.includes(name)
-        } 
+        }
     }
 }
 </script>
 <style lang="less" scoped>
 .dzs-header-btn-box {
     display: flex;
-    margin: 10px 0;
     margin-left: 0;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+
+    .el-button {
+        margin-top: 10px;
+    }
 
     &.left {
         justify-content: flex-start;
@@ -130,6 +136,14 @@ export default {
 
     /deep/.el-popover__reference-wrapper {
         margin: 0 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dzs-header-btn-box {
+        .el-button {
+            margin-top: 10px;
+        }
     }
 }
 </style>

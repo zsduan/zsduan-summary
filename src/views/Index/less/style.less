@@ -169,6 +169,16 @@
 .el-main {
     color: #333;
     position: relative;
+    // 隐藏滚动条
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    scrollbar-width: none;
+
+    /* Firefox */
+    &::-webkit-scrollbar {
+        /* Chrome Safari */
+        display: none;
+    }
 
     .welcome {
         font-size: 30px;

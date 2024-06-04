@@ -71,6 +71,11 @@ export const componentsList = [
         title : "消息通知栏",
         path : "/notice-bar",
         is_show : true
+    },
+    {
+        title : "表单公共按钮",
+        path : "/public-button",
+        is_show : true
     }
 ]
 

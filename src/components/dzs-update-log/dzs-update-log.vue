@@ -3,6 +3,16 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.7</h2>
+                <div class="time">2024-6-4</div>
+            </div>
+            <div class="content">
+                <p>1. 新增表单头部公共按钮组件 见/?type=%2Fpublic-button</p>
+                <p>2. 删除了旧版本首页</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.6</h2>
                 <div class="time">2024-6-3</div>
             </div>

@@ -358,5 +358,14 @@
         "page" : "large-screen-lottery/large-screen-lottery",
         "isShow" : true,
         "children" : []
+    },
+    {
+        "ID" : "20240604145119",
+        "PID" : null ,
+        "title" : "表单公共按钮",
+        "pathName" : "public-button",
+        "page" : "public-button/index",
+        "isShow" : true,
+        "children" : []
     }
 ]

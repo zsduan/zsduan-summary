@@ -145,6 +145,14 @@
 .el-main {
   color: #333;
   position: relative;
+  -ms-overflow-style: none;
+  /* IE 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.el-main::-webkit-scrollbar {
+  /* Chrome Safari */
+  display: none;
 }
 .el-main .welcome {
   font-size: 30px;

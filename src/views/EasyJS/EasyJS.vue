@@ -10,13 +10,13 @@
         <div class="page" v-if="!searchList.length">
             <div class="item" v-for="(item,index) in list" :key="index">
                 <h2>{{item.name}}</h2>
-                <dzs-code title="代码片段" :value="item.code"></dzs-code>
+                <dzs-code title="代码片段" :value="item.code" :open="true"></dzs-code>
             </div>
         </div>
         <div class="page" v-else>
             <div class="item" v-for="(item,index) in searchList" :key="index">
                 <h2>{{item.name}}</h2>
-                <dzs-code title="代码片段" :value="item.code"></dzs-code>
+                <dzs-code title="代码片段" :value="item.code" :open="true"></dzs-code>
             </div>
         </div>
         <el-backtop :visibility-height="20" ></el-backtop>
