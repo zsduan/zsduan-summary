@@ -71,6 +71,8 @@ export const formatTime = function (options) {
     }
     if(typeof options.date == 'string'){
         options.date = options.date.replace(/-/g , '/');
+        options.date = options.date.replace(/T/g , ' ');
+        options.date = options.date.substr(0 , 19);
     }
     let option = {
         format: "yyyy-MM-dd HH:mm:ss",
@@ -148,6 +150,11 @@ export const asyncFormatTime = function (options = {}) {
 export function chainFormatTime(time){
     let returnTime = "";
     if(!time)time = new Date();
+    if(typeof time == 'string'){
+        time = time.replace(/-/g , '/');
+        time = time.replace(/T/g , ' ');
+        time = time.substr(0 , 19);
+    }
     try {
         time = new Date(time);
     }catch (error) {
@@ -305,9 +312,13 @@ function _diff(options , callback){
     if(!options.endDate)options.endDate = new Date();
     if(options.startDate && typeof options.startDate == 'string'){
         options.startDate = options.startDate.replace(/-/g, "/"); 
+        options.startDate = options.startDate.replace(/T/g , ' ');
+        options.startDate = options.startDate.substr(0 , 19);
     }
     if(options.endDate && typeof options.endDate == 'string'){
         options.endDate = options.endDate.replace(/-/g, "/"); 
+        options.endDate = options.endDate.replace(/T/g , ' ');
+        options.endDate = options.endDate.substr(0 , 19);
     }
     try {
         options.startDate = new Date(options.startDate);
@@ -347,6 +358,8 @@ function _last(options , callback){
     if(!options.type)options.type = 'day';
     if(options.date && typeof options.date == 'string'){
         options.date = options.date.replace(/-/g, "/"); 
+        options.date = options.date.replace(/T/g , ' ');
+        options.date = options.date.substr(0 , 19);
     }
     try {
         options.date = new Date(options.date);
@@ -379,10 +392,16 @@ function _last(options , callback){
 /**获取日期是星期几*/
 function _week(date , callback){
     const weekList = ['日','一','二','三','四','五','六'];
-    if(!date)date = new Date();
-    if(typeof date == 'string'){
-        date = date.replace(/-/g, "/");
+    if(typeof date == 'function'){
+        callback = date;
+        date = null;
     }
+    if(options.date && typeof date == 'string'){
+        date = date.replace(/-/g, "/");
+        date = date.replace(/T/g , ' ');
+        date = date.substr(0 , 19);
+    }
+    if(!date)date = new Date();
     try {
         date = new Date(date);
     }catch (error) {
@@ -408,6 +427,8 @@ function _day(options , callback){
     if(!options.type)options.type = 'year';
     if(options.date && typeof options.date == 'string'){
         options.date = options.date.replace(/-/g, "/"); 
+        options.date = options.date.replace(/T/g , ' ');
+        options.date = options.date.substr(0 , 19);
     }
     try {
         options.date = new Date(options.date);
@@ -454,6 +475,9 @@ function _leapYear(date , callback){
     if(!date)date = new Date();
     if(typeof date == 'string'){
         date = date.replace(/-/g, "/");
+        date = date.replace(/T/g , ' ');
+        date = date.substr(0 , 4);
+        date = Number(date);
     }
     if(date.length == 4 || typeof date == 'number'){
         date = date + '/01/01';

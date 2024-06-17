@@ -73,7 +73,7 @@ export default {
             },
         },
         value: {
-            type: Array,
+            type: Array | String,
             default: () => {
                 return [];
             },
@@ -122,7 +122,16 @@ export default {
     watch: {
         value:{
             handler(val){
-                this.fileList = val;
+                if(typeof val == "string"){
+                    this.fileList = val ? {
+                        uid : new Date().getTime(),
+                        url : val,
+                        status : "success",
+                        fromItem : "upload-img",
+                    } : [];
+                }else{
+                    this.fileList = val;
+                }
             },
             deep:true,
             immediate:true,
