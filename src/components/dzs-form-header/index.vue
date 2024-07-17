@@ -5,7 +5,7 @@
             <!-- 自定义头部 -->
             <el-row :gutter="gutter">
                 <template v-for="(item, index) in formItem">
-                    <el-col :span="item.span ? item.span : 6" :key="index" v-if="!item.isHidden">
+                    <el-col v-show="item.isShow" :span="item.span ? item.span : 6" :key="index" v-if="!item.isHidden">
                         <!-- 自定义组件 -->
                         <template v-if="item.isSlot">
                             <slot :name="item.key"></slot>
@@ -91,7 +91,11 @@
                             <el-button class="btn" type="primary" :icon="btnIcon" @click.stop="submit('dzsForm')">
                                 {{ submitText }}
                             </el-button>
-                            <el-button type="info" @click.stop="Reset" class="btn cancel">{{ resetText }}</el-button>
+                            <el-button @click.stop="Reset" class="btn cancel">{{ resetText }}</el-button>
+                            <el-button v-if="!openItems && spanCount > 18" @click="openItem" type="text">展开<i
+                                    class="el-icon-arrow-down"></i></el-button>
+                            <el-button v-if="openItems && spanCount > 18" @click="retractItem" type="text">收起<i
+                                    class="el-icon-arrow-up"></i></el-button>
                             <slot name="footerBtn"></slot>
                         </div>
                     </el-col>
@@ -226,7 +230,10 @@ export default {
             timer: null, //定时器 防止重复提交
             toolbar: [],
             fromId: `dzsForm${new Date().getTime()}`,
-            btnSpan: 6
+            btnSpan: 6,
+            openItems: false,
+            retractItems: false,
+            spanCount : 0 ,
         };
     },
     watch: {
@@ -455,15 +462,17 @@ export default {
 
         /**赋值*/
         setFormData(data) {
-            this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(data) };
+            if(JSON.stringify(data) == '{}' || !data) return ;
+            this.fromModel = { ...deepCopy(data) };
             // 避免数据未加载完毕时，数据未赋值
             setTimeout(() => {
-                this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(data) };
+                this.fromModel = { ...deepCopy(data) };
             }, 100)
         },
         /**监听form-box宽度变化*/
         listenFormBoxWidth() {
             const resizeObserver = new ResizeObserver(entries => {
+                let spanCount = 0;
                 for (let entry of entries) {
                     const { width } = entry.contentRect;
                     this.formBoxWidth = width;
@@ -471,9 +480,16 @@ export default {
                     if (!this.formItem) return;
                     this.formItem.forEach((item) => {
                         // 兼容手机端
-                        item.span = width <= 768 ? 24 : item.span;
+                        item.span = width <= 768 ? 24 : item.span || 6;
+                        spanCount += item.span;
+                        spanCount > 18 ? item.isShow = false : item.isShow = true;
+                        this.openItems ? item.isShow = true : null;
+                        this.retractItems && spanCount > 18 ? item.isShow = false : null;
+                        width < 768 ? item.isShow = true : null;
                     })
+                    width < 768 ? spanCount = 0 : null;
                     this.btnSpan = width <= 765 ? 24 : 6;
+                    this.spanCount = spanCount;
                 }
             })
             resizeObserver.observe(document.querySelector(`#${this.fromId}`));
@@ -482,6 +498,26 @@ export default {
         Reset() {
             this.clearForm();
             this.$emit('onReset', this.fromModel)
+        },
+        /**展开formItem*/
+        openItem() {
+            this.openItems = true;
+            this.formItem.forEach((item) => {
+                item.isShow = true
+            })
+        },
+        /**收起formItem*/
+        retractItem() {
+            let spanCount = 0;
+            this.formItem.forEach((item) => {
+                spanCount += item.span;
+                spanCount > 18 ? item.isShow = false : item.isShow = true;
+            })
+            this.retractItems = true;
+            this.openItems = false;
+            setTimeout(() => {
+                this.retractItems = false;
+            }, 200)
         }
     },
 };
@@ -501,6 +537,9 @@ export default {
         padding-top: 3px;
         line-height: 14px;
     }
+    .el-date-editor{
+        max-width: 100%;
+    }
 }
 
 .phone-form {
@@ -512,12 +551,6 @@ export default {
     .form-sbumit-box {
         display: flex;
         flex-wrap: wrap;
-
-        .cancel {
-            background-color: #fff;
-            border: 1px solid #bbb;
-            color: #666;
-        }
     }
 
     .form-sbumit-box-phone {

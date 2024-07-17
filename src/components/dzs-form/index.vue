@@ -2,7 +2,7 @@
     <div :id="fromId" class="form-box">
         <el-form v-loading="loading" :element-loading-text="loadingText" v-bind="{ ...formProps }" :model="fromModel"
             :rules="fromRules" :label-position="labelPosition" ref="dzsForm"
-            :class="{ ruleForm: true, noScroll: loading, 'phone-form': formBoxWidth <= 768 ,  'form-box-scroll' : isScroll }"
+            :class="{ ruleForm: true, noScroll: loading, 'phone-form': formBoxWidth <= 768, 'form-box-scroll': isScroll }"
             :style="{ height: isScroll ? height : '100%' }">
             <!-- 自定义头部 -->
             <el-row :gutter="gutter">
@@ -77,11 +77,11 @@
 
                                     <!-- 多选框 -->
                                     <template v-if="item.type == 'checkbox'">
-                                        <el-checkbox-group :value="getFromModelValue(item.key)" v-bind="{ ...item.props }" @input="changeVaule($event, item.key)">
+                                        <el-checkbox-group :value="getFromModelValue(item.key)"
+                                            v-bind="{ ...item.props }" @input="changeVaule($event, item.key)">
                                             <el-checkbox class="items" v-for="(option, idx) in item.children"
                                                 v-bind="{ ...option.props }" :key="option.value + idx"
-                                                :label="option.value"
-                                                >
+                                                :label="option.value">
                                                 {{ option.label }}
                                             </el-checkbox>
                                         </el-checkbox-group>
@@ -107,15 +107,16 @@
 
                                     <!-- 上传文件 -->
                                     <template v-if="item.type == 'uploadFile'">
-                                        <dzs-upload-file :isPhone="formBoxWidth <= 768" :value="getFromModelValue(item.key)"
-                                            v-bind="{ ...item.props }"
+                                        <dzs-upload-file :isPhone="formBoxWidth <= 768"
+                                            :value="getFromModelValue(item.key)" v-bind="{ ...item.props }"
                                             @change="changeVaule($event, item.key)"></dzs-upload-file>
                                     </template>
 
                                     <!-- 富文本组件 -->
                                     <template v-if="item.type == 'editor'">
                                         <dzs-editors :toolbar="toolbar" @save="changeVaule($event, item.key)"
-                                            :show_save="false" v-bind="{ ...item.props }" :value="getFromModelValue(item.key)">
+                                            :show_save="false" v-bind="{ ...item.props }"
+                                            :value="getFromModelValue(item.key)">
                                         </dzs-editors>
                                     </template>
 
@@ -289,7 +290,7 @@ export default {
             default: () => {
                 return "100%"
             }
-        },  
+        },
     },
     data() {
         return {
@@ -495,9 +496,11 @@ export default {
         /**初始化数据*/
         initModel(data) {
             this.labelPosition = this.formBoxWidth <= 768 ? "top" : "left";
-            let labelPosition = this.options?.formProps['label-position'] || this.options?.formProps['labelPosition']
-            if (labelPosition) {
-                this.labelPosition = labelPosition;
+            if (this.options && this.options.formProps) {
+                let labelPosition = this.options.formProps['label-position'] || this.options.formProps['labelPosition']
+                if (labelPosition) {
+                    this.labelPosition = labelPosition;
+                }
             }
             this.formProps = data.formProps || {};
             this.formItem = deepCopy(data.formItem);
@@ -581,10 +584,11 @@ export default {
 
         /**赋值*/
         setFormData(data) {
-            this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(data) };
+            if(JSON.stringify(data) == '{}' || !data) return ;
+            this.fromModel = { ...deepCopy(data) };
             // 避免数据未加载完毕时，数据未赋值
             setTimeout(() => {
-                this.fromModel = { ...deepCopy(this.fromModel), ...deepCopy(data) };
+                this.fromModel = { ...deepCopy(data) };
             }, 100)
         },
         /**监听form-box宽度变化*/
@@ -596,13 +600,15 @@ export default {
                     const { width } = entry.contentRect;
                     this.formBoxWidth = width;
                     this.labelPosition = width <= 768 ? "top" : "left";
-                    let labelPosition = this.options?.formProps['label-position'] || this.options?.formProps['labelPosition']
-                    if(labelPosition){
-                        this.labelPosition = labelPosition;
+                    if (this.options && this.options.formProps) {
+                        let labelPosition = this.options.formProps['label-position'] || this.options.formProps['labelPosition']
+                        if (labelPosition) {
+                            this.labelPosition = labelPosition;
+                        }
                     }
                     this.toolbar = width <= 768 ? phoneToolbar : toolbar;
                     this.formItem = deepCopy(this.options.formItem);
-                    if(!this.formItem)return ;
+                    if (!this.formItem) return;
                     this.formItem.forEach((item) => {
                         // 兼容手机端
                         item.span = width <= 768 ? 24 : item.span;
@@ -629,13 +635,14 @@ export default {
     }
 }
 
-.form-box-scroll{
+.form-box-scroll {
     overflow-y: auto;
     -ms-overflow-style: none;
-	/*IE10*/
-	&::-webkit-scrollbar {
-		display: none;
-	}
+
+    /*IE10*/
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .phone-form {

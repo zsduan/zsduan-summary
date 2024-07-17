@@ -42,6 +42,7 @@
         <vue-office v-else-if="type == '/vue-office'"></vue-office>
         <large-screen-lottery v-else-if="type == '/big-screen-draw'"></large-screen-lottery>
         <public-button v-else-if="type == '/public-button'"></public-button>
+        <scroll-to-number v-else-if="type == '/scrollToNumber'"></scroll-to-number>
         <div v-else class="empty-list">
             <el-empty description="页面开发中~"></el-empty>
         </div>
@@ -89,6 +90,7 @@ import groupSorting from "@/views/group-sorting/group-sorting.vue";
 import vueOffice from "@/views/vue-office/index.vue";
 import largeScreenLottery from "@/views/large-screen-lottery/large-screen-lottery.vue";
 import publicButton from "@/views/public-button/index.vue";
+import scrollToNumber from "@/views/scrollToNumber/index.vue"
 export default {
     name: "dzs-components-list",
     components: {
@@ -132,7 +134,8 @@ export default {
         groupSorting,
         vueOffice,
         largeScreenLottery,
-        publicButton
+        publicButton,
+        scrollToNumber
     },
     props: {
         type: {

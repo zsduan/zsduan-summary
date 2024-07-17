@@ -222,6 +222,7 @@ class Time {
      * @param {Date | string | number} [options.date] 时间 默认为当前时间
      * @param {number} [options.num] 需要前后多少天(小时/周) 默认1
      * @param {string} [options.type] 类型 day hour week 默认 day
+     * @param {string} [options.format] 格式化方式 默认 yyyy-MM-dd
      * @param {Function} [callback] 回调函数
      * @returns {Object} 时间信息
      * */ 
@@ -280,7 +281,7 @@ class Time {
 }
 
 /**获取当前时间的年月日 时分秒 时间戳*/
-function _getNowDate(date){
+function _getNowDate(date , format = 'yyyy-MM-dd HH:mm:ss'){
     if(!date)date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -289,7 +290,11 @@ function _getNowDate(date){
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
     let time = date.getTime();
-    return {year,month,day,hour,minutes,seconds ,time}
+    date = formatTime({
+        format : format,
+        date : date
+    })
+    return {year,month,day,hour,minutes,seconds ,time , date}
 } 
 
 /**格式化时间*/ 
@@ -298,9 +303,8 @@ function _format(options , callback){
     if(data.code == -1) return;
     let date = options.date ? new Date(options.date) : new Date();
     callback({
-        ..._getNowDate(date),
-        format : data,
-        date : new Date(options.date)
+        dateInfo:_getNowDate(date),
+        date : data,
     })
     return data
 }
@@ -367,24 +371,43 @@ function _last(options , callback){
         throw new Error('时间格式错误');
     }
     let sendData = {
-        format : "" ,
-        date : null
+        previousDate : "" ,
+        nextDate : "",
+        nowDate : "" ,
+        dateInfo : {}
     }
+    let nextDate = null;
     if(options.type == 'day'){
-        sendData.date = new Date(options.date.setDate(options.date.getDate() + options.num));
-        sendData.format = _formatTime(sendData.date , 'yyyy-MM-dd');
-        Object.assign(sendData , _getNowDate(sendData.date));
+        nextDate = new Date(options.date.setDate(options.date.getDate() + options.num));
+        if(!options.format) options.format = 'yyyy-MM-dd';
+        if(options.num < 0){
+            sendData.previousDate = _formatTime(nextDate , options.format)
+        }else{
+            sendData.nextDate = _formatTime(nextDate , options.format)
+        }
+        sendData.nowDate = _formatTime(options.date , options.format)
     }
     if(options.type == 'hour'){
-        sendData.date = new Date(options.date.setHours(options.date.getHours() + options.num));
-        sendData.format = _formatTime(sendData.date , 'yyyy-MM-dd HH:mm:ss');
-        Object.assign(sendData , _getNowDate(sendData.date));
+        nextDate = new Date(options.date.setHours(options.date.getHours() + options.num));
+        if(!options.format) options.format = 'yyyy-MM-dd HH:mm';
+        if(options.num < 0){
+            sendData.previousDate = _formatTime(nextDate , options.format)
+        }else{
+            sendData.nextDate = _formatTime(nextDate , options.format)
+        }
+        sendData.nowDate = _formatTime(options.date , options.format)
     }
     if(options.type == 'week'){
-        sendData.date = new Date(options.date.setDate(options.date.getDate() + options.num * 7));
-        sendData.format = _formatTime(sendData.date , 'yyyy-MM-dd');
-        Object.assign(sendData , _getNowDate(sendData.date));
+        nextDate = new Date(options.date.setDate(options.date.getDate() + options.num * 7));
+        if(!options.format) options.format = 'yyyy-MM-dd';
+        if(options.num < 0){
+            sendData.previousDate = _formatTime(nextDate , options.format)
+        }else{
+            sendData.nextDate = _formatTime(nextDate , options.format)
+        }
+        sendData.nowDate = _formatTime(options.date , options.format)
     }
+    sendData.dateInfo = _getNowDate(sendData.date)
     callback(sendData);
     return sendData;
 } 
@@ -396,7 +419,7 @@ function _week(date , callback){
         callback = date;
         date = null;
     }
-    if(options.date && typeof date == 'string'){
+    if(date && typeof date == 'string'){
         date = date.replace(/-/g, "/");
         date = date.replace(/T/g , ' ');
         date = date.substr(0 , 19);
@@ -411,7 +434,7 @@ function _week(date , callback){
     let sendData = {
         format : _formatTime(date , 'yyyy-MM-dd') ,
         date : date,
-        ..._getNowDate(date),
+        dateInfo : _getNowDate(date),
         week : weekList[week]
     }
     callback(sendData);
@@ -438,7 +461,7 @@ function _day(options , callback){
     let sendData = {
         format : _formatTime(options.date , 'yyyy-MM-dd') ,
         date : options.date,
-        ..._getNowDate(options.date),
+        dateInfo:_getNowDate(options.date),
         num : 0
     }
     let start = null;
@@ -491,7 +514,7 @@ function _leapYear(date , callback){
     let sendData = {
         format : _formatTime(date , 'yyyy-MM-dd') ,
         date : date,
-        ..._getNowDate(date),
+        dateInfo:_getNowDate(date),
         leapYear : false
     }
     if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){

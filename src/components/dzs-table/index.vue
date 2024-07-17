@@ -22,7 +22,7 @@
                         </el-table-column>
                     </template>
                 </template>
-                <el-table-column v-if="showOperation && operation.length"
+                <el-table-column v-if="showOperation"
                     :class-name="'table-column_' + columnClassName" v-bind="operationOption" label="操作">
                     <template slot-scope="scope">
                         <el-button type="text" class="btn" size="small" v-for="(item, index) in operation" :key="index">

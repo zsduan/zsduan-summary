@@ -190,6 +190,11 @@ export const jsList = [
         title : "分组排序",
         path : "/group-sorting",
         is_show : true
+    },
+    {
+        title : "滚动的数字",
+        path : "/scrollToNumber",
+        is_show : true,
     }
 ]
 

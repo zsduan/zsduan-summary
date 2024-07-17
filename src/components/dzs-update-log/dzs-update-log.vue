@@ -3,6 +3,17 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.8</h2>
+                <div class="time">2024-7-17</div>
+            </div>
+            <div class="content">
+                <p>1. 修复表单组件有时候会卡死的bug</p>
+                <p>2. 修复了表单组件设置了方向还是会失败的bug</p>
+                <p>3. 新增了滚动js /?type=%2FscrollToNumber</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.7</h2>
                 <div class="time">2024-6-4</div>
             </div>
