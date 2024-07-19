@@ -345,7 +345,7 @@ export default {
                         if (item.isNull) delete sendList[item.key];
                         sendList = this.transformKeysToNestedObject(sendList);
                     })
-                    this.$emit("onSubmit", sendList);
+                    this.$emit("onSeach", sendList);
                     this.$emit("update:value", sendList);
                     resolve(sendList);
                 });
@@ -374,12 +374,8 @@ export default {
                         break;
                 }
             });
-            this.$emit("onSubmit", sendList);
+            this.$emit("onSeach", sendList);
             resolve(sendList);
-        },
-        cancel() {
-            this.clearForm();
-            this.$emit("onCancel");
         },
 
         initModel(data) {

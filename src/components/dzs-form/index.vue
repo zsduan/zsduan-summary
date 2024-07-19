@@ -139,7 +139,7 @@
                 </div>
             </el-row>
         </el-form>
-        <div class="form-sbumit-box" v-if="showBtn">
+        <div :class="['form-sbumit-box' , buttonFlex]" v-if="showBtn">
             <el-button type="info" @click.stop="cancel" class="btn cancel">{{ cancelText }}</el-button>
             <slot name="footerBtn"></slot>
             <el-button class="btn" type="primary" @click.stop="submit('dzsForm')">{{ submitText }}</el-button>
@@ -291,6 +291,13 @@ export default {
                 return "100%"
             }
         },
+        /**botton位置*/ 
+        buttonFlex : {
+            type: String,
+            default: () => {
+                return "right"
+            }
+        }
     },
     data() {
         return {
@@ -654,8 +661,16 @@ export default {
     .form-sbumit-box {
         display: flex;
         flex-wrap: wrap;
-        justify-content: right;
         padding: 10px 0;
+        &.right{
+            justify-content: flex-end;
+        }
+        &.left{
+            justify-content: flex-start;
+        }
+        &.center{
+            justify-content: center;
+        }
 
         .cancel {
             background-color: #fff;

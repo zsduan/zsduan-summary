@@ -3,25 +3,25 @@
         <div class="page">
             <h2>基础用法</h2>
             <div class="item">
-                <dzs-form-header :options="formOptions">
+                <dzs-search-form :options="formOptions">
                     <template #mySlot>
                         <el-form-item label="自定义组件" prop="mySlot">
                             <el-button>button</el-button>
                         </el-form-item>
                     </template>
-                </dzs-form-header>
+                </dzs-search-form>
             </div>
             <h2>手机端</h2>
             <div class="item">
                 <div class="is-phone-public">
                     <div class="phone-box">
-                        <dzs-form-header :options="formOptions">
+                        <dzs-search-form :options="formOptions">
                             <template #mySlot>
                                 <el-form-item label="自定义组件" prop="mySlot">
                                     <el-button>button</el-button>
                                 </el-form-item>
                             </template>
-                        </dzs-form-header>
+                        </dzs-search-form>
                     </div>
                 </div>
             </div>
@@ -38,19 +38,19 @@
             <h2>组件源代码下载</h2>
             <div class="item">
                 <a target="_blank"
-                    href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-form-header/index.vue">横向表单组件下载地址</a>
+                    href="https://github.com/zsduan/zsduan-summary/blob/master/src/components/dzs-search-form/index.vue">横向表单组件下载地址</a>
             </div>
         </div>
         <el-backtop :visibility-height="20" ></el-backtop>
     </div>
 </template>
 <script>
-import dzsFormHeader from "../../components/dzs-form-header/index.vue";
+import dzsSearchForm from "../../components/dzs-search-form/index.vue";
 import { code1 } from "./config"
 import { descHeader, descData, descTableOptions } from "./desc";
 export default {
     components: {
-        dzsFormHeader
+        dzsSearchForm
     },
     computed: {
         formOptions() {

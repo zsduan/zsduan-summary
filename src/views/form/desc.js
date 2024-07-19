@@ -250,7 +250,14 @@ export const descData = [
         type : 'props',
         parameterType : 'String',
         desc : '高度',
-        remark : '默认 500px'
+        remark : '默认 100%'
+    },
+    {
+        key : 'buttonFlex',
+        type : 'props',
+        parameterType : 'String',
+        desc : '底部按钮位置',
+        remark : '默认 right  支持 left center right'
     },
     {
         key: "@onSubmit",

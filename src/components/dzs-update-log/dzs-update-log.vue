@@ -3,6 +3,17 @@
         <h1>版本更新日志</h1>
         <div class="item">
             <div class="header-box">
+                <h2>版本号 v2.1.9</h2>
+                <div class="time">2024-7-19</div>
+            </div>
+            <div class="content">
+                <p>1. 横向表单组件更换为搜素表单组件 dzs-search-form</p>
+                <p>2. 搜素表单组件新增展开搜索功能</p>
+                <p>3. 表单组件新增buttonFlex属性 支持定义 底部button的位置</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="header-box">
                 <h2>版本号 v2.1.8</h2>
                 <div class="time">2024-7-17</div>
             </div>
