@@ -1,10 +1,3 @@
-<!--
- * @Author: zs.duan
- * @Date: 2021-12-17 15:23:43
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-03-02 19:34:06
- * @FilePath: \vue2+elui+template\src\components\dzs-editor\index.vue
--->
 <template>
     <div>
         <div class v-if="showEdit" :style="width">
@@ -55,12 +48,12 @@ import "tinymce/plugins/hr"; //水平分割线
 import "tinymce/plugins/preview"; //预览
 import "tinymce/plugins/help"; //帮助
 import "tinymce/plugins/autosave"; //自动保存
-import "tinymce/plugins/importword"; //导入word
+import "./importword"; //导入word
 import "tinymce/plugins/fullscreen"; //全屏
 import "tinymce/plugins/print"; //打印
 
 export default {
-    name: "dzs-editors",
+    name: "dzsEditor",
     model: {
         prop: "value",
         event: "update:value"
@@ -254,7 +247,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .sava-box {
     text-align: right;
     padding-bottom: 10px;

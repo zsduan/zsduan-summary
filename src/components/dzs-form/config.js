@@ -1,11 +1,3 @@
-/*
- * @Author: zs.duan
- * @Date: 2021-12-22 09:31:48
- * @LastEditors: zs.duan
- * @LastEditTime: 2021-12-22 09:31:49
- * @FilePath: \templatef:\我的博客\adminBlog\src\components\from\cinfig.js
- */
-
 export const pickerOptions = {
 	shortcuts: [{
 		text: '最近一周',

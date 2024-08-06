@@ -1,0 +1,51 @@
+export const tableData = [
+    {
+        key: "action",
+        type: "props",
+        parameterType: "String",
+        desc: "上传地址",
+        remark: "",
+    },
+    {
+        key: "limit",
+        type: "props",
+        parameterType: "Number",
+        desc: "上传数量",
+        remark: "默认1",
+    },
+    {
+        key: "maxSize",
+        type: "props",
+        parameterType: "Number",
+        desc: "最大上传大小",
+        remark: "默认5M",
+    },
+    {
+        key: "fileType",
+        type: "props",
+        parameterType: "Array",
+        desc: "文件类型",
+        remark: "默认['doc', 'docx', 'ppt', 'pptx', 'zip', 'rar', 'pdf', 'xls', 'xlsx', 'txt', 'jpg', 'png', 'jpeg']",
+    },
+    {
+        key: "value/v-model",
+        type: "props",
+        parameterType: "Array",
+        desc: "值",
+        remark: "",
+    },
+    {
+        key: "autoUpload",
+        type: "props",
+        parameterType: "Boolean",
+        desc: "是否自动上传",
+        remark: "默认true",
+    },
+    {
+        key: "@change",
+        type: "methods",
+        parameterType: "Function",
+        desc: "改变",
+        remark: "返回所以文件list array",
+    },
+]

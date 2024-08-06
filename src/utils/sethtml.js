@@ -1,12 +1,7 @@
-/*
- * @Author: zs.duan
- * @Date: 2023-02-02 14:36:18
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-02-02 14:36:39
- * @FilePath: \vue2+js+eui+template\src\utils\sethtml.js
- */
 /**
  * 处理html 目前仅支持处理图片
+ * @author zs.duan
+ * @date 2023-02-02
  * @description 将图片的宽度变成 100% 高度自适应
  * @param {object} option 配置文件
  * @description option 数据详情
@@ -24,10 +19,7 @@ const setHtml = (option)=>{
         success : (res)=>{},
         fail : (error)=>{}
     }
-    options = {
-        ...options,
-        ...option
-    }
+    Object.assign(options, option);
     if(!options.html){
         options.fail("html is null")
         return ;

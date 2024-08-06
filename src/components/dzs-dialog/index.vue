@@ -28,12 +28,12 @@
 <script>
 /**
  * 自定义组件弹窗 可以拖动 可以控制大小
- * @props : title 弹窗标题
- * @props : isShow  是否显示
- * @props : width 宽度
- * @props : fullscreen 是否全屏
- * @props : showFullscreen 是否显示全屏按钮
- * @props : options 饿了吗ui原生属性
+ * @props {string} title 弹窗标题
+ * @props {boolean} isShow 是否显示弹窗
+ * @props {string} width 弹窗宽度
+ * @props {object} options 弹窗配置
+ * @props {boolean} fullscreen 是否全屏
+ * @props {boolean} showFullscreen 是否显示全屏按钮
  *
  * @method close 关闭弹窗
  * @method open 打开弹窗
@@ -43,7 +43,7 @@
  */
 import './drag.js' // 弹窗 拖动、放大、缩小
 export default {
-    name: "dzs-dialog",
+    name: "dzsDialog",
     props: {
         title: {
             type: String,
@@ -80,16 +80,16 @@ export default {
             default: () => {
                 return true
             }
-        }
+        },
     },
     data() {
         return {
             is_fullscreen: false,
         };
     },
-    model : {
-        prop : "isShow",
-        event : "update:isShow"
+    model: {
+        prop: "isShow",
+        event: "update:isShow"
     },
     watch: {
         fullscreen: {
@@ -123,7 +123,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .title-box {
     display: flex;
     justify-content: space-between;
@@ -151,4 +151,5 @@ export default {
             height: 18px;
         }
     }
-}</style>
+}
+</style>

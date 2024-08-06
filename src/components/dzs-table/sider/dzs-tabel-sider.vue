@@ -60,7 +60,13 @@ export default {
             default : () =>{
                 return ['search','column','height']
             }
-        }
+        },
+        treeProps : {
+            type : Object,
+            default : ()=>{
+                return {}
+            },
+        },
     },
     computed: {
         returnList() {
@@ -123,21 +129,7 @@ export default {
         list : {
             handler(val){
                 if(this.tableData.length) return;
-                const list = deepCopy(val);
-                // 拉平数据
-                let tableData = [];
-                const setData = (list) =>{
-                    list.forEach((item)=>{
-                        if(item.children && item.children.length){
-                            setData(item.children);
-                            tableData.push(item);
-                        }else{
-                            tableData.push(item);
-                        }
-                    });
-                }
-                setData(list);
-                this.tableData = tableData;
+                this.tableData = deepCopy(val);
             },
             deep : true,
             immediate : true,
@@ -167,9 +159,10 @@ export default {
                 return;
             }
             blurSearch({
-                list : this.tableData,
+                data : this.tableData,
                 key : this.searchSelect,
-                searValue : this.searchValue,
+                value : this.searchValue,
+                children : this.treeProps.children || "",
                 success : (list)=>{
                     this.$emit("search",list);
                 }
@@ -178,11 +171,12 @@ export default {
     }
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .tabel-sider-box {
     width: 30px;
     height: 100%;
-    background-color: var(--ThemeColor01);
+    border: 1px solid #EBEEF5;
+    border-left: 0;
     .el-icon {
         padding: 10px 0;
         text-align: center;

@@ -1,13 +1,7 @@
-/*
- * @Author: zs.duan
- * @Date: 2023-01-15 14:11:32
- * @LastEditors: zs.duan
- * @LastEditTime: 2023-01-27 07:59:05
- * @FilePath: \vue2+elui+template\src\utils\99-multiplication-table.js
- */
-
 /**
  * @name 99乘法表
+ * @author zs.duan
+ * @date 2023-01-15
  * @param {object} option 配置对象
  * @param {Boolean} option.is_empty 是否添加空数组
  * @param {Function} [option.success] 成功返回
@@ -21,7 +15,7 @@
     }
  * 
 */ 
-export const multiplicationTable99 = (option)=>{
+export default function multiplicationTable99 (option){
     let options = {
         is_empty : true, //是否填空数组
         success : (reslut)=>{}

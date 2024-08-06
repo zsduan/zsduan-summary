@@ -22,8 +22,8 @@
                         </el-table-column>
                     </template>
                 </template>
-                <el-table-column v-if="showOperation"
-                    :class-name="'table-column_' + columnClassName" v-bind="operationOption" label="操作">
+                <el-table-column v-if="showOperation" :class-name="'table-column_' + columnClassName"
+                    v-bind="operationOption" label="操作">
                     <template slot-scope="scope">
                         <el-button type="text" class="btn" size="small" v-for="(item, index) in operation" :key="index">
                             <span @click="onEdit(scope.row)" v-if="item == 'edit'">编辑</span>
@@ -42,13 +42,15 @@
                 你还没设置数据显示
             </div>
             <div class="sider-box">
-                <dzs-tabel-sider v-if="showSider" :column="tableHeader" :list="tableData"  @change="onSiderChange"
-                    @changeHeight="changeHeight" @search="siderSearch" :forceSearch="forceSearch" :show-siders="showSiders"></dzs-tabel-sider>
+                <dzs-tabel-sider :treeProps="tableOptions['tree-props']" v-if="showSider" :column="tableHeader" :list="tableData" @change="onSiderChange"
+                    @changeHeight="changeHeight" @search="siderSearch" :forceSearch="forceSearch"
+                    :show-siders="showSiders"></dzs-tabel-sider>
             </div>
         </div>
         <div class="table-footer" v-if="(total > maxSize) && showPage">
             <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                :page-sizes="[maxSize, maxSize * 2, maxSize * 4]"  v-bind="{...paginationSet}" :total="total"></el-pagination>
+                :page-sizes="[maxSize, maxSize * 2, maxSize * 4]" v-bind="{ ...paginationSet }"
+                :total="total"></el-pagination>
         </div>
     </div>
 </template>
@@ -89,7 +91,7 @@ import dzsTabelSider from "./sider/dzs-tabel-sider.vue";
 import defaultProps from "./props";
 import deepCopy from "./deepCopy";
 export default {
-    name: "dzs-table",
+    name: "dzsTable",
     components: {
         dzsTabelSider,
     },
@@ -101,10 +103,10 @@ export default {
                 layout: "total, sizes, prev, pager, next, jumper",
             },
             headerData: [],
-            columnClassName: "" ,
+            columnClassName: "",
             tableData: [],
             tableId: `dzsTable${new Date().getTime()}`,
-            isPhone : false
+            isPhone: false
         };
     },
     watch: {
@@ -115,12 +117,12 @@ export default {
             deep: true,
             immediate: true,
         },
-        list : {
-            handler(val){
+        list: {
+            handler(val) {
                 this.tableData = deepCopy(val);
             },
-            deep : true,
-            immediate : true
+            deep: true,
+            immediate: true
         }
     },
     computed: {
@@ -207,16 +209,16 @@ export default {
             return true;
         },
         /**侧边栏搜索*/
-        siderSearch(list){
+        siderSearch(list) {
             this.tableData = list;
         },
         /**监听form-box宽度变化*/
         listenFormBoxWidth() {
-            let paginationSet =  {
+            let paginationSet = {
                 background: false,
                 layout: "total, sizes, prev, pager, next, jumper",
             }
-            let paginationSetPhone =  {
+            let paginationSetPhone = {
                 background: false,
                 layout: "sizes , total,  prev, next",
             }
@@ -232,41 +234,29 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .table-wrop {
     height: 100%;
     position: relative;
 
     .list-wrop {
-        padding: 0 10px;
+        display: flex;
         overflow-y: scroll;
         -ms-overflow-style: none;
         /* IE 10+ */
         scrollbar-width: none;
-
         /* Firefox */
         &::-webkit-scrollbar {
             /* Chrome Safari */
             display: none;
         }
-
-        display: flex;
-
-        :deep(.el-table th, .el-table tr) {
-            background-color: var(--ThemeColor01);
-            color: #282c33;
-
-            .cell {
-                font-weight: normal;
-            }
-        }
-
         :deep(.el-table__body-wrapper) {
 
             // 滚动条宽度
             &::-webkit-scrollbar {
-                width: 6px;
+                width: 4px;
                 background-color: #fff;
+                display: block;
             }
 
             // 滚动条轨道
@@ -288,14 +278,10 @@ export default {
             // 滚动条滑块
             &::-webkit-scrollbar-thumb {
                 background-color: #e9e7e7;
-                -webkit-border-radius: 2em;
-                -moz-border-radius: 2em;
-                border-radius: 2em;
+                -webkit-border-radius: 1em;
+                -moz-border-radius: 1em;
+                border-radius: 1em;
             }
-        }
-
-        :deep(.el-table__fixed-right-patch) {
-            background-color: #f3f8ff;
         }
 
         :deep(.el-table) {
@@ -314,10 +300,6 @@ export default {
                 }
             }
         }
-    }
-
-    .table {
-        border: 1px solid #ebeef5;
     }
 
     .table-empty {
@@ -353,56 +335,14 @@ export default {
         }
     }
 
-    .operation {
-        cursor: pointer;
-
-        >span {
-            padding-right: 10px;
-            color: var(--ThemeColor);
-
-            span {
-                font-size: 14px;
-            }
-
-            &:last-child {
-                padding-right: 0;
-            }
-        }
-    }
-
     .empty {
         text-align: center;
         padding-top: 10px;
     }
 
-    .scope-span {
-        color: var(--fontColor);
-    }
 
-    :deep(.el-tag--dark) {
-        border-color: transparent;
-        display: inline-block !important;
-        padding: 0 10px;
-        margin: 0 auto;
-    }
-}
-
-.btn {
-    span {
-        color: var(--ThemeColor);
-    }
-
-    :deep(span) {
-        color: var(--ThemeColor);
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .table-wrop {
-        .btn {
-            width: 100%;
-            margin-left: 0;
-        }
+    .btn {
+        margin-left: 10px;
     }
 }
 </style>

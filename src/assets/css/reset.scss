@@ -1,0 +1,144 @@
+div,p,span,ul,ol,li,h1,h2,h3,h4,h5,header,main,footer,section,body{
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+div{
+	word-break:break-all;
+}
+
+li {
+	list-style: none;
+}
+
+input {
+	outline: none;
+	border: 0;
+}
+
+a {
+	text-decoration: none;
+	color: #333;
+}
+
+a:link,
+a:visited {
+	text-decoration: none;
+	/*超链接无下划线*/
+}
+
+img {
+	border: 0;
+	outline: none;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.elli1 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.elli2 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+.elli3 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+.elli4 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	overflow: hidden;
+}
+
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.not-select {
+	-moz-user-select: none;
+	/*火狐*/
+	-webkit-user-select: none;
+	
+	/*webkit浏览器*/
+	-ms-user-select: none;
+	-ms-overflow-style: none;
+	/*IE10*/
+	-khtml-user-select: none;
+	/*早期浏览器*/
+	user-select: none;
+}
+
+body{
+	overflow-y: scroll;
+	// 滚动条宽度
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: #fff;
+    }
+    // 滚动条轨道
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+    // 滚动条背景
+    &::-webkit-scrollbar-track-piece {
+        background-color: transparent;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+    // 滚动条滑块
+    &::-webkit-scrollbar-thumb {
+        background-color: #e9e7e7;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+}
+
+.hidden-scrollbar {
+    -ms-overflow-style: none;
+    /* IE 和 Edge */
+    scrollbar-width: none;
+
+    /* Firefox */
+    ::-webkit-scrollbar {
+        display: none;
+        scrollbar-width: 0;
+    }
+}
+
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}

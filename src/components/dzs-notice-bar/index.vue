@@ -10,11 +10,7 @@
             <span v-if="!isEline" :style="{color:color , animationDuration : speeds}" :class="['text' , isMove && 'text-move' ] " >{{text}}</span>
             <div v-if="isEline" :style="{color:color}" class="eline-text">{{text}}</div>
         </div>
-        <div class="right-icon" @click="close" v-if="showCloseIcon && !closeIcon">
-            <slot name="right-icon"></slot>
-            <i class="icon el-icon-close" :style="{color:color}"></i>
-        </div>
-        <div class="right-icon" @click="closeClick" v-if="showCloseIcon && closeIcon">
+        <div class="right-icon" @click="close" v-if="showCloseIcon" >
             <slot name="right-icon"></slot>
             <i class="icon" :style="{color:color}" :class="closeIcon" v-if="closeIcon && !closeImgSrc"></i>
             <img class="img" :src="closeImgSrc" v-if="closeImgSrc" />
@@ -44,7 +40,6 @@
  * 
  * @method close 关闭
  * @method contentClick 点击内容
- * @method closeClick 点击关闭按钮 自定义关闭按钮时使用
  * @method closeNoticeBar  关闭通知栏 ref方式调用
  * 
  * @slot left-icon 左边的icon
@@ -52,6 +47,7 @@
  * @slot 默认插槽
  * */ 
 export default{
+    name : "dzsNoticeBar",
     props : {
         /**饿了吗 icon图标*/
         icon : {
@@ -71,7 +67,7 @@ export default{
         closeIcon : {
             type : String,
             default : ()=>{
-                return ""
+                return "el-icon-close"
             }
         },
         /**关闭按钮图片 icon 优先级低于closeIcon*/
@@ -127,14 +123,14 @@ export default{
         color : {
             type : String,
             default : ()=>{
-                return "var(--ThemeColor)"
+                return "#66b1ff"
             }
         },
         /**背景颜色*/
         backgroundColor : {
             type : String,
             default : ()=>{
-                return "var(--ThemeColor01)"
+                return "rgba(102,177,255,0.2)"
             }
         }
     },
@@ -170,9 +166,6 @@ export default{
         contentClick(){
             this.$emit("noticeClick")
         },
-        closeClick(){
-            this.$emit("closeClick");
-        },
         /**关闭natice*/ 
         closeNoticeBar(){
             this.showNoticeBar = false;
@@ -180,12 +173,11 @@ export default{
     },
 }
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .dzs-notice-bar{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // height: 40px;
     padding: 10px 10px;
     width: 100%;
     background-color: v-bind(backgroundColor);

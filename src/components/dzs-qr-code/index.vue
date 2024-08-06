@@ -29,6 +29,7 @@
 * */
 import QRCode from "qrcode";
 export default {
+    name : "dzsQrCode",
     props: {
         option: {
             type: Object,

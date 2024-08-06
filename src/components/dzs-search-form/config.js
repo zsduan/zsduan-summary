@@ -1,11 +1,3 @@
-/*
- * @Author: zs.duan
- * @Date: 2022-12-26 16:41:09
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-26 16:41:10
- * @FilePath: \vue2+js+eui+template\src\components\dzs-search-form\config.js
- */
-
 export const pickerOptions = {
 	shortcuts: [{
 		text: '最近一周',

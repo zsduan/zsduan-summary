@@ -1,10 +1,4 @@
-<!--
- * @Author: zs.duan
- * @Date: 2022-12-05 17:28:11
- * @LastEditors: zs.duan
- * @LastEditTime: 2022-12-05 18:24:37
- * @FilePath: \vue2+elui+template\src\components\dzs-markdown\index.vue
--->
+
 <template>
     <div class="markdown-box" :style="{height:height,}">
         <mavon-editor :toolbars="markdownOption" v-model="content" @change="changeVaule" @sava="sava" @imgAdd="$imgAdd"></mavon-editor>
@@ -19,8 +13,11 @@
  * @prop markdownOption的配置 详情见 https://github.com/hinesboy/mavonEditor
  */
 import "mavon-editor/dist/css/index.css";
+import mavonEditor from 'mavon-editor';
+import Vue from 'vue';
+Vue.use(mavonEditor)
 export default {
-    name: "dzs-markdown",
+    name: "dzsMarkdown",
     model: {
         prop: "value",
         event: "update:value",
@@ -116,7 +113,7 @@ export default {
     },
 };
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .markdown-box {
     :deep(.v-note-wrapper) {
         height: 100%;
