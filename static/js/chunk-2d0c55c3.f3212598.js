@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c55c3"],{"3f82":function(e,r,a){"use strict";a.r(r),a.d(r,"tableData",(function(){return p}));const p=[{key:"start",type:"param",parameterType:"Number",desc:"开始数值",remark:""},{key:"end",type:"param",parameterType:"Number",desc:"结束数值",remark:""},{key:"duration",type:"param",parameterType:"Number",desc:"持续时间",remark:""},{key:"el",type:"param",parameterType:"String",desc:"dom的id选择器",remark:""}]}}]);
+//# sourceMappingURL=chunk-2d0c55c3.f3212598.js.map

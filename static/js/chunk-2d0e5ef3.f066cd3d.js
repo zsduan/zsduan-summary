@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e5ef3"],{9732:function(n,r,o){"use strict";o.r(r),o.d(r,"code",(function(){return e}));const e='\n// 使用\nimport scrollToNumber from "@/utils/scrollToNumber.js";\n\n/**\n * 滚动到指定数字\n * @param {number} start 开始数字\n * @param {number} end 结束数字\n * @param {number} duration 结束时间\n * @param {string} el dom的id选择器\n * */ \nscrollToNumber(0 , 2024 , 2000 , "number")\n\n'}}]);
-//# sourceMappingURL=chunk-2d0e5ef3.f066cd3d.js.map

@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/views/JS-article/get-guid/config.js"],"names":["code1"],"mappings":"gHAAA,6CAAO,MAAMA,EAAQ","file":"static/js/chunk-2d21e367.2eecb467.js","sourcesContent":["export const code1 = `\r\nimport guid from \"@/tool/guid\";\r\nconst myguid = guid();\r\n`\r\n\r\n"],"sourceRoot":""}

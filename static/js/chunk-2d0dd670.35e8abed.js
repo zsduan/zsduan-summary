@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0dd670"],{"80df":function(e,a,r){"use strict";r.r(a),r.d(a,"tableData",(function(){return p}));const p=[{key:"option",type:"param",parameterType:"Object ",desc:"配置对象",remark:"",children:[{key:"success",type:"param",parameterType:"Function",desc:"成功返回",remark:""},{key:"fail",type:"param",parameterType:"Function",desc:"失败返回",remark:""}]}]}}]);
+//# sourceMappingURL=chunk-2d0dd670.35e8abed.js.map

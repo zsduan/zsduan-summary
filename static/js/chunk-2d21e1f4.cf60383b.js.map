@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/views/JS-article/get-ua/config.js"],"names":["code1"],"mappings":"gHAAA,6CAAO,MAAMA,EAAQ","file":"static/js/chunk-2d21e1f4.cf60383b.js","sourcesContent":["export const code1 = `\r\nimport getUA from \"@/tool/ua\";\r\nconst ua = getUA();\r\n`\r\n\r\n"],"sourceRoot":""}

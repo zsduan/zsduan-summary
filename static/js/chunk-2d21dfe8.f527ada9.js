@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21dfe8"],{d457:function(n,e,a){"use strict";a.r(e),a.d(e,"code1",(function(){return t}));const t='\nimport getCalendar from "@/tool/calender";\n\n// 调用方式一\nconst calendar = getCalendar(new Date());\n\n// 调用方式二\ngetCalendar({\n    time : new Date(),\n    success : (data) => {\n        console.log(data);\n    }\n});\n'}}]);
+//# sourceMappingURL=chunk-2d21dfe8.f527ada9.js.map

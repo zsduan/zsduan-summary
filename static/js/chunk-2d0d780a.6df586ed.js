@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d780a"],{"76a6":function(n,o,s){"use strict";s.r(o),s.d(o,"code1",(function(){return t}));const t='\nimport signalRcoont from "@/tool/signalR";\nconst signalR = signalRcoont({\n    url : "",\n    data : {\n        token : "123456"\n    },\n    success : (reslut) =>{\n        console.log(reslut)\n    },\n    fail : (error) =>{\n        console.log(error)\n    },\n    stop : (stop) => {\n        console.log(stop)\n    }\n})\n'}}]);
+//# sourceMappingURL=chunk-2d0d780a.6df586ed.js.map

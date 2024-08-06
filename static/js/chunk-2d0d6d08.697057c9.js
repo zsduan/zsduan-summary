@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d6d08"],{"73c9":function(n,o,e){"use strict";e.r(o),e.d(o,"code1",(function(){return c}));const c='\nimport setThemecolor from "@/tool/setThemecolor"\nsetThemecolor({\n    color : "#409EFF",\n    generate : false,\n    success : ()=>{\n        // do something\n    }\n});\n'}}]);
+//# sourceMappingURL=chunk-2d0d6d08.697057c9.js.map

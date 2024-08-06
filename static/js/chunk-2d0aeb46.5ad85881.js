@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0aeb46"],{"0acb":function(n,t,s){"use strict";s.r(t),s.d(t,"code1",(function(){return m}));const m='\nimport imgUrl from "./image/1.jpg";\nimport setHtml from "@/utils/sethtml";\n\n// 方式一\nsetHtml({\n    html : "<img src=\'imgUrl\' />",\n    success : (res)=>{\n        // do something\n    },\n})\n\n// 方式二\nconst html [= setHtml({\n    html : "<img src=\'imgUrl\' />",\n})\n'}}]);
+//# sourceMappingURL=chunk-2d0aeb46.5ad85881.js.map

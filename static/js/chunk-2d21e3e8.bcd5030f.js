@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21e3e8"],{d578:function(o,n,p){"use strict";p.r(n),p.d(n,"code1",(function(){return t}));const t="\nimport phoneAppNavigator from '@/tool/phoneAppNavigator';\nconst appNavigator = phoneAppNavigator();\n"}}]);
+//# sourceMappingURL=chunk-2d21e3e8.bcd5030f.js.map

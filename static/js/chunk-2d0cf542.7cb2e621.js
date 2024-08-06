@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0cf542"],{"62f6":function(n,o,r){"use strict";r.r(o),r.d(o,"code1",(function(){return c}));const c='\n// 使用\nimport scrollToNumber from "@/utils/scrollToNumber.js";\nscrollToNumber(0 , 2024 , 2000 , "number")\n'}}]);
+//# sourceMappingURL=chunk-2d0cf542.7cb2e621.js.map

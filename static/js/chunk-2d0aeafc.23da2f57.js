@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0aeafc"],{"0ab7":function(n,o,t){"use strict";t.r(o),t.d(o,"code1",(function(){return p})),t.d(o,"code2",(function(){return d}));const p='\n<dzs-popup :isShow.sync="defaultIsShow">\n    <div>我是一个默认的弹窗</div>\n</dzs-popup>\n',d='\n<dzs-popup :isShow.sync="defaultBottomIsShow">\n    <div>我是一个有底部的弹窗</div>\n    <template slot="footer">\n        <el-button>提交</el-button>\n    </template>\n</dzs-popup>\n'}}]);
-//# sourceMappingURL=chunk-2d0aeafc.23da2f57.js.map

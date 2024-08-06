@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0b2517"],{2432:function(e,r,p){"use strict";p.r(r),p.d(r,"tableData",(function(){return a}));const a=[{key:"ErrorRange",type:"props",parameterType:"Number",desc:"允许的误差值",remark:"默认10"},{key:"isShow",type:"props",parameterType:"Boolean",desc:"是否显示",remark:""},{key:"@success",type:"methods",parameterType:"",desc:"成功返回",remark:""},{key:"@fail",type:"methods",parameterType:"",desc:"失败返回",remark:""}]}}]);
+//# sourceMappingURL=chunk-2d0b2517.455dbe5f.js.map

@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/views/JS-article/phone-app-navigator/config.js"],"names":["code1"],"mappings":"gHAAA,6CAAO,MAAMA,EAAQ","file":"static/js/chunk-2d21e3e8.bcd5030f.js","sourcesContent":["export const code1 = `\r\nimport phoneAppNavigator from '@/tool/phoneAppNavigator';\r\nconst appNavigator = phoneAppNavigator();\r\n`\r\n\r\n"],"sourceRoot":""}

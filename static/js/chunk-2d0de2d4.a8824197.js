@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0de2d4"],{8512:function(n,e,d){"use strict";d.r(e),d.d(e,"code1",(function(){return o}));const o='\nimport dzsHeaderBtn from "@/components/dzs-header-btn/index.vue";\n\ncomponents: {\n    dzsHeaderBtn,\n},\n\n<dzs-header-btn></dzs-header-btn>\n'}}]);
-//# sourceMappingURL=chunk-2d0de2d4.a8824197.js.map

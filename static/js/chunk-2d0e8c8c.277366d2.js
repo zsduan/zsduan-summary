@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e8c8c"],{"8b6b":function(n,o,e){"use strict";e.r(o),e.d(o,"code1",(function(){return d}));const d='\n<template>\n    <dzs-markdown v-model="value"></dzs-markdown>\n</template>\n<script>\nimport dzsMarkdown from "@/components/dzs-markdown/index.vue"\nexport default{\n    components:{\n        dzsMarkdown\n    },\n    data(){\n        return{\n            value:"",\n        }\n    },\n}\n<\/script>\n'}}]);
+//# sourceMappingURL=chunk-2d0e8c8c.277366d2.js.map

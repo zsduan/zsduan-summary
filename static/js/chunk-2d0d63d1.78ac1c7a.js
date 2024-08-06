@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d63d1"],{7266:function(n,o,d){"use strict";d.r(o),d.d(o,"code1",(function(){return e}));const e='\n<template>\n    <dzs-code-editor v-model="code"></dzs-code-editor>\n</template>\nimport dzsCodeEditor from "@/components/dzs-code-editor"\nexport default {\n    components: {\n        dzsCodeEditor\n    },\n    data(){\n        return {\n            code : ""\n        }\n    }\n}\n'}}]);
+//# sourceMappingURL=chunk-2d0d63d1.78ac1c7a.js.map

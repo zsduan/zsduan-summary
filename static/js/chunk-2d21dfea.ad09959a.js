@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21dfea"],{d459:function(i,n,s){"use strict";s.r(n),s.d(n,"code1",(function(){return e}));const e='\n// html\n<dzs-slide-verification :isShow.sync="isShow" @success="isShow = false"></dzs-slide-verification>\n// js\nimport dzsSlideVerification from "@/components/dzs-slide-verification/index.vue"\n\n'}}]);
-//# sourceMappingURL=chunk-2d21dfea.ad09959a.js.map

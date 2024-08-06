@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0b8a57"],{3026:function(e,p,t){"use strict";t.r(p),t.d(p,"tableData",(function(){return r}));const r=[{key:"url",type:"props",parameterType:"String",desc:"预览地址",remark:"支持支持http:// 或者 https:// 或者 blod://"},{key:"type",type:"props",parameterType:"Number",desc:"类型",remark:"word excel pdf ppt txt"}]}}]);
+//# sourceMappingURL=chunk-2d0b8a57.3ff805b3.js.map

@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21e1f4"],{d3e4:function(n,o,t){"use strict";t.r(o),t.d(o,"code1",(function(){return c}));const c='\nimport getUA from "@/tool/ua";\nconst ua = getUA();\n'}}]);
+//# sourceMappingURL=chunk-2d21e1f4.cf60383b.js.map

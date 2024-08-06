@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c7af5"],{5257:function(n,t,e){"use strict";e.r(t),e.d(t,"code1",(function(){return o}));const o="\n<template>\n    <dzs-header-button @btnClick='btnClick'></dzs-header-button>\n</template>\n<script>\nimport dzsHeaderButton from \"@/components/dzs-header-button\";\nexdefault {\n    components : {\n        dzsHeaderButton\n    },\n    methods:{\n        btnClick(val) {\n            // do something\n        }\n    }\n}\n<\/script>\n"}}]);
+//# sourceMappingURL=chunk-2d0c7af5.73312aff.js.map
