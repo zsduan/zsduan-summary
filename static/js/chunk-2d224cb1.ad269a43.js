@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d224cb1"],{e23a:function(e,n,t){"use strict";t.r(n),t.d(n,"tableHeaderOption",(function(){return a})),t.d(n,"tableActionOption",(function(){return d}));const a=[{label:"序号",key:"id",width:"80px"},{label:"姓名",key:"name"},{label:"年龄",key:"age"},{label:"性别",key:"sex"},{label:"地址",key:"address",width:"300px"}],d=["edit","delete","detail"]}}]);
+//# sourceMappingURL=chunk-2d224cb1.ad269a43.js.map

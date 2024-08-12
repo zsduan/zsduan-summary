@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0a554d"],{"09f4":function(o,s,t){"use strict";t.r(s),s["default"]=[{version:"3.0.1",date:"2024-08-12",log:["修复搜索表单组件/表单组件没填写props报错的bug","修复代码编辑器不能输入的bug","新增后台代码四件套 地址 /four-sets","优化了 富文本编辑器 在后端插入sql时单引号出现的bug"]},{version:"3.0.0",date:"2024-08-06",log:["全新版本上线了","新增代码编辑器组件","新增文件上传组件、图片上传组件","文档预览新增ppt、txt","删除了拖动示例","搜索更改了 请用ctrl+k进行搜索","优化了暂开指令 修复了部分失效的bug","修复了部分bug"]}]}}]);
+//# sourceMappingURL=chunk-2d0a554d.42b21477.js.map

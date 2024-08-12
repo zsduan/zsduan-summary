@@ -1,0 +1,1 @@
+.multiplicationTable{display:flex}.multiplicationTable ul li{width:90px;height:30px;line-height:30px;padding-left:5px}.multiplicationTable ul .active{border-top:1px solid #666;border-right:1px solid #666}.multiplicationTable ul .left-border{border-left:1px solid #666}.multiplicationTable ul .bottom-border{border-bottom:1px solid #666}
