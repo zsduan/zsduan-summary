@@ -62,7 +62,7 @@ export const descData = [
         type : "props",
         parameterType : "Array",
         desc : "操作栏参数",
-        remark : "可选值 ['edit' , 'details' , 'del'] 为空数组时不显示操作栏"
+        remark : "可选值 ['edit' , 'details' , 'delete'] 为空数组时不显示操作栏"
     },
     {
         key : "operationOption",

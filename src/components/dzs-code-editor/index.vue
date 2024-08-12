@@ -134,10 +134,6 @@ const CodeMirror = window.CodeMirror || _CodeMirror
 import { themeList, languageList } from "./config";
 export default {
     name: 'dzsCode',
-    model:{
-        prop: 'value',
-        event: 'input'
-    },
     props: {
         // 外部传入的内容，用于实现双向绑定
         value: {
@@ -221,12 +217,17 @@ export default {
             languageList: languageList,
             codeHight: '0px',
             codeId: "dzsCode" + new Date().getTime(),
+            isFirst : false,
         }
     },
     watch: {
         value:{
             handler(val) {
-                this.setCodeContent(val);
+                if(this.isFirst) return
+                if(this.coder && val){
+                    this.coder.setValue(val);
+                    this.isFirst = true
+                }
             },
             deep: true,
             immediate : true

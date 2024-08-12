@@ -147,6 +147,7 @@ export default {
     },
     methods: {
         save() {
+            this.editValue = this.editValue.replace(/'/g, "&#39;");
             this.$emit("update:value", this.editValue);
             this.$emit("save", this.editValue);
         },

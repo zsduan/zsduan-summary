@@ -1,7 +1,7 @@
 <template>
     <div :id="tableId" class="table-wrop">
         <div class="list-wrop">
-            <el-table v-if="headerData.length" :data="tableData" class="table" ref="dzsTable" v-loading="loading"
+            <el-table border v-if="headerData.length" :data="tableData" class="table" ref="dzsTable" v-loading="loading"
                 @selection-change="handleSelectionChange" :stripe="true" v-bind="{ ...tableOptions }"
                 :height="tableHeight ? tableHeight : '100%'">
                 <el-table-column type="selection" width="55" v-if="showCheckbox"></el-table-column>
@@ -28,11 +28,7 @@
                         <el-button type="text" class="btn" size="small" v-for="(item, index) in operation" :key="index">
                             <span @click="onEdit(scope.row)" v-if="item == 'edit'">编辑</span>
                             <span @click="onDetails(scope.row)" v-if="item == 'detail'">详情</span>
-                            <el-popconfirm title="是否要删除？" @confirm="onDel(scope.row)">
-                                <template #reference>
-                                    <span v-if="item == 'detele'">删除</span>
-                                </template>
-                            </el-popconfirm>
+                            <span @click="onDel(scope.row)" v-if="item == 'delete'">删除</span>
                         </el-button>
                         <slot name="button" :row="{ ...scope.row }"></slot>
                     </template>

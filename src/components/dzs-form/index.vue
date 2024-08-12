@@ -278,6 +278,7 @@ export default {
             };
             items.forEach(item => {
                 item.span = this.formBoxWidth <= 768 ? 24 : item.span; //手机端默认24
+                if (!item.props) item.props = {};
                 if (this.value[item.key]) item.defaultValue = this.value[item.key];
                 if (defaultValuesByType.hasOwnProperty(item.type) && !item.defaultValue) {
                     item.defaultValue = defaultValuesByType[item.type];
@@ -292,7 +293,6 @@ export default {
                     item.defaultValue = item.defaultValue ? item.defaultValue : false;
                 }
                 rules[item.key] = item.rules || [];
-                if (!item.props) item.props = {};
                 item.props.placeholder = this.getPlaceholder(item, item.type);
                 formItem.push(item);
                 if (clear) {

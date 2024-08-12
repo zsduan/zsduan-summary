@@ -105,6 +105,12 @@ export default [
                 name: 'codeEditor',
                 meta: { title: '代码编辑器' }
             },
+            {
+                path : "/four-sets",
+                component : "component-section/four-sets/index",
+                name : 'fourSets',
+                meta : { title : '后台四件套' }
+            },
         ]
     },
     {
