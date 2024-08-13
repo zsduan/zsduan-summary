@@ -4,7 +4,7 @@ const addZroe = (num) => {
 }
 let time = `${date.getFullYear()}${addZroe(date.getMonth() + 1)}${addZroe(date.getDate())}`;
 module.exports = {
-    publicPath: "./",
+    publicPath: process.env.NODE_ENV === "production" ? "/zhongjie" : "./",
     outputDir: `dist/${time}`,
     lintOnSave: false,
     assetsDir: "static",
