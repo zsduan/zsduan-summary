@@ -34,9 +34,8 @@ export const routes = [
 ]
 
 const router = new VueRouter({
-    // mode: 'hash',
     mode: 'history',
-    base: process.env.NODE_ENV === "production" ? '/zhongjie/' : '/',
+    base: process.env.VUE_APP_PUBLIC_PATH,
     routes
 })
 
