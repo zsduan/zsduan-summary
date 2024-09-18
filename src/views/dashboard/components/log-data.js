@@ -1,5 +1,13 @@
 export default [
     {
+        version : "3.0.2",
+        date : "2024-09-10",
+        log : [
+            "修复搜索表单组件/表单组件在v-model多层级(xx.xx.xx)赋值失败的bug",
+            "参数提示表格对参数类型进行了优化处理"
+        ]
+    },
+    {
         version : "3.0.1",
         date : "2024-08-12",
         log : [

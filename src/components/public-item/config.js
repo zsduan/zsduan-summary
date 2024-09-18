@@ -11,6 +11,7 @@ export const tableHeader = [
     {
         key : 'parameterType',
         label : '参数类型',
+        isSlot: true,
     },
     {
         label : "说明",
