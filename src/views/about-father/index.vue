@@ -147,8 +147,8 @@ export default {
         inputValue(type) {
             if (type == "en") {
                 Search({
-                    list: entryPrice,
-                    searValue: this.searchValueEn,
+                    data: entryPrice,
+                    value: this.searchValueEn,
                     key: this.EnSelect,
                     success: (res) => {
                         this.entryPriceData = res;
@@ -156,8 +156,8 @@ export default {
                 });
             } else {
                 Search({
-                    list: OutPrice,
-                    searValue: this.searchValueOut,
+                    data: OutPrice,
+                    value: this.searchValueOut,
                     key: this.OutSelect,
                     success: (res) => {
                         this.OutPriceData = res;
