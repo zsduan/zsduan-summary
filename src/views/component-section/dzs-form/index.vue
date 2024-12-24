@@ -1,5 +1,10 @@
 <template>
     <section>
+        <public-item title="基础用法">
+            <dzs-form v-model="formData" :options="testFormOptions" @onSubmit="onSubmit" @onCancel="onCancel">
+                
+            </dzs-form>
+        </public-item>
         <public-item title="PC端" tips="该组件需要导入 dzs-editor dzs-upload-img dzs-upload-file 三个组件使用">
             <dzs-form :options="formOptions" @onSubmit="onSubmit" @onCancel="onCancel">
                 <template #mySlot>
@@ -247,10 +252,31 @@ export default {
                 title: "组件源码"
             },
             tableData: tableData,
+            testFormOptions : {
+                formProps: {
+                    "label-width": "120px",
+                },
+                formItem: [
+                    {
+                        label: "输入框",
+                        key: "input",
+                        type: "input",
+                        rules: [
+                            { required: true, message: '请输入输入框名称', trigger: 'blur' },
+                        ],
+                        span: 24
+                    },
+                ]
+            },
+            formData : {
+                input : "",
+                select : "12541",
+            }
         }
     },
     methods: {
-        onSubmit() {
+        onSubmit(data) {
+            console.log("data ==>" ,data);
             // do something
         },
         onCancel() {

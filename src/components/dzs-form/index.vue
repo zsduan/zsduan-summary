@@ -6,6 +6,7 @@
             :ref="formId"
             :class="{ ruleForm: true, noScroll: loadingOption.loading, 'phone-form': formBoxWidth <= 768, 'form-box-scroll': isScroll }"
             :style="{ height: isScroll ? height : '100%' }">
+            <slot name="form-header"></slot>
             <el-row :gutter="gutter">
                 <template v-for="(item, index) in formItem">
                     <el-col :span="item.span ? item.span : 24" v-if="!item.isHidden">
@@ -21,9 +22,6 @@
                                 <dzs-item :formBoxWidth="formBoxWidth" :toolbar="toolbar"
                                     :value="getFromModelValue(item.key)" :item="item" @change="changeVaule">
                                 </dzs-item>
-                                <div class="from-item-tips" v-if="getTips(item) && item.type != 'divider'">
-                                    {{ getTips(item) }}
-                                </div>
                             </template>
                         </dzs-form-item>
                         <template v-if="item.type == 'divider'">
@@ -35,6 +33,7 @@
                     </el-col>
                 </template>
             </el-row>
+            <slot ></slot>
         </el-form>
         <div :class="['form-sbumit-box', buttonFlex]" v-if="showFooter">
             <el-button @click.stop="onCancel" v-if="showButton">
@@ -297,7 +296,7 @@ export default {
                 formItem.push(item);
                 if (clear) {
                     fromModel[item.key] = item.defaultValue;
-                } else {
+                } else if(item.key){
                     let keyList = item.key.split(".");
                     let setValue = this.value;
                     for (let i = 0; i < keyList.length; i++) {
@@ -338,6 +337,7 @@ export default {
         },
         /**获取FromModel的参数*/
         getFromModelValue(keyPath) {
+            if(!keyPath) return '';
             let keyList = keyPath.split('.');
             let value = this.fromModel;
             for (let i = 0; i < keyList.length; i++) {
@@ -358,13 +358,6 @@ export default {
             }
             let placeholder = item.props ? item.props.placeholder ? item.props.placeholder : fisrtText + item.label : fisrtText + item.label
             return placeholder
-        },
-        /**设置提示信息*/
-        getTips(item) {
-            if (item.props && item.props.tips) {
-                return item.props.tips
-            };
-            return ""
         },
         /**改变输入的值*/
         changeVaule(value, keyPath) {
@@ -442,6 +435,7 @@ export default {
                         return
                     }
                     this.formItem.forEach(item => {
+                        item.key = item.key ? item.key : '';
                         let keyPath = item.key.split('.');
                         let value = this.fromModel;
                         for (let i = 0; i < keyPath.length; i++) {
@@ -449,8 +443,9 @@ export default {
                         }
                         sendData[item.key] = value;
                         if (item.isNull) delete sendData[item.key];
-                        sendData = this.transformKeysToNestedObject(sendData);
                     })
+                    sendData = this.transformKeysToNestedObject(sendData);
+                    if(this.value)sendData = {...sendData,...this.value}
                     this.$emit("onSubmit", sendData);
                     this.$emit("update:value", sendData);
                     resolve(sendData);

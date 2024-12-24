@@ -1,8 +1,9 @@
 <template>
     <div>
-        <el-upload :class="{'upload-dzs' : true , 'upload-dzs-phone' : isPhone}" drag :action="action" :multiple="multiple" :file-list="fileList" :limit="limit"
-            :before-upload="beforeUpload" :on-success="handleSuccess" :on-exceed="handleExceed"
-            :auto-upload="autoUpload" :on-change="changeFile" :show-file-list="true">
+        <el-upload :class="{ 'upload-dzs': true, 'upload-dzs-phone': isPhone }" drag :action="action"
+            :multiple="multiple" :file-list="fileList" :limit="limit" :before-upload="beforeUpload"
+            :on-success="handleSuccess" :on-exceed="handleExceed" :auto-upload="autoUpload" :on-change="changeFile"
+            :show-file-list="true">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text" v-if="!isPhone">将文件拖到此处，或<em>点击上传</em></div>
             <div class="el-upload__text" v-else><em>点击上传文件</em></div>
@@ -79,6 +80,12 @@ export default {
             default: () => {
                 return false
             }
+        },
+        uploadFun: {
+            type: Function | null,
+            default: () => {
+                return null
+            }
         }
     },
     data() {
@@ -146,21 +153,21 @@ export default {
         },
         /**文件改变*/
         changeFile(files) {
-            if (!this.autoUpload) {
-                let fileInfo = {
-                    name: files.name,
-                    path: files.url,
-                    uploadUrl: files.url,
-                    uid: files.uid,
-                    type: files.type,
-                    status: "success",
-                    fromItem: "upload-file",
-                    file: files.raw
-                };
-                this.fileList.push(fileInfo);
-                this.$emit("update:value", this.fileList);
-                this.$emit("change", this.fileList);
-            }
+            this.uploadFun(files, this.handleSuccess);
+            if (this.autoUpload || this.uploadFun) return;
+            let fileInfo = {
+                name: files.name,
+                path: files.url,
+                uploadUrl: files.url,
+                uid: files.uid,
+                type: files.type,
+                status: "success",
+                fromItem: "upload-file",
+                file: files.raw
+            };
+            this.fileList.push(fileInfo);
+            this.$emit("update:value", this.fileList);
+            this.$emit("change", this.fileList);
         },
         /**超出文件个数限制时的钩子*/
         handleExceed(files, fileList) {
@@ -170,8 +177,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.upload-dzs-phone{
+.upload-dzs-phone {
     width: 100%;
+
     :deep(.el-upload) {
         width: 100%;
 

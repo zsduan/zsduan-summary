@@ -25,12 +25,20 @@ export const routes = [
         hidden : true
     },
     {
+        path : "/404",
+        component: () => import('@/views/error-page/404'),
+        hidden : true,
+        meta: { title: '404' }
+    },
+    {
         path: '/about-father',
         component: () => import('@/views/about-father/index'),
         name: 'about-father',
         meta: { title: '关于父亲' }
     },
-    ...setRouter()
+    ...setRouter(),
+    // 通配404
+    { path: '*', redirect: '/404', hidden: true }
 ]
 
 const router = new VueRouter({

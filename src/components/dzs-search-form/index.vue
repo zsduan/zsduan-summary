@@ -24,6 +24,7 @@
                         </dzs-form-item>
                     </el-col>
                 </template>
+                <slot></slot>
                 <template>
                     <el-col :span="btnSpan">
                         <div :class="{ 'form-sbumit-box': true, 'form-sbumit-box-phone': this.btnSpan == 24 }">

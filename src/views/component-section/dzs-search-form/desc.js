@@ -186,6 +186,13 @@ export const tableData = [
         remark: ""
     },
     {
+        key  : "default",
+        type: "slot",
+        parameterType: "",
+        desc: "默认插槽",
+        remark: ""
+    },
+    {
         key: "@onSearch",
         type: "methods",
         parameterType: "",

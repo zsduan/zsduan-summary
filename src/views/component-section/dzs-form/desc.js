@@ -40,7 +40,7 @@ export const tableData = [
                         type: "props",
                         parameterType: "String",
                         desc: "类型",
-                        remark: "input | select | radio | checkbox | date | time | switch | uploadImg | editor | uploadFile | divider"
+                        remark: "input | select | radio | checkbox | date | time | timeSelect | switch | uploadImg | editor | uploadFile | divider"
                     },
                     {
                         key: "span",
@@ -108,10 +108,10 @@ export const tableData = [
                                 remark: ""
                             },
                             {
-                                key: "text",
+                                key: "text(防止更新错误)",
                                 type: "props",
                                 parameterType: "String",
-                                desc: "插槽的名称",
+                                desc: "显示文字",
                                 remark: ""
                             }
                         ]
@@ -256,6 +256,18 @@ export const tableData = [
         parameterType : 'String',
         desc : '底部按钮位置',
         remark : '默认 right  支持 left center right'
+    },
+    {
+        key : 'form-header',
+        type: "slot",
+        desc: "表单头部插槽",
+        remark: ""
+    },
+    {
+        key : 'default',
+        type: "slot",
+        desc: "表单默认插槽",
+        remark: ""
     },
     {
         key: "@onSubmit",

@@ -43,6 +43,13 @@ export const tableData = [
         remark: "以逗号分隔",
     },
     {
+        key: "uploadFun",
+        type: "props",
+        parameterType: "Function",
+        desc: "自定义上传函数",
+        remark: "默认null , (file, handleSuccess)=>{ handleSuccess(res , file) } , res 必须拥有 以下属性 url , name , path",
+    },
+    {
         key: "@change",
         type: "methods",
         parameterType: "Function",

@@ -1,30 +1,20 @@
 <template>
     <div class="upload-img-box">
         <div class="show-img-box" v-if="fileList.length" :style="imgStyle">
-            <div v-for="(item,index) in fileList" :key="index">
+            <div v-for="(item, index) in fileList" :key="index">
                 <img class="el-upload-list__item-thumbnail" :src="item.url" alt :style="imgStyle" />
                 <div class="el-upload-list__item-actions" :style="imgStyle">
                     <div class="el-upload-actions">
                         <i class="el-icon-zoom-in" @click="handlePictureCardPreview(item)"></i>
-                        <i class="el-icon-delete"  @click="handleRemove(index)"></i>
+                        <i class="el-icon-delete" @click="handleRemove(index)"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div :style="imgStyle">
-            <el-upload
-                class="avatar-uploader"
-                :action="upFile"
-                :show-file-list="false"
-                list-type="picture-card"
-                :file-list="fileList"
-                :limit="limit"
-                :before-upload="beforeUpload"
-                :on-success="handleSuccess"
-                :on-exceed="handleExceed"
-                :auto-upload="autoUpload"
-                :on-change="changeFile"
-            >
+            <el-upload class="avatar-uploader" :action="upFile" :show-file-list="false" list-type="picture-card"
+                :file-list="fileList" :limit="limit" :before-upload="beforeUpload" :on-success="handleSuccess"
+                :on-exceed="handleExceed" :auto-upload="autoUpload" :on-change="changeFile">
                 <i class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
         </div>
@@ -52,7 +42,7 @@
  * @methods : upload-remove 删除 function 返回所以图片list array
  * 
  * 
-*/ 
+*/
 export default {
     name: "dzsUploadImg",
     model: {
@@ -99,10 +89,16 @@ export default {
                 return "image/jpeg,image/png,image/gif";
             },
         },
-        autoUpload : {
-            type : Boolean,
-            default : ()=>{
+        autoUpload: {
+            type: Boolean,
+            default: () => {
                 return true
+            }
+        },
+        uploadFun: {
+            type: Function | null,
+            default: () => {
+                return null
             }
         }
     },
@@ -114,21 +110,21 @@ export default {
         };
     },
     watch: {
-        value:{
-            handler(val){
-                if(typeof val == "string"){
+        value: {
+            handler(val) {
+                if (typeof val == "string") {
                     this.fileList = val ? {
-                        uid : new Date().getTime(),
-                        url : val,
-                        status : "success",
-                        fromItem : "upload-img",
+                        uid: new Date().getTime(),
+                        url: val,
+                        status: "success",
+                        fromItem: "upload-img",
                     } : [];
-                }else{
+                } else {
                     this.fileList = val;
                 }
             },
-            deep:true,
-            immediate:true,
+            deep: true,
+            immediate: true,
         }
     },
     methods: {
@@ -154,8 +150,8 @@ export default {
                 url: file.url,
                 status: "success",
                 fromItem: "upload-img",
-                data : res,
-                file : file,
+                data: res,
+                file: file,
             };
             this.fileList.push(fileInfo);
             this.$emit("update:value", this.fileList);
@@ -163,24 +159,24 @@ export default {
             this.$emit("change", this.fileList);
         },
         // 文件改变
-        changeFile(files){
-            if(!this.autoUpload){
-                let fileInfo = {
-                    name: files.name,
-                    path: files.url,
-                    uploadUrl: files.url,
-                    uid: files.uid,
-                    url: files.url,
-                    status: "success",
-                    fromItem: "upload-img",
-                    data : files.raw,
-                    file : files.raw,
-                };
-                this.fileList.push(fileInfo);
-                this.$emit("update:value", this.fileList);
-                this.$emit("upload-success", fileInfo);
-                this.$emit("change", this.fileList);
-            }
+        changeFile(files) {
+            this.uploadFun(files, this.handleSuccess);
+            if (this.autoUpload || this.uploadFun) return;
+            let fileInfo = {
+                name: files.name,
+                path: files.url,
+                uploadUrl: files.url,
+                uid: files.uid,
+                url: files.url,
+                status: "success",
+                fromItem: "upload-img",
+                data: files.raw,
+                file: files.raw,
+            };
+            this.fileList.push(fileInfo);
+            this.$emit("update:value", this.fileList);
+            this.$emit("upload-success", fileInfo);
+            this.$emit("change", this.fileList);
         },
         // 超出限制
         handleExceed(files, fileList) {
@@ -194,7 +190,7 @@ export default {
         // 删除
         handleRemove(index) {
             this.fileList.splice(index, 1);
-            this.$emit("change",this.fileList);
+            this.$emit("change", this.fileList);
             this.$emit("update:value", this.fileList);
             this.$emit("upload-remove", this.fileList);
         },
@@ -202,18 +198,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 .upload-img-box {
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    .show-img-box{
+
+    .show-img-box {
         margin-right: 10px;
         border: 1px dashed #c0ccda;
         border-radius: 6px;
         overflow: hidden;
         position: relative;
-        .el-upload-list__item-actions{
+
+        .el-upload-list__item-actions {
             position: absolute;
             display: block;
             width: 100%;
@@ -223,11 +220,11 @@ export default {
             text-align: center;
             color: #fff;
             opacity: 0;
-            background-color: rgba(0,0,0,.5);
+            background-color: rgba(0, 0, 0, .5);
             transition: opacity .3s;
             font-size: 24px;
-            
-            .el-upload-actions{
+
+            .el-upload-actions {
                 display: flex;
                 justify-content: center;
                 align-content: center;
@@ -235,27 +232,32 @@ export default {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                i{
+
+                i {
                     cursor: pointer;
                     display: inline-block;
                     margin-right: 5px;
-                    &:last-child{
+
+                    &:last-child {
                         margin-right: 0;
                     }
                 }
             }
-            
-            &:hover{
+
+            &:hover {
                 opacity: 1;
             }
         }
     }
+
     .avatar-uploader {
         height: 100%;
+
         :deep(.el-upload--picture-card) {
             width: 100%;
             height: 100%;
             position: relative;
+
             i {
                 position: absolute;
                 top: 50%;
@@ -263,10 +265,12 @@ export default {
                 transform: translate(-50%, -50%);
             }
         }
-        /deep/.el-upload--picture-card{
+
+        /deep/.el-upload--picture-card {
             width: 100%;
             height: 100%;
             position: relative;
+
             i {
                 position: absolute;
                 top: 50%;

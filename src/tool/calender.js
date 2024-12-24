@@ -557,10 +557,15 @@ function getCalendar(option) {
     calendar.lunarYear = lDObj.year;
     calendar.lunarMonth = lDObj.month;
     calendar.lunarDay = lDObj.day;
-    calendar.zodiacYear = zodiacs[(GY - 4) % 12];
 
-    //农历中文年月日
-    calendar.lunarYearCn = cyclical(GY - 1900 + 36);
+    // 如果年份小于今年 则 多减去1年
+    if (lDObj.year < year) {
+        calendar.zodiacYear = zodiacs[(GY - 5) % 12];
+        calendar.lunarYearCn = cyclical(GY - 1900 + 35);
+    }else{
+        calendar.zodiacYear = zodiacs[(GY - 4) % 12];
+        calendar.lunarYearCn = cyclical(GY - 1900 + 36);
+    }
     calendar.lunarMonthCn = cDay(lDObj.month, lDObj.day).lunarMonthCn;
     calendar.lunarDayCn = cDay(lDObj.month, lDObj.day).lunarDayCn;
 
