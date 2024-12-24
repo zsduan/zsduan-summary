@@ -32,11 +32,6 @@
         <!-- 参数说明 -->
         <template v-if="list && list.length">
             <dzs-table :tableHeader="tableHeader" :list="list" :showOperation="false" :tableOptions="tableOptions">
-                <template #parameterType="{ row }">
-                    <template v-if="row.parameterType" v-for="(item) in row.parameterType.split('|')">
-                        <el-tag type="primary" style="margin: 5px;">{{ item }}</el-tag>
-                    </template>
-                </template>
             </dzs-table>
         </template>
 
@@ -155,7 +150,7 @@ export default {
         font-weight: 500;
     }
 
-    .notice-bar {
+    .notice-bar{
         margin-bottom: 10px;
     }
 

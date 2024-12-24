@@ -245,12 +245,7 @@ export default {
                 if (clear) {
                     fromModel[item.key] = item.defaultValue;
                 } else {
-                    let keyList = item.key.split(".");
-                    let setValue = this.value;
-                    for (let i = 0; i < keyList.length; i++) {
-                        setValue = setValue ? setValue[keyList[i]] : null;
-                    }
-                    fromModel[item.key] = setValue || item.defaultValue;
+                    fromModel[item.key] = this.value[item.key] || item.defaultValue;
                 }
             });
             this.fromModel = this.transformKeysToNestedObject(fromModel);
