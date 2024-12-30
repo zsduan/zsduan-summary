@@ -42,7 +42,7 @@ export const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: process.env.VUE_APP_MODE ||  'history',
     base: process.env.VUE_APP_PUBLIC_PATH,
     routes
 })

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:zj": "vue-cli-service build --mode zongjie",
+    "build:github": "vue-cli-service build --mode github",
     "lint": "vue-cli-service lint"
   },
   "main": "background.js",
