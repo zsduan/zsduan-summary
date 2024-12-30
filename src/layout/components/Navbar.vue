@@ -85,7 +85,7 @@ export default {
                     if (item.children && item.children.length) {
                         setList(item.children);
                     } else {
-                        item.metaTitle = item.meta.title || ""
+                        item.metaTitle = item.meta ? item.meta.title || "" : '个人总结'
                         list.push(item);
                     }
                 });
