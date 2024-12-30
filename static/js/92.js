@@ -1,0 +1,15 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[92],{
+
+/***/ "./src/views/JS-article/watermark/desc.js":
+/*!************************************************!*\
+  !*** ./src/views/JS-article/watermark/desc.js ***!
+  \************************************************/
+/*! exports provided: tableData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"option\",\n  type: \"param\",\n  parameterType: \"Object\",\n  desc: \"配置对象\",\n  remark: \"\",\n  children: [{\n    key: \"watermark_txt\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"水印文本\",\n    remark: \"必填\"\n  }, {\n    key: \"watermark_x\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印起始位置x轴坐标\",\n    remark: \"默认 20\"\n  }, {\n    key: \"watermark_y\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印起始位置Y轴坐标\",\n    remark: \"默认 20\"\n  }, {\n    key: \"watermark_rows\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印行数\",\n    remark: \"默认 0\"\n  }, {\n    key: \"watermark_cols\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印列数\",\n    remark: \"默认 0\"\n  }, {\n    key: \"watermark_x_space\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印x轴间隔\",\n    remark: \"默认 100\"\n  }, {\n    key: \"watermark_y_space\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印y轴间隔\",\n    remark: \"默认 100\"\n  }, {\n    key: \"watermark_color\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"水印字体颜色\",\n    remark: \"默认 #000\"\n  }, {\n    key: \"watermark_alpha\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印透明度\",\n    remark: \"默认 0.4\"\n  }, {\n    key: \"watermark_fontsize\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印字体大小\",\n    remark: \"默认 16\"\n  }, {\n    key: \"watermark_font\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"水印字体\",\n    remark: \"默认 SimSun\"\n  }, {\n    key: \"watermark_width\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印宽度\",\n    remark: \"默认 100\"\n  }, {\n    key: \"watermark_height\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印长度\",\n    remark: \"默认 100\"\n  }, {\n    key: \"watermark_angle\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"水印倾斜度数\",\n    remark: \"默认 15\"\n  }, {\n    key: \"isHtml\",\n    type: \"param\",\n    parameterType: \"Boolean\",\n    desc: \"是否是html水印\",\n    remark: \"默认 false\"\n  }]\n}, {\n  key: \"clearWatermark\",\n  type: \"method\",\n  parameterType: \"Function\",\n  desc: \"本函数可单独导出清空水印方法\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/watermark/desc.js?");
+
+/***/ })
+
+}]);
