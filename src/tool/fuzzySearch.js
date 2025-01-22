@@ -63,7 +63,7 @@ export default function Search(option){
             if(options.isCompletely && element[options.key] === options.value){
                 reslut.push(element)
             }else{
-                element[options.key] = element[options.key].toString();
+                element[options.key] = element[options.key] ? element[options.key].toString() : '';
                 if(element[options.key].match(reg)){
                     reslut.push(element)
                 }

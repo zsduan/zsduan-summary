@@ -121,6 +121,7 @@ export default {
                 file: "myfile",
                 Vue: this,
                 success: (res) => {
+                    console.log("res ==>" ,res);
                     this.xlsxInfo = res;
                 },
             })
