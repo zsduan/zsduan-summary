@@ -1,5 +1,6 @@
 <template>
     <div :id="formId" class="dzs-form-box">
+        <dzs-form-data-copy-and-paste v-if="copyAndPaste" :formItem="formItem" :formData="fromModel" :simple="simple" @paste="pasteData($event)"></dzs-form-data-copy-and-paste>
         <el-form v-loading="loadingOption.loading" :element-loading-text="loadingOption.loadingText"
             :element-loading-spinner="loadingOption.spinner" :element-loading-background="loadingOption.background"
             v-bind="{ ...formProps }" :model="fromModel" :rules="fromRules" :label-position="labelPosition"
@@ -99,6 +100,8 @@ import { pickerOptions } from "./config";
 import deepCopy from "./deepCopy.js";
 import dzsFormItem from "./components/dzs-form-item";
 import dzsItem from "./components/dzs-item";
+import dzsFormDataCopyAndPaste from "./components/dzs-form-data-copy-and-paste";
+import {simpleHash} from "./tool.js";
 export default {
     name: "dzsForm",
     model: {
@@ -107,7 +110,8 @@ export default {
     },
     components: {
         dzsFormItem,
-        dzsItem
+        dzsItem,
+        dzsFormDataCopyAndPaste,
     },
     props: {
         options: {
@@ -194,7 +198,14 @@ export default {
             default: () => {
                 return "right"
             }
-        }
+        },
+        /**是否开启复制粘贴*/
+        copyAndPaste: {
+            type: Boolean,
+            default: () => {
+                return true
+            }
+        } 
     },
     data() {
         return {
@@ -207,7 +218,8 @@ export default {
             labelPosition: "left", //对其方式
             timer: null, //定时器 防止重复提交
             toolbar: [],
-            formId: `dzsForm${new Date().getTime()}`
+            formId: `dzsForm${new Date().getTime()}`,
+            simple : "" , // 生成一个固定的hash值 用户复制粘贴
         }
     },
     watch: {
@@ -308,7 +320,21 @@ export default {
             this.fromModel = this.transformKeysToNestedObject(fromModel);
             this.formItem = deepCopy(formItem);
             this.fromRules = deepCopy(rules);
+            this.getOriginalFormData();
         },
+
+        /**生成原始表单数据 用来进行复制粘贴 生成hash值*/ 
+        getOriginalFormData() {
+            let originalFormData = {};
+            for (let i = 0; i < this.formItem.length; i++) {
+                let item = this.formItem[i];
+                if (item.key) {
+                    originalFormData[item.key] = "";
+                }
+            }
+            this.simple = simpleHash(JSON.stringify(originalFormData));
+        },
+
         /**格式化值*/
         transformKeysToNestedObject(obj) {
             let result = {};
@@ -341,7 +367,7 @@ export default {
             let keyList = keyPath.split('.');
             let value = this.fromModel;
             for (let i = 0; i < keyList.length; i++) {
-                value = value[keyList[i]];
+                value = value[keyList[i]] ? value[keyList[i]] : '';
             }
             return value;
         },
@@ -364,7 +390,7 @@ export default {
             let keyList = keyPath.split('.');
             let obj = this.fromModel;
             for (let i = 0; i < keyList.length - 1; i++) {
-                obj = obj[keyList[i]];
+                obj = obj[keyList[i]] ? obj[keyList[i]] : null;
             }
             obj[keyList[keyList.length - 1]] = value;
             this.$emit("update:value", this.fromModel);
@@ -451,7 +477,12 @@ export default {
                     resolve(sendData);
                 });
             })
-        }
+        },
+        /**粘贴数据*/
+        pasteData($event) {
+            this.setFormData($event);
+            this.$emit('update:value', $event);
+        }, 
     }
 }
 </script>

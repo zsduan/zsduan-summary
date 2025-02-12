@@ -13,6 +13,7 @@
             </div>
         </public-item>
         <dzs-backtop  target=".el-main"></dzs-backtop>
+        <dzs-navigation-title></dzs-navigation-title>
     </section>
 </template>
 <script>

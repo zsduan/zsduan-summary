@@ -6,9 +6,10 @@
         <public-item title="携带默认值" :code="code2">
             <dzs-editor v-model="value"></dzs-editor>
         </public-item>
-        <public-item title="参数说明" :list="tabelData"></public-item>
+        <public-item title="参数说明" :list="tableData"></public-item>
         <public-item title="组件源代码查看" :links="links"></public-item>
         <dzs-backtop  target=".el-main"></dzs-backtop>
+        <dzs-navigation-title></dzs-navigation-title>
     </section>
 </template>
 <script>

@@ -34,21 +34,21 @@ export default{
                 },
                 formItem : [
                     {
-                        label : '姓名',
-                        key : 'name',
+                        label : 'ID',
+                        key : 'id',
                         type : 'input',
-                        rules : [
-                            {
-                                required : true,
-                                message : '请输入姓名',
-                                trigger : 'blur'
-                            }
-                        ]
+                        isHidden : true
+                    },
+                    {
+                        label : '用户名',
+                        key : 'username.xxx',
+                        type : 'input',
+                        isHidden : true
                     },
                     {
                         label : '年龄',
                         key : 'age',
-                        type : 'input',
+                        type : 'number',
                         rules : [
                             {
                                 required : true,

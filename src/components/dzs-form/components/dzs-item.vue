@@ -23,7 +23,7 @@
         <!-- 数字输入框 -->
         <template v-if="item.type == 'number'">
             <el-input-number v-if="status != 'details'" v-model="numberEditValue" v-bind="{ ...item.props }"
-                @input="changeVaule($event, item.key)"></el-input-number>
+                @change="changeVaule($event, item.key)"></el-input-number>
             <span v-else class="dzs-suffix">{{ editValue }}</span>
         </template>
         <!-- 日期选择器 -->
@@ -152,7 +152,7 @@ export default {
     },
     watch: {
         value: {
-            handler(val) {
+            handler(val, oldVal) {
                 if (this.item.type == 'number') {
                     this.numberEditValue = val ? Number(val) : 0;
                     return;

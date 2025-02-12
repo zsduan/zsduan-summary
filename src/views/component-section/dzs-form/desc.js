@@ -257,6 +257,13 @@ export const tableData = [
         desc : '底部按钮位置',
         remark : '默认 right  支持 left center right'
     },
+
+    {
+        key : 'copyAndPaste',
+        type: "props",
+        desc: "是否允许复制粘贴",
+        remark: "只复制基本组件的值，自定义组件的值无法复制，isHide为true时该值自动变成空"
+    },
     {
         key : 'form-header',
         type: "slot",

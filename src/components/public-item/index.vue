@@ -1,6 +1,6 @@
 <template>
     <div class="public-item">
-        <div class="title" v-if="title">{{ title }}</div>
+        <h2 class="title dzs-navigation-title" v-if="title" :id="title" :name="title">{{ title }}</h2>
         <div class="notice-bar" v-if="tips">
             <dzs-notice-bar :text="tips" type="success" :showCloseIcon="false">
             </dzs-notice-bar>
