@@ -186,7 +186,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .entryPrice-box {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     padding-bottom: 30px;
 
@@ -207,7 +208,8 @@ export default {
     .search_box {
         background-color: #d1d0d06b;
         border-radius: 20px;
-        width: 340px;
+        width: 100%;
+        max-width: 340px;
         height: 40px;
         display: flex;
         align-items: center;

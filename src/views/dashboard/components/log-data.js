@@ -1,4 +1,12 @@
+
 export default [
+    {
+        version : "3.0.7",
+        date : "2025-02-13",
+        log : [
+            "支持移动端展示啦",
+        ]
+    },
     {
         version : "3.0.6",
         date : "2025-02-12",

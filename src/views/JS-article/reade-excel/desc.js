@@ -176,12 +176,5 @@ export const returnTableData = [
         parameterType : "Function",
         desc : "导出xls",
         remark : ""
-    },
-    {
-        key : "outCvs",
-        type : "return",
-        parameterType : "Function",
-        desc : "导出cvs",
-        remark : ""
-    },
+    }
 ]

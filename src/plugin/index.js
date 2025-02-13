@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import store from '../store';
 import "./element-ui";
 
 import "../assets/css/reset.scss";
@@ -14,3 +15,9 @@ Vue.use(dzsTable);
 Vue.use(dzsBacktop);
 Vue.use(myDirective);
 Vue.use(dzsNavigationTitle);
+
+// 监听浏览器窗口变化
+window.onresize = () => {
+    store.dispatch("isPhone/setIsPhone", window.innerWidth < 1200);
+};
+store.dispatch("isPhone/setIsPhone", window.innerWidth < 1200);

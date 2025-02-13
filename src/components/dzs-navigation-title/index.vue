@@ -1,5 +1,5 @@
 <template>
-    <div class="dzs-navigation-title" v-if="navigationTitleArr.length && isShow">
+    <div class="dzs-navigation-title-box" v-if="navigationTitleArr.length">
         <ul>
             <li v-for="(item, index) in navigationTitleArr" :key="index">
                 <a class="elli1" :class="[currentUrl == item ? 'active' : '']" :href="'#' + item">{{ item }}</a>
@@ -14,21 +14,17 @@ export default {
         return {
             navigationTitleArr: [],
             currentUrl: "",
-            isShow : false
         };
     },
     mounted() {
         this.getAllNavigationTitle();
-        // 监听 .el-main 的滚动条
         const mainContent = document.querySelector('.el-main');
+        mainContent && mainContent.removeEventListener("scroll", this.scrollEvent());
         mainContent.addEventListener("scroll", this.scrollEvent);
-        setTimeout(() => {
-            this.isShow = true;
-        }, 1000);
     },
     beforeDestroy() {
         const mainContent = document.querySelector('.el-main');
-        mainContent.removeEventListener("scroll", this.scrollEvent());
+        mainContent && mainContent.removeEventListener("scroll", this.scrollEvent());
     },
     methods: {
         // 获取所有 .dzs-navigation-title 的节点
@@ -38,7 +34,7 @@ export default {
             );
             let navigationTitleArr = [];
             for (let i = 0; i < navigationTitle.length; i++) {
-                navigationTitleArr.push(navigationTitle[i].innerText);
+                if (navigationTitle[i].innerText) navigationTitleArr.push(navigationTitle[i].innerText);
             }
             this.navigationTitleArr = navigationTitleArr;
             this.getCurrentUrl();
@@ -53,7 +49,7 @@ export default {
                     window.location.href = url;
                 }, 1000);
             }
-            if(!url.includes("#")){
+            if (!url.includes("#")) {
                 this.currentUrl = this.navigationTitleArr[0]
             }
         },
@@ -62,9 +58,9 @@ export default {
             const mainContent = document.querySelector('.el-main');
             // 获取 mainContent 的滚动条
             const scrollTop = mainContent.scrollTop;
-            if(scrollTop < 40){
+            if (scrollTop < 40) {
                 this.currentUrl = this.navigationTitleArr[0]
-                return ;
+                return;
             }
             const isInViewport = (targetElement) => {
                 const mainElement = document.querySelector('.el-main');
@@ -93,11 +89,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.dzs-navigation-title {
+.dzs-navigation-title-box {
     width: 200px;
     position: absolute;
     top: 100px;
     right: 20px;
+    z-index: 999;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
     ul {
         li {

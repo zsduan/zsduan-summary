@@ -3,7 +3,6 @@
         <public-item v-for="(item, index) in list" :key="index" :title="item.title" :code="item.code">
         </public-item>
         <dzs-backtop  target=".el-main"></dzs-backtop>
-        <dzs-navigation-title></dzs-navigation-title>
     </section>
 </template>
 <script>
