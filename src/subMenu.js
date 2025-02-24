@@ -303,6 +303,12 @@ export default [
                 name: '99MultiplicationTable',
                 meta: { title: '99乘法表' }
             },
+            {
+                path : '/postman',
+                component : "idea/postman/index",
+                name : 'postman',
+                meta : {title : 'Postman'}
+            },
         ]
     }
 ] 

@@ -142,6 +142,13 @@ export const descData = [
         remark : "height 高度设置  column 列配置 search 搜索配置 ['search','column','height']"
     },
     {
+        key : "operationWidth",
+        type : "props",
+        parameterType : "String",
+        desc : "操作栏宽度",
+        remark : ""
+    },
+    {
         key : "@selectionChange",
         type : "methods",
         parameterType : "",

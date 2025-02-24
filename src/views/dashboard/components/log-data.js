@@ -1,6 +1,25 @@
 
 export default [
     {
+        version : "3.0.8",
+        date : "2025-02-24",
+        log : [
+            {
+                tips : "表格组件 新增 operationWidth 控制操作栏的宽度",
+                links : [
+                    '/dzs-table#参数说明'
+                ]
+            },
+            "修复 表单组件、表格组件、表单搜索组件 对正则表达式和时间处理失败的bug",
+            {
+                tips : "新增 postman 组件 可以直接进行 请求 目前只支持 query 和 json参数",
+                links : [
+                    '/postman'
+                ]
+            },
+        ]
+    },
+    {
         version : "3.0.7",
         date : "2025-02-13",
         log : [

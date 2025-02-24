@@ -23,7 +23,7 @@
                     </template>
                 </template>
                 <el-table-column v-if="showOperation" :class-name="'table-column_' + columnClassName"
-                    v-bind="operationOption" label="操作">
+                    v-bind="operationOption" label="操作" :width="operationWidth">
                     <template slot-scope="scope">
                         <el-button type="text" class="btn" size="small" v-for="(item, index) in operation" :key="index">
                             <span @click="onEdit(scope.row)" v-if="item == 'edit'">编辑</span>
@@ -68,6 +68,7 @@
  * @props showSider 是否显示侧边栏 默认true 显示
  * @props showOperation 是否显示操作列 默认true 显示
  * @props forceSearch 是否强制搜索 默认false 不强制搜索 true 强制搜索
+ * @props operationWidth 操作栏宽度
  *
  * @methods selectionChange 选中数据改变 返回当前选中的数据
  * @methods change 页码/条数改变 返回当前页码/条数  status:page 改变页码  status:size 改变条数

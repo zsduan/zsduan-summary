@@ -105,7 +105,14 @@ const defaultProps = {
         default : () =>{
             return ['search','column','height']
         }
-    } 
+    },
+    /**操作栏宽度*/
+    'operation-width' : {
+        type : String,
+        default : () =>{
+            return ''
+        }
+    }
 };
 
 export default defaultProps;

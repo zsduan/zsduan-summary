@@ -8,7 +8,12 @@
                     <span class="log-time">{{item.date}}</span>
                 </li>
                 <li v-for="(log,logIndex) in item.log" :key="logIndex">
-                    {{logIndex + 1}}、{{log}}
+                    {{logIndex + 1}}、
+                    <span v-if="!log.tips">{{log}}</span>
+                    <span v-else>
+                        <span>{{log.tips}}</span>
+                        <a v-for="(item,index) in log.links" :href="item">查看修改（{{index + 1}}）</a>
+                    </span>
                 </li>
             </ol>
         </ul>
@@ -19,7 +24,8 @@ import logData from './log-data';
 export default{
     data(){
         return{
-            logData : logData
+            logData : logData,
+            BASE_URL : "https://zongjie.anran233.com"
         }
     }
 }
@@ -44,6 +50,11 @@ export default{
                 font-size: 14px;
                 color: #666;
                 padding: 2px 0;
+                a {
+                    display: inline-block;
+                    color : var(--themecolor);
+                    padding-left : 10px;
+                }
             }
         }
     }
