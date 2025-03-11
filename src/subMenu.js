@@ -111,6 +111,12 @@ export default [
                 name : 'fourSets',
                 meta : { title : '后台四件套' }
             },
+            {
+                path : "/dzs-douyin",
+                component : "component-section/dzs-douyin/index",
+                name : 'dzsDouyin',
+                meta : { title : '仿抖音' }
+            },
         ]
     },
     {

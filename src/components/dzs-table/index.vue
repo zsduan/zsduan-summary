@@ -252,6 +252,7 @@ export default {
             // 滚动条宽度
             &::-webkit-scrollbar {
                 width: 4px;
+                height: 6px;
                 background-color: #fff;
                 display: block;
             }
