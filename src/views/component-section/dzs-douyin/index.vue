@@ -3,7 +3,7 @@
         <public-item title="基础用法">
             <div class="phone-public">
                 <div class="phone-box">
-                    <dzs-douyin :list="videoList"></dzs-douyin>
+                    <dzs-douyin :list="videoList" @change="changeVideo"></dzs-douyin>
                 </div>
             </div>
         </public-item>
@@ -31,6 +31,11 @@ export default {
                 url : `/video/0${i % 2 == 0 ? '2' : '1'}.mp4`
             }
             this.videoList.push(json)
+        }
+    },
+    methods: {
+        changeVideo(e){
+            console.log(e)
         }
     }
 }

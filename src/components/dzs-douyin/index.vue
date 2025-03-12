@@ -1,17 +1,20 @@
 <template>
     <div class="dzs-douyin-box">
-        <div class="content-box"
-            :style="{ height: (height * videoList.length) + 'px', transform: 'translateY(' + transformY + 'px)' }">
+        <div class="content-box" :style="{
+            height: (height * videoList.length) + 'px',
+            transform: 'translateY(' + transformY + 'px)',
+            'transition-duration': transitionDuration,
+        }">
             <div class="item-box" :style="{ height: height + 'px' }" v-for="(item, index) in videoList" :key="index">
                 <div class="video-box">
-                    <video :src="item.url" loop="loop" muted="muted">
+                    <video :ref="'dzs-video-' + index" :src="item.url" :autoplay="item.autoplay" loop="loop" muted="muted">
                     </video>
                 </div>
                 <div class="mask-box" @mousedown="itemDown(index)" @mousemove="itemMove" @mouseup="itemUp"
-                    @touchstart="itemDown(index)" @touchmove.stop="itemMove" @touchend.stop="itemUp">
+                    @touchstart="itemDown(index)" @touchmove.stop="itemMove" @touchend.stop="itemUp" @click="playVideo(index)">
                     <div class="right-bottom">
-                        <div class="heart"></div>
-                        <div class="star-button"></div>
+                        <div class="heart" :class="[item.isLike ? 'active' : '']"></div>
+                        <div class="star-button" :class="[item.isStar ? 'active' : '']"></div>
                         <div class="share-button">
                             <svg t="1741661731876" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="3478"
@@ -69,8 +72,10 @@ export default {
             current: {
                 start: 0,
                 index: 0,
-                end: 20
-            }
+                end: 5,
+                interval: 5
+            },
+            transitionDuration: '500ms',
         }
     },
     watch: {
@@ -79,12 +84,18 @@ export default {
                 if (newVal.length > 10) {
                     this.videoList = [];
                     for (let i = this.current.start; i < this.current.end; i++) {
-                        this.videoList.push(newVal[i])
+                        let item = newVal[i];
+                        item.autoplay = false;
+                        this.videoList.push(item)
                     }
+                    this.videoList[0].autoplay = true;
                 } else {
                     for (let i = 0; i < newVal.length; i++) {
-                        this.videoList.push(newVal[i])
+                        let item = newVal[i];
+                        item.autoplay = false;
+                        this.videoList.push(item)
                     }
+                    this.videoList[0].autoplay = true;
                 }
             }
         }
@@ -105,16 +116,79 @@ export default {
         itemUp() {
             this.isMouseDown = false;
             this.clickDomInfo = {};
+            this.videoList.forEach((item, index) => {
+                item.autoplay = false;
+            })
+            let isUp = false;
+            let isDown = false;
             if (this.transformY % this.height != 0) {
                 if (this.transformY % this.height < this.height / 2 && this.isUp) {
                     this.transformY = -(this.height * (this.clickIndex + 1));
+                    this.videoList[this.clickIndex + 1].autoplay = true;
+                    isUp = true;
                 } else if (this.transformY % this.height < this.height / 2 && this.isDown) {
                     this.transformY = -(this.height * (this.clickIndex - 1));
+                    this.videoList[this.clickIndex - 1].autoplay = true;
+                    isDown = true;
                 } else {
                     this.transformY = -(this.height * this.clickIndex);
                 }
             }
             this.current.index = this.clickIndex;
+            // 上拉
+            if (this.isUp) {
+                if (this.current.index + 1 >= this.current.interval) {
+                    this.current.start = this.current.end - 2;
+                    this.current.end = this.current.end + this.current.interval - 2;
+                    if (this.current.end > this.list.length) {
+                        this.current.end = this.list.length;
+                    }
+                    this.videoList = [];
+                    for (let i = this.current.start; i < this.current.end; i++) {
+                        let item = this.list[i];
+                        item.autoplay = false;
+                        this.videoList.push(item);
+                    }
+                    this.transitionDuration = '0ms';
+                    this.transformY = -(this.height);
+                    this.videoList[2].autoplay = true;
+                    setTimeout(() => {
+                        this.transitionDuration = '500ms';
+                        this.transformY = -(this.height * 2);
+                    }, 100);
+                }
+            }
+            // 上拉
+            if (this.isDown) {
+                if (this.current.index == 0 && this.current.start != 0) {
+                    this.current.end = this.current.end - this.current.start;
+                    this.current.start = this.current.start - this.current.interval;
+                    if (this.current.start < 0) {
+                        this.current.start = 0;
+                        this.current.end = this.current.interval;
+                    }
+                    this.videoList = [];
+                    for (let i = this.current.start; i < this.current.end; i++) {
+                        let item = this.list[i];
+                        item.autoplay = false;
+                        this.videoList.push(item);
+                    }
+                    this.transitionDuration = '0ms';
+                    this.transformY = -(this.height * (this.current.interval - 2));
+                    this.videoList[this.current.interval - 3].autoplay = true;
+                    setTimeout(() => {
+                        this.transitionDuration = '500ms';
+                        this.transformY = -(this.height * (this.current.interval - 3));
+                    }, 100);
+                }
+            }
+            let changeIndex = this.clickIndex;
+            isDown ? changeIndex = this.clickIndex - 1 : null;
+            isUp ? changeIndex = this.clickIndex + 1 : null;
+            this.$emit('change', {
+                index: changeIndex,
+                item: this.videoList[changeIndex]
+            });
             this.clickIndex = -1;
         },
         itemMove(e) {
@@ -124,9 +198,9 @@ export default {
             if (!this.clickDomInfo.clientY) {
                 this.clickDomInfo = $event;
             }
+            this.isUp = $event.clientY - this.clickDomInfo.clientY < 0;
+            this.isDown = $event.clientY - this.clickDomInfo.clientY > 0;
             if ($event.clientY - this.clickDomInfo.clientY < 0 && this.clickIndex != this.videoList.length - 1) {
-                this.isUp = true;
-                this.isDown = false;
                 if (($event.clientY - this.clickDomInfo.clientY) < -this.height) {
                     return;
                 }
@@ -139,8 +213,6 @@ export default {
                 return;
             }
             if ($event.clientY - this.clickDomInfo.clientY > 0 && this.clickIndex != 0) {
-                this.isUp = false;
-                this.isDown = true;
                 if (($event.clientY - this.clickDomInfo.clientY) > this.height) {
                     return;
                 }
@@ -149,7 +221,16 @@ export default {
                     this.transformY = 0;
                 }
             }
-        }
+        },
+        /**播放和暂停视频*/
+        playVideo(index){
+            let video = this.$refs['dzs-video-'+index][0];
+            if(video.paused){
+                video.play();
+            }else{
+                video.pause();
+            }
+        } 
     }
 }
 </script>
@@ -197,7 +278,7 @@ export default {
                     background-color: var(--icon-color);
                 }
 
-                &.active::before {
+                &.active::before,&.active::after {
                     background-color: red;
                 }
 
@@ -300,7 +381,6 @@ export default {
     .content-box {
         width: 100%;
         overflow-y: auto;
-        transition-duration: 500ms;
         display: flex;
         flex-direction: column;
         position: relative;
