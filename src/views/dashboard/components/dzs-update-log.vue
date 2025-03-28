@@ -12,7 +12,7 @@
                     <span v-if="!log.tips">{{log}}</span>
                     <span v-else>
                         <span>{{log.tips}}</span>
-                        <a v-for="(item,index) in log.links" :href="item">查看修改（{{index + 1}}）</a>
+                        <a v-for="(item,index) in log.links" :href="item">查看（{{index + 1}}）</a>
                     </span>
                 </li>
             </ol>

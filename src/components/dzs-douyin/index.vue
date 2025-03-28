@@ -5,13 +5,16 @@
             transform: 'translateY(' + transformY + 'px)',
             'transition-duration': transitionDuration,
         }">
-            <div class="item-box" :style="{ height: height + 'px' }" v-for="(item, index) in videoList" :key="index">
+            <div class="item-box" @mousedown="itemDown(index)" @mousemove="itemMove" @mouseup="itemUp"
+                @touchstart="itemDown(index)" @touchmove.stop="itemMove" @touchend.stop="itemUp"
+                @click="playVideo(index)" :style="{ height: height + 'px' }" v-for="(item, index) in videoList"
+                :key="index">
                 <div class="video-box">
-                    <video :ref="'dzs-video-' + index" :src="item.url" :autoplay="item.autoplay" loop="loop" muted="muted">
+                    <video playsinline x-webkit-airplay="true" :ref="'dzs-video-' + index" :autoplay="item.autoplay" loop="loop">
+                        <source :src="item.url" type="video/mp4">
                     </video>
                 </div>
-                <div class="mask-box" @mousedown="itemDown(index)" @mousemove="itemMove" @mouseup="itemUp"
-                    @touchstart="itemDown(index)" @touchmove.stop="itemMove" @touchend.stop="itemUp" @click="playVideo(index)">
+                <div class="mask-box">
                     <div class="right-bottom">
                         <div class="heart" :class="[item.isLike ? 'active' : '']"></div>
                         <div class="star-button" :class="[item.isStar ? 'active' : '']"></div>
@@ -41,6 +44,11 @@
                         </div>
                     </div>
                     <div class="right-box"></div>
+                    <div class="duration-box">
+                        <div class="duration-time">{{ durationInfo.currentZh }}/{{ durationInfo.durationZh }}</div>
+                        <div class="current" @click.stop="progressClick($event , index)" :style="{ width: durationInfo.progress + '%' }"></div>
+                        <div class="duration" :ref="'dzs-progress-' + index" @click.stop="progressClick($event , index)"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,6 +84,14 @@ export default {
                 interval: 5
             },
             transitionDuration: '500ms',
+            durationInfo: {
+                durationZh: "",
+                duration: 0,
+                current: 0,
+                currentZh: "",
+                progress: 0
+            },
+            oldVideoInfo : null
         }
     },
     watch: {
@@ -97,6 +113,9 @@ export default {
                     }
                     this.videoList[0].autoplay = true;
                 }
+                setTimeout(() => {
+                    this.getVideoInfo(0);
+                }, 1000)
             }
         }
     },
@@ -189,6 +208,7 @@ export default {
                 index: changeIndex,
                 item: this.videoList[changeIndex]
             });
+            this.getVideoInfo(changeIndex);
             this.clickIndex = -1;
         },
         itemMove(e) {
@@ -222,15 +242,60 @@ export default {
                 }
             }
         },
-        /**播放和暂停视频*/
-        playVideo(index){
-            let video = this.$refs['dzs-video-'+index][0];
-            if(video.paused){
-                video.play();
-            }else{
+        playVideo(index) {
+            let video = this.$refs['dzs-video-' + index][0];
+            if (!video.paused) {
+                // 暂停
                 video.pause();
+                return;
             }
-        } 
+            video.play();
+        },
+        /**获取视频信息*/
+        getVideoInfo(index) {
+            let video = this.$refs['dzs-video-' + index][0];
+            this.durationInfo.duration = video.duration;
+            this.durationInfo.durationZh = this.formatTimeToMinutes(video.duration);
+            this.durationInfo.currentTime = video.currentTime;
+            this.durationInfo.currentZh = this.formatTimeToMinutes(video.currentTime);
+            if (this.durationInfo.duration) {
+                this.durationInfo.progress = ((video.currentTime / this.durationInfo.duration) * 100).toFixed(2);
+            }
+            if(this.oldVideoInfo){
+                this.oldVideoInfo.removeEventListener('timeupdate', ()=>{});
+            }
+            video.addEventListener('timeupdate', () => {
+                // 获取当前播放时间（以秒为单位）
+                this.durationInfo.current = video.currentTime;
+                this.durationInfo.currentZh = this.formatTimeToMinutes(video.currentTime);
+                if (this.durationInfo.duration) {
+                    this.durationInfo.progress = ((video.currentTime / this.durationInfo.duration) * 100).toFixed(2);
+                }
+            });
+            this.oldVideoInfo = video;
+        },
+        /**
+         * 转换时间 为 00:00格式
+         * @param {Number} time 时间戳
+         * */
+        formatTimeToMinutes(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        },
+        /**
+         * 点击进度条计算当前播放时间 并跳转到对应进度
+         * @param {Object} e 事件对象
+         * @param {Number} index 当前点击的索引
+         * */ 
+        progressClick(e, index) {
+            const $event = e.touches ? e.touches[0] : e;
+            if (this.durationInfo.duration) {
+                const progress = ($event.clientX - this.$refs['dzs-progress-' + index][0].getBoundingClientRect().left) / this.$refs['dzs-progress-' + index][0].offsetWidth;
+                console.log(this.durationInfo.duration , $event , progress);
+                this.$refs['dzs-video-' + index][0].currentTime = progress * this.durationInfo.duration;
+            }
+        },
     }
 }
 </script>
@@ -256,7 +321,6 @@ export default {
             bottom: 20%;
             height: 180px;
             width: 50px;
-            // background-color: aqua;
 
             .heart {
                 position: absolute;
@@ -278,7 +342,8 @@ export default {
                     background-color: var(--icon-color);
                 }
 
-                &.active::before,&.active::after {
+                &.active::before,
+                &.active::after {
                     background-color: red;
                 }
 
@@ -351,7 +416,7 @@ export default {
 
     .info-box {
         position: absolute;
-        bottom: 10px;
+        bottom: 15px;
         left: 0;
         padding: 5px;
         width: 100%;
@@ -375,6 +440,39 @@ export default {
             width: 60%;
             font-size: 14px;
             color: rgba(255, 255, 255, .8);
+        }
+    }
+
+    .duration-box {
+        position: absolute;
+        width: 96%;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .duration-time {
+            position: absolute;
+            color: #fff;
+            font-size: 12px;
+            right: 2%;
+            bottom: 10px;
+        }
+
+        .current {
+            position: absolute;
+            height: 5px;
+            background-color: red;
+            left: 0;
+            top: 0;
+        }
+
+        .duration {
+            height: 5px;
+            background-color: #fff;
+            left: 0;
+            overflow: hidden;
+            border-radius: 3px;
+            width: 100%;
         }
     }
 

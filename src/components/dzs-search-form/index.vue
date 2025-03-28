@@ -28,17 +28,17 @@
                 <template>
                     <el-col :span="btnSpan">
                         <div :class="{ 'form-sbumit-box': true, 'form-sbumit-box-phone': this.btnSpan == 24 }">
-                            <el-button v-if="showButton" class="btn" type="primary" :icon="btnIcon"
+                            <dzs-button v-if="showButton" class="btn" type="primary" :icon="btnIcon"
                                 @click.stop="onSubmit()">
                                 {{ bottonText.submitText ? bottonText.submitText : '搜索' }}
-                            </el-button>
-                            <el-button v-if="showButton" @click.stop="onReset">
+                            </dzs-button>
+                            <dzs-button v-if="showButton" @click.stop="onReset">
                                 {{ bottonText.resetText ? bottonText.resetText : '重置' }}
-                            </el-button>
-                            <el-button v-if="!openItems && spanCount > 18" @click="openItem" type="text">展开<i
-                                    class="el-icon-arrow-down"></i></el-button>
-                            <el-button v-if="openItems && spanCount > 18" @click="retractItem" type="text">收起<i
-                                    class="el-icon-arrow-up"></i></el-button>
+                            </dzs-button>
+                            <dzs-button v-if="!openItems && spanCount > 18" @click="openItem" text type="primary">展开<i
+                                    class="el-icon-arrow-down"></i></dzs-button>
+                            <dzs-button v-if="openItems && spanCount > 18" @click="retractItem" text type="primary">收起<i
+                                    class="el-icon-arrow-up"></i></dzs-button>
                             <slot name="button"></slot>
                         </div>
                     </el-col>
@@ -85,11 +85,13 @@ import { pickerOptions } from "./config.js";
 import deepCopy from "./deepCopy.js";
 import dzsFormItem from "./components/dzs-form-item";
 import dzsItem from "./components/dzs-item";
+import dzsButton from "../dzs-button";
 export default {
     name: "dzsSearchForm",
     components: {
         dzsFormItem,
-        dzsItem
+        dzsItem,
+        dzsButton
     },
     model: {
         prop: "value",

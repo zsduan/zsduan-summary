@@ -37,13 +37,13 @@
             <slot ></slot>
         </el-form>
         <div :class="['form-sbumit-box', buttonFlex]" v-if="showFooter">
-            <el-button @click.stop="onCancel" v-if="showButton">
+            <dzs-button @click.stop="onCancel" v-if="showButton">
                 {{ bottonText.cancelText ? bottonText.cancelText : '取消' }}
-            </el-button>
+            </dzs-button>
             <slot name="footerBtn"></slot>
-            <el-button type="primary" @click.stop="onSubmit()" v-if="showButton">
+            <dzs-button type="primary" @click.stop="onSubmit()" v-if="showButton">
                 {{ bottonText.submitText ? bottonText.submitText : '提交'}}
-            </el-button>
+            </dzs-button>
         </div>
     </div>
 </template>
@@ -101,6 +101,7 @@ import deepCopy from "./deepCopy.js";
 import dzsFormItem from "./components/dzs-form-item";
 import dzsItem from "./components/dzs-item";
 import dzsFormDataCopyAndPaste from "./components/dzs-form-data-copy-and-paste";
+import dzsButton from "../dzs-button";
 import {simpleHash} from "./tool.js";
 export default {
     name: "dzsForm",
@@ -112,6 +113,7 @@ export default {
         dzsFormItem,
         dzsItem,
         dzsFormDataCopyAndPaste,
+        dzsButton
     },
     props: {
         options: {

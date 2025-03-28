@@ -1,20 +1,20 @@
 <template>
     <div class="dzs-header-btn-box" :class="labelPosition" v-if="myRules.length">
-        <el-button v-if="getRules('add')" type="primary" icon="el-icon-plus" @click="exportMethod('add')">添加</el-button>
+        <dzs-button v-if="getRules('add')" type="primary" icon="el-icon-plus" @click="exportMethod('add')">添加</dzs-button>
         <el-popover v-if="getRules('import')" placement="bottom" width="400" trigger="click">
             <dzs-upload-file :action="action" @change="changeFile" :fileType="['xls', 'xlsx']"></dzs-upload-file>
-            <el-button slot="reference" type="primary" icon="el-icon-upload2">导入</el-button>
+            <dzs-button slot="reference" type="primary" icon="el-icon-upload2">导入</dzs-button>
         </el-popover>
-        <el-button v-if="getRules('delete')" type="danger" icon="el-icon-delete" :disabled="isBatchDelete"
-            @click="batchDelete">删除全部</el-button>
-        <el-button v-if="getRules('export')" type="primary" icon="el-icon-download" @click="exportMethod('export')">
+        <dzs-button v-if="getRules('delete')" type="danger" icon="el-icon-delete" :disabled="isBatchDelete"
+            @click="batchDelete">删除全部</dzs-button>
+        <dzs-button v-if="getRules('export')" type="primary" icon="el-icon-download" @click="exportMethod('export')">
             导出
-        </el-button>
+        </dzs-button>
         <el-dropdown v-if="getRules(['export-all', 'export-current', 'export-select'])">
-            <el-button type="primary" icon="el-icon-download">
+            <dzs-button type="primary" icon="el-icon-download">
                 <span>导出</span>
                 <i class="el-icon-arrow-down el-icon--right"></i>
-            </el-button>
+            </dzs-button>
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
                     <div @click="exportMethod('exportAll')">导出全部</div>
@@ -52,6 +52,7 @@
  * @solt {slot} 默认插槽
  * */ 
 import dzsUploadFile from "../dzs-upload-file";
+import dzsButton from "../dzs-button";
 export default {
     name: "dzsHeaderButton",
     props: {
@@ -83,7 +84,8 @@ export default {
         }
     },
     components: {
-        dzsUploadFile
+        dzsUploadFile,
+        dzsButton
     },
     computed: {
         myRules() {

@@ -1,6 +1,32 @@
 
 export default [
     {
+        version : "3.0.9",
+        date : "2025-03-28",
+        log : [
+            {
+                tips : "基础版仿抖音组件上线",
+                links : [
+                    '/dzs-douyin'
+                ]
+            },
+            {
+                tips : "新增文章列表组件",
+                links : [
+                    '/dzs-article-item'
+                ]
+            },
+            {
+                tips : "新增按钮组件",
+                links : [
+                    '/dzs-button'
+                ]
+            },
+            "后台四件套/表单组件/表单搜索组件更换按钮组件",
+            "新版深度复制更新了,对正则表达式/时间复制进行了修复"
+        ]
+    },
+    {
         version : "3.0.8",
         date : "2025-02-24",
         log : [

@@ -10,6 +10,12 @@ export default [
         },
         children: [
             {
+                path: '/dzs-button',
+                component: "component-section/dzs-button/dzs-button",
+                name: 'dzsButton',
+                meta: { title: '按钮组件' }
+            },
+            {
                 path: '/dzs-dialog',
                 component: "component-section/dzs-dialog/index",
                 name: 'dzsDialog',
@@ -116,6 +122,12 @@ export default [
                 component : "component-section/dzs-douyin/index",
                 name : 'dzsDouyin',
                 meta : { title : '仿抖音' }
+            },
+            {
+                path : "/dzs-article-item",
+                component : "component-section/dzs-article-item/index",
+                name : 'dzsArticleItem',
+                meta : { title : '文章列表' }
             },
         ]
     },
