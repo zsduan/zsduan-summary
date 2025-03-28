@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[94],{
 
-/***/ "./src/views/component-section/code-editor/desc.js":
-/*!*********************************************************!*\
-  !*** ./src/views/component-section/code-editor/desc.js ***!
-  \*********************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/JS-article/signalR/config.js":
+/*!************************************************!*\
+  !*** ./src/views/JS-article/signalR/config.js ***!
+  \************************************************/
+/*! exports provided: code1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"value / v-model\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示\",\n  remark: \"\"\n}, {\n  key: \"language\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"语言\",\n  remark: \"\"\n}, {\n  key: \"placeholder\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"提示文字\",\n  remark: \"\"\n}, {\n  key: \"zIndex\",\n  type: \"props\",\n  parameterType: \"Number | String\",\n  desc: \"层级\",\n  remark: \"默认 999\"\n}, {\n  key: \"autoHeight\",\n  type: \"props\",\n  parameterType: \"String | Boolean\",\n  desc: \"是否自动高度\",\n  remark: \"默认 true\"\n}, {\n  key: \"height\",\n  type: \"props\",\n  parameterType: \"Number\",\n  desc: \"高度\",\n  remark: \"默认0\"\n}, {\n  key: \"editorOptions\",\n  type: \"props\",\n  parameterType: \"Object\",\n  desc: \"编辑器配置\",\n  remark: \"codemirror 配置\"\n}, {\n  key: \"showMenu\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示菜单\",\n  remark: \"默认 true\"\n}, {\n  key: \"showHint\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否开启提示\",\n  remark: \"默认false\"\n}, {\n  key: \"@input\",\n  type: \"method\",\n  parameterType: \"\",\n  desc: \"输入方法\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/code-editor/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\nimport signalRcoont from \"@/tool/signalR\";\nconst signalR = signalRcoont({\n    url : \"\",\n    data : {\n        token : \"123456\"\n    },\n    success : (reslut) =>{\n        console.log(reslut)\n    },\n    fail : (error) =>{\n        console.log(error)\n    },\n    stop : (stop) => {\n        console.log(stop)\n    }\n})\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/signalR/config.js?");
 
 /***/ })
 

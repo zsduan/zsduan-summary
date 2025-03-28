@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[96],{
 
-/***/ "./src/views/component-section/dzs-dialog/desc.js":
-/*!********************************************************!*\
-  !*** ./src/views/component-section/dzs-dialog/desc.js ***!
-  \********************************************************/
-/*! exports provided: descData */
+/***/ "./src/views/JS-article/watermark/config.js":
+/*!**************************************************!*\
+  !*** ./src/views/JS-article/watermark/config.js ***!
+  \**************************************************/
+/*! exports provided: code1, code2, code3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"descData\", function() { return descData; });\nconst descData = [{\n  key: \"title\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"标题\",\n  remark: \"\"\n}, {\n  key: \"isShow / v-model\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示\",\n  remark: \"\"\n}, {\n  key: \"width\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"宽度\",\n  remark: \"\"\n}, {\n  key: \"options\",\n  type: \"props\",\n  parameterType: \"Object\",\n  desc: \"el-dialog的配置项\",\n  remark: \"\"\n}, {\n  key: \"fullscreen\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否全屏\",\n  remark: \"\"\n}, {\n  key: \"showFullscreen\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示全屏按钮\",\n  remark: \"\"\n}, {\n  key: \"@open\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"打开弹窗\",\n  remark: \"\"\n}, {\n  key: \"@close\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"关闭弹窗\",\n  remark: \"\"\n}, {\n  key: \"@opened\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"打开弹窗后的回调\",\n  remark: \"\"\n}, {\n  key: \"@closed\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"关闭弹窗后的回调\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-dialog/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code3\", function() { return code3; });\nconst code1 = `\nimport watermark from \"./tool/watermark.js\";\nwatermark({\n    watermark_txt : \"zsduan\",\n})\n`;\nconst code2 = `\nimport watermark , {clearWatermark} from \"@/tool/watermark.js\";\nwatermark({\n    watermark_txt : \"<p>zsduan的个人总结</p>\",\n    isHtml : true,\n    watermark_color : \"rgba(0,0,0,0.2)\",\n})\n`;\nconst code3 = `\nimport {clearWatermark} from \"@/tool/watermark.js\";\nclearWatermark()\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/watermark/config.js?");
 
 /***/ })
 

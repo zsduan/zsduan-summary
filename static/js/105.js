@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[105],{
 
-/***/ "./src/views/component-section/dzs-license-plate-keyboard/config.js":
-/*!**************************************************************************!*\
-  !*** ./src/views/component-section/dzs-license-plate-keyboard/config.js ***!
-  \**************************************************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/component-section/dzs-dialog/desc.js":
+/*!********************************************************!*\
+  !*** ./src/views/component-section/dzs-dialog/desc.js ***!
+  \********************************************************/
+/*! exports provided: descData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\n<template>\n    <div>\n        <el-input placeholder=\"请输入车牌号\" v-model=\"plateNumber\" class=\"ipt\" @focus=\"showKeyboard = true\"></el-input>\n        <dzs-license-plate-keyboard :isShow.sync=\"showKeyboard\" @change=\"changeKeyboard\" @del=\"del\">\n        </dzs-license-plate-keyboard>\n    </div>\n</template>\n<script>\nimport dzsLicensePlateKeyboard from \"@/components/dzs-license-plate-keyboard/index.vue\";\nexport default{\n    components:{\n        dzsLicensePlateKeyboard\n    },\n    data(){\n        return{\n            plateNumber:\"\",\n            showKeyboard:false\n        }\n    },\n    methods: {\n        changeKeyboard(e) {\n            this.plateNumber += e;\n        },\n        del() {\n            this.plateNumber = this.plateNumber.substring(0, this.plateNumber.length - 1)\n        }\n    }\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-license-plate-keyboard/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"descData\", function() { return descData; });\nconst descData = [{\n  key: \"title\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"标题\",\n  remark: \"\"\n}, {\n  key: \"isShow / v-model\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示\",\n  remark: \"\"\n}, {\n  key: \"width\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"宽度\",\n  remark: \"\"\n}, {\n  key: \"options\",\n  type: \"props\",\n  parameterType: \"Object\",\n  desc: \"el-dialog的配置项\",\n  remark: \"\"\n}, {\n  key: \"fullscreen\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否全屏\",\n  remark: \"\"\n}, {\n  key: \"showFullscreen\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示全屏按钮\",\n  remark: \"\"\n}, {\n  key: \"@open\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"打开弹窗\",\n  remark: \"\"\n}, {\n  key: \"@close\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"关闭弹窗\",\n  remark: \"\"\n}, {\n  key: \"@opened\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"打开弹窗后的回调\",\n  remark: \"\"\n}, {\n  key: \"@closed\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"关闭弹窗后的回调\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-dialog/desc.js?");
 
 /***/ })
 

@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[88],{
 
-/***/ "./src/views/JS-article/set-themecolor/desc.js":
-/*!*****************************************************!*\
-  !*** ./src/views/JS-article/set-themecolor/desc.js ***!
-  \*****************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/JS-article/send-notification/config.js":
+/*!**********************************************************!*\
+  !*** ./src/views/JS-article/send-notification/config.js ***!
+  \**********************************************************/
+/*! exports provided: code1, code2, code3, code4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"option\",\n  type: \"param\",\n  parameterType: \"String | Object\",\n  desc: \"配置信息 | 修改颜色 \",\n  remark: \"\",\n  children: [{\n    key: \"color\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"修改颜色\",\n    remark: \"支持16进制颜色 rgb颜色 不支持rgba和hsl\"\n  }, {\n    key: \"generate\",\n    type: \"param\",\n    parameterType: \"Boolean\",\n    desc: \"是否生成0.1-0.9透明度颜色\",\n    remark: \"\"\n  }, {\n    key: \"name\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"主题名称 默认为 --themecolor\",\n    remark: \"\"\n  }, {\n    key: \"success\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"成功返回\",\n    remark: \"\"\n  }, {\n    key: \"fail\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"失败返回\",\n    remark: \"\"\n  }]\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/set-themecolor/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code3\", function() { return code3; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code4\", function() { return code4; });\nconst code1 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    Vue : this,\n});\n`;\nconst code2 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    msg : \"测试信息\",\n    Vue : this,\n});\n`;\nconst code3 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    duration : 3000,\n    position : \"bottom-right\",\n    Vue : this,\n});\n`;\nconst code4 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    audioUrl : \"https://xxx\",\n    Vue : this,\n});\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/send-notification/config.js?");
 
 /***/ })
 

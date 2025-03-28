@@ -156,30 +156,6 @@ eval("\nvar globalThis = __webpack_require__(/*! ../internals/global-this */ \".
 
 /***/ }),
 
-/***/ "./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment-is-node.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment-is-node.js ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\nvar ENVIRONMENT = __webpack_require__(/*! ../internals/environment */ \"./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment.js\");\n\nmodule.exports = ENVIRONMENT === 'NODE';\n\n\n//# sourceURL=webpack:///./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment-is-node.js?");
-
-/***/ }),
-
-/***/ "./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment.js":
-/*!******************************************************************************************!*\
-  !*** ./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n/* global Bun, Deno -- detection */\nvar globalThis = __webpack_require__(/*! ../internals/global-this */ \"./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/global-this.js\");\nvar userAgent = __webpack_require__(/*! ../internals/environment-user-agent */ \"./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment-user-agent.js\");\nvar classof = __webpack_require__(/*! ../internals/classof-raw */ \"./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/classof-raw.js\");\n\nvar userAgentStartsWith = function (string) {\n  return userAgent.slice(0, string.length) === string;\n};\n\nmodule.exports = (function () {\n  if (userAgentStartsWith('Bun/')) return 'BUN';\n  if (userAgentStartsWith('Cloudflare-Workers')) return 'CLOUDFLARE';\n  if (userAgentStartsWith('Deno/')) return 'DENO';\n  if (userAgentStartsWith('Node.js/')) return 'NODE';\n  if (globalThis.Bun && typeof Bun.version == 'string') return 'BUN';\n  if (globalThis.Deno && typeof Deno.version == 'object') return 'DENO';\n  if (classof(globalThis.process) === 'process') return 'NODE';\n  if (globalThis.window && globalThis.document) return 'BROWSER';\n  return 'REST';\n})();\n\n\n//# sourceURL=webpack:///./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/environment.js?");
-
-/***/ }),
-
 /***/ "./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/function-bind-context.js":
 /*!****************************************************************************************************!*\
   !*** ./node_modules/.store/core-js@3.38.1/node_modules/core-js/internals/function-bind-context.js ***!

@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[106],{
 
-/***/ "./src/views/component-section/dzs-license-plate-keyboard/desc.js":
-/*!************************************************************************!*\
-  !*** ./src/views/component-section/dzs-license-plate-keyboard/desc.js ***!
-  \************************************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/component-section/dzs-editor/config.js":
+/*!**********************************************************!*\
+  !*** ./src/views/component-section/dzs-editor/config.js ***!
+  \**********************************************************/
+/*! exports provided: code1, code2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"isShow\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示键盘\",\n  remark: \"\"\n}, {\n  key: \"bottom\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"距离底部安全区的距离\",\n  remark: \"\"\n}, {\n  key: \"@complete\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"点击完成事件\",\n  remark: \"\"\n}, {\n  key: \"@change\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"键盘点击后的改变事件\",\n  remark: \"\"\n}, {\n  key: \"validatePlateNumber(plateNumber)\",\n  type: \"ref methods\",\n  parameterType: \"\",\n  desc: \"校验车牌号的函数 传入车牌号\",\n  remark: \"只是一个基础的函数不对真实校验负责\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-license-plate-keyboard/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\nconst code1 = `\n<template>\n    <dzs-editor @save=\"save\"></dzs-editor>\n</template>\n<script>\nimport dzsEditor from \"@/components/dzs-editor/index.vue\";\nexdefault {\n    components : {\n        dzsEditor\n    },\n    methods:{\n        save(val) {\n            // do something\n        }\n    }\n}\n</script>\n`;\nconst code2 = `\n<template>\n    <dzs-editor v-model=\"value\" @save=\"save\"></dzs-editor>\n</template>\n<script>\nimport dzsEditor from \"@/components/dzs-editor/index.vue\";\nexdefault {\n    components : {\n        dzsEditor\n    },\n    data(){\n        return {\n            value : \"<p>这是默认值</p>\"\n        }\n    },\n    methods:{\n        save(val) {\n            // do something\n        }\n    }\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-editor/config.js?");
 
 /***/ })
 

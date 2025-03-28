@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[110],{
 
-/***/ "./src/views/component-section/dzs-notice-bar/desc.js":
-/*!************************************************************!*\
-  !*** ./src/views/component-section/dzs-notice-bar/desc.js ***!
-  \************************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/component-section/dzs-header-button/config.js":
+/*!*****************************************************************!*\
+  !*** ./src/views/component-section/dzs-header-button/config.js ***!
+  \*****************************************************************/
+/*! exports provided: code1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"icon\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"el-ui icon图标\",\n  remark: \"\"\n}, {\n  key: \"imgSrc\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"图片 icon 优先级高于icon\",\n  remark: \"\"\n}, {\n  key: \"showIcon\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示icon\",\n  remark: \"\"\n}, {\n  key: \"closeIcon\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"el-ui icon图标\",\n  remark: \"\"\n}, {\n  key: \"closeImgSrc\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"关闭按钮图片 icon 优先级高于closeIcon\",\n  remark: \"\"\n}, {\n  key: \"showCloseIcon\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示关闭按钮\",\n  remark: \"\"\n}, {\n  key: \"text\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"提示文字\",\n  remark: \"\"\n}, {\n  key: \"speed\",\n  type: \"props\",\n  parameterType: \"Number\",\n  desc: \"滚动速度\",\n  remark: \"\"\n}, {\n  key: \"isMove\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否滚动\",\n  remark: \"\"\n}, {\n  key: \"isEline\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否多行显示\",\n  remark: \"\"\n}, {\n  key: \"color\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"文字颜色\",\n  remark: \"和css一样\"\n}, {\n  key: \"backgroundColor\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"背景颜色\",\n  remark: \"\"\n}, {\n  key: \"@close\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"关闭事件\",\n  remark: \"\"\n}, {\n  key: \"@contentClick\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"内容点击事件\",\n  remark: \"\"\n}, {\n  key: \"closeNoticeBar\",\n  type: \"ref methods\",\n  parameterType: \"\",\n  desc: \"通过ref调用关闭事件\",\n  remark: \"\"\n}, {\n  key: \"left-icon\",\n  type: \"slots\",\n  parameterType: \"\",\n  desc: \"左侧插槽\",\n  remark: \"\"\n}, {\n  key: \"right-icon\",\n  type: \"slots\",\n  parameterType: \"\",\n  desc: \"右侧插槽\",\n  remark: \"\"\n}, {\n  key: \"\",\n  type: \"slots\",\n  parameterType: \"\",\n  desc: \"默认插槽\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-notice-bar/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\n<template>\n    <dzs-header-button @btnClick='btnClick'></dzs-header-button>\n</template>\n<script>\nimport dzsHeaderButton from \"@/components/dzs-header-button\";\nexdefault {\n    components : {\n        dzsHeaderButton\n    },\n    methods:{\n        btnClick(val) {\n            // do something\n        }\n    }\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-header-button/config.js?");
 
 /***/ })
 

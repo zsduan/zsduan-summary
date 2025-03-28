@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[104],{
 
-/***/ "./src/views/component-section/dzs-identifying-code-canvans/desc.js":
-/*!**************************************************************************!*\
-  !*** ./src/views/component-section/dzs-identifying-code-canvans/desc.js ***!
-  \**************************************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/component-section/dzs-dialog/config.js":
+/*!**********************************************************!*\
+  !*** ./src/views/component-section/dzs-dialog/config.js ***!
+  \**********************************************************/
+/*! exports provided: code1, code2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"value / v-model\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"生成的验证码\",\n  remark: \"\"\n}, {\n  key: \"codeArr\",\n  type: \"props\",\n  parameterType: \"Array\",\n  desc: \"传入一个数组来自定义验证码\",\n  remark: \"默认26个字母和0-9数字\"\n}, {\n  key: \"uppercase\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否转大写\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-identifying-code-canvans/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\nconst code1 = `\n<template>\n    <dzs-popup :isShow.sync=\"isShow\">\n        <div>我是一个默认的弹窗</div>\n    </dzs-popup>\n</template>\nimport dzsDialog from \"@/components/dzs-dialog/index.vue\"\nexport default {\n    components: {\n        dzsDialog\n    },\n    data(){\n        return {\n            isShow : false\n        }\n    }\n}\n`;\nconst code2 = `\n<template>\n    <dzs-popup :isShow.sync=\"isShow\">\n        <div>我是一个有底部的弹窗</div>\n        <template slot=\"footer\">\n            <el-button>提交</el-button>\n        </template>\n    </dzs-popup>\n</template>\n<script>\nimport dzsDialog from \"@/components/dzs-dialog/index.vue\"\nexport default {\n    components: {\n        dzsDialog\n    },\n    data(){\n        return {\n            isShow : false\n        }\n    }\n}\n</script>\n\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-dialog/config.js?");
 
 /***/ })
 

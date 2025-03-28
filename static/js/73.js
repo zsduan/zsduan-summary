@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[73],{
 
-/***/ "./src/views/JS-article/get-ua/config.js":
-/*!***********************************************!*\
-  !*** ./src/views/JS-article/get-ua/config.js ***!
-  \***********************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/JS-article/format-time/config.js":
+/*!****************************************************!*\
+  !*** ./src/views/JS-article/format-time/config.js ***!
+  \****************************************************/
+/*! exports provided: code1, code2, code3, code4, code5, code6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\nimport getUA from \"@/tool/ua\";\nconst ua = getUA();\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/get-ua/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code3\", function() { return code3; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code4\", function() { return code4; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code5\", function() { return code5; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code6\", function() { return code6; });\nconst code1 = `\nimport {formatTime , asyncFormatTime , chainFormatTime , setTime} from \"@/tool/format-time\";\n\n/**方式一*/\nformatTime({\n    date : new Date(),\n    format : \"yyyy-MM-dd HH:mm:ss\",\n    success : (res)=>{\n        console.log(\"格式化后的时间 ==>\" ,res)\n    },\n    fail : (err)=>{\n        console.log(\"格式化错误 ==>\" , err)\n    },\n})\n\n/**方式二*/ \nconst time = formatTime({\n    date : new Date(),\n    format : \"yyyy-MM-dd\",\n});\n\n/**方式三*/ \nconst time = formatTime(new Date())\n\n/**方式四 Promise*/ \nasyncFormatTime({\n    date : new Date(),\n    format : \"yyyy-MM-dd HH:mm:ss\",\n}).then((res)=>{\n    console.log(\"格式化后的时间 ==>\" ,res)\n}).catch((err)=>{\n    console.log(\"格式化错误 ==>\" , err)\n})\n\n/**方式五 链式调用*/ \nconst time = chainFormatTime(new Date()).format(\"yyyy-MM-dd HH:mm:ss\").time;\n\n/**方式六 统一调用 不支持Promise 但是支持回调*/ \nimport {setTime} from \"@/tool/format-time\";\nsetTime.format({\n    date : new Date(),\n    format : \"yyyy-MM-dd HH:mm:ss\",\n    callback : (res)=>{\n        console.log(\"格式化后的时间 ==>\" ,res)\n    }\n})\n`;\nconst code2 = `\nimport {setTime} from \"@/tool/format-time\";\nconst diffTime = setTime.diff({\n    startDate : \"2024-01-01 12:00:00\",\n    endDate : new Date(),\n})\n`;\nconst code3 = `\nimport {setTime} from \"@/tool/format-time\";\nconst lastTime = setTime.last({\n    date : new Date(),\n    num : 2 ,\n    type : \"day\"\n})\n`;\nconst code4 = `\nimport {setTime} from \"@/tool/format-time\";\nconst week = setTime.week()\n`;\nconst code5 = `\nimport {setTime} from \"@/tool/format-time\";\nconst day= setTime.day({\n    date : new Date(),\n    type : \"year\"\n})\n`;\nconst code6 = `\nimport {setTime} from \"../../utils/format-time\";\nconst leapYear = setTime.leapYear(new Date())\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/format-time/config.js?");
 
 /***/ })
 

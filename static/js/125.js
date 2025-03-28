@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[125],{
 
-/***/ "./src/views/component-section/four-sets/config.js":
-/*!*********************************************************!*\
-  !*** ./src/views/component-section/four-sets/config.js ***!
-  \*********************************************************/
-/*! exports provided: tableHeaderOption, tableActionOption */
+/***/ "./src/views/component-section/dzs-slide-verification/desc.js":
+/*!********************************************************************!*\
+  !*** ./src/views/component-section/dzs-slide-verification/desc.js ***!
+  \********************************************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableHeaderOption\", function() { return tableHeaderOption; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableActionOption\", function() { return tableActionOption; });\n/**设置表格表头*/\nconst tableHeaderOption = [{\n  label: '序号',\n  key: \"id\",\n  width: \"80px\"\n}, {\n  label: '姓名',\n  key: \"name\"\n}, {\n  label: '年龄',\n  key: \"age\"\n}, {\n  label: '性别',\n  key: \"sex\"\n}, {\n  label: '地址',\n  key: \"address\",\n  width: \"300px\"\n}];\n\n/**表格操作按钮*/\nconst tableActionOption = ['edit', 'delete', 'detail'];\n\n//# sourceURL=webpack:///./src/views/component-section/four-sets/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"ErrorRange\",\n  type: \"props\",\n  parameterType: \"Number\",\n  desc: \"允许的误差值\",\n  remark: \"默认10\"\n}, {\n  key: \"isShow\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示\",\n  remark: \"\"\n}, {\n  key: \"@success\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"成功返回\",\n  remark: \"\"\n}, {\n  key: \"@fail\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"失败返回\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-slide-verification/desc.js?");
 
 /***/ })
 

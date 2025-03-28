@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[121],{
 
-/***/ "./src/views/component-section/dzs-upload-img/config.js":
-/*!**************************************************************!*\
-  !*** ./src/views/component-section/dzs-upload-img/config.js ***!
-  \**************************************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/component-section/dzs-qr-code/desc.js":
+/*!*********************************************************!*\
+  !*** ./src/views/component-section/dzs-qr-code/desc.js ***!
+  \*********************************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/**基础用法*/\nconst code1 = `\n<template>\n    <section>\n        <public-item title=\"基础用法\">\n            <dzs-upload-img @change=\"change\"></dzs-upload-img>\n        </public-item>\n    </section>\n</template>\n<script>\nimport dzsUploadImg from \"@/components/dzs-upload-img\"\nexport default {\n    components:{\n        dzsUploadImg\n    },\n    methods: {\n        change(fileList){\n            // do something\n        }\n    }\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-upload-img/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"option\",\n  type: \"props\",\n  parameterType: \"Object\",\n  desc: \"配置项\",\n  remark: \"\",\n  children: [{\n    key: \"value\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码内容\",\n    remark: \"\"\n  }, {\n    key: \"size\",\n    type: \"props\",\n    parameterType: \"Number\",\n    desc: \"二维码大小\",\n    remark: \"\"\n  }, {\n    key: \"level\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码等级\",\n    remark: \"\"\n  }, {\n    key: \"bgColor\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码背景颜色\",\n    remark: \"\"\n  }, {\n    key: \"fgColor\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码前景颜色\",\n    remark: \"\"\n  }, {\n    key: \"margin\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码边距\",\n    remark: \"\"\n  }, {\n    key: \"scale\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"缩放\",\n    remark: \"\"\n  }, {\n    key: \"version\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"版本号\",\n    remark: \"\"\n  }, {\n    key: \"errorCorrectionLevel\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码容错率\",\n    remark: \"\"\n  }, {\n    key: \"logo\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码logo\",\n    remark: \"\"\n  }, {\n    key: \"logoWidth\",\n    type: \"props\",\n    parameterType: \"Number\",\n    desc: \"logo宽度\",\n    remark: \"\"\n  }, {\n    key: \"logoHeight\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"logo高度\",\n    remark: \"\"\n  }, {\n    key: \"text\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码下方文字\",\n    remark: \"\"\n  }, {\n    key: \"font\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"文字字体\",\n    remark: \"\"\n  }, {\n    key: \"fontColor\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"底部文字颜色\",\n    remark: \"\"\n  }, {\n    key: \"lineWidth\",\n    type: \"props\",\n    parameterType: \"Number\",\n    desc: \"二维码底部文字线条宽度\",\n    remark: \"\"\n  }, {\n    key: \"lineColor\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"二维码底部文字线条颜色\",\n    remark: \"\"\n  }, {\n    key: \"showBoder\",\n    type: \"props\",\n    parameterType: \"Boolean\",\n    desc: \"是否显示边框\",\n    remark: \"\"\n  }]\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-qr-code/desc.js?");
 
 /***/ })
 

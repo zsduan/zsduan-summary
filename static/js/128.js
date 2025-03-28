@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[128],{
 
-/***/ "./src/views/directive/anti-vibration-and-throttling/desc.js":
-/*!*******************************************************************!*\
-  !*** ./src/views/directive/anti-vibration-and-throttling/desc.js ***!
-  \*******************************************************************/
-/*! exports provided: antiShakeData, throttleData */
+/***/ "./src/views/component-section/dzs-upload-file/config.js":
+/*!***************************************************************!*\
+  !*** ./src/views/component-section/dzs-upload-file/config.js ***!
+  \***************************************************************/
+/*! exports provided: code1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"antiShakeData\", function() { return antiShakeData; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"throttleData\", function() { return throttleData; });\n/**\r\n * @name 防抖 表格\r\n * */\nconst antiShakeData = [{\n  key: \"time\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"延迟时间\",\n  remark: \"time | callback | options 三选一\"\n}, {\n  key: \"callback\",\n  type: \"param\",\n  parameterType: \"Function\",\n  desc: \"回调函数\",\n  remark: \"time | callback | options 三选一\"\n}, {\n  key: \"options\",\n  type: \"param\",\n  parameterType: \"object \",\n  desc: \"配置对象\",\n  remark: \"time | callback | options 三选一\",\n  children: [{\n    key: \"time\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"延迟时间\",\n    remark: \"\"\n  }, {\n    key: \"callback\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"回调函数\",\n    remark: \"\"\n  }, {\n    key: \"type\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"防抖类型\",\n    remark: \"默认 button 支持 input\"\n  }]\n}];\n\n/**\r\n * @name 节流 表格\r\n * */\nconst throttleData = [{\n  key: \"time\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"延迟时间\",\n  remark: \"time | callback | options 三选一\"\n}, {\n  key: \"callback\",\n  type: \"param\",\n  parameterType: \"Function\",\n  desc: \"回调函数\",\n  remark: \"time | callback | options 三选一\"\n}, {\n  key: \"options\",\n  type: \"param\",\n  parameterType: \"object \",\n  desc: \"配置对象\",\n  remark: \"time | callback | options 三选一\",\n  children: [{\n    key: \"time\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"延迟时间\",\n    remark: \"\"\n  }, {\n    key: \"callback\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"回调函数\",\n    remark: \"\"\n  }, {\n    key: \"type\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"节流类型\",\n    remark: \"默认 input 支持 button\"\n  }]\n}];\n\n//# sourceURL=webpack:///./src/views/directive/anti-vibration-and-throttling/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/**基础用法*/\nconst code1 = `\n<template>\n    <section>\n        <dzs-upload-file @change=\"change\"></dzs-upload-file>\n    </section>\n</template>\n<script>\nimport dzUploadFile from \"@/components/dzs-upload-file\"\nexport default {\n    components:{\n        dzUploadFile\n    },\n    methods: {\n        change(fileList){\n            // do something\n        }\n    }\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-upload-file/config.js?");
 
 /***/ })
 
