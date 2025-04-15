@@ -8,7 +8,6 @@
     "build:github": "vue-cli-service build --mode github",
     "lint": "vue-cli-service lint"
   },
-  "main": "background.js",
   "dependencies": {
     "@microsoft/signalr": "^5.0.0",
     "@tinymce/tinymce-vue": "^3.2.8",

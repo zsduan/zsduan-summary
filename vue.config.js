@@ -8,7 +8,7 @@ module.exports = {
     outputDir: `dist/${time}`,
     lintOnSave: false,
     assetsDir: "static",
-    devServer:{
-        https : false
-    },
+    devServer: {
+        https: false
+    }
 };

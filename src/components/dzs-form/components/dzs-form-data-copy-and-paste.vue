@@ -1,14 +1,18 @@
 <template>
     <div class="dzs-form-data-copy-and-paste">
-        <el-button icon="el-icon-document-copy" type='text' @click="copyData">复制表单数据</el-button>
-        <el-button icon="el-icon-document" type='text' @click="pasteData">粘贴表单数据</el-button>
+        <dzs-button icon="el-icon-document-copy" type='primary' text @click="copyData">复制表单数据</dzs-button>
+        <dzs-button icon="el-icon-document" type='primary' text @click="pasteData">粘贴表单数据</dzs-button>
     </div>
 </template>
 <script>
 import {copyToClipboard} from "../tool.js";
 import deepCopy from "../deepCopy.js";
+import dzsButton from "../../dzs-button";
 export default {
     name: "dzsFormDataCopyAndPaste",
+    components : {
+        dzsButton
+    },
     props: {
         formData: {
             type: Object,

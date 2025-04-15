@@ -14,12 +14,12 @@
                 </el-table-column>
                 <el-table-column label="操作" :width="nameWidth">
                     <template slot-scope="scope">
-                        <el-button type="text" @click="delTableList(scope.$index)">删除</el-button>
+                        <dzs-button type="danger" text @click="delTableList(scope.$index)">删除</dzs-button>
                     </template>
                 </el-table-column>
             </el-table>
             <div class="dzs-postman-table-btn">
-                <el-button type="text" @click="addTableList">添加一行</el-button>
+                <dzs-button type="primary" text @click="addTableList">添加一行</dzs-button>
             </div>
         </div>
         <div class="input-box">
@@ -35,8 +35,12 @@
  * @param {String} type json/Array 输入类型
  * @event change 输入值改变时触发
  * */ 
+ import dzsButton from "../../dzs-button";
 export default {
     name: 'dzsPostmanTable',
+    components: {
+        dzsButton
+    },
     props: {
         type: {
             type: String,

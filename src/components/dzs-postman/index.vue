@@ -6,7 +6,7 @@
                 </el-option>
             </el-select>
             <el-input v-model="requestUrl" placeholder="请输入请求地址" class="request-url-input"></el-input>
-            <el-button type="primary" @click="sendRequest">发送请求</el-button>
+            <dzs-button type="primary" @click="sendRequest">发送请求</dzs-button>
         </div>
         <div class="dzs-postma-title">请求头</div>
         <dzs-postman-table type="Array" v-model="requestHeader"></dzs-postman-table>
@@ -40,6 +40,7 @@
  * */
 import { requestMethodList, requestBody } from './config';
 import dzsPostmanTable from './components/dzs-postman-table.vue';
+import dzsButton from "../dzs-button";
 export default {
     name: 'dzsPostman',
     props: {
@@ -52,7 +53,8 @@ export default {
         }
     },
     components: {
-        dzsPostmanTable
+        dzsPostmanTable,
+        dzsButton
     },
     data() {
         return {

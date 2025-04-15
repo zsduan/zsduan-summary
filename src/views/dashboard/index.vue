@@ -7,7 +7,9 @@
 import dzsUpdateLog from './components/dzs-update-log.vue';
 export default {
     components: {
-        dzsUpdateLog
+        dzsUpdateLog,
     },
 }
 </script>
+<style lang="scss" scoped>
+</style>

@@ -232,7 +232,6 @@ export const fetchRequsetRequestConfig = config => {
     if(typeof config === "object"){
         Object.assign(configs, config);
     }
-    console.log(configs , fetchRequset.defaults)
     fetchRequset.defaults.withCredentials = configs.withCredentials || false;
     fetchRequset.defaults.timeout = configs.timeout || 12000;
     fetchRequset.defaults.baseURL = configs.BASE_URL || "";

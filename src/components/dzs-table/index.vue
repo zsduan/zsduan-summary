@@ -25,11 +25,11 @@
                 <el-table-column v-if="showOperation" :class-name="'table-column_' + columnClassName"
                     v-bind="operationOption" label="操作" :width="operationWidth">
                     <template slot-scope="scope">
-                        <el-button type="text" class="btn" size="small" v-for="(item, index) in operation" :key="index">
+                        <dzs-button type="primary" text class="btn" v-for="(item, index) in operation" :key="index">
                             <span @click="onEdit(scope.row)" v-if="item == 'edit'">编辑</span>
                             <span @click="onDetails(scope.row)" v-if="item == 'detail'">详情</span>
                             <span @click="onDel(scope.row)" v-if="item == 'delete'">删除</span>
-                        </el-button>
+                        </dzs-button>
                         <slot name="button" :row="{ ...scope.row }"></slot>
                     </template>
                 </el-table-column>
@@ -87,10 +87,12 @@
 import dzsTabelSider from "./sider/dzs-tabel-sider.vue";
 import defaultProps from "./props";
 import deepCopy from "./deepCopy";
+import dzsButton from "../dzs-button";
 export default {
     name: "dzsTable",
     components: {
         dzsTabelSider,
+        dzsButton
     },
     props: defaultProps,
     data() {

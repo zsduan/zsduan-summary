@@ -151,7 +151,7 @@ $primary-active-color: #3a8ee6;
 .dzs-button-default {
     &.dzs-button-text {
         border: 0;
-        padding: 0;
+        padding: 5px;
 
         &:hover {
             background-color: transparent;
@@ -201,7 +201,7 @@ $primary-active-color: #3a8ee6;
 
     &.dzs-button-text {
         border: 0;
-        padding: 0;
+        padding: 9px 0;
         background-color: transparent;
         color: $primary-color;
 
@@ -276,7 +276,7 @@ $primary-active-color: #3a8ee6;
 
     &.dzs-button-text {
         border: 0;
-        padding: 0;
+        padding: 9px 0;
         background-color: transparent;
         color: $success-color;
 
@@ -351,7 +351,7 @@ $primary-active-color: #3a8ee6;
 
     &.dzs-button-text {
         border: 0;
-        padding: 0;
+        padding: 9px 0;
         background-color: transparent;
         color: $warning-color;
 
@@ -426,7 +426,7 @@ $primary-active-color: #3a8ee6;
 
     &.dzs-button-text {
         border: 0;
-        padding: 0;
+        padding: 9px 0;
         background-color: transparent;
         color: $danger-color;
 
@@ -501,7 +501,7 @@ $primary-active-color: #3a8ee6;
 
     &.dzs-button-text {
         border: 0;
-        padding: 0;
+        padding: 9px 0;
         background-color: transparent;
         color: $info-color;
 

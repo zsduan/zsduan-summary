@@ -136,7 +136,7 @@ export default {
     flex-wrap: wrap;
     margin-bottom: 10px;
 
-    .el-button {
+    .dzs-button {
         margin-top: 10px;
     }
 
@@ -163,7 +163,7 @@ export default {
 
 @media screen and (max-width: 768px) {
     .dzs-header-btn-box {
-        .el-button {
+        .dzs-button {
             margin-top: 10px;
         }
     }
