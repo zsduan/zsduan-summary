@@ -43,6 +43,7 @@ import fileSliceMerge from "./file-slice-and-merge";
  * @param {Function} fileSliceMerge 文件切片
  * */
 export default {
+    version : "1.0.0",
     getua,
     copy,
     formatTime,

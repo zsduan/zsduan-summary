@@ -1,6 +1,7 @@
 <template>
     <div :id="formId" class="dzs-form-box">
-        <dzs-form-data-copy-and-paste v-if="copyAndPaste" :formItem="formItem" :formData="fromModel" :simple="simple" @paste="pasteData($event)"></dzs-form-data-copy-and-paste>
+        <dzs-form-data-copy-and-paste v-if="copyAndPaste" :formItem="formItem" :formData="fromModel" :simple="simple"
+            @paste="pasteData($event)"></dzs-form-data-copy-and-paste>
         <el-form v-loading="loadingOption.loading" :element-loading-text="loadingOption.loadingText"
             :element-loading-spinner="loadingOption.spinner" :element-loading-background="loadingOption.background"
             v-bind="{ ...formProps }" :model="fromModel" :rules="fromRules" :label-position="labelPosition"
@@ -34,7 +35,7 @@
                     </el-col>
                 </template>
             </el-row>
-            <slot ></slot>
+            <slot></slot>
         </el-form>
         <div :class="['form-sbumit-box', buttonFlex]" v-if="showFooter">
             <dzs-button @click.stop="onCancel" v-if="showButton">
@@ -42,7 +43,7 @@
             </dzs-button>
             <slot name="footerBtn"></slot>
             <dzs-button type="primary" @click.stop="onSubmit()" v-if="showButton">
-                {{ bottonText.submitText ? bottonText.submitText : '提交'}}
+                {{ bottonText.submitText ? bottonText.submitText : '提交' }}
             </dzs-button>
         </div>
     </div>
@@ -95,14 +96,14 @@
  * 
  * @slot {Object} footerBtn 底部按钮插槽
  * 
- * */ 
+ * */
 import { pickerOptions } from "./config";
 import deepCopy from "./deepCopy.js";
 import dzsFormItem from "./components/dzs-form-item";
 import dzsItem from "./components/dzs-item";
 import dzsFormDataCopyAndPaste from "./components/dzs-form-data-copy-and-paste";
 import dzsButton from "../dzs-button";
-import {simpleHash} from "./tool.js";
+import { simpleHash } from "./tool.js";
 export default {
     name: "dzsForm",
     model: {
@@ -207,7 +208,7 @@ export default {
             default: () => {
                 return true
             }
-        } 
+        }
     },
     data() {
         return {
@@ -221,7 +222,7 @@ export default {
             timer: null, //定时器 防止重复提交
             toolbar: [],
             formId: `dzsForm${new Date().getTime()}`,
-            simple : "" , // 生成一个固定的hash值 用户复制粘贴
+            simple: "", // 生成一个固定的hash值 用户复制粘贴
         }
     },
     watch: {
@@ -310,7 +311,7 @@ export default {
                 formItem.push(item);
                 if (clear) {
                     fromModel[item.key] = item.defaultValue;
-                } else if(item.key){
+                } else if (item.key) {
                     let keyList = item.key.split(".");
                     let setValue = this.value;
                     for (let i = 0; i < keyList.length; i++) {
@@ -325,7 +326,7 @@ export default {
             this.getOriginalFormData();
         },
 
-        /**生成原始表单数据 用来进行复制粘贴 生成hash值*/ 
+        /**生成原始表单数据 用来进行复制粘贴 生成hash值*/
         getOriginalFormData() {
             let originalFormData = {};
             for (let i = 0; i < this.formItem.length; i++) {
@@ -365,7 +366,7 @@ export default {
         },
         /**获取FromModel的参数*/
         getFromModelValue(keyPath) {
-            if(!keyPath) return '';
+            if (!keyPath) return '';
             let keyList = keyPath.split('.');
             let value = this.fromModel;
             for (let i = 0; i < keyList.length; i++) {
@@ -401,13 +402,20 @@ export default {
                 key: keyPath,
             });
         },
-        /**清空表单数据*/
-        clearForm() {
-            this.initModel(true);
-            setTimeout(() => {
-                this.$refs[this.formId].resetFields();
-            }, 0)
-            this.$emit("update:value", this.fromModel);
+        /**
+         * 清空表单数据
+         * @param {Function} [callback] 回调函数
+         * */
+        clearForm(callback) {
+            return new Promise((resolve, reject) => {
+                this.initModel(true);
+                setTimeout(() => {
+                    this.$refs[this.formId].resetFields();
+                    callback && callback();
+                    resolve();
+                }, 0)
+                this.$emit("update:value", this.fromModel);
+            });
         },
 
         /**调用饿了么表单的原生方法*/
@@ -459,7 +467,7 @@ export default {
                 this.$refs[this.formId].validate((valid) => {
                     if (!valid) {
                         this.$message.error("请完善表单信息");
-                        reject({code : -1 , msg : "请完善表单信息" });
+                        reject({ code: -1, msg: "请完善表单信息" });
                         return
                     }
                     this.formItem.forEach(item => {
@@ -473,7 +481,7 @@ export default {
                         if (item.isNull) delete sendData[item.key];
                     })
                     sendData = this.transformKeysToNestedObject(sendData);
-                    if(this.value)sendData = {...sendData,...this.value}
+                    if (this.value) sendData = { ...sendData, ...this.value }
                     this.$emit("onSubmit", sendData);
                     this.$emit("update:value", sendData);
                     resolve(sendData);
@@ -484,7 +492,7 @@ export default {
         pasteData($event) {
             this.setFormData($event);
             this.$emit('update:value', $event);
-        }, 
+        },
     }
 }
 </script>

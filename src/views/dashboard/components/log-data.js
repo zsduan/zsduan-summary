@@ -1,5 +1,13 @@
+import { version } from "core-js";
 
 export default [
+    {
+        version : "3.0.1",
+        date : "2025-05-09",
+        log : [
+            "新增 表单组件 清空表单数据新增可以执行函数 且可以异步执行",
+        ]
+    },
     {
         version : "3.0.9",
         date : "2025-03-28",
