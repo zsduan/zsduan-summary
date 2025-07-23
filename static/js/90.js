@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[90],{
 
-/***/ "./src/views/JS-article/set-html/config.js":
-/*!*************************************************!*\
-  !*** ./src/views/JS-article/set-html/config.js ***!
-  \*************************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/JS-article/scroll-to-number/desc.js":
+/*!*******************************************************!*\
+  !*** ./src/views/JS-article/scroll-to-number/desc.js ***!
+  \*******************************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\nimport imgUrl from \"./image/1.jpg\";\nimport setHtml from \"@/utils/sethtml\";\n\n// 方式一\nsetHtml({\n    html : \"<img src='imgUrl' />\",\n    success : (res)=>{\n        // do something\n    },\n})\n\n// 方式二\nconst html [= setHtml({\n    html : \"<img src='imgUrl' />\",\n})\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/set-html/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"start\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"开始数值\",\n  remark: \"\"\n}, {\n  key: \"end\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"结束数值\",\n  remark: \"\"\n}, {\n  key: \"duration\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"持续时间\",\n  remark: \"\"\n}, {\n  key: \"el\",\n  type: \"param\",\n  parameterType: \"String\",\n  desc: \"dom的id选择器\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/scroll-to-number/desc.js?");
 
 /***/ })
 

@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[101],{
 
-/***/ "./src/views/component-section/dzs-article-item/desc.js":
-/*!**************************************************************!*\
-  !*** ./src/views/component-section/dzs-article-item/desc.js ***!
-  \**************************************************************/
-/*! exports provided: descData */
+/***/ "./src/views/component-section/code-editor/config.js":
+/*!***********************************************************!*\
+  !*** ./src/views/component-section/code-editor/config.js ***!
+  \***********************************************************/
+/*! exports provided: code1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"descData\", function() { return descData; });\nconst descData = [{\n  key: \"item\",\n  type: \"props\",\n  parameterType: \"Object\",\n  desc: \"需要渲染的对象\",\n  remark: \"\",\n  children: [{\n    key: \"title\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"文章标题\",\n    remark: \"必填\"\n  }, {\n    key: \"desc\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"文章描述\",\n    remark: \"\"\n  }, {\n    key: \"img\",\n    type: \"props\",\n    parameterType: \"String | Array\",\n    desc: \"文章图片\",\n    remark: \"\"\n  }, {\n    key: \"time\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"文章时间\",\n    remark: \"\"\n  }, {\n    key: \"author\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"文章作者\",\n    remark: \"\"\n  }, {\n    key: \"href\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"文章链接\",\n    remark: \"\"\n  }, {\n    key: \"tag\",\n    type: \"props\",\n    parameterType: \"Array\",\n    desc: \"文章标签\",\n    remark: \"\"\n  }, {\n    key: \"star\",\n    type: \"props\",\n    parameterType: \"String\",\n    desc: \"文章收藏数\",\n    remark: \"\"\n  }, {\n    key: \"isVideo\",\n    type: \"props\",\n    parameterType: \"Boolean\",\n    desc: \"是否为视频\",\n    remark: \"\"\n  }]\n}, {\n  key: \"placement\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"放置位置\",\n  remark: \"可选 top | bottom | left | right\"\n}, {\n  key: \"num\",\n  type: \"props\",\n  parameterType: \"Number\",\n  desc: \"显示图片数量\",\n  remark: \"\"\n}, {\n  key: \"scroll\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否可以横向滚动\",\n  remark: \"\"\n}, {\n  key: \"row\",\n  type: \"props\",\n  parameterType: \"Number\",\n  desc: \"简介显示行数\",\n  remark: \"最多 3 行\"\n}, {\n  key: \"show-footer\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示底部信息\",\n  remark: \"\"\n}, {\n  key: \"header\",\n  type: \"solt\",\n  parameterType: \"\",\n  desc: \"顶部插槽\",\n  remark: \"\"\n}, {\n  key: \"image\",\n  type: \"solt\",\n  parameterType: \"\",\n  desc: \"图片插槽\",\n  remark: \"\"\n}, {\n  key: \"footer\",\n  type: \"solt\",\n  parameterType: \"\",\n  desc: \"底部插槽\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-article-item/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\n<template>\n    <dzs-code-editor v-model=\"code\"></dzs-code-editor>\n</template>\nimport dzsCodeEditor from \"@/components/dzs-code-editor\"\nexport default {\n    components: {\n        dzsCodeEditor\n    },\n    data(){\n        return {\n            code : \"\"\n        }\n    }\n}\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/code-editor/config.js?");
 
 /***/ })
 

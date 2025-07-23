@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[116],{
 
-/***/ "./src/views/component-section/dzs-markdown/config.js":
-/*!************************************************************!*\
-  !*** ./src/views/component-section/dzs-markdown/config.js ***!
-  \************************************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/component-section/dzs-identifying-code-canvans/desc.js":
+/*!**************************************************************************!*\
+  !*** ./src/views/component-section/dzs-identifying-code-canvans/desc.js ***!
+  \**************************************************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\n<template>\n    <dzs-markdown v-model=\"value\"></dzs-markdown>\n</template>\n<script>\nimport dzsMarkdown from \"@/components/dzs-markdown/index.vue\"\nexport default{\n    components:{\n        dzsMarkdown\n    },\n    data(){\n        return{\n            value:\"\",\n        }\n    },\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-markdown/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"value / v-model\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"生成的验证码\",\n  remark: \"\"\n}, {\n  key: \"codeArr\",\n  type: \"props\",\n  parameterType: \"Array\",\n  desc: \"传入一个数组来自定义验证码\",\n  remark: \"默认26个字母和0-9数字\"\n}, {\n  key: \"uppercase\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否转大写\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-identifying-code-canvans/desc.js?");
 
 /***/ })
 

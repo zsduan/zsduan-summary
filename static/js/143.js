@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[143],{
 
-/***/ "./src/views/idea/postman/config.js":
-/*!******************************************!*\
-  !*** ./src/views/idea/postman/config.js ***!
-  \******************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/directive/auto-open/desc.js":
+/*!***********************************************!*\
+  !*** ./src/views/directive/auto-open/desc.js ***!
+  \***********************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\n<template>\n    <div>\n        <dzs-postman :request=\"request\"></dzs-postman>\n    </div>\n</template>\n\n<script>\nimport dzsPostman from '@/components/dzs-postman/index.vue';\nimport request from \"@/tool/request/index\";\nexport default {\n    components: {\n        dzsPostman\n    },\n    data(){\n        return{\n            request : request\n        }\n    }\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/idea/postman/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"isOpen\",\n  type: \"param\",\n  parameterType: \"Boolean\",\n  desc: \"是否展开\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/directive/auto-open/desc.js?");
 
 /***/ })
 

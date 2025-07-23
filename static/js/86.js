@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[86],{
 
-/***/ "./src/views/JS-article/scroll-to-number/config.js":
-/*!*********************************************************!*\
-  !*** ./src/views/JS-article/scroll-to-number/config.js ***!
-  \*********************************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/JS-article/phone-app-navigator/desc.js":
+/*!**********************************************************!*\
+  !*** ./src/views/JS-article/phone-app-navigator/desc.js ***!
+  \**********************************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\n// 使用\nimport scrollToNumber from \"@/utils/scrollToNumber.js\";\nscrollToNumber(0 , 2024 , 2000 , \"number\")\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/scroll-to-number/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"navigator\",\n  type: \"return\",\n  parameterType: \"string\",\n  desc: \"返回app名称\",\n  remark: \"qq | wx | Alipay | taobao | jd | weibo | other\"\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/phone-app-navigator/desc.js?");
 
 /***/ })
 
