@@ -1,13 +1,16 @@
 <template>
     <div>
-        <el-upload :class="{ 'upload-dzs': true, 'upload-dzs-phone': isPhone }" drag :action="action"
+        <el-upload :class="{ 'upload-dzs': true, 'upload-dzs-phone': isPhone }" :drag="!isButton" :action="action"
             :multiple="multiple" :file-list="fileList" :limit="limit" :before-upload="beforeUpload"
             :on-success="handleSuccess" :on-exceed="handleExceed" :auto-upload="autoUpload" :on-change="changeFile"
             :show-file-list="true">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text" v-if="!isPhone">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__text" v-else><em>点击上传文件</em></div>
-            <div class="el-upload__tip" slot="tip">
+            <div v-if="!isButton">
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text" v-if="!isPhone">将文件拖到此处，或<em>点击上传</em></div>
+                <div class="el-upload__text" v-else><em>点击上传文件</em></div>
+            </div>
+            <el-button type="primary" v-if="isButton">点击上传</el-button>
+            <div v-if="isOpenTip" class="el-upload__tip" slot="tip">
                 <div>只能上传不超过 {{ maxSize / 1024 / 1024 }}M 的{{ fileType.join("、") }}文件</div>
                 <div v-if="limit > 1">最多上传 {{ limit }} 个文件</div>
             </div>
@@ -86,6 +89,20 @@ export default {
             default: () => {
                 return null
             }
+        },
+        /**是否为按钮模式*/ 
+        isButton: {
+            type: Boolean,
+            default: () => {
+                return false
+            }
+        },
+        /**是否显示提示*/ 
+        isOpenTip : {
+            type: Boolean,
+            default: () => {
+                return true
+            }
         }
     },
     data() {
@@ -153,6 +170,13 @@ export default {
         },
         /**文件改变*/
         changeFile(files) {
+            if (!files.raw && this.limit == 1) return;
+            if (!this.autoUpload && !this.beforeUpload(files)) {
+                this.fileList.splice(this.fileList.length - 1, 1);
+                this.$emit("update:value", this.fileList);
+                this.$emit("change", this.fileList);
+                return;
+            }
             this.uploadFun(files, this.handleSuccess);
             if (this.autoUpload || this.uploadFun) return;
             let fileInfo = {

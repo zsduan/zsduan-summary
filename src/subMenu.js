@@ -135,6 +135,12 @@ export default [
                 name : 'dzsArticleItem',
                 meta : { title : '文章列表' }
             },
+            {
+                path : "/dzs-pull-to-refresh",
+                component : "component-section/dzs-pull-to-refresh/index",
+                name : 'dzsPullToRefresh',
+                meta : { title : '下拉刷新与上拉加载' }
+            },
         ]
     },
     {

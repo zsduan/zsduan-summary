@@ -405,6 +405,7 @@ export default {
         /**
          * 清空表单数据
          * @param {Function} [callback] 回调函数
+         * @returns Promise
          * */
         clearForm(callback) {
             return new Promise((resolve, reject) => {

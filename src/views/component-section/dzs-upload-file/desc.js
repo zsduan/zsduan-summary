@@ -49,6 +49,20 @@ export const tableData = [
         remark: "默认null , (file, handleSuccess)=>{ handleSuccess(res , file) } , res 必须拥有 以下属性 url , name , path",
     },
     {
+        key: "isOpenTip",
+        type: "props",
+        parameterType: "Boolean",
+        desc: "是否开启提示",
+        remark: "默认true",
+    },
+    {
+        key: "isButton",
+        type: "props",
+        parameterType: "Boolean",
+        desc: "是否为button",
+        remark: "默认false",
+    },
+    {
         key: "@change",
         type: "methods",
         parameterType: "Function",

@@ -2,6 +2,36 @@ import { version } from "core-js";
 
 export default [
     {
+        version : "3.1.0",
+        date : "2025-07-15",
+        log : [
+            {
+                tips : "新增 上传文件组件支持button属性",
+                links : [
+                    '/dzs-upload-file'
+                ]
+            },
+            {
+                tips : "新增 上传文件组件支持是否显示提示",
+                links : [
+                    '/dzs-upload-file'
+                ]
+            },
+            {
+                tips : "修复 上传文件组件在自定义上传 limit=1时，多次上传不报错的bug",
+                links : [
+                    '/dzs-upload-file'
+                ]
+            },
+            {
+                tips : "新增下拉刷新和上拉加载组件",
+                links : [
+                    '/dzs-pull-to-refresh'
+                ]
+            },
+        ]
+    },
+    {
         version : "3.0.1",
         date : "2025-05-09",
         log : [
