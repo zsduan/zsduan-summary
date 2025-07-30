@@ -9,12 +9,12 @@ export default [
             title: "组件篇"
         },
         children: [
-            {
-                path: '/drag-form',
-                component: "component-section/drag-form/index",
-                name: 'dragForm',
-                meta: { title: '自定义表单' }
-            },
+            // {
+            //     path: '/drag-form',
+            //     component: "component-section/drag-form/index",
+            //     name: 'dragForm',
+            //     meta: { title: '自定义表单' }
+            // },
             {
                 path: '/dzs-button',
                 component: "component-section/dzs-button/dzs-button",

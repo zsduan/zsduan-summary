@@ -97,6 +97,10 @@
                 @save="changeVaule($event, item.key)" :show_save="false">
             </dzs-editor>
         </template>
+        <!-- markdown 组件 -->
+         <template v-if="item.type == 'markdown'"> 
+            <dzs-markdown v-model="editValue" v-bind="{ ...item.props }" @save="changeVaule($event, item.key)"></dzs-markdown>
+        </template>
         <div class="from-item-tips" v-if="getTips() && item.type != 'divider'">
             {{ getTips() }}
         </div>
@@ -106,12 +110,14 @@
 import dzsUploadImg from '../../dzs-upload-img/index.vue';
 import dzsUploadFile from '../../dzs-upload-file/index.vue';
 import dzsEditor from '../../dzs-editor/index.vue';
+import dzsMarkdown from '../../dzs-markdown/index.vue';
 export default {
     name: 'dzsItem',
     components: {
         dzsUploadImg,
         dzsUploadFile,
-        dzsEditor
+        dzsEditor,
+        dzsMarkdown
     },
     props: {
         item: {

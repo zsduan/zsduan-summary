@@ -1,7 +1,11 @@
-
 <template>
-    <div class="markdown-box" :style="{height:height,}">
-        <mavon-editor :toolbars="markdownOption" v-model="content" @change="changeVaule" @sava="sava" @imgAdd="$imgAdd"></mavon-editor>
+    <div class="markdown-box" :style="{ height: height }">
+        <mavon-editor :codeStyle="codeStyle" :placeholder="placeholder" v-if="!isPreview" :toolbars="mdOption"
+            v-model="content" @change="changeVaule" @sava="sava" @imgAdd="$imgAdd" :ishljs="ishljs" :fontSize="fontSize"
+            v-bind="options" :previewBackground="previewBackground"></mavon-editor>
+        <mavon-editor :class="{aiStream : aiStream}" :codeStyle="codeStyle" v-else class="content" :value="content" :navigation="false"
+            :toolbarsFlag="false" :subfield="false" defaultOpen="preview"
+            :previewBackground="previewBackground"></mavon-editor>
     </div>
 </template>
 <script>
@@ -23,6 +27,22 @@ export default {
         event: "update:value",
     },
     props: {
+        // 输入框的提示词
+        placeholder: {
+            type: String,
+            default: "请输入..."
+        },
+        /**样式*/
+        codeStyle: {
+            type: String,
+            default: "dark"
+        },
+        options: {
+            type: Object,
+            default: () => {
+                return {}
+            }
+        },
         value: {
             type: String,
             default: () => {
@@ -32,7 +52,7 @@ export default {
         height: {
             type: String,
             default: () => {
-                return "500px";
+                return "auto";
             },
         },
         width: {
@@ -40,6 +60,32 @@ export default {
             default: () => {
                 return "100%";
             },
+        },
+        ishljs: {
+            type: Boolean,
+            default: () => {
+                return true;
+            },
+        },
+        fontSize: {
+            type: String,
+            default: () => {
+                return '14px'
+            }
+        },
+        /**是否只需要预览*/
+        isPreview: {
+            type: Boolean,
+            default: () => {
+                return false;
+            },
+        },
+        /**预览背景*/
+        previewBackground: {
+            type: String,
+            default: () => {
+                return '#ffffff'
+            }
         },
         markdownOption: {
             type: Object,
@@ -81,22 +127,55 @@ export default {
                 };
             },
         },
+
+        /**大模型 流数据*/
+        streamList: {
+            type: Array,
+            default: function () {
+                return []
+            }
+        },
+        /**是否开启 AI 流模式*/
+        aiStream: {
+            type: Boolean,
+            default: ()=>{
+                return false
+            }
+        },
     },
     watch: {
         value: {
             handler(newValue, oldValue) {
                 this.content = newValue;
             },
-            deep:true,
-            immediate:true
+            deep: true,
+            immediate: true
         },
+        markdownOption: {
+            handler(newValue) {
+                this.mdOption = newValue;
+            },
+            deep: true,
+            immediate: true
+        },
+        aiStream : {
+            handler(newValue) {
+                newValue && this.startTypingEffect()
+            },
+            deep: true,
+            immediate: true
+        },
+        
     },
     data() {
         return {
             content: "",
+            mdOption: this.markdownOption,
+            resultText: "",
+            printTimer : null,
         };
     },
-    mounted() {},
+    mounted() { },
     methods: {
         changeVaule(e) {
             this.$emit("update:value", this.content);
@@ -110,6 +189,47 @@ export default {
             let formdata = new FormData();
             formdata.append("image", $file);
         },
+        /**打印机效果*/
+        startTypingEffect(printIndex = 0) {
+            let data = {};
+            this.printTimer = setInterval(() => {
+                if (this.streamList[printIndex]) {
+                    data = this.streamList[printIndex];
+                    clearInterval(this.printTimer);
+                    this.printTimer = null;
+                    if (data.isEnd) {
+                        this.printEnd()
+                        return;
+                    }
+                    requestAnimationFrame(printNextChar);
+                }
+            }, 50);
+            const printNextChar = () => {
+                if (!data.message) {
+                    this.startTypingEffect(printIndex + 1);
+                    return;
+                }
+                if (data.message.length === 0) {
+                    data.end && this.printEnd();
+                    this.startTypingEffect(printIndex + 1)
+                    return;
+                }
+                let char = data.message[0];
+                data.message = data.message.slice(1);
+                this.resultText += char;
+                this.content = this.resultText;
+                requestAnimationFrame(printNextChar);
+                data.end && this.printEnd();
+            };
+
+        },
+
+        /**打印结束*/
+        printEnd() {
+            setTimeout(() => {
+                this.content = this.resultText
+            }, 500);
+        },
     },
 };
 </script>
@@ -118,6 +238,15 @@ export default {
     :deep(.v-note-wrapper) {
         height: 100%;
         z-index: 10;
+    }
+
+    :deep(.markdown-body .hljs) {
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .aiStream{
+        min-width: none;
+        min-height: auto;
     }
 }
 </style>

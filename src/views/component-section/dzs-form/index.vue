@@ -1,11 +1,11 @@
 <template>
     <section>
         <public-item title="基础用法">
-            <dzs-form v-model="formData" :options="testFormOptions" @onSubmit="onSubmit" @onCancel="onCancel">
+            <dzs-form :options="testFormOptions" @onSubmit="onSubmit" @onCancel="onCancel">
                 
             </dzs-form>
         </public-item>
-        <public-item title="PC端" tips="该组件需要导入 dzs-editor dzs-upload-img dzs-upload-file 三个组件使用">
+        <public-item title="PC端" tips="该组件需要导入 dzs-editor dzs-upload-img dzs-upload-file dzs-markdown 组件使用">
             <dzs-form :options="formOptions" @onSubmit="onSubmit" @onCancel="onCancel">
                 <template #mySlot>
                     <el-button>我是自定义组件的button</el-button>
@@ -230,6 +230,11 @@ export default {
                         rules: [],
                         props: {},
                     },
+                    {
+                        label: "markdown",
+                        key: "markdown",
+                        type: "markdown",
+                    },
                 ]
             }
         }
@@ -267,10 +272,6 @@ export default {
                         span: 24
                     },
                 ]
-            },
-            formData : {
-                input : "",
-                select : "12541",
             }
         }
     },

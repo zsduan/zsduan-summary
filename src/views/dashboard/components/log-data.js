@@ -1,6 +1,36 @@
-import { version } from "core-js";
+
 
 export default [
+    {
+        version : "3.1.1",
+        date : "2025-07-30",
+        log : [
+            {
+                tips : "markdown文档新增 预览功能",
+                links : [
+                    '/dzs-markdown#预览使用'
+                ]
+            },
+            {
+                tips : "markdown文档新增 流式读取功能",
+                links : [
+                    '/dzs-markdown#支持大模型流式读取'
+                ]
+            },
+            {
+                tips : "markdown文档新增 很多配置项",
+                links : [
+                    '/dzs-markdown#参数说明'
+                ]
+            },
+            {
+                tips : "表单组件新增 markdown 编辑器",
+                links : [
+                    '/dzs-form#PC端'
+                ]
+            },
+        ]
+    },
     {
         version : "3.1.0",
         date : "2025-07-15",
