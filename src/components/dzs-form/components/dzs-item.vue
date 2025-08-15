@@ -163,6 +163,30 @@ export default {
                     this.numberEditValue = val ? Number(val) : 0;
                     return;
                 }
+                if(typeof val == 'boolean'){
+                    this.editValue = val;
+                    return ;
+                }
+                if(this.item.type == 'switch' && !val){
+                    this.editValue = false;
+                    return ;
+                }
+                if(this.item.type == 'checkbox' && !val){
+                    this.editValue = [];
+                    return ;
+                }
+                if(this.item.type == 'select' && this.item.props.multiple){
+                    this.editValue = val || [];
+                    return ;
+                }
+                if(this.item.type == 'date'){
+                    try{
+                        new Date(val);
+                    }catch(e){
+                        this.editValue = "";
+                    }
+                    return;
+                }
                 this.editValue = val || "";
             },
             deep: true,

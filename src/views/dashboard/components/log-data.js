@@ -5,6 +5,13 @@ export default [
         version : "3.1.1",
         date : "2025-07-30",
         log : [
+            "修复搜索表单组件/表单组件 在switch/checkbox/select(多选)状态下没传值时，会无法赋值的bug",
+        ]
+    },
+    {
+        version : "3.1.1",
+        date : "2025-07-30",
+        log : [
             {
                 tips : "markdown文档新增 预览功能",
                 links : [
