@@ -182,6 +182,12 @@ export default {
         },
     },
     mounted() {
+        document.addEventListener("keydown", (e) => {
+            if (e.code === "Enter") {
+                e.preventDefault();
+                this.onSubmit();
+            }
+        });
         this.listenFormBoxWidth();
     },
     methods: {

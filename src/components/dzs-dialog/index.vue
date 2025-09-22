@@ -1,24 +1,26 @@
 <template>
-    <el-dialog v-dialogDrag v-bind="{ ...options }" :visible="isShow" :width="width" :fullscreen="is_fullscreen"
-        @opened="opened" @closed="closed" @close="close" @open="open">
+    <el-dialog class="dzs-dialog" v-dialogDrag v-bind="{ ...options }" :visible="isShow" :width="width"
+        :fullscreen="is_fullscreen" @opened="opened" @closed="closed" @close="close" @open="open">
         <template #title>
             <div class="title-box">
                 <slot name="title"></slot>
-                <span class="title" v-if="!$slots.title">{{ title }}</span>
+                <span class="title" :style="{color:fontColor}" v-if="!$slots.title">{{ title }}</span>
                 <div v-if="showFullscreen">
-                    <i class="icon el-icon-full-screen" v-if="!is_fullscreen" @click="openFullscreen"></i>
+                    <i class="icon el-icon-full-screen"  :style="{color:fontColor}" v-if="!is_fullscreen" @click="openFullscreen"></i>
                     <div class="close-fullscreen" v-else @click="closeFullscreen">
                         <svg t="1687859073485" class="icon" viewBox="0 0 1024 1024" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" p-id="2283" width="200" height="200">
                             <path
                                 d="M301.61271492 7.07051506c-25.24647427 0-42.07745737 16.83098314-42.07745737 42.07745742v189.34855691c0 12.62323709-8.41549115 21.03872822-21.03872816 21.03872816H49.14797248c-25.24647427 0-42.07745737 16.83098314-42.07745742 42.07745737s16.83098314 42.07745737 42.07745742 42.07745647h189.34855691C297.40496887 343.69017139 343.69017139 297.40496887 343.69017139 238.49652939V49.14797248c0-25.24647427-16.83098314-42.07745737-42.07745647-42.07745742zM785.50347061 343.69017139H974.85202752c25.24647427 0 42.07745737-16.83098314 42.07745742-42.07745647s-16.83098314-42.07745737-42.07745742-42.07745737h-189.34855691c-12.62323709 0-21.03872822-8.41549115-21.03872816-21.03872816V49.14797248c0-25.24647427-16.83098314-42.07745737-42.07745737-42.07745742s-42.07745737 16.83098314-42.07745647 42.07745742v189.34855691C680.30982861 297.40496887 726.59503113 343.69017139 785.50347061 343.69017139zM238.49652939 680.30982861H49.14797248c-25.24647427 0-42.07745737 16.83098314-42.07745742 42.07745647s16.83098314 42.07745737 42.07745742 42.07745737h189.34855691c12.62323709 0 21.03872822 8.41549115 21.03872816 21.03872816V974.85202752c0 25.24647427 16.83098314 42.07745737 42.07745737 42.07745742s42.07745737-16.83098314 42.07745647-42.07745742v-189.34855691C343.69017139 726.59503113 297.40496887 680.30982861 238.49652939 680.30982861zM974.85202752 680.30982861h-189.34855691c-58.90843962 0-105.193643 46.28520248-105.193642 105.193642V974.85202752c0 25.24647427 16.83098314 42.07745737 42.07745647 42.07745742s42.07745737-16.83098314 42.07745737-42.07745742v-189.34855691c0-12.62323709 8.41549115-21.03872822 21.03872816-21.03872816H974.85202752c25.24647427 0 42.07745737-16.83098314 42.07745742-42.07745737s-16.83098314-42.07745737-42.07745742-42.07745647z"
-                                p-id="2284" fill="#333"></path>
+                                p-id="2284" :fill="fontColor"></path>
                         </svg>
                     </div>
                 </div>
             </div>
         </template>
-        <slot></slot>
+        <div class="content-box" :class="{ 'content-box-height': this.height }" :style="{height:height}">
+            <slot></slot>
+        </div>
         <div slot="footer" v-if="$slots.footer">
             <slot name="footer"></slot>
         </div>
@@ -46,6 +48,12 @@ export default {
     name: "dzsDialog",
     props: {
         title: {
+            type: String,
+            default: () => {
+                return "";
+            },
+        },
+        height: {
             type: String,
             default: () => {
                 return "";
@@ -81,6 +89,18 @@ export default {
                 return true
             }
         },
+        'background-color': {
+            type: String,
+            default: () => {
+                return "transparent";
+            },
+        },
+        fontColor: {
+            type: String,
+            default: () => {
+                return "#333";
+            },
+        },
     },
     data() {
         return {
@@ -97,7 +117,7 @@ export default {
                 this.is_fullscreen = val !== undefined ? val : false;
             },
             immediate: true,
-        }
+        },
     },
     methods: {
         close() {
@@ -106,6 +126,16 @@ export default {
         },
         open() {
             this.$emit("open");
+            let els = document.querySelectorAll(".el-dialog__header");
+            if (!els.length) return;
+            els.forEach((el) => {
+                el.style.backgroundColor = this.backgroundColor;
+            });
+            let closeEls = document.querySelectorAll(".el-dialog__close");
+            if(!closeEls.length) return ;
+                closeEls.forEach((el) => {
+                    el.style.color = this.fontColor;
+                });
         },
         openFullscreen() {
             this.is_fullscreen = true;
@@ -151,5 +181,9 @@ export default {
             height: 18px;
         }
     }
+}
+
+.content-box-height{
+    overflow-y: auto;
 }
 </style>

@@ -3,7 +3,7 @@
         <el-upload :class="{ 'upload-dzs': true, 'upload-dzs-phone': isPhone }" :drag="!isButton" :action="action"
             :multiple="multiple" :file-list="fileList" :limit="limit" :before-upload="beforeUpload"
             :on-success="handleSuccess" :on-exceed="handleExceed" :auto-upload="autoUpload" :on-change="changeFile"
-            :show-file-list="true">
+            :show-file-list="true" :on-remove="handleRemove">
             <div v-if="!isButton">
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text" v-if="!isPhone">将文件拖到此处，或<em>点击上传</em></div>
@@ -177,7 +177,8 @@ export default {
                 this.$emit("change", this.fileList);
                 return;
             }
-            this.uploadFun(files, this.handleSuccess);
+            files.fileIndex = this.fileList.length;
+            this.uploadFun(files, this.handleSuccess , this.deleteFile);
             if (this.autoUpload || this.uploadFun) return;
             let fileInfo = {
                 name: files.name,
@@ -196,6 +197,16 @@ export default {
         /**超出文件个数限制时的钩子*/
         handleExceed(files, fileList) {
             this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+        },
+        /**删除文件*/
+        deleteFile(index) {
+            this.fileList.splice(index, 1);
+            this.$emit("update:value", this.fileList);
+            this.$emit("change", this.fileList);
+        },
+        handleRemove(file , fileList){
+            this.$emit("update:value", fileList);
+            this.$emit("change", fileList);
         }
     }
 }

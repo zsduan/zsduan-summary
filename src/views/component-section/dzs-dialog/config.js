@@ -41,3 +41,47 @@ export default {
 </script>
 
 `
+
+export const code3 = `
+<template>
+    <dzs-popup :isShow.sync="isShow" title="设置标题栏颜色与标题字体颜色"   background-color="red" fontColor="#fff">
+        <div>设置标题栏颜色与标题字体颜色</div>
+    </dzs-popup>
+</template>
+<script>
+import dzsDialog from "@/components/dzs-dialog/index.vue"
+export default {
+    components: {
+        dzsDialog
+    },
+    data(){
+        return {
+            isShow : false
+        }
+    }
+}
+</script>
+
+`
+
+export const code4 = `
+<template>
+    <dzs-popup :isShow.sync="isShow" title="设置高度"  height="200px">
+        <div v-for="item in 50">滑动查看内容{{ item }}</div>
+    </dzs-popup>
+</template>
+<script>
+import dzsDialog from "@/components/dzs-dialog/index.vue"
+export default {
+    components: {
+        dzsDialog
+    },
+    data(){
+        return {
+            isShow : false
+        }
+    }
+}
+</script>
+
+`

@@ -42,6 +42,20 @@ export const descData = [
         remark : ""
     },
     {
+        key : "background-color",
+        type : "props",
+        parameterType : "Boolean",
+        desc : "标题栏背景颜色",
+        remark : ""
+    },
+    {
+        key : "fontColor",
+        type : "props",
+        parameterType : "string",
+        desc : "标题字体颜色",
+        remark : ""
+    },
+    {
         key : "@open",
         type : "methods",
         parameterType : "",

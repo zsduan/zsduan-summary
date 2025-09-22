@@ -2,6 +2,33 @@
 
 export default [
     {
+        version : "3.1.3",
+        date : "2025-9-22",
+        log : [
+            "表单搜索组件新增 点击回车提交",
+            {
+                tips : "弹窗组件新增 可以设置标题栏颜色、标题字体颜色",
+                links : [
+                    '/dzs-dialog#设置标题栏颜色与标题字体颜色'
+                ]
+            },
+            {
+                tips : "弹窗组件新增 可以设置高度，设置高度后会设置设置 overflow-y: hidden;",
+                links : [
+                    '/dzs-dialog#设置高度'
+                ]
+            },
+        ]
+    },
+    {
+        version : "3.1.2",
+        date : "2025-9-12",
+        log : [
+            "修复上传文件组件的时候删除文件时，不同步的bug",
+            "新增上传文件组件自定义上传中 新增删除文件功能 (file , success , delete)=>{} ,使用 delete(file.fileIndex)"
+        ]
+    },
+    {
         version : "3.1.1",
         date : "2025-07-30",
         log : [
