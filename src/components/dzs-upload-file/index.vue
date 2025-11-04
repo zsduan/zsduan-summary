@@ -142,9 +142,10 @@ export default {
     methods: {
         /**上传之前*/
         beforeUpload(file) {
-            let fileType = file.name.split(".")[1];
+            let types = file.type.split(".");
+            let fileType = types[types.length - 1];
             if (this.fileType.indexOf(fileType) == -1) {
-                this.$message.error(`上传文件格式不正确`);
+                this.$message.error(`上传文件格式不正确,目前仅支持 ${this.fileType.join("、")} 文件`);
                 return false;
             }
             if (file.size > this.maxSize) {

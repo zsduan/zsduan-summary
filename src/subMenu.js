@@ -141,6 +141,12 @@ export default [
                 name : 'dzsPullToRefresh',
                 meta : { title : '下拉刷新与上拉加载' }
             },
+            {
+                path : "/dzs-ip-input",
+                component : "component-section/dzs-ip-input/index",
+                name : 'IpInput',
+                meta : { title : 'ip地址输入框' }
+            },
         ]
     },
     {

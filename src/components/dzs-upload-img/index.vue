@@ -133,10 +133,10 @@ export default {
             let index = imgTypes.indexOf(file.type);
             const isLt2M = file.size / 1024 / 1024 < this.maxSize;
             if (index == -1) {
-                this.$message.error("请上传正确的图片格式");
+                this.$message.error(`请上传正确的图片格式,目前只支持 ${imgTypes.join("、")} 格式`);
             }
             if (!isLt2M) {
-                this.$message.error(`上传图片大小不能超过 ${this.maxSize}MB!`);
+                this.$message.error(`上传图片大小不能超过 ${this.maxSize} MB!`);
             }
             return index != -1 && isLt2M;
         },

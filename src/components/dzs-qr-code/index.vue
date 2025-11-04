@@ -133,6 +133,7 @@ export default {
                     options.logoHeight
                 );
             };
+            
         },
         /**
          * 设置底部文字

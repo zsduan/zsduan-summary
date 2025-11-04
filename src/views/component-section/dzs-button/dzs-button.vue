@@ -111,13 +111,13 @@
     </section>
 </template>
 <script>
-// import dzsButton from "@/components/dzs-button";
+import dzsButton from "@/components/dzs-button";
 
 import { code1 } from "./config";
 import { descData } from "./desc";
 export default {
     components: {
-        // dzsButton
+        dzsButton
     },
     data() {
         return {

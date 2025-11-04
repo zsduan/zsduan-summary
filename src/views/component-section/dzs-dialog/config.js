@@ -1,8 +1,8 @@
 export const code1 = `
 <template>
-    <dzs-popup :isShow.sync="isShow">
+    <dzs-dialog :isShow.sync="isShow">
         <div>我是一个默认的弹窗</div>
-    </dzs-popup>
+    </dzs-dialog>
 </template>
 import dzsDialog from "@/components/dzs-dialog/index.vue"
 export default {
@@ -19,12 +19,12 @@ export default {
 
 export const code2 = `
 <template>
-    <dzs-popup :isShow.sync="isShow">
+    <dzs-dialog :isShow.sync="isShow">
         <div>我是一个有底部的弹窗</div>
         <template slot="footer">
             <el-button>提交</el-button>
         </template>
-    </dzs-popup>
+    </dzs-dialog>
 </template>
 <script>
 import dzsDialog from "@/components/dzs-dialog/index.vue"
@@ -44,9 +44,9 @@ export default {
 
 export const code3 = `
 <template>
-    <dzs-popup :isShow.sync="isShow" title="设置标题栏颜色与标题字体颜色"   background-color="red" fontColor="#fff">
+    <dzs-dialog :isShow.sync="isShow" title="设置标题栏颜色与标题字体颜色"   background-color="red" fontColor="#fff">
         <div>设置标题栏颜色与标题字体颜色</div>
-    </dzs-popup>
+    </dzs-dialog>
 </template>
 <script>
 import dzsDialog from "@/components/dzs-dialog/index.vue"
@@ -66,9 +66,9 @@ export default {
 
 export const code4 = `
 <template>
-    <dzs-popup :isShow.sync="isShow" title="设置高度"  height="200px">
+    <dzs-dialog :isShow.sync="isShow" title="设置高度"  height="200px">
         <div v-for="item in 50">滑动查看内容{{ item }}</div>
-    </dzs-popup>
+    </dzs-dialog>
 </template>
 <script>
 import dzsDialog from "@/components/dzs-dialog/index.vue"

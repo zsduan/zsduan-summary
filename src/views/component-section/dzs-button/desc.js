@@ -70,7 +70,7 @@ export const descData = [
         remark: "",
     },
     {
-        key: "icon",
+        key: "icon(slot)",
         type: "slot",
         parameterType: "",
         desc: "图标插槽",
