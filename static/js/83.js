@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[83],{
 
-/***/ "./src/views/JS-article/group-sort/config.js":
-/*!***************************************************!*\
-  !*** ./src/views/JS-article/group-sort/config.js ***!
-  \***************************************************/
-/*! exports provided: code1, code2 */
+/***/ "./src/views/JS-article/get-ua/desc.js":
+/*!*********************************************!*\
+  !*** ./src/views/JS-article/get-ua/desc.js ***!
+  \*********************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\nconst code1 = `\nimport groupOrSort from \"@/tool/groupOrSort.js\";\nconst list = [\n    {\n        age: 18,\n        name: \"张三\"\n    },\n    {\n        age: 16,\n        name: \"李四\"\n    },\n    {\n        age: 17,\n        name: \"王五\"\n    },\n    {\n        age: 17,\n        name: \"赵六\"\n    },\n],\n\n// 方式一\nconst sortList = groupOrSort({\n    list: list,\n    order: 'desc',\n    key: \"age\"\n});\n\n// 方式二\ngroupOrSort({\n    list: list,\n    order: 'desc',\n    key: \"age\",\n    success: (res) => {\n        // do something\n    }\n});\n`;\nconst code2 = `\nimport groupOrSort from \"@/tool/groupOrSort.js\";\nconst list = [\n    {\n        age: 18,\n        name: \"张三\"\n    },\n    {\n        age: 16,\n        name: \"李四\"\n    },\n    {\n        age: 17,\n        name: \"王五\"\n    },\n    {\n        age: 17,\n        name: \"赵六\"\n    },\n],\n\n// 方式一\nconst groupList = groupOrSort({\n    list: list,\n    type: 'group',\n    key: \"age\"\n});\n\n// 方式二\ngroupOrSort({\n    list: list,\n    type: 'group',\n    key: \"age\",\n    success: (res) => {\n        // do something\n    }\n});\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/group-sort/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"browserName\",\n  type: \"return\",\n  parameterType: \"String\",\n  desc: \"浏览器名称\",\n  remark: \"\"\n}, {\n  key: \"browserVersion\",\n  type: \"return\",\n  parameterType: \"String\",\n  desc: \"浏览器版本\",\n  remark: \"\"\n}, {\n  key: \"osName\",\n  type: \"return\",\n  parameterType: \"String\",\n  desc: \"操作系统名称\",\n  remark: \"\"\n}, {\n  key: \"osVersion\",\n  type: \"return\",\n  parameterType: \"String\",\n  desc: \"操作系统版本\",\n  remark: \"\"\n}, {\n  key: \"deviceName\",\n  type: \"return\",\n  parameterType: \"String\",\n  desc: \"设备名称\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/get-ua/desc.js?");
 
 /***/ })
 

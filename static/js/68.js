@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[68],{
 
-/***/ "./src/views/JS-article/date-to-calender/config.js":
-/*!*********************************************************!*\
-  !*** ./src/views/JS-article/date-to-calender/config.js ***!
-  \*********************************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/JS-article/copy/desc.js":
+/*!*******************************************!*\
+  !*** ./src/views/JS-article/copy/desc.js ***!
+  \*******************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\nconst code1 = `\nimport getCalendar from \"@/tool/calender\";\n\n// 调用方式一\nconst calendar = getCalendar(new Date());\n\n// 调用方式二\ngetCalendar({\n    time : new Date(),\n    success : (data) => {\n        console.log(data);\n    }\n});\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/date-to-calender/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"option\",\n  type: \"param\",\n  parameterType: \"Object | String \",\n  desc: \"配置对象 | 需要复制的文本\",\n  remark: \"\",\n  children: [{\n    key: \"text\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"复制的信息 \",\n    remark: \"文本|图片url\"\n  }, {\n    key: \"type\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"类型\",\n    remark: \"text | html | image\"\n  }, {\n    key: \"success\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"成功返回\",\n    remark: \"\"\n  }, {\n    key: \"fail\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"失败返回\",\n    remark: \"\"\n  }]\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/copy/desc.js?");
 
 /***/ })
 

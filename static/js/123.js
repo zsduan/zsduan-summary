@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[123],{
 
-/***/ "./src/views/component-section/dzs-pull-to-refresh/config.js":
-/*!*******************************************************************!*\
-  !*** ./src/views/component-section/dzs-pull-to-refresh/config.js ***!
-  \*******************************************************************/
-/*! exports provided: code1 */
+/***/ "./src/views/component-section/dzs-license-plate-keyboard/desc.js":
+/*!************************************************************************!*\
+  !*** ./src/views/component-section/dzs-license-plate-keyboard/desc.js ***!
+  \************************************************************************/
+/*! exports provided: tableData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/**基础用法*/\nconst code1 = `\n<template>\n    <dzs-pull-to-refresh ref=\"refresh\" :enableReachBottom=\"true\" :onReachBottom=\"onReachBottom\" :onPullDownRefresh=\"onPullDownRefresh\">\n        <div v-for=\"(item, index) in items\" :key=\"index\" class=\"item\">\n            {{ item }}\n        </div>\n    </dzs-pull-to-refresh>\n</template>\n<script>\nimport dzsPullToRefresh from \"@/components/dzs-pull-to-refresh/index.vue\";\nexdefault {\n    components : {\n        dzsPullToRefresh\n    },\n    data() {\n        return {\n            items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5' , 'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5' , 'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'],\n        }\n    }\n}\n</script>\n`;\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-pull-to-refresh/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"isShow\",\n  type: \"props\",\n  parameterType: \"Boolean\",\n  desc: \"是否显示键盘\",\n  remark: \"\"\n}, {\n  key: \"bottom\",\n  type: \"props\",\n  parameterType: \"String\",\n  desc: \"距离底部安全区的距离\",\n  remark: \"\"\n}, {\n  key: \"@complete\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"点击完成事件\",\n  remark: \"\"\n}, {\n  key: \"@change\",\n  type: \"methods\",\n  parameterType: \"\",\n  desc: \"键盘点击后的改变事件\",\n  remark: \"\"\n}, {\n  key: \"validatePlateNumber(plateNumber)\",\n  type: \"ref methods\",\n  parameterType: \"\",\n  desc: \"校验车牌号的函数 传入车牌号\",\n  remark: \"只是一个基础的函数不对真实校验负责\"\n}];\n\n//# sourceURL=webpack:///./src/views/component-section/dzs-license-plate-keyboard/desc.js?");
 
 /***/ })
 

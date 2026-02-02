@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[92],{
 
-/***/ "./src/views/JS-article/send-notification/desc.js":
-/*!********************************************************!*\
-  !*** ./src/views/JS-article/send-notification/desc.js ***!
-  \********************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/JS-article/send-notification/config.js":
+/*!**********************************************************!*\
+  !*** ./src/views/JS-article/send-notification/config.js ***!
+  \**********************************************************/
+/*! exports provided: code1, code2, code3, code4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"option\",\n  type: \"param\",\n  parameterType: \"Object \",\n  desc: \"配置对象\",\n  remark: \"\",\n  children: [{\n    key: \"Vue\",\n    type: \"param\",\n    parameterType: \"Object\",\n    desc: \"Vue对象\",\n    remark: \"\"\n  }, {\n    key: \"title\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"标题\",\n    remark: \"必填\"\n  }, {\n    key: \"msg\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"详情信息\",\n    remark: \"\"\n  }, {\n    key: \"position\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"信息位置\",\n    remark: \"top-right/top-left/bottom-right/bottom-left\"\n  }, {\n    key: \"audioUrl\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"音频地址\",\n    remark: \"\"\n  }, {\n    key: \"duration\",\n    type: \"param\",\n    parameterType: \"Number\",\n    desc: \"延时时间\",\n    remark: \"\"\n  }, {\n    key: \"success\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"成功返回\",\n    remark: \"\"\n  }, {\n    key: \"fail\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"失败返回\",\n    remark: \"\"\n  }]\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/send-notification/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code3\", function() { return code3; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code4\", function() { return code4; });\nconst code1 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    Vue : this,\n});\n`;\nconst code2 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    msg : \"测试信息\",\n    Vue : this,\n});\n`;\nconst code3 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    duration : 3000,\n    position : \"bottom-right\",\n    Vue : this,\n});\n`;\nconst code4 = `\nimport sendNotification from \"@/tool/sendNotification\";\nsendNotification({\n    title: \"系统通知\",\n    audioUrl : \"https://xxx\",\n    Vue : this,\n});\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/send-notification/config.js?");
 
 /***/ })
 

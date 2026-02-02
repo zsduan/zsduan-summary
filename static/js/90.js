@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[90],{
 
-/***/ "./src/views/JS-article/scroll-to-number/desc.js":
-/*!*******************************************************!*\
-  !*** ./src/views/JS-article/scroll-to-number/desc.js ***!
-  \*******************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/JS-article/scroll-to-number/config.js":
+/*!*********************************************************!*\
+  !*** ./src/views/JS-article/scroll-to-number/config.js ***!
+  \*********************************************************/
+/*! exports provided: code1, code2, code3, code4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"start\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"开始数值\",\n  remark: \"\"\n}, {\n  key: \"end\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"结束数值\",\n  remark: \"\"\n}, {\n  key: \"duration\",\n  type: \"param\",\n  parameterType: \"Number\",\n  desc: \"持续时间\",\n  remark: \"\"\n}, {\n  key: \"el\",\n  type: \"param\",\n  parameterType: \"String\",\n  desc: \"dom的id选择器\",\n  remark: \"\"\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/scroll-to-number/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code3\", function() { return code3; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code4\", function() { return code4; });\nconst code1 = `\n<div id=\"number\">0</div>\n// 使用\nimport scrollToNumber from \"@/utils/scrollToNumber.js\";\nscrollToNumber({\n    start : 0,\n    end :new Date().getFullYear(),\n    duration : 2000,\n    el : 'number',\n})\n`;\nconst code2 = `\n<div class=\"show-number number-box\" >0</div>\n// 使用\nimport scrollToNumber from \"@/utils/scrollToNumber.js\";\nscrollToNumber({\n    start : 0,\n    end :new Date().getFullYear(),\n    duration : 2000,\n    dom : document.querySelector('.show-number'),\n})\n`;\nconst code3 = `\n<div class=\"number-box\" ref=\"showNumber\">0</div>\n// 使用\nimport scrollToNumber from \"@/utils/scrollToNumber.js\";\nscrollToNumber({\n    start : 0,\n    end :new Date().getFullYear(),\n    duration : 2000,\n    ref : this.$refs.showNumber,\n})\n`;\nconst code4 = `\n<div class=\"number-box\" :data-number=\"new Date().getFullYear()\">0</div>\n// 使用\nimport scrollToNumber from \"@/utils/scrollToNumber.js\";\nscrollToNumber()\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/scroll-to-number/config.js?");
 
 /***/ })
 

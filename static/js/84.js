@@ -1,14 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[84],{
 
-/***/ "./src/views/JS-article/group-sort/desc.js":
-/*!*************************************************!*\
-  !*** ./src/views/JS-article/group-sort/desc.js ***!
-  \*************************************************/
-/*! exports provided: tableData */
+/***/ "./src/views/JS-article/group-sort/config.js":
+/*!***************************************************!*\
+  !*** ./src/views/JS-article/group-sort/config.js ***!
+  \***************************************************/
+/*! exports provided: code1, code2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"option\",\n  type: \"param\",\n  parameterType: \"Object \",\n  desc: \"配置对象\",\n  remark: \"\",\n  children: [{\n    key: \"list\",\n    type: \"param\",\n    parameterType: \"Array\",\n    desc: \"原始数组\",\n    remark: \"\"\n  }, {\n    key: \"key\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"分组/排序的key\",\n    remark: \"\"\n  }, {\n    key: \"func\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"处理函数\",\n    remark: \"优先级高于key\"\n  }, {\n    key: \"type\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"处理类型\",\n    remark: \"group/sort\"\n  }, {\n    key: \"order\",\n    type: \"param\",\n    parameterType: \"String\",\n    desc: \"排序方式\",\n    remark: \"asc/desc\"\n  }, {\n    key: \"success\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"成功回调\",\n    remark: \"\"\n  }, {\n    key: \"fail\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"失败回调\",\n    remark: \"\"\n  }]\n}];\n\n//# sourceURL=webpack:///./src/views/JS-article/group-sort/desc.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code1\", function() { return code1; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"code2\", function() { return code2; });\nconst code1 = `\nimport groupOrSort from \"@/tool/groupOrSort.js\";\nconst list = [\n    {\n        age: 18,\n        name: \"张三\"\n    },\n    {\n        age: 16,\n        name: \"李四\"\n    },\n    {\n        age: 17,\n        name: \"王五\"\n    },\n    {\n        age: 17,\n        name: \"赵六\"\n    },\n],\n\n// 方式一\nconst sortList = groupOrSort({\n    list: list,\n    order: 'desc',\n    key: \"age\"\n});\n\n// 方式二\ngroupOrSort({\n    list: list,\n    order: 'desc',\n    key: \"age\",\n    success: (res) => {\n        // do something\n    }\n});\n`;\nconst code2 = `\nimport groupOrSort from \"@/tool/groupOrSort.js\";\nconst list = [\n    {\n        age: 18,\n        name: \"张三\"\n    },\n    {\n        age: 16,\n        name: \"李四\"\n    },\n    {\n        age: 17,\n        name: \"王五\"\n    },\n    {\n        age: 17,\n        name: \"赵六\"\n    },\n],\n\n// 方式一\nconst groupList = groupOrSort({\n    list: list,\n    type: 'group',\n    key: \"age\"\n});\n\n// 方式二\ngroupOrSort({\n    list: list,\n    type: 'group',\n    key: \"age\",\n    success: (res) => {\n        // do something\n    }\n});\n`;\n\n//# sourceURL=webpack:///./src/views/JS-article/group-sort/config.js?");
 
 /***/ })
 

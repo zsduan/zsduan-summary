@@ -1,13 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[151],{
 
-/***/ "./src/views/JS-article/set-html/image/1.jpg":
-/*!***************************************************!*\
-  !*** ./src/views/JS-article/set-html/image/1.jpg ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./src/views/idea/99-multiplication-table/desc.js":
+/*!********************************************************!*\
+  !*** ./src/views/idea/99-multiplication-table/desc.js ***!
+  \********************************************************/
+/*! exports provided: tableData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"static/img/1.b9ee55ab.jpg\";\n\n//# sourceURL=webpack:///./src/views/JS-article/set-html/image/1.jpg?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"tableData\", function() { return tableData; });\nconst tableData = [{\n  key: \"option\",\n  type: \"param\",\n  parameterType: \"Object \",\n  desc: \"配置对象\",\n  remark: \"\",\n  children: [{\n    key: \"success\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"成功返回\",\n    remark: \"\"\n  }, {\n    key: \"fail\",\n    type: \"param\",\n    parameterType: \"Function\",\n    desc: \"失败返回\",\n    remark: \"\"\n  }]\n}];\n\n//# sourceURL=webpack:///./src/views/idea/99-multiplication-table/desc.js?");
 
 /***/ })
 
