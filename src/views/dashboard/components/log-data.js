@@ -2,6 +2,35 @@
 
 export default [
     {
+        version : "3.1.6",
+        date : "2026-01-30",
+        log : [
+            {
+                tips : "新增版本控制 支持 vue2 vue3 普通html",
+                links : [
+                    '/version-control'
+                ]
+            },
+            "优化模糊搜索js 更加健壮 对内容的正则进行了优化 统一进行错误处理",
+            "优化ip地址输入 数字键盘 . 无法下一个的bug"
+        ]
+    },
+    {
+        version : "3.1.5",
+        date : "2026-01-20",
+        log : [
+            {
+                tips : "优化滚动到指定数字组件 支持多种方法",
+                links : [
+                    '/scroll-to-number'
+                ]
+            },
+            {
+                tips : "修复获取农历多次调用时，只返回最后一个结果的bug"
+            }
+        ]
+    },
+    {
         version : "3.1.4",
         date : "2025-11-4",
         log : [

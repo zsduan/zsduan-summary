@@ -1,9 +1,9 @@
 <template>
     <section>
-        <public-item title="基本用法">
+        <public-item title="基本用法" data-version="3.1.0">
             <div class="flex-box">
                 <dzs-button>默认按钮</dzs-button>
-                <dzs-button type="primary">主要按钮</dzs-button>
+                <dzs-button type="primary" >主要按钮</dzs-button>
                 <dzs-button type="success">成功按钮</dzs-button>
                 <dzs-button type="info">信息按钮</dzs-button>
                 <dzs-button type="warning">警告按钮</dzs-button>

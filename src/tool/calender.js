@@ -4,28 +4,7 @@
  * @date 2022-09-30
  * */ 
 
-const calendar = {
-    gregorianYear: null, //公历年
-    gregorianMonth: null, //公历月
-    gregorianDay: null, //公历日
-    weekday: null, //星期
-    hours: null,
-    minutes: null,
-    seconds: null,
 
-    lunarYear: null, //农历年
-    lunarMonth: null, //农历月
-    lunarDay: null, //农历日
-
-    lunarYearCn: "", //农历天干地支纪年
-    lunarMonthCn: "", //农历中文月
-    lunarDayCn: "", //农历中文日
-    zodiacYear: "", //农历生肖年
-
-    solarTerm: "", //节气
-    gregorianFestival: "", //公历节日
-    lunarFestival: "", //农历节日
-};
 
 let now = null ; //全局时间变量
 
@@ -505,6 +484,28 @@ function getFestival(mouth, day) {
  * }
 */ 
 function getCalendar(option) {
+    const calendar = {
+    gregorianYear: null, //公历年
+    gregorianMonth: null, //公历月
+    gregorianDay: null, //公历日
+    weekday: null, //星期
+    hours: null,
+    minutes: null,
+    seconds: null,
+
+    lunarYear: null, //农历年
+    lunarMonth: null, //农历月
+    lunarDay: null, //农历日
+
+    lunarYearCn: "", //农历天干地支纪年
+    lunarMonthCn: "", //农历中文月
+    lunarDayCn: "", //农历中文日
+    zodiacYear: "", //农历生肖年
+
+    solarTerm: "", //节气
+    gregorianFestival: "", //公历节日
+    lunarFestival: "", //农历节日
+};
     let options = {
         time : "",
         success : (reslut) =>{},

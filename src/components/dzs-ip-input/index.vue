@@ -1,7 +1,7 @@
 <template>
     <div class="ip-input">
-        <template v-for="(segment, index) in ipSegments">
-            <el-input :key="index" v-model="ipSegments[index]" type="text" maxlength="3" class="ip-input__segment"
+        <template v-for="(segment, index) in ipSegments" >
+            <el-input  v-model="ipSegments[index]" type="text" maxlength="3" class="ip-input__segment"
                 @input="validateSegment(index)" @paste="handlePaste($event)" :ref="'segment' + index" />
             <span v-if="index < 3" class="ip-input__dot">.</span>
         </template>
@@ -43,7 +43,7 @@ export default {
     },
     mounted() {
         window.addEventListener("keydown", (e) => {
-            if (e.key === '.') {
+            if (e.key === '.' || (e.key === 'Process' && (e.code === 'Period' || e.code === 'NumpadDecimal'))) {
                 e.preventDefault();
                 this.focusNext(this.iptIndex);
             }

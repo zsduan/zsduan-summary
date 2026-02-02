@@ -272,6 +272,12 @@ export default [
                 name: 'setHtml',
                 meta: { title: '富文本设置图片大小' }
             },
+            {
+                path: '/version-control',
+                component: "JS-article/version-control/index",
+                name: 'versionControl',
+                meta: { title: '版本控制' }
+            },
         ]
     },
     {
