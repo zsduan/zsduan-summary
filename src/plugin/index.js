@@ -5,16 +5,17 @@ import "./element-ui";
 import "../assets/css/reset.scss";
 
 import myDirective from "../directive";
-// import VersionControl from '../directive/version-control.js';
+import VersionControl from '../directive/version-control.js';
 
-// Vue.use(VersionControl, {
-//     currentVersion: '2.3.1',
-//     suffixRules: [
-//         { name: 'dev', isHide: true },
-//         { name: 'beta', isHide: false }
-//     ],
-//     debug: true // 可选：打印日志
-// });
+Vue.use(VersionControl, {
+    currentVersion: '2.3.1',
+    suffixRules: [
+        { name: 'dev', isHide: true },
+        { name: 'beta', isHide: false }
+    ],
+    debug: true ,// 可选：打印日志
+    isDev : true , // 可选：是否是开发环境 开发环境默认显示所有版本 不隐藏
+});
 
 // VersionControl.initNative({
 //     currentVersion: '2.3.1',

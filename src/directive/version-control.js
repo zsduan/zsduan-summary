@@ -28,7 +28,7 @@
         let matchedRule = null;
         for (const rule of rules) {
             const escapedName = rule.name.replace(/[-\/\\^ $ *+?.()|[ $  {}]/g, '\\ $ &');
-            const pattern = new RegExp(`[._\\-]? $ {escapedName}`, 'i');
+            const pattern = new RegExp(`[._\\-]?${escapedName}`, 'i');
             if (pattern.test(clean)) {
                 matchedRule = rule;
                 break;
@@ -51,9 +51,13 @@
     }
 
     function handleElement(el, requiredVersion, config) {
+        console.log(config);
+        if(config.isDev){
+            config.debug && console.log("开发模式下，已全部展示");
+            return;
+        }
         if (!requiredVersion) return;
         const parsed = parseVersion(requiredVersion, config.suffixRules);
-
         // 如果匹配到 isHide=true 的规则 → 删除
         if (parsed.matchedRule && parsed.matchedRule.isHide) {
             config.debug && console.log(`[VersionControl] 删除元素:`, el.outerHTML);
@@ -90,7 +94,8 @@
         const config = {
             currentVersion: userOptions.currentVersion || '1.0.0',
             suffixRules: userOptions.suffixRules || DEFAULT_RULES,
-            debug: !!userOptions.debug
+            debug: !!userOptions.debug,
+            isDev : !!userOptions.isDev
         };
 
 
@@ -148,7 +153,8 @@
             const config = {
                 currentVersion: options.currentVersion || '1.0.0',
                 suffixRules: options.suffixRules || DEFAULT_RULES,
-                debug: !!options.debug
+                debug: !!options.debug,
+                isDev : !!options.isDev
             };
 
             const directive = createDirective(config);
@@ -190,7 +196,8 @@
             const autoConfig = {
                 currentVersion: window.VERSION_CONTROL_CURRENT_VERSION || '1.0.0',
                 suffixRules: window.VERSION_CONTROL_SUFFIX_RULES || DEFAULT_RULES,
-                debug: !!window.VERSION_CONTROL_DEBUG
+                debug: !!window.VERSION_CONTROL_DEBUG,
+                isDev : window.VERSION_CONTROL_IS_DEV || false
             };
             initNative(autoConfig);
         }
