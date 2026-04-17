@@ -19,7 +19,7 @@
  * })
  * */
 
-export default function Search(option) {
+function Search(option) {
     let options = {
         data: [],
         key: "",
@@ -44,15 +44,13 @@ export default function Search(option) {
         msg = "搜索key必须为字符串"
     }
     const hasObject = options.data.some(item => item !== null && typeof item === 'object');
-    if (hasObject && !options.key) {
-        msg = "数组对象时,搜索key不能为空"
-    }
-    if(msg){
+    if (msg) {
         options.fail({ code: -1, msg: msg });
         console.error(msg);
         return []
     }
     if (!options.value) {
+        console.log('搜索关键词不能为空 ==>' , options.data);
         options.success(options.data);
         return options.data;
     }
@@ -61,7 +59,7 @@ export default function Search(option) {
     function escapeRegExp(str) {
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
-    const reg = new RegExp(escapeRegExp((options.value).toString()) , 'i');
+    const reg = new RegExp(escapeRegExp((options.value).toString()), 'i');
     // 通过key搜索
     const _searchByKey = (data) => {
         data.forEach(element => {
@@ -82,11 +80,26 @@ export default function Search(option) {
     // 通过数组搜索
     const _search = (data) => {
         data.forEach(element => {
-            if (options.isCompletely && element === options.value) {
+            if(options.isCompletely && hasObject){
+                console.warn('数组对象时,默认全场景匹配')
+            }
+            if (options.isCompletely && !hasObject &&  element === options.value) {
                 reslut.push(element)
             } else {
-                if (element.toString().match(reg)) {
-                    reslut.push(element)
+                let matchString = '';
+                if (element !== null && hasObject) {
+                    for (const prop in element) {
+                        if (prop === options.children) continue;
+                        const val = element[prop];
+                        if (val != null) {
+                            matchString += val.toString() + ' ';
+                        }
+                    }
+                } else {
+                    matchString = element != null ? element.toString() : '';
+                }
+                if (reg.test(matchString)) {
+                    reslut.push(element);
                 }
             }
             if (options.children && element[options.children]) {
@@ -94,11 +107,11 @@ export default function Search(option) {
             }
         })
     }
-
+    const searchData = JSON.parse(JSON.stringify(options.data));
     if (options.key) {
-        _searchByKey(options.data);
+        _searchByKey(searchData);
     } else {
-        _search(options.data);
+        _search(searchData);
     }
     reslut.forEach(element => {
         delete element[options.children];
@@ -106,3 +119,5 @@ export default function Search(option) {
     options.success(reslut);
     return reslut;
 }
+
+export default  Search;

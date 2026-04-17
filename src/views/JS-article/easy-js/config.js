@@ -151,3 +151,29 @@ function getRandom (min , max){
     return reslut;
 }
 `
+
+export const code11 = `
+/**
+ * 获取随机颜色
+ * */ 
+function getRandomColor () {
+    return '#' + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0');
+}
+`
+
+export const code12 = `
+/**
+ * 替换字符串 用{key}
+ * @param {String} str 字符串
+ * @param {Object} obj 对象
+ * @return {String} 替换后的字符串
+ * @example
+ * replacePlaceholders('Hello, \${name}!', { name: 'World' }) // Hello, World!
+*/
+function replacePlaceholders(template, params) {
+    const placeholderRegex = /\$\{(\w+)\}/g;
+    return template.replace(placeholderRegex, (match, placeholderName) => {
+        return params[placeholderName] || '';
+    });
+}
+`

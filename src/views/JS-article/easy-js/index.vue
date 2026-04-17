@@ -7,7 +7,7 @@
 </template>
 <script>
 import { code1, code2, code3 , code4 , code5 , code6 , code7 , code8} from './config';
-import { code9, code10} from './config';
+import { code9, code10 , code11  , code12 } from './config';
 export default {
     data() {
         return {
@@ -91,7 +91,23 @@ export default {
                         code : code10,
                         lang : "js"
                     },
-                }
+                },
+                {
+                    title : "随机颜色",
+                    code : {
+                        title : "代码示例",
+                        code : code11,
+                        lang : "js"
+                    },
+                },
+                {
+                    title : "替换字符串 用{key}",
+                    code : {
+                        title : "代码示例",
+                        code : code12,
+                        lang : "js"
+                    },
+                },
             ]
         }
     }
